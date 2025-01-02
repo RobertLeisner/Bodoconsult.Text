@@ -3,6 +3,7 @@
 using System;
 using System.Data;
 using System.IO;
+using System.Runtime.Versioning;
 using Bodoconsult.Pdf.PdfSharp;
 using Bodoconsult.Pdf.Stylesets;
 using Bodoconsult.Text.Enums;
@@ -12,6 +13,7 @@ using MigraDoc.DocumentObjectModel;
 
 namespace Bodoconsult.Text.Pdf;
 
+[SupportedOSPlatform("windows")]
 public class PdfTextFormatter : ITextFormatter
 {
 

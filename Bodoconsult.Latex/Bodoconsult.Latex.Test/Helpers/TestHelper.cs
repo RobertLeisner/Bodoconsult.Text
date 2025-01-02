@@ -15,6 +15,9 @@ namespace Bodoconsult.Latex.Test.Helpers
     {
         static TestHelper()
         {
+
+            TempPath = Path.GetTempPath();
+
             if (!Directory.Exists(TempPath))
             {
                 Directory.CreateDirectory(TempPath);
@@ -23,13 +26,15 @@ namespace Bodoconsult.Latex.Test.Helpers
             var loc = new FileInfo(typeof(TestHelper).Assembly.Location);
 
             TestDataPath = Path.Combine(loc.Directory.Parent.Parent.Parent.FullName, "TestData");
+
+            
         }
 
 
         /// <summary>
         /// Folder to save test output temporarily
         /// </summary>
-        public static string TempPath => @"D:\temp\Latex";
+        public static string TempPath { get; }
 
 
         /// <summary>

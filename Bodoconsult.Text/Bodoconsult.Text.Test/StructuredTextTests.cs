@@ -1,3 +1,5 @@
+// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
+
 using System.IO;
 using System.Linq;
 using Bodoconsult.Text.Enums;
@@ -8,7 +10,7 @@ using NUnit.Framework;
 namespace Bodoconsult.Text.Test;
 
 [TestFixture]
-public class UnitTestStructuredText
+public class StructuredTextTests
 {
     private const string MassText =
         "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
@@ -46,20 +48,23 @@ public class UnitTestStructuredText
         masterText.AddParagraph(MassText);
         masterText.AddParagraph(MassText);
 
-        var fileName = @"D:\temp\datatable.json";
-        if (File.Exists(fileName)) File.Delete(fileName);
+        var fileName = Path.Combine(Path.GetTempPath(), @"datatable.json");
+        if (File.Exists(fileName))
+        {
+            File.Delete(fileName);
+        }
 
         JsonHelper.SaveAsFile(fileName, masterText);
 
         var sr = JsonHelper.LoadJsonFile<StructuredText>(fileName);
 
         var sourceItem =
-            (TableTextItem) masterText.TextItems.FirstOrDefault(x => x.LogicalType == TextItemType.Table);
+            (TableTextItem)masterText.TextItems.FirstOrDefault(x => x.LogicalType == TextItemType.Table);
         var item = (TableTextItem)sr.TextItems.FirstOrDefault(x => x.LogicalType == TextItemType.Table);
 
         Assert.That(File.Exists(fileName));
-        Assert.That(masterText.TextItems.Count==sr.TextItems.Count);
-        Assert.That(item.DataTableXml!=null);
+        Assert.That(masterText.TextItems.Count == sr.TextItems.Count);
+        Assert.That(item.DataTableXml != null);
         Assert.That(item.DataTableXml == sourceItem.DataTableXml);
     }
 

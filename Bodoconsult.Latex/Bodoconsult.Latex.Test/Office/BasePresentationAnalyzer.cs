@@ -25,8 +25,8 @@ namespace Bodoconsult.Latex.Test.Office
             // Act: see Setup()
 
             // Assert
-            Assert.IsNotNull(Analyzer.PresentationMetaData);
-            Assert.AreEqual(Source, Analyzer.PresentationMetaData.SourceFileName);
+            Assert.That(Analyzer.PresentationMetaData, Is.Not.Null);
+            Assert.That(Analyzer.PresentationMetaData.SourceFileName, Is.EqualTo(Source));
 
         }
 
@@ -39,8 +39,8 @@ namespace Bodoconsult.Latex.Test.Office
             Analyzer.Analyse();
 
             // Assert
-            Assert.IsNotNull(Analyzer.PresentationMetaData);
-            Assert.AreEqual(Source, Analyzer.PresentationMetaData.SourceFileName);
+            Assert.That(Analyzer.PresentationMetaData, Is.Not.Null);
+            Assert.That(Analyzer.PresentationMetaData.SourceFileName, Is.EqualTo(Source));
 
 
             TestHelper.PrintPresentation(Analyzer.PresentationMetaData);

@@ -10,11 +10,12 @@ using Bodoconsult.Latex.Model;
 using Bodoconsult.Latex.Services;
 using Bodoconsult.Latex.Test.Helpers;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Bodoconsult.Latex.Test
 {
     [TestFixture]
-    public class UnitTestsLatecV2WriterService
+    public class LatexV2WriterServiceTests
     {
 
 
@@ -42,10 +43,10 @@ namespace Bodoconsult.Latex.Test
             // Act: see Setup()
 
             // Assert
-            Assert.IsNotNull(_service.FileName);
-            Assert.IsNotNull(_service.LatexDirectory);
-            Assert.IsNotNull(_service.ImageDirectory);
-            Assert.IsTrue(string.IsNullOrEmpty(_service.Content));
+            Assert.That(_service.FileName, Is.Not.Null);
+            Assert.That(_service.LatexDirectory, Is.Not.Null);
+            Assert.That(_service.ImageDirectory, Is.Not.Null);
+            Assert.That(string.IsNullOrEmpty(_service.Content));
         }
 
 
@@ -522,12 +523,12 @@ namespace Bodoconsult.Latex.Test
             // Assert
             Debug.Print(_service.Content);
 
-            Assert.IsTrue(_service.Content.Contains(testValue1));
-            Assert.IsTrue(_service.Content.Contains(testValue2));
-            Assert.IsTrue(_service.Content.Contains(testValue3));
-            Assert.IsTrue(_service.Content.Contains(testValue4));
+            Assert.That(_service.Content.Contains(testValue1));
+            Assert.That(_service.Content.Contains(testValue2));
+            Assert.That(_service.Content.Contains(testValue3));
+            Assert.That(_service.Content.Contains(testValue4));
 
-            StringAssert.Contains(@"\begin{tabular}[t]{rl}", _service.Content);
+            StringAssert.Contains(@"\begin{tabular}[h]{l}", _service.Content);
             StringAssert.Contains(@"\end{tabular}", _service.Content);
             StringAssert.Contains(@"\toprule", _service.Content);
             StringAssert.Contains(@"\midrule", _service.Content);

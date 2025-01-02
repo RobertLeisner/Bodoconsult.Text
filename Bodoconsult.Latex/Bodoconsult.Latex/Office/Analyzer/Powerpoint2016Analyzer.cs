@@ -16,6 +16,7 @@ using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Drawing;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Presentation;
+using Path = System.IO.Path;
 using Shape = DocumentFormat.OpenXml.Presentation.Shape;
 
 namespace Bodoconsult.Latex.Office.Analyzer
@@ -33,7 +34,7 @@ namespace Bodoconsult.Latex.Office.Analyzer
 
         private readonly PresentationMetaData _presentationMetaData;
 
-        private const string TempPath = @"D:\Temp";
+        private readonly string _tempPath = Path.GetTempPath();
 
         private readonly string _baseDir;
 
@@ -48,7 +49,7 @@ namespace Bodoconsult.Latex.Office.Analyzer
 
             var fi = new FileInfo(sourceFileName);
 
-            _baseDir = System.IO.Path.Combine(TempPath, fi.Name.Replace(fi.Extension, ""));
+            _baseDir = System.IO.Path.Combine(_tempPath, fi.Name.Replace(fi.Extension, ""));
 
             if (Directory.Exists(_baseDir))
             {
@@ -473,22 +474,13 @@ namespace Bodoconsult.Latex.Office.Analyzer
         private static bool IsTitleShape(Shape shape)
         {
             var placeholderShape = shape.NonVisualShapeProperties.ApplicationNonVisualDrawingProperties.GetFirstChild<PlaceholderShape>();
-            if (placeholderShape != null && placeholderShape.Type != null && placeholderShape.Type.HasValue)
+            if (placeholderShape == null || placeholderShape.Type == null || !placeholderShape.Type.HasValue)
             {
-                switch ((PlaceholderValues)placeholderShape.Type)
-                {
-                    // Any title shape.
-                    case PlaceholderValues.Title:
-
-                    // A centered title.
-                    case PlaceholderValues.CenteredTitle:
-                        return true;
-
-                    default:
-                        return false;
-                }
+                return false;
             }
-            return false;
+
+            var t = (PlaceholderValues)placeholderShape.Type;
+            return t == PlaceholderValues.Title || t == PlaceholderValues.CenteredTitle;
         }
 
         private static ImagePart ExtractImage(DocumentFormat.OpenXml.Presentation.Picture pic, SlidePart slide, out string extension)

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
+
+
 using System.Windows.Forms;
 using LaTexConvert.Business.ViewModels;
 

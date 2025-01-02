@@ -7,6 +7,7 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.Versioning;
 using Bodoconsult.Pdf.Helpers;
 using Bodoconsult.Pdf.Stylesets;
 using MigraDoc.DocumentObjectModel;
@@ -14,12 +15,15 @@ using MigraDoc.DocumentObjectModel.Shapes;
 using MigraDoc.DocumentObjectModel.Shapes.Charts;
 using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
+using PdfSharp.Fonts;
 
 namespace Bodoconsult.Pdf.PdfSharp;
 
 /// <summary>
 /// Class representing a PDF document and basic functionality to add content to it
 /// </summary>
+
+[SupportedOSPlatform("windows")]
 public class PdfCreator : IDisposable
 {
 
@@ -33,6 +37,8 @@ public class PdfCreator : IDisposable
 
         LoadDefaults();
 
+        GlobalFontSettings.FontResolver ??= new WindowsFontResolver();
+
         // Get the predefined style Normal.
         var style = _document.Styles["Normal"];
         // Because all styles are derived from Normal, the next line changes the 
@@ -40,6 +46,7 @@ public class PdfCreator : IDisposable
         // all styles and paragraphs that do not redefine the font.
         style.Font.Name = "Arial";
         style.Font.Size = 11;
+
 
     }
 
@@ -51,6 +58,8 @@ public class PdfCreator : IDisposable
     public PdfCreator(string fontName, Unit fontSize)
     {
         LoadDefaults();
+
+        GlobalFontSettings.FontResolver ??= new WindowsFontResolver();
 
         // Get the predefined style Normal.
         var style = _document.Styles["Normal"];
@@ -70,19 +79,21 @@ public class PdfCreator : IDisposable
     {
         LoadDefaults();
 
+        GlobalFontSettings.FontResolver ??= new WindowsFontResolver();
+
         _ps = styleSet.PageSetup;
 
-        ObjectHelper.MapProperties(_ps, _document.DefaultPageSetup);
+        //ObjectHelper.MapProperties(_ps, _document.DefaultPageSetup);
 
         var style = _document.Styles["Normal"];
 
         // ToDo complete clone of NORMAL style
-        //style.Font.Name = styleSet.Normal.Font.Name;
-        //style.Font.Size = styleSet.Normal.Font.Size;
-        //style.ParagraphFormat.SpaceBefore = styleSet.Normal.ParagraphFormat.SpaceBefore;
-        //style.ParagraphFormat.SpaceAfter = styleSet.Normal.ParagraphFormat.SpaceAfter ;
-        //style.ParagraphFormat.PageBreakBefore = styleSet.Normal.ParagraphFormat.PageBreakBefore;
-        //style.ParagraphFormat.Alignment = styleSet.Normal.ParagraphFormat.Alignment;
+        style.Font.Name = styleSet.Normal.Font.Name;
+        style.Font.Size = styleSet.Normal.Font.Size;
+        style.ParagraphFormat.SpaceBefore = styleSet.Normal.ParagraphFormat.SpaceBefore;
+        style.ParagraphFormat.SpaceAfter = styleSet.Normal.ParagraphFormat.SpaceAfter;
+        style.ParagraphFormat.PageBreakBefore = styleSet.Normal.ParagraphFormat.PageBreakBefore;
+        style.ParagraphFormat.Alignment = styleSet.Normal.ParagraphFormat.Alignment;
 
         ObjectHelper.MapProperties(styleSet.Normal, style);
         ObjectHelper.MapProperties(styleSet.Normal.Font, style.Font);
@@ -117,8 +128,6 @@ public class PdfCreator : IDisposable
         AddStyle(styleSet.Toc4);
         AddStyle(styleSet.TocHeading1);
 
-
-
     }
 
     #endregion
@@ -126,7 +135,7 @@ public class PdfCreator : IDisposable
 
     #region Private properties
 
-    private Document _document = new Document();
+    private Document _document = new();
     private Section _content;
     private Section _toc;
 
@@ -340,7 +349,10 @@ public class PdfCreator : IDisposable
     /// <returns></returns>
     public Style AddStyle(Style style)
     {
-        if (style == null) return null;
+        if (style == null)
+        {
+            return null;
+        }
 
         _document.Styles.Add(style);
 
@@ -1280,6 +1292,7 @@ public class PdfCreator : IDisposable
     public void DefineContentSection()
     {
         var section = _document.AddSection();
+        section.PageSetup = _ps.Clone();
         section.PageSetup.OddAndEvenPagesHeaderFooter = false;
         section.PageSetup.StartingNumber = 1;
 

@@ -661,7 +661,7 @@ namespace Bodoconsult.Test
 
             var method = stack.GetFrame(1).GetMethod();
 
-            for (int i = 0; i < stack.FrameCount; i++)
+            for (var i = 0; i < stack.FrameCount; i++)
             {
                 var sf = stack.GetFrame(i);
                 method = sf.GetMethod();

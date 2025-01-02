@@ -2,6 +2,7 @@
 
 
 using System.IO;
+using System.Runtime.Versioning;
 using Bodoconsult.Pdf.PdfSharp;
 using Bodoconsult.Pdf.Stylesets;
 using Bodoconsult.Pdf.Test.Helpers;
@@ -10,14 +11,15 @@ using NUnit.Framework;
 
 namespace Bodoconsult.Pdf.Test;
 
+[SupportedOSPlatform("windows")]
 [TestFixture]
-public class UnitTestPdfCreator
+public class PdfCreatorTests
 {
     [Test]
     public void TestPdfCreatorWithDefaultStyleSheet()
     {
 
-        string fileName = Path.Combine(TestHelper.TempPath, "pdf1.pdf");
+        var fileName = Path.Combine(TestHelper.TempPath, "pdf1.pdf");
             
         CreateFile(fileName);
 
@@ -27,7 +29,7 @@ public class UnitTestPdfCreator
     [Test]
     public void TestPdfCreatorWithDefaultStyleSheetLandScape()
     {
-        string fileName = Path.Combine(TestHelper.TempPath, "pdf1quer.pdf");
+        var fileName = Path.Combine(TestHelper.TempPath, "pdf1quer.pdf");
         CreateFile(fileName, true);
     }
 
@@ -35,11 +37,11 @@ public class UnitTestPdfCreator
     public void TestPdfCreatorWithDefaultStyleSheet2Files()
     {
 
-        string fileName1 = Path.Combine(TestHelper.TempPath, "pdf1.pdf");
+        var fileName1 = Path.Combine(TestHelper.TempPath, "pdf1.pdf");
 
         CreateFile(fileName1);
 
-        string fileName2 = Path.Combine(TestHelper.TempPath, "pdf2.pdf");
+        var fileName2 = Path.Combine(TestHelper.TempPath, "pdf2.pdf");
 
         CreateFile(fileName2);
 
@@ -51,10 +53,16 @@ public class UnitTestPdfCreator
         var code = FileHelper.GetTextResource("code1.txt");
 
 
-        if (File.Exists(fileName)) File.Delete(fileName);
+        if (File.Exists(fileName))
+        {
+            File.Delete(fileName);
+        }
 
         var styleset = new DefaultStyleSet();
-        if (landscape) LoadLandScapeSettings(styleset);
+        if (landscape)
+        {
+            LoadLandScapeSettings(styleset);
+        }
 
         var pdf = new PdfCreator(styleset);
 

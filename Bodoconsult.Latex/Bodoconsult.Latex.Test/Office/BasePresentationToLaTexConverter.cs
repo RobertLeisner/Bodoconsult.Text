@@ -5,6 +5,7 @@ using System.IO;
 using Bodoconsult.Latex.Interfaces;
 using Bodoconsult.Latex.Test.Helpers;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Bodoconsult.Latex.Test.Office
 {
@@ -30,11 +31,11 @@ namespace Bodoconsult.Latex.Test.Office
             // Act: see Setup()
 
             // Assert
-            Assert.IsNotNull(Analyzer.PresentationMetaData);
-            Assert.AreEqual(Source, Analyzer.PresentationMetaData.SourceFileName);
+            Assert.That(Analyzer.PresentationMetaData, Is.Not.Null);
+            Assert.That(Analyzer.PresentationMetaData.SourceFileName, Is.EqualTo(Source));
 
-            Assert.IsNotNull(Converter.Analyzer.PresentationMetaData);
-            Assert.AreEqual(Source, Converter.Analyzer.PresentationMetaData.SourceFileName);
+            Assert.That(Converter.Analyzer.PresentationMetaData, Is.Not.Null);
+            Assert.That(Converter.Analyzer.PresentationMetaData.SourceFileName, Is.EqualTo(Source));
 
         }
 
@@ -53,9 +54,9 @@ namespace Bodoconsult.Latex.Test.Office
             var result = Converter.Convert();
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.That(result, Is.Not.Null);
 
-            Assert.IsFalse(string.IsNullOrEmpty(result.Trim()));
+            Assert.That(string.IsNullOrEmpty(result.Trim()), Is.False);
 
             FileAssert.Exists(Converter.LaTexWriterService.FileName);
 

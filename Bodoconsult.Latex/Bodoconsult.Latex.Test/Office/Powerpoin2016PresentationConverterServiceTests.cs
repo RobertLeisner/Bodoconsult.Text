@@ -1,24 +1,24 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
 
-
 using System.IO;
 using Bodoconsult.Latex.Model;
 using Bodoconsult.Latex.Services;
+using Bodoconsult.Latex.Test.Helpers;
 using NUnit.Framework;
 
 namespace Bodoconsult.Latex.Test.Office
 {
-    public class UnitTestsPowerpoin2016PresentationConverterService: BasePresentationConverterService
+    public class Powerpoin2016PresentationConverterServiceTests: BasePresentationConverterService
     {
         [Test]
-        public void TestConvert()
+        public void Convert_ExistingFile_LatexCreated()
         {
 
             // Arrange
             Job = new PresentationJob
             {
-                PresentationFilePath = @"D:\Daten\Projekte\Customer\Royotech\RTTower\StSysServer\Documentation\FindSlot.pptx",
-                LaTexFilePath = @"D:\Daten\Projekte\Customer\Royotech\RTTower\StSysServer\Documentation\FindSlot.tex"
+                PresentationFilePath = Path.Combine(TestHelper.TestDataPath, @"Grundkurs Wirtschaft.pptx"),
+                LaTexFilePath = Path.Combine(TestHelper.TempPath , @"Grundkurs_Wirtschaft.tex")
             };
 
             if (File.Exists(Job.LaTexFilePath))

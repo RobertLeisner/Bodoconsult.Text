@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
+
 
 namespace LaTexConvert.Business.Models
 {

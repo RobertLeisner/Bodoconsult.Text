@@ -1,9 +1,6 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
 
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using LaTexConvert.Business.Models;
 
 namespace LaTexConvert.Business.ViewModels

@@ -1,6 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
+
+
 using System.Windows.Forms;
-using LaTexConvert.Business.Models;
 using LaTexConvert.Business.ViewModels;
 
 namespace LaTexConvert

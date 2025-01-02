@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace Bodoconsult.Latex.Test.Office
 {
     [TestFixture]
-    public class UnitTestPowerpoint2016Analyzer : BasePresentationAnalyzer
+    public class Powerpoint2016AnalyzerTests : BasePresentationAnalyzer
     {
 
         [SetUp]

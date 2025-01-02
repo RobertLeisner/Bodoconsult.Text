@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
 
-
 using System;
 using System.IO;
+using System.Runtime.Versioning;
 using Bodoconsult.Text.Model;
 using Bodoconsult.Text.Pdf.Test.Helpers;
 using NUnit.Framework;
@@ -10,8 +10,9 @@ using NUnit.Framework.Legacy;
 
 namespace Bodoconsult.Text.Pdf.Test;
 
+[SupportedOSPlatform("windows")]
 [TestFixture]
-public class UnitTestPdfTextFormatter
+public class PdfTextFormatterTests
 {
     [Test]
     public void TestCreatePdf()
@@ -24,7 +25,7 @@ public class UnitTestPdfTextFormatter
             File.Delete(fileName);
         }
 
-        Assert.That(File.Exists(fileName));
+        Assert.That(File.Exists(fileName), Is.False);
 
         var st = new StructuredText();
 
