@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+		<Deterministic>False</Deterministic>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageOutputPath>..\..\Nuget\</PackageOutputPath>
+		<Copyright>Bodoconsult EDV-Dienstleistungen GmbH</Copyright>
+		<Authors>Robert Leisner</Authors>
+		<Company>Bodoconsult EDV-Dienstleistungen GmbH</Company>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<RepositoryType>git</RepositoryType>
+		<NeutralLanguage>en</NeutralLanguage>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+
+		<VersionPrefix>1.0.0</VersionPrefix>
+		<Version />
+		<RepositoryUrl>https://github.com/RobertLeisner/Bodoconsult.Text</RepositoryUrl>
+		<PackageId>Bodoconsult.Text</PackageId>
+		<PackageTags>Output structured text HTML plain text ascii</PackageTags>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Description>Simple class for collecting structured text in an app and export it to HTML or an ASCII plain text file. Use library to create simple reports from apps or from unit testing i.e. for auditors or as documentation.</Description>
+		<PackageReleaseNotes>Migration to .Net 8 and new namespace</PackageReleaseNotes>
+		<PackageProjectUrl>https://github.com/RobertLeisner/Bodoconsult.Text</PackageProjectUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\LICENSE.md" Link="LICENSE.md" />
+		<None Include="..\README.md" Link="README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+</Project>

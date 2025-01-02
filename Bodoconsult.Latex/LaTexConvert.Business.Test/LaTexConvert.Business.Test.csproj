@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.13.3" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.3.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bodoconsult.Latex.Test\Bodoconsult.Latex.Test.csproj" />
+    <ProjectReference Include="..\Bodoconsult.Latex\Bodoconsult.Latex.csproj" />
+    <ProjectReference Include="..\LaTexConvert.Business\LaTexConvert.Business.csproj" />
+  </ItemGroup>
+
+</Project>

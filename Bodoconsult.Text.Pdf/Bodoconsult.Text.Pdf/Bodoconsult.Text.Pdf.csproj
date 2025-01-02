@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+		<Deterministic>False</Deterministic>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageOutputPath>..\..\Nuget\</PackageOutputPath>
+		<Copyright>Bodoconsult EDV-Dienstleistungen GmbH</Copyright>
+		<Authors>Robert Leisner</Authors>
+		<VersionPrefix>1.0.0</VersionPrefix>
+		<Version />
+		<Company>Bodoconsult EDV-Dienstleistungen GmbH</Company>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<RepositoryType>git</RepositoryType>
+		<NeutralLanguage>en</NeutralLanguage>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/RobertLeisner/Bodoconsult.Text</RepositoryUrl>
+
+		<PackageId>Bodoconsult.Text.Pdf</PackageId>
+		<PackageTags>Output structured text PDF</PackageTags>
+		<Description>Enhances Bodoconsult.Text, a simple class for collecting structured text in an app, with an export of the text to PDF. Use library to create simple reports from apps or from unit testing i.e. for auditors or as documentation.</Description>
+		<PackageReleaseNotes>Migration to .Net 8 and new namespace</PackageReleaseNotes>
+		<PackageProjectUrl>https://github.com/RobertLeisner/Bodoconsult.Text</PackageProjectUrl>
+
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Folder Include="Properties\" />
+		<Folder Include="Templates\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\LICENSE.md" Link="LICENSE.md" />
+		<None Include="..\README.md" Link="README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Bodoconsult.Pdf\Bodoconsult.Pdf\Bodoconsult.Pdf.csproj" />
+		<ProjectReference Include="..\..\Bodoconsult.Text\Bodoconsult.Text\Bodoconsult.Text.csproj" />
+		<ProjectReference Include="..\..\Bodoconsult.Typography\Bodoconsult.Typography\Bodoconsult.Typography.csproj" />
+	</ItemGroup>
+
+</Project>
