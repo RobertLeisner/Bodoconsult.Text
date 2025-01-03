@@ -3,6 +3,7 @@
 
 using System.Diagnostics;
 using System.IO;
+using Bodoconsult.Test.Tests.Helpers;
 using NUnit.Framework;
 
 // ReSharper disable InconsistentNaming
@@ -11,9 +12,9 @@ namespace Bodoconsult.Test.Tests;
 
 [TestFixture]
 #pragma warning disable 1591
-public class UnitTestTestHelperHtml
+public class TestHelperHtmlTests
 {
-    private const string Path = @"d:\temp\ProtocolUnitTesting.htm";
+    private readonly string Path = System.IO.Path.Combine(TestHelper.TempPath, "ProtocolUnitTesting.htm");
 
     [Test]
     public void TestDiverseMethoden()
@@ -66,22 +67,20 @@ public class UnitTestTestHelperHtml
         Assert.That(File.Exists(Path));
 
 
-        if (Debugger.IsAttached)
+        if (!Debugger.IsAttached)
         {
-            var p = new Process
-            {
-                StartInfo = new ProcessStartInfo(Path)
-                {
-                    UseShellExecute = true
-                }
-            };
-            p.Start();
+            return;
         }
+
+        var p = new Process
+        {
+            StartInfo = new ProcessStartInfo(Path)
+            {
+                UseShellExecute = true
+            }
+        };
+        p.Start();
 
 
     }
-
-
-
-
 }

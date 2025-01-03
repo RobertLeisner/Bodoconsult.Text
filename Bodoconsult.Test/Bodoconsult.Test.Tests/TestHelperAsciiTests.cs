@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
 
 using System.Collections.Generic;
+using Bodoconsult.Test.Tests.Helpers;
 using Bodoconsult.Test.Tests.Models;
 using NUnit.Framework;
 
@@ -8,9 +9,9 @@ namespace Bodoconsult.Test.Tests;
 
 [TestFixture]
 #pragma warning disable 1591
-public class UnitTestTestHelperAscii
+public class TestHelperAsciiTests
 {
-    private const string Path = @"d:\temp\ProtocolUnitTesting.txt";
+    private readonly string _path = System.IO.Path.Combine(TestHelper.TempPath, @"ProtocolUnitTesting.txt");
 
     [Test]
     public void TestDiverseMethoden()
@@ -37,7 +38,7 @@ public class UnitTestTestHelperAscii
 
         var helper = new TestDocuHelperHandler();
         helper.AddDebugWindowOutput();
-        helper.AddAsciiOutput(Path);
+        helper.AddAsciiOutput(_path);
         helper.PrintHeader("Test header");
 
 

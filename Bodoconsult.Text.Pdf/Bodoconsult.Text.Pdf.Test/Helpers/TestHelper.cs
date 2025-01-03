@@ -5,7 +5,6 @@ using System;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection;
 
 namespace Bodoconsult.Text.Pdf.Test.Helpers;
 
@@ -24,6 +23,11 @@ internal static class TestHelper
     /// <param name="path"></param>
     public static void OpenFile(string path)
     {
+        if (!Debugger.IsAttached)
+        {
+            return;
+        }
+
         var p = new Process
         {
             StartInfo = new ProcessStartInfo(path)
@@ -112,35 +116,5 @@ internal static class TestHelper
         return dt;
     }
 
-
-}
-
-internal class FileHelper
-{
-
-    /// <summary>
-    /// Get a text from a embedded resource file
-    /// </summary>
-    /// <param name="resourceName">resource name = plain file name with out extension and path</param>
-    /// <returns></returns>
-    public static string GetTextResource(string resourceName)
-    {
-
-        resourceName = $"Bodoconsult.Text.Pdf.Test.Resources.{resourceName}";
-
-        var ass = Assembly.GetExecutingAssembly();
-        var str = ass.GetManifestResourceStream(resourceName);
-
-        if (str == null) return null;
-
-        string s;
-
-        using (var file = new StreamReader(str))
-        {
-            s = file.ReadToEnd();
-        }
-
-        return s;
-    }
 
 }

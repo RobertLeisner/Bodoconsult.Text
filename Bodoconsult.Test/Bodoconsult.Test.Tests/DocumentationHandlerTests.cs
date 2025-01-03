@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using Bodoconsult.Test.TestDocumentation;
+using Bodoconsult.Test.Tests.Helpers;
 using NUnit.Framework;
 
 namespace Bodoconsult.Test.Tests;
@@ -12,12 +13,11 @@ namespace Bodoconsult.Test.Tests;
 #pragma warning disable CS1591
 
 [TestFixture]
-public class UnitTestDocumentationHandler
+public class DocumentationHandlerTests
 {
 
     private DocumentationHandler _docu;
 
-    private const string TmpFolder = @"d:\temp\";
 
     [SetUp]
     public void Setup()
@@ -66,7 +66,7 @@ public class UnitTestDocumentationHandler
     public void TestCreateReport()
     {
         // Arrange
-        var fileName = Path.Combine(TmpFolder, "testreport.htm");
+        var fileName = Path.Combine(TestHelper.TempPath, "testreport.htm");
 
         if (File.Exists(fileName)) File.Delete(fileName);
 

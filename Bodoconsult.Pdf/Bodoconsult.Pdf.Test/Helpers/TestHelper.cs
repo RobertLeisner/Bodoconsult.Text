@@ -4,18 +4,40 @@
 using System;
 using System.Data;
 using System.Diagnostics;
+using System.IO;
 
 namespace Bodoconsult.Pdf.Test.Helpers;
 
 internal class TestHelper
 {
+        static TestHelper()
+        {
+
+            TempPath = Path.GetTempPath();
+
+            if (!Directory.Exists(TempPath))
+            {
+                Directory.CreateDirectory(TempPath);
+            }
+
+            var loc = new FileInfo(typeof(TestHelper).Assembly.Location);
+
+            TestDataPath = Path.Combine(loc.Directory.Parent.Parent.Parent.FullName, "TestData");
 
 
-    public const string Masstext1 =
+        }
+
+        public const string Masstext1 =
         "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
 
 
-    public const string TempPath = @"C:\temp";
+    public static string TempPath { get;}
+
+
+    /// <summary>
+    /// Path to the test data
+    /// </summary>
+    public static string TestDataPath { get; }
 
     /// <summary>
     /// Opens a file in a separate process. Executable not required
@@ -23,6 +45,11 @@ internal class TestHelper
     /// <param name="path"></param>
     public static void OpenFile(string path)
     {
+        if (!Debugger.IsAttached)
+        {
+            return;
+        }
+
         var p = new Process
         {
             StartInfo = new ProcessStartInfo(path)

@@ -15,6 +15,10 @@ namespace Bodoconsult.Pdf.Test;
 [TestFixture]
 public class PdfCreatorTests
 {
+
+    private readonly string _logo = Path.Combine(TestHelper.TestDataPath, "logo_bre.png");
+
+
     [Test]
     public void TestPdfCreatorWithDefaultStyleSheet()
     {
@@ -68,7 +72,7 @@ public class PdfCreatorTests
 
         pdf.SetDocInfo("Test", "Susbject", "Author");
 
-        pdf.SetHeader("Kopfzeile", "Header1", @"\\192.168.10.121\softwarestore$\Logos\Intern\logo_bre.png");
+        pdf.SetHeader("Kopfzeile", "Header1", _logo);
         pdf.SetFooter("Footer \t<<page>> / <<pages>>");
 
         pdf.CreateTocSection("Inhaltsverzeichnis");
@@ -104,7 +108,7 @@ public class PdfCreatorTests
         pdf.AddParagraph("Überschrift 2-1", "Heading2");
         pdf.AddParagraph(TestHelper.Masstext1, "Normal");
 
-        pdf.AddImage(@"\\192.168.10.121\softwarestore$\Logos\Intern\logo_bre.png", 5, 1.5);
+        pdf.AddImage(_logo, 5, 1.5);
 
         pdf.AddParagraph("Überschrift 2-2", "Heading2");
         pdf.AddParagraph(TestHelper.Masstext1, "Normal");

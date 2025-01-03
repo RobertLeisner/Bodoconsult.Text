@@ -1,10 +1,12 @@
+// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
+
 using System.Diagnostics;
 using NUnit.Framework;
 
 namespace Bodoconsult.Text.Test;
 
 [TestFixture]
-public class UnitTestHtmlHelper
+public class HtmlHelperTests
 {
     private const string MassText =
         "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";

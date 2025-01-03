@@ -11,10 +11,9 @@ namespace Bodoconsult.Test.Tests;
 
 [TestFixture]
 #pragma warning disable 1591
-public class UnitTestMetaDataHandler
-
+public class MetaDataHandlerTests
 {
-    private const string Path = @"d:\temp\MetaDataText.txt";
+    //private string Path = System.IO.Path.Combine(TestHelper.TempPath, "MetaDataText.txt");
 
     [Test]
     public void TestLoadAssemblies()

@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
 
-
 using Bodoconsult.Pdf.Helpers;
 using MigraDoc.DocumentObjectModel;
 using NUnit.Framework;
@@ -8,13 +7,12 @@ using NUnit.Framework;
 namespace Bodoconsult.Pdf.Test;
 
 [TestFixture]
-public class UnitTestObjectHelper
+public class ObjectHelperTests
 {
     [Test]
-    public void TestMapProperties()
+    public void MapProperties_ValidObjects_PropertiesMapped()
     {
         var style1 = new Style("Test1", "Normal") {Font = {Size = 25}};
-
 
         var style2 = new Style("Test2", "Normal");
 
