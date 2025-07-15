@@ -6,9 +6,17 @@ using System.Data;
 
 namespace Bodoconsult.Pdf.Extensions;
 
+/// <summary>
+/// Extension methods for <see cref="DataTable"/> instances
+/// </summary>
 public static class DataTableExtensions
 {
 
+    /// <summary>
+    /// Enumerate all rows
+    /// </summary>
+    /// <param name="table">Current data table</param>
+    /// <returns>Enumerable list of rows</returns>
     public static IEnumerable<DataRow> EnumerateRows(this DataTable table)
     {
         foreach (DataRow row in table.Rows)
@@ -17,11 +25,13 @@ public static class DataTableExtensions
         }
     }
 
+    /// <summary>
+    /// Enumerate all colums
+    /// </summary>
+    /// <param name="table">Current data table</param>
+    /// <returns>Enumerable list of columns</returns>
     public static IEnumerable<DataColumn> EnumerateColumns(this DataTable table)
     {
-
-            
-
         foreach (DataColumn column in table.Columns)
         {
             yield return column;

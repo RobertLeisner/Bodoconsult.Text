@@ -13,26 +13,61 @@ using MigraDoc.DocumentObjectModel;
 
 namespace Bodoconsult.Text.Pdf;
 
+/// <summary>
+/// An <see cref="ITextFormatter"/> implementation creating a PDF file
+/// </summary>
 [SupportedOSPlatform("windows")]
-public class PdfTextFormatter : ITextFormatter
+public class PdfTextFormatter : ITextFormatter, IDisposable
 {
+    /// <summary>
+    /// The increment to use
+    /// </summary>
+    public int Increment { get; set; }
 
-    public int Schritt { get; set; }
-
+    /// <summary>
+    /// Current style set
+    /// </summary>
     public IStyleSet StyleSet { get; set; }
 
-
+    /// <summary>
+    /// Background color
+    /// </summary>
     public Color BackColor { get; set; }
+
+    /// <summary>
+    /// Border color for table borders
+    /// </summary>
     public Color TableBorderColor { get; set; }
+
+    /// <summary>
+    /// Color to use for headline
+    /// </summary>
     public Color HeadLineColor { get; set; }
+
+    /// <summary>
+    /// Color for details
+    /// </summary>
     public Color DetailsColor { get; set; }
 
+    /// <summary>
+    /// Path to the logo image file
+    /// </summary>
     public string LogoImagePath { get; set; }
 
+    /// <summary>
+    /// Subject
+    /// </summary>
     public string Subject { get; set; }
 
+    /// <summary>
+    /// Author
+    /// </summary>
     public string Author { get; set; }
 
+    /// <summary>
+    /// Get the formatted text
+    /// </summary>
+    /// <returns>formatted text</returns>
     public string GetFormattedText()
     {
         var dl = new DataTable();
@@ -42,7 +77,7 @@ public class PdfTextFormatter : ITextFormatter
 
         Pdf = new PdfCreator(StyleSet)
         {
-            Increment = Schritt,
+            Increment = Increment,
             BackColor = BackColor,
             TableBorderColor = TableBorderColor
         };
@@ -156,9 +191,6 @@ public class PdfTextFormatter : ITextFormatter
 
     }
 
-
-
-
     /// <summary>Structured text to format</summary>
     public IStructuredText StructuredText { get; set; }
 
@@ -186,9 +218,14 @@ public class PdfTextFormatter : ITextFormatter
 
 
 
-
+    /// <summary>
+    /// PdfCreator instance: do not use directly
+    /// </summary>
     public PdfCreator Pdf;
 
+    /// <summary>
+    /// Default ctor
+    /// </summary>
     public PdfTextFormatter()
     {
         BackColor = new Color(211, 223, 240);
@@ -216,6 +253,7 @@ public class PdfTextFormatter : ITextFormatter
     }
 
 
+    /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
     public void Dispose()
     {
         try

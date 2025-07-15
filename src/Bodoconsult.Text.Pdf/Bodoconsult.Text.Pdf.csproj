@@ -26,6 +26,7 @@
 
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 
 	</PropertyGroup>
 
@@ -46,7 +47,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\Bodoconsult.Text\Bodoconsult.Text\Bodoconsult.Text.csproj" />
 		<ProjectReference Include="..\Bodoconsult.Pdf\Bodoconsult.Pdf.csproj" />
 		<ProjectReference Include="..\Bodoconsult.Text\Bodoconsult.Text.csproj" />
 		<ProjectReference Include="..\Bodoconsult.Typography\Bodoconsult.Typography.csproj" />

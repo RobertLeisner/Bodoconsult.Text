@@ -23,6 +23,7 @@
 		<Description>A basic library for typographic settings used in PDF creation with Bodoconsult.PDf, charting with Bodoconsult.Charting or other layout oriented software projects</Description>
 		<PackageReleaseNotes>Migration to .Net 8 and new namespace</PackageReleaseNotes>
 		<PackageProjectUrl>https://github.com/RobertLeisner/Bodoconsult.Text</PackageProjectUrl>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 	</PropertyGroup>
 
 

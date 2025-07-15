@@ -147,35 +147,72 @@ public class PdfCreator : IDisposable
 
     #endregion
 
-
-
+    /// <summary>
+    /// Currently started table
+    /// </summary>
     public Table Table { get; private set; }
 
+    /// <summary>
+    /// The title for the table of content (TOC)
+    /// </summary>
+    public string TitleTableOfContent { get; set; } = "Inhaltsverzeichnis";
 
-
-
-
+    /// <summary>
+    /// Inv´crement
+    /// </summary>
     public int Increment { get; set; }
 
-
-
-
+    /// <summary>
+    /// Alternating background color for tables
+    /// </summary>
     public Color AlternateBackColor { get; set; }
+
+    /// <summary>
+    /// Background color
+    /// </summary>
     public Color BackColor { get; set; }
+
+    /// <summary>
+    /// Table border color
+    /// </summary>
     public Color TableBorderColor { get; set; }
 
     // Farben für Stylesheets wie "wr_cell_h1"
 
+    /// <summary>
+    /// Color for shading of risk class 1
+    /// </summary>
     public Color ShadingRisk2Color { get; set; }
+
+    /// <summary>
+    /// Color for shading of risk class 2
+    /// </summary>
     public Color ShadingRisk1Color { get; set; }
+
+    /// <summary>
+    /// Color for shading of headline 3
+    /// </summary>
     public Color ShadingH3Color { get; set; }
+
+    /// <summary>
+    /// Color for shading of headline 2
+    /// </summary>
     public Color ShadingH2Color { get; set; }
+
+    /// <summary>
+    /// Color for shading of headline 1
+    /// </summary>
     public Color ShadingH1Color { get; set; }
 
 
-
+    /// <summary>
+    /// Add a page break if necessary
+    /// </summary>
     public bool AddPageBreakIfNecessary { get; set; }
 
+    /// <summary>
+    /// Path to the background image or null if no background image should be used
+    /// </summary>
     public string BackgroundImagePath { get; set; }
 
 
@@ -308,25 +345,27 @@ public class PdfCreator : IDisposable
     }
 
 
-
-    public void CreateDocument()
-    {
-        // Create a new MigraDoc document
-
-
-        //Styles.DefineStyles(document);
-
-        //Cover.DefineCover(document);
-        //TableOfContents.DefineTableOfContents(document);
-
-        //DefineContentSection(document);
-
-        //Paragraphs.DefineParagraphs(document);
-        //Tables.DefineTables(document);
-        //Charts.DefineCharts(document);
+    ///// <summary>
+    ///// Create the PDF document
+    ///// </summary>
+    //public void CreateDocument()
+    //{
+    //    // Create a new MigraDoc document
 
 
-    }
+    //    //Styles.DefineStyles(document);
+
+    //    //Cover.DefineCover(document);
+    //    //TableOfContents.DefineTableOfContents(document);
+
+    //    //DefineContentSection(document);
+
+    //    //Paragraphs.DefineParagraphs(document);
+    //    //Tables.DefineTables(document);
+    //    //Charts.DefineCharts(document);
+
+
+    //}
 
     /// <summary>
     /// Add a ney style based on style "Normal"
@@ -362,7 +401,7 @@ public class PdfCreator : IDisposable
 
 
     /// <summary>
-    /// Add a ney style based on an other style
+    /// Add a ney style based on another style
     /// </summary>
     /// <param name="styleName">Style name</param>
     /// <param name="baseStyleName">name of the style, the new one is based on</param>
@@ -401,14 +440,12 @@ public class PdfCreator : IDisposable
         AddHeaderInternal(_toc);
         AddFooterInternal(_toc);
 
-        Paragraph p;
-
         if (!string.IsNullOrEmpty(heading))
         {
-            p = _toc.AddParagraph(heading, "Title");
+            _toc.AddParagraph(heading, "Title");
         }
 
-        p = _toc.AddParagraph("Inhaltsverzeichnis", "TocHeading1");
+        var p = _toc.AddParagraph(TitleTableOfContent, "TocHeading1");
         p.AddBookmark("Inhalt");
 
         _content = _toc;
@@ -418,23 +455,31 @@ public class PdfCreator : IDisposable
     /// <summary>
     /// Add a paragraph to the content section
     /// </summary>
-    /// <param name="text"></param>
+    /// <param name="text">Content to add</param>
     public void AddParagraph(string text)
     {
         var paragraph = new Paragraph();
         paragraph.AddText(text ?? "");
         _content.Add(paragraph);
-
-
     }
 
     /// <summary>
     /// Add a paragraph to the content section
     /// </summary>
-    /// <param name="text"></param>
-    /// <param name="styleName"></param>
+    /// <param name="text">Content to add</param>
+    /// <param name="styleName">Name of the style to use</param>
     public void AddParagraph(string text, string styleName)
     {
+
+        if (string.IsNullOrEmpty(styleName))
+        {
+            styleName = "Normal";
+        }
+        if (string.IsNullOrEmpty(text))
+        {
+            text = "";
+        }
+
         var paragraph = new Paragraph();
 
         paragraph.AddText(text ?? "");
@@ -507,7 +552,7 @@ public class PdfCreator : IDisposable
         if (text.Contains("<<page>>"))
         {
 
-            var vorher = text.Substring(0, text.IndexOf("<<page>>", StringComparison.Ordinal));
+            var vorher = text[..text.IndexOf("<<page>>", StringComparison.Ordinal)];
             var nachher = text.Substring(text.IndexOf("<<page>>", StringComparison.Ordinal) + 8,
                 text.Length - text.IndexOf("<<page>>", StringComparison.Ordinal) - 8);
             paragraph.AddText(vorher);
@@ -515,7 +560,7 @@ public class PdfCreator : IDisposable
 
             if (nachher.Contains("<<pages>>"))
             {
-                vorher = nachher.Substring(0, nachher.IndexOf("<<pages>>", StringComparison.Ordinal));
+                vorher = nachher[..nachher.IndexOf("<<pages>>", StringComparison.Ordinal)];
                 nachher = nachher.Substring(nachher.IndexOf("<<pages>>", StringComparison.Ordinal) + 9,
                     nachher.Length - nachher.IndexOf("<<pages>>", StringComparison.Ordinal) - 9);
 
@@ -523,8 +568,6 @@ public class PdfCreator : IDisposable
                 paragraph.AddNumPagesField();
             }
             paragraph.AddText(nachher);
-
-
         }
         else
         {
@@ -535,11 +578,14 @@ public class PdfCreator : IDisposable
         section.Footers.Primary.Add(paragraph);
     }
 
+    /// <summary>
+    /// Set a header for the document
+    /// </summary>
+    /// <param name="text">Header text</param>
+    /// <param name="styleName">Name of the style to use for the header</param>
     public void SetHeader(string text, string styleName = "Header")
     {
-
         SetHeader(text, styleName, null);
-
     }
 
 
@@ -547,7 +593,12 @@ public class PdfCreator : IDisposable
     private string _headerStyleName;
     private string _headerLogoPath;
 
-
+    /// <summary>
+    /// Set a header for the document
+    /// </summary>
+    /// <param name="text">Header text</param>
+    /// <param name="styleName">Name of the style to use for the header</param>
+    /// <param name="logoPath">Path to a logo image or null</param>
     public void SetHeader(string text, string styleName, string logoPath)
     {
         _headerText = text;
@@ -1091,7 +1142,10 @@ public class PdfCreator : IDisposable
         var shadow = false;
         for (var zeile = schleife * Increment; zeile < (schleife + 1) * Increment; zeile++)
         {
-            if (zeile >= dt.Rows.Count) break;
+            if (zeile >= dt.Rows.Count)
+            {
+                break;
+            }
 
             var r = dt.Rows[zeile];
             var row = table.AddRow();
@@ -1140,9 +1194,12 @@ public class PdfCreator : IDisposable
                 var cell = row.Cells[i];
                 cell.Format.SpaceAfter = 0;
                 cell.Format.SpaceBefore = 0;
-                if (string.IsNullOrEmpty(format[i + korr]))
+
+                var s = format[i + korr];
+
+                if (string.IsNullOrEmpty(s))
                 {
-                    var p = cell.AddParagraph(r[i + korr].ToString().Trim());
+                    var p = cell.AddParagraph((r[i + korr].ToString() ?? "").Trim());
                     p.Format.Font.Size = style.Font.Size;
                     p.Format.Font.Name = style.Font.Name;
                     p.Format.SpaceAfter = style.ParagraphFormat.SpaceAfter;
@@ -1151,31 +1208,33 @@ public class PdfCreator : IDisposable
                 }
                 else
                 {
-                    if (format[i + korr].ToLower().Contains("yy"))
+                    if (s.ToLower().Contains("yy"))
                     {
-                        var z = r[i + korr].ToString().Trim();
-                        if (!string.IsNullOrEmpty(z))
+                        var z = (r[i + korr].ToString() ?? "").Trim();
+                        if (string.IsNullOrEmpty(z))
                         {
-                            var p = cell.AddParagraph(Convert.ToDateTime(z).ToString(format[i + korr]));
-                            p.Format.Font.Size = style.Font.Size;
-                            p.Format.Font.Name = style.Font.Name;
-                            p.Format.SpaceAfter = style.ParagraphFormat.SpaceAfter;
-                            p.Format.SpaceBefore = style.ParagraphFormat.SpaceBefore;
-                            p.Format.Shading.Color = shadingColor;
+                            continue;
                         }
+                        var p = cell.AddParagraph(Convert.ToDateTime(z).ToString(format[i + korr]));
+                        p.Format.Font.Size = style.Font.Size;
+                        p.Format.Font.Name = style.Font.Name;
+                        p.Format.SpaceAfter = style.ParagraphFormat.SpaceAfter;
+                        p.Format.SpaceBefore = style.ParagraphFormat.SpaceBefore;
+                        p.Format.Shading.Color = shadingColor;
                     }
                     else
                     {
                         var z = r[i + korr].ToString();
-                        if (!string.IsNullOrEmpty(z))
+                        if (string.IsNullOrEmpty(z))
                         {
-                            var p = cell.AddParagraph(Convert.ToDouble(z).ToString(format[i + korr]));
-                            p.Format.Font.Size = style.Font.Size;
-                            p.Format.Font.Name = style.Font.Name;
-                            p.Format.SpaceAfter = style.ParagraphFormat.SpaceAfter;
-                            p.Format.SpaceBefore = style.ParagraphFormat.SpaceBefore;
-                            p.Format.Shading.Color = shadingColor;
+                            continue;
                         }
+                        var p = cell.AddParagraph(Convert.ToDouble(z).ToString(format[i + korr]));
+                        p.Format.Font.Size = style.Font.Size;
+                        p.Format.Font.Name = style.Font.Name;
+                        p.Format.SpaceAfter = style.ParagraphFormat.SpaceAfter;
+                        p.Format.SpaceBefore = style.ParagraphFormat.SpaceBefore;
+                        p.Format.Shading.Color = shadingColor;
                     }
                 }
             }
@@ -1661,16 +1720,27 @@ public class PdfCreator : IDisposable
 
     //}
 
+    /// <summary>
+    /// Add a chart
+    /// </summary>
+    /// <param name="chart"></param>
     public void AddChart(Chart chart)
     {
         _content.Add(chart);
     }
 
+    /// <summary>
+    /// Start a table with style NormalTable
+    /// </summary>
     public void TableStart()
     {
         TableStart("NormalTable");
     }
 
+    /// <summary>
+    /// Start a table with a certain style
+    /// </summary>
+    /// <param name="style">Style to apply to new table</param>
     public void TableStart(string style)
     {
         var p = _content.AddParagraph();
@@ -1686,6 +1756,11 @@ public class PdfCreator : IDisposable
 
     }
 
+    /// <summary>
+    /// Add a column to the currently started table
+    /// </summary>
+    /// <param name="alignment"></param>
+    /// <param name="width"></param>
     public void TableAddColumn(ParagraphAlignment alignment, double width)
     {
         var column = Table.AddColumn();
@@ -1693,48 +1768,79 @@ public class PdfCreator : IDisposable
         column.Width = Unit.FromCentimeter(width);
     }
 
-
+    /// <summary>
+    /// End the currently started table
+    /// </summary>
     public void TableEnd()
     {
 
 
     }
 
+    /// <summary>
+    /// Add a row to the currently started table
+    /// </summary>
+    /// <returns></returns>
     public Row TableAddRow()
     {
         return Table.AddRow();
     }
 
+    /// <summary>
+    /// Fill content in a certain table cell defined by row and column number
+    /// </summary>
+    /// <param name="column">Column number of the cell starting with 0</param>
+    /// <param name="row">Row number of the cell starting with 0</param>
+    /// <param name="content">Content to fill in the cell</param>
     public void TableSetContent(int column, int row, string content)
     {
 
-        if (string.IsNullOrEmpty(content)) content = "";
+        if (string.IsNullOrEmpty(content))
+        {
+            content = "";
+        }
 
         var cell = Table.Rows[row].Cells[column];
         cell.AddParagraph(content);
     }
 
+    /// <summary>
+    /// Fill content in a certain table cell defined by row and column number
+    /// </summary>
+    /// <param name="column">Column number of the cell starting with 0</param>
+    /// <param name="row">Row number of the cell starting with 0</param>
+    /// <param name="chart">Chart to fill in the cell</param>
     public void TableSetContent(int column, int row, Chart chart)
     {
         Table.Rows[row][column].Add(chart);
 
     }
 
-
-
-    public void TableSetContent(int column, int row, string chartImagePath, double width, double height)
+    /// <summary>
+    /// Fill image in a certain table cell defined by row and column number
+    /// </summary>
+    /// <param name="column">Column number of the cell starting with 0</param>
+    /// <param name="row">Row number of the cell starting with 0</param>
+    /// <param name="imagePath">Image to fill in the cell</param>
+    /// <param name="width">Width of the image in cm</param>
+    /// <param name="height">Height of the image in cm</param>
+    public void TableSetContent(int column, int row, string imagePath, double width, double height)
     {
-
         var t = Table.Rows[row][column];
 
-        var image = t.AddImage(chartImagePath);
+        var image = t.AddImage(imagePath);
 
         image.Width = Unit.FromCentimeter(width);
         image.Height = Unit.FromCentimeter(height);
         //image.Left = 0;
-
     }
 
+    /// <summary>
+    /// Add an image
+    /// </summary>
+    /// <param name="fileName">Path to the image to add</param>
+    /// <param name="width">Width of the image in cm</param>
+    /// <param name="height">Height of the image in cm</param>
     public void AddImage(string fileName, double width, double height)
     {
         var frame = _content.AddTextFrame();
@@ -1747,6 +1853,15 @@ public class PdfCreator : IDisposable
         image = null;
     }
 
+    /// <summary>
+    /// Fill image in a certain table cell of a small table defined by row and column number
+    /// </summary>
+    /// <param name="column">Column number of the cell starting with 0</param>
+    /// <param name="row">Row number of the cell starting with 0</param>
+    /// <param name="data">Data to fill in the cells</param>
+    /// <param name="heading">Heading for the table</param>
+    /// <param name="width">Width of the image in cm</param>
+    /// <param name="height">Height of the image in cm</param>
     public void TableSetContentSmallTable(int column, int row, DataTable data, string heading, double width, double height = 6F)
     {
         var t = Table.Rows[row][column];
@@ -1765,14 +1880,19 @@ public class PdfCreator : IDisposable
         CreateTable(data, 0, frame);
     }
 
-    public void AddTable<T>(IList<T> items, IList<PdfTableField> listFields, bool showheader)
+    /// <summary>
+    /// Create a table from a list of items
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="items">Data items to show</param>
+    /// <param name="listFields">List of fields to show</param>
+    /// <param name="showHeader">Show a header. Default false</param>
+    public void AddTable<T>(IList<T> items, IList<PdfTableField> listFields, bool showHeader)
     {
 
         var myObjectType = typeof(T);
 
         var fieldInfo = myObjectType.GetProperties().ToList();
-
-
 
         // Header
 
@@ -1804,7 +1924,7 @@ public class PdfCreator : IDisposable
 
         // header anzeigen
         var column = 0;
-        if (showheader)
+        if (showHeader)
         {
             var header = Table.AddRow();
 
@@ -1851,18 +1971,21 @@ public class PdfCreator : IDisposable
     }
 
     /// <summary>
-    /// Add a HTML code
+    /// Add an HTML code
     /// </summary>
-    /// <param name="html"></param>
+    /// <param name="html">HTML code to add</param>
     public void AddHtml(string html)
     {
-        if (string.IsNullOrEmpty(html)) html = "";
+        if (string.IsNullOrEmpty(html))
+        {
+            html = "";
+        }
+
         if (!html.Contains("<"))
         {
             AddParagraph(html);
             return;
         }
-
 
         html = html.Replace("&nbsp;", " ").Replace("<br />", "\r\n").Replace("<br/>", "\r\n").Replace("\r\n\r\n", "\r\n");
 
@@ -1917,18 +2040,20 @@ public class PdfCreator : IDisposable
                 //    break;
             }
 
-
-
             startTag = html.IndexOf("<", startTag + 1, StringComparison.InvariantCultureIgnoreCase);
         }
 
     }
 
-
+    /// <summary>
+    /// Create a footer with three section left, middle and right
+    /// </summary>
+    /// <param name="footerLeft">Content of left footer section</param>
+    /// <param name="footerMiddle">Content of left middle section</param>
+    /// <param name="footerRight">Content of left right section</param>
+    /// <param name="styleName">Style to use for the footer</param>
     public void CreateFooter3(string footerLeft, string footerMiddle, string footerRight, string styleName)
     {
-
-
         var table = _content.Footers.Primary.AddTable();
         table.Borders.Visible = false;
         table.TopPadding = 9;
@@ -1975,6 +2100,7 @@ public class PdfCreator : IDisposable
     }
 
 
+    /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
     public void Dispose()
     {
         _content = null;

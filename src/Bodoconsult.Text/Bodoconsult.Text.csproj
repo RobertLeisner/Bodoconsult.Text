@@ -23,6 +23,7 @@
 		<Description>Simple class for collecting structured text in an app and export it to HTML or an ASCII plain text file. Use library to create simple reports from apps or from unit testing i.e. for auditors or as documentation.</Description>
 		<PackageReleaseNotes>Migration to .Net 8 and new namespace</PackageReleaseNotes>
 		<PackageProjectUrl>https://github.com/RobertLeisner/Bodoconsult.Text</PackageProjectUrl>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>

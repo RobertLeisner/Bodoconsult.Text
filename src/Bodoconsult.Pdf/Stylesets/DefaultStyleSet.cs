@@ -10,7 +10,9 @@ namespace Bodoconsult.Pdf.Stylesets;
 /// </summary>
 public class DefaultStyleSet : IStyleSet
 {
-
+    /// <summary>
+    /// Default ctor
+    /// </summary>
     public DefaultStyleSet()
     {
 
@@ -457,8 +459,9 @@ public class DefaultStyleSet : IStyleSet
     /// </summary>
     public Style Normal { get; }
 
+
     /// <summary>
-    /// Spezielles Format für Tabellenbasis (nicht ändern!)
+    /// Style used a table base. Do NOT change this style
     /// </summary>
     public Style NormalTable { get; }
 
@@ -496,50 +499,86 @@ public class DefaultStyleSet : IStyleSet
     public Style Heading4 { get; }
 
 
+    /// <summary>
+    /// No heading 1 for small tables
+    /// </summary>
     public Style NoHeading1 { get; }
 
 
+    /// <summary>
+    /// Chart title style
+    /// </summary>
     public Style ChartTitle { get; }
 
 
+    /// <summary>
+    /// Chart y-axis label style
+    /// </summary>
     public Style ChartYLabel { get; }
 
 
+    /// <summary>
+    /// Style for TOC heading 1
+    /// </summary>
     public Style Toc1 { get; }
 
 
+    /// <summary>
+    /// Style for TOC heading 2
+    /// </summary>
     public Style Toc2 { get; }
 
+    /// <summary>
+    /// Style for TOC heading 3
+    /// </summary>
     public Style Toc3 { get; }
 
 
+    /// <summary>
+    /// Style for TOC heading 4
+    /// </summary>
     public Style Toc4 { get; }
 
 
-
+    /// <summary>
+    /// Style for TOC title
+    /// </summary>
     public Style TocHeading1 { get; }
 
 
+    /// <summary>
+    /// Page header style
+    /// </summary>
     public Style Header { get; }
 
 
-
+    /// <summary>
+    /// Details style
+    /// </summary>
     public Style Details { get; }
 
 
-
+    /// <summary>
+    /// Chart cell style
+    /// </summary>
     public Style ChartCell { get; }
 
 
-
+    /// <summary>
+    /// Page footer style
+    /// </summary>
     public Style Footer { get; }
 
 
-
+    /// <summary>
+    /// Style for code segement paragraphs
+    /// </summary>
     public Style Code { get; }
 
 
-
+    /// <summary>
+    /// A style for bulleted lists
+    /// </summary>
     public Style Bullet1 { get; }
 
 

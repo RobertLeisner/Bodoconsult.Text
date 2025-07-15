@@ -14,8 +14,17 @@ namespace Bodoconsult.Test.TestDocumentation
     /// </summary>
     public class DocuTestClass : IHtmlCreator
     {
+        /// <summary>
+        /// Current documentation handler. Public only for testing
+        /// </summary>
         public DocumentationHandler DocuHandler { get; }
 
+
+        /// <summary>
+        /// Default ctor
+        /// </summary>
+        /// <param name="docuHandler">Current documentation handler</param>
+        /// <param name="type">Curent type</param>
         public DocuTestClass(DocumentationHandler docuHandler, Type type)
         {
             DocuHandler = docuHandler;
@@ -118,6 +127,12 @@ namespace Bodoconsult.Test.TestDocumentation
             return result;
         }
 
+        /// <summary>
+        /// Mark a method as started
+        /// </summary>
+        /// <param name="description">Description</param>
+        /// <param name="priority">Test priority</param>
+        /// <returns></returns>
         public DocuTestClassMethod StartMethod(string description = null, TestPriority priority = TestPriority.Normal)
         {
             var st = new StackTrace();
@@ -140,7 +155,10 @@ namespace Bodoconsult.Test.TestDocumentation
                 TestMethods.Add(testMethod);
             }
 
-            if (!string.IsNullOrEmpty(description)) testMethod.Description = description;
+            if (!string.IsNullOrEmpty(description))
+            {
+                testMethod.Description = description;
+            }
             testMethod.TestPriority = priority;
 
 

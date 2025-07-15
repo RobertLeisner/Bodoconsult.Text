@@ -7,18 +7,30 @@ using System.Reflection;
 
 namespace Bodoconsult.Test.Helpers
 {
+    /// <summary>
+    /// Test helper class
+    /// </summary>
     public class TestHelper
     {
 
+        private static readonly Assembly Ass;
+
         static TestHelper()
         {
-            AppPath = new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.Parent.Parent.Parent.FullName;
+            Ass = Assembly.GetExecutingAssembly();
+            AppPath = new FileInfo(Ass.Location).Directory.FullName;
             TestDataPath = Path.Combine(AppPath, "TestData");
         }
 
+        /// <summary>
+        /// Current app path
+        /// </summary>
         public static string AppPath { get; }
 
-        public static string TestDataPath { get; }
+        /// <summary>
+        /// Test data path
+        /// </summary>
+        public static string TestDataPath { get; set; }
 
 
         /// <summary>
@@ -31,8 +43,7 @@ namespace Bodoconsult.Test.Helpers
 
             resourceName = $"Bodoconsult.Test.Resources.{resourceName}.txt";
 
-            var ass = Assembly.GetExecutingAssembly();
-            var str = ass.GetManifestResourceStream(resourceName);
+            var str = Ass.GetManifestResourceStream(resourceName);
 
             if (str == null) return null;
 
@@ -52,8 +63,10 @@ namespace Bodoconsult.Test.Helpers
         /// <param name="path">File to open</param>
         public static void OpenFile(string path)
         {
-
-            if (!Debugger.IsAttached) return;
+            if (!Debugger.IsAttached)
+            {
+                return;
+            }
 
             var p = new Process
             {
@@ -64,6 +77,5 @@ namespace Bodoconsult.Test.Helpers
             };
             p.Start();
         }
-
     }
 }

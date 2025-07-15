@@ -10,11 +10,17 @@ using MigraDoc.DocumentObjectModel.Shapes.Charts;
 
 namespace Bodoconsult.Pdf.PdfSharp;
 
+/// <summary>
+/// Simple chart creation with MigraDoc
+/// </summary>
 public class PdfChart
 {
-    readonly Chart _chart = new Chart();
+    private readonly Chart _chart = new();
 
 
+    /// <summary>
+    /// Default ctor
+    /// </summary>
     public PdfChart()
     {
         HasDataLabel = false;
@@ -23,29 +29,64 @@ public class PdfChart
         Left = 0;
     }
 
+    /// <summary>
+    /// Left posiiton in cm
+    /// </summary>
+    public double Left { get; set; }
 
-    public double Left; // { get; set; }
+    /// <summary>
+    /// Width in cm
+    /// </summary>
+    public double Width { get; set; }
 
+    /// <summary>
+    /// Height in cm
+    /// </summary>
+    public double Height { get; set; }
 
-    public double Width; // { get; set; }
+    /// <summary>
+    /// Chart type
+    /// </summary>
+    public ChartType TypeOfChart { get; set; }
 
-    public double Height; // { get; set; }
+    /// <summary>
+    /// Has a data lable
+    /// </summary>
+    public bool HasDataLabel { get; set; }
 
-    public ChartType TypeOfChart; // { get; set; }
+    /// <summary>
+    /// XAxis lable
+    /// </summary>
+    public string XAxisLabel { get; set; }
 
-    public bool HasDataLabel; // { get; set; }
+    /// <summary>
+    /// YAxis lable
+    /// </summary>
+    public string YAxisLabel { get; set; }
 
-    public string XAxisLabel; // { get; set; }
-    public string YAxisLabel; // { get; set; }
-
-    public int LegendLength; // { get; set; }
+    /// <summary>
+    /// Length of the legend
+    /// </summary>
+    public int LegendLength { get; set; }
 
     private int _xDimension;
 
-    public string Title; // { get; set; }
+    /// <summary>
+    /// Chart title
+    /// </summary>
+    public string Title { get; set; }
 
+    /// <summary>
+    /// Draw the chart
+    /// </summary>
+    /// <returns>Chart</returns>
     public Chart Draw()
     {
+        if (_chart.SeriesCollection.Count==0)
+        {
+            throw new ArgumentException("At least the data of one series are required.");
+        }
+
         _chart.Width = Unit.FromCentimeter(Width);
         _chart.Height = Unit.FromCentimeter(Height);
 
@@ -59,7 +100,7 @@ public class PdfChart
         _chart.PlotArea.LineFormat.Width = 1;
         _chart.PlotArea.BottomPadding = Unit.FromCentimeter(0.2);
         _chart.PlotArea.LeftPadding = Unit.FromCentimeter(0.2);
-            
+
         _chart.Format.Font.Size = 8;
         _chart.HeaderArea.Style = "ChartTitle";
         _chart.HeaderArea.AddParagraph(Title);
@@ -67,10 +108,12 @@ public class PdfChart
         _chart.PlotArea.FillFormat.Color = Colors.White;
         _chart.LineFormat.Color = Colors.SteelBlue;
 
-
-
         if (_chart.SeriesCollection.Count > 1)
         {
+            if (_chart.SeriesCollection[0] == null || _chart.SeriesCollection[1]==null)
+            {
+                throw new ArgumentException("Two data series are required.");
+            }
 
             _chart.SeriesCollection[0].MarkerBackgroundColor = Colors.YellowGreen;
             _chart.SeriesCollection[0].MarkerSize = 2;
@@ -88,12 +131,16 @@ public class PdfChart
         }
         else
         {
+            if (_chart.SeriesCollection[0] == null)
+            {
+                throw new ArgumentException("At least the data of one series are required.");
+            }
             _chart.SeriesCollection[0].FillFormat.Color = Colors.Orange;
             _chart.SeriesCollection[0].MarkerBackgroundColor = Colors.Orange;
             _chart.SeriesCollection[0].MarkerSize = 2;
             _chart.SeriesCollection[0].MarkerStyle = MarkerStyle.Plus;
             _chart.SeriesCollection[0].LineFormat.Color = Colors.Orange;
-            _chart.SeriesCollection[0].LineFormat.Width = 2;       
+            _chart.SeriesCollection[0].LineFormat.Width = 2;
         }
 
         if (!string.IsNullOrEmpty(YAxisLabel))
@@ -103,14 +150,17 @@ public class PdfChart
             _chart.LeftArea.LeftPadding = Unit.FromCentimeter(0.2);
         }
 
-
         _chart.RightArea.AddLegend();
 
         return _chart;
 
     }
 
-
+    /// <summary>
+    /// Add a data series to the chart
+    /// </summary>
+    /// <param name="data">Data array</param>
+    /// <param name="name">Name of the series</param>
     public void AddSeries(double[] data, string name)
     {
         var series = _chart.SeriesCollection.AddSeries();
@@ -119,10 +169,14 @@ public class PdfChart
         series.Name = name;
         series.MarkerSize = Unit.FromCentimeter(0.1);
         series.HasDataLabel = HasDataLabel;
-
     }
 
-
+    /// <summary>
+    /// Add a series taken from a <see cref="DataTable"/>
+    /// </summary>
+    /// <param name="dataTable">Current data</param>
+    /// <param name="columnId">Column number starting with 0</param>
+    /// <param name="name">Name of the series</param>
     public void AddSeries(DataTable dataTable, int columnId, string name)
     {
 
@@ -136,8 +190,6 @@ public class PdfChart
             x[i] = Convert.ToDouble(v);
         }
 
-
-
         //var query = from mycolumn in dataTable.AsEnumerable()
         //            where mycolumn.Field<decimal>(columnId) != null 
         //            select mycolumn;
@@ -148,7 +200,10 @@ public class PdfChart
 
     }
 
-
+    /// <summary>
+    /// Add x-axis values for series
+    /// </summary>
+    /// <param name="s">Array with names</param>
     public void XSeries(params string[] s)
     {
         _xDimension = s.Length;
@@ -156,6 +211,11 @@ public class PdfChart
         xseries.Add(s);
     }
 
+    /// <summary>
+    /// Add x-axis values for series
+    /// </summary>
+    /// <param name="dataTable"><see cref="DataTable"/>> with names</param>
+    /// <param name="columnId">Column number starting with 0</param>
     public void XSeries(DataTable dataTable, int columnId)
     {
         if (LegendLength > 15) LegendLength = 15;

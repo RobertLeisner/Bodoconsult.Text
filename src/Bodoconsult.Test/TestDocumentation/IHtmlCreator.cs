@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Bodoconsult.Test.TestDocumentation
 {
+    /// <summary>
+    /// Interface for creating HTML file
+    /// </summary>
     public interface IHtmlCreator
     {
         /// <summary>

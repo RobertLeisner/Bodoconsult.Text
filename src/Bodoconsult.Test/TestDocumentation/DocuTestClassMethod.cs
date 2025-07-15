@@ -35,6 +35,10 @@ namespace Bodoconsult.Test.TestDocumentation
         /// </summary>
         public TestPriority TestPriority { get; set; }
 
+        /// <summary>
+        /// Create a report as an HTML string in a short version
+        /// </summary>
+        /// <returns>HTML string</returns>
         public StringBuilder ToHtmlString()
         {
             var result = new StringBuilder();
@@ -47,16 +51,25 @@ namespace Bodoconsult.Test.TestDocumentation
                 result.AppendLine($"<p class=\"margin\">Test priority: {TestPriority}</p>");
             }
 
-            if (!string.IsNullOrEmpty(Description))
+            if (string.IsNullOrEmpty(Description))
             {
-                if (!Description.EndsWith(".")) Description = Description + ".";
-
-                result.AppendLine($"<p class=\"margin\">{Description}</p>");
+                return result;
             }
+
+            if (!Description.EndsWith("."))
+            {
+                Description += ".";
+            }
+
+            result.AppendLine($"<p class=\"margin\">{Description}</p>");
 
             return result;
         }
 
+        /// <summary>
+        /// Create a report as an HTML string in a longer, more detailled version
+        /// </summary>
+        /// <returns>HTML string</returns>
         public StringBuilder ToHtmlStringLong()
         {
             var result = new StringBuilder();
@@ -69,16 +82,24 @@ namespace Bodoconsult.Test.TestDocumentation
                 result.AppendLine($"<p class=\"margin\">Test priority: {TestPriority}</p>");
             }
 
-            if (!string.IsNullOrEmpty(Description))
+            if (string.IsNullOrEmpty(Description))
             {
-                if (!Description.EndsWith(".")) Description = Description + ".";
-
-                result.AppendLine($"<p class=\"margin\">{Description}</p>");
+                return result;
             }
+
+            if (!Description.EndsWith("."))
+            {
+                Description += ".";
+            }
+
+            result.AppendLine($"<p class=\"margin\">{Description}</p>");
 
             return result;
         }
 
+        /// <summary>
+        /// Mark method as successful
+        /// </summary>
         public void MethodSuccess()
         {
             Success = true;

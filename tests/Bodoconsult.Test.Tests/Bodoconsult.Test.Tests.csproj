@@ -6,10 +6,6 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Daten\Projekte\Tools\Bodoconsult.Text\Bodoconsult.Test\Bodoconsult.Test.Tests\Bodoconsult.Test.Tests.xml</DocumentationFile>
-  </PropertyGroup>
-
   <ItemGroup>
     <Content Include="Bodoconsult.Test.Tests.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

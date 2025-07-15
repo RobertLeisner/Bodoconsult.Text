@@ -25,13 +25,20 @@ namespace Bodoconsult.Test.TestDocumentation
         public IList<DocuTestClass> TestClasses { get; set; } = new List<DocuTestClass>();
 
 
-
+        /// <summary>
+        /// Methods without start
+        /// </summary>
         public IList<DocuTestClassMethod> MethodsWithoutStart { get; set; } = new List<DocuTestClassMethod>();
 
 
+        /// <summary>
+        /// Assembly name
+        /// </summary>
         public string AssemblyName { get; set; }
 
-
+        /// <summary>
+        /// Assembly description
+        /// </summary>
         public string AssemblyDescription { get; set; }
 
 
@@ -50,6 +57,13 @@ namespace Bodoconsult.Test.TestDocumentation
         /// </summary>
         public int NumberOfTestsSuccess { get; set; }
 
+        /// <summary>
+        /// Marks a certain method as started
+        /// </summary>
+        /// <param name="type">Current type</param>
+        /// <param name="description">Description</param>
+        /// <param name="priority">Test priority</param>
+        /// <returns>Documentation string</returns>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public string StartMethod(Type type, string description = null, TestPriority priority = TestPriority.Normal)
         {
@@ -87,8 +101,6 @@ namespace Bodoconsult.Test.TestDocumentation
                 TestClasses.Add(testClass);
             }
 
-
-
             var method = m.Name;
 
             var testMethod = testClass.TestMethods.FirstOrDefault(x => x.Name == method);
@@ -103,7 +115,10 @@ namespace Bodoconsult.Test.TestDocumentation
                 testClass.TestMethods.Add(testMethod);
             }
 
-            if (!string.IsNullOrEmpty(description)) testMethod.Description = description;
+            if (!string.IsNullOrEmpty(description))
+            {
+                testMethod.Description = description;
+            }
             testMethod.TestPriority = priority;
 
 
@@ -118,7 +133,11 @@ namespace Bodoconsult.Test.TestDocumentation
 
         }
 
-
+        /// <summary>
+        /// Method was successful
+        /// </summary>
+        /// <param name="type">Type to test</param>
+        /// <returns>Documentation</returns>
         public string MethodSuccess(Type type)
         {
             var st = new StackTrace();
@@ -169,9 +188,16 @@ namespace Bodoconsult.Test.TestDocumentation
             return method;
         }
 
+        /// <summary>
+        /// Create a report and write it to <see cref="FileName"/>
+        /// </summary>
+        /// <returns><see cref="FileName"/></returns>
         public string CreateReport()
         {
-            if (File.Exists(FileName)) File.Delete(FileName);
+            if (File.Exists(FileName))
+            {
+                File.Delete(FileName);
+            }
 
             var master = TestHelper.GetTextResource("HtmlMaster");
 
@@ -205,11 +231,17 @@ namespace Bodoconsult.Test.TestDocumentation
             return FileName;
         }
 
+        /// <summary>
+        /// Add a class to the documentation
+        /// </summary>
+        /// <param name="type">Type to test</param>
+        /// <param name="description">Description</param>
+        /// <param name="priority">Priority for testing</param>
+        /// <returns></returns>
         public DocuTestClass AddClass(Type type, string description, TestPriority priority = TestPriority.Normal)
         {
 
             var className = type.Name;
-
 
             var testClass = TestClasses.FirstOrDefault(x => x.Name == className);
 
@@ -226,6 +258,10 @@ namespace Bodoconsult.Test.TestDocumentation
             return testClass;
         }
 
+        /// <summary>
+        /// Create an HTML string
+        /// </summary>
+        /// <returns>StringBuilder with HTML</returns>
         public StringBuilder ToHtmlString()
         {
             var content = new StringBuilder();
@@ -268,7 +304,7 @@ namespace Bodoconsult.Test.TestDocumentation
 
                 content.AppendLine("<h3>Tests without start</h3>");
 
-                // Print methods with out start
+                // Print methods without start
                 foreach (var m in MethodsWithoutStart)
                 {
                     content.Append(m.ToHtmlStringLong());
@@ -296,13 +332,17 @@ namespace Bodoconsult.Test.TestDocumentation
             return content;
         }
 
+        /// <summary>
+        /// Create an HTML string for the TOC
+        /// </summary>
+        /// <returns></returns>
         public StringBuilder TocToHtmlString()
         {
             var result = new StringBuilder();
 
             result.AppendLine("<h2>Table of content</h2>");
 
-            result.AppendLine($"<p><a href=\"#Overview\">Overview</a></p>");
+            result.AppendLine("<p><a href=\"#Overview\">Overview</a></p>");
 
             foreach (var testClass in TestClasses.Where(x => x.TestPriority != TestPriority.Ignore).OrderBy(x => x.Name))
             {
