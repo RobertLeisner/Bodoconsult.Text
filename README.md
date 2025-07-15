@@ -4,15 +4,17 @@ This repository contains a collection of projects related to formatted text gene
 
 Content:
 
--   [Bodoconsult.Typography: basic settings for text formatting](Bodoconsult.Typography/README.md)
+>   [Bodoconsult.Typography: basic settings for text formatting](doc/Bodoconsult.Typography/README.md)
 
--   [Bodoconsult.Text: basic features for text handling and formatted plain text handling](Bodoconsult.Text/README.md)
+>   [Bodoconsult.Pdf: PDF file generation based on Bodoconsult.Text](doc/Bodoconsult.Pdf/README.md)
 
--   [Bodoconsult.Pdf: PDF file generation based on Bodoconsult.Text](Bodoconsult.Pdf/README.md)
+>   [Bodoconsult.Text.Pdf: creating PDF files](doc/Bodoconsult.Text.Pdf/README.md)
 
--   [Bodoconsult.Test: generate a test documentation i.e. for auditing](Bodoconsult.Test/README.md)
+>   [Bodoconsult.Text: basic features for text handling and formatted plain text handling](doc/Bodoconsult.Text/README.md)
 
--   [Bodoconsult.Latex: create LaTex from Office documents like presentations](/Bodoconsult.Latex/README.md)
+>   [Bodoconsult.Test: generate a test documentation i.e. for auditing](doc/Bodoconsult.Test/README.md)
+
+>   [Bodoconsult.Latex: create LaTex from Office documents like presentations](doc/Bodoconsult.Latex/README.md)
 
 # About us
 
