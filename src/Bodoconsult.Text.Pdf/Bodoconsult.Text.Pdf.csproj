@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+		<Deterministic>False</Deterministic>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageOutputPath>..\..\packages\</PackageOutputPath>
+		<Copyright>Bodoconsult EDV-Dienstleistungen GmbH</Copyright>
+		<Authors>Robert Leisner</Authors>
+		<VersionPrefix>1.0.2</VersionPrefix>
+		<Version />
+		<Company>Bodoconsult EDV-Dienstleistungen GmbH</Company>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<RepositoryType>git</RepositoryType>
+		<NeutralLanguage>en</NeutralLanguage>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/RobertLeisner/Bodoconsult.Text</RepositoryUrl>
+
+		<PackageId>Bodoconsult.Text.Pdf</PackageId>
+		<PackageTags>Output structured text PDF</PackageTags>
+		<Description>Enhances Bodoconsult.Text, a simple class for collecting structured text in an app, with an export of the text to PDF. Use library to create simple reports from apps or from unit testing i.e. for auditors or as documentation.</Description>
+		<PackageReleaseNotes>Migration to .Net 8 and new namespace</PackageReleaseNotes>
+		<PackageProjectUrl>https://github.com/RobertLeisner/Bodoconsult.Text</PackageProjectUrl>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Folder Include="Properties\" />
+		<Folder Include="Templates\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\..\LICENSE.md" Link="LICENSE.md">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="..\..\doc\Bodoconsult.Text.Pdf\README.md" Link="README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="PDFsharp-MigraDoc" Version="6.1.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Bodoconsult.Text\Bodoconsult.Text\Bodoconsult.Text.csproj" />
+		<ProjectReference Include="..\Bodoconsult.Pdf\Bodoconsult.Pdf.csproj" />
+		<ProjectReference Include="..\Bodoconsult.Text\Bodoconsult.Text.csproj" />
+		<ProjectReference Include="..\Bodoconsult.Typography\Bodoconsult.Typography.csproj" />
+	</ItemGroup>
+
+</Project>

@@ -3,23 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35506.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Text", "Bodoconsult.Text\Bodoconsult.Text\Bodoconsult.Text.csproj", "{F83759E5-72C0-4BAC-9F50-FD15025C9B0D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Text", "src\Bodoconsult.Text\Bodoconsult.Text.csproj", "{F83759E5-72C0-4BAC-9F50-FD15025C9B0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Text.Test", "Bodoconsult.Text\Bodoconsult.Text.Test\Bodoconsult.Text.Test.csproj", "{16B37F51-33B9-476F-8600-BE64975F792F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Text.Test", "tests\Bodoconsult.Text.Test\Bodoconsult.Text.Test.csproj", "{16B37F51-33B9-476F-8600-BE64975F792F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{72D65B3F-0BE2-44C9-B2DB-32D2F6AC863E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{72D65B3F-0BE2-44C9-B2DB-32D2F6AC863E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Text.Pdf", "Bodoconsult.Text.Pdf\Bodoconsult.Text.Pdf\Bodoconsult.Text.Pdf.csproj", "{75127786-7AC2-4523-8901-ACD61279E17C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Text.Pdf", "src\Bodoconsult.Text.Pdf\Bodoconsult.Text.Pdf.csproj", "{75127786-7AC2-4523-8901-ACD61279E17C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Text.Pdf.Test", "Bodoconsult.Text.Pdf\Bodoconsult.Text.Pdf.Test\Bodoconsult.Text.Pdf.Test.csproj", "{C3BF99C9-A2C3-4C62-AD1D-FB048C415AAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Text.Pdf.Test", "tests\Bodoconsult.Text.Pdf.Test\Bodoconsult.Text.Pdf.Test.csproj", "{C3BF99C9-A2C3-4C62-AD1D-FB048C415AAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Typography", "Bodoconsult.Typography\Bodoconsult.Typography\Bodoconsult.Typography.csproj", "{E667EEAC-18E6-49FD-AA80-3F59405538CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Typography", "src\Bodoconsult.Typography\Bodoconsult.Typography.csproj", "{E667EEAC-18E6-49FD-AA80-3F59405538CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Typography.Test", "Bodoconsult.Typography\Bodoconsult.Typography.Test\Bodoconsult.Typography.Test.csproj", "{ABA6ACE0-DEB0-4405-90FD-C1DED1E3D975}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Typography.Test", "tests\Bodoconsult.Typography.Test\Bodoconsult.Typography.Test.csproj", "{ABA6ACE0-DEB0-4405-90FD-C1DED1E3D975}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Pdf", "Bodoconsult.Pdf\Bodoconsult.Pdf\Bodoconsult.Pdf.csproj", "{F44E46AB-4328-4EF4-B61E-AD1404C698D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Pdf", "src\Bodoconsult.Pdf\Bodoconsult.Pdf.csproj", "{F44E46AB-4328-4EF4-B61E-AD1404C698D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Pdf.Test", "Bodoconsult.Pdf\Bodoconsult.Pdf.Test\Bodoconsult.Pdf.Test.csproj", "{ED7C546B-3E64-4372-9049-3D2856D9CF32}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Pdf.Test", "tests\Bodoconsult.Pdf.Test\Bodoconsult.Pdf.Test.csproj", "{ED7C546B-3E64-4372-9049-3D2856D9CF32}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Projektmappenelemente", "{B62D591F-9112-481B-B4D4-379B2F20C4C5}"
 	ProjectSection(SolutionItems) = preProject
@@ -27,23 +27,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Pr
 		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Test", "Bodoconsult.Test\Bodoconsult.Test\Bodoconsult.Test.csproj", "{C904776C-BBEC-456A-9ED6-6F033FA69DDD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Test", "src\Bodoconsult.Test\Bodoconsult.Test.csproj", "{C904776C-BBEC-456A-9ED6-6F033FA69DDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Test.Tests", "Bodoconsult.Test\Bodoconsult.Test.Tests\Bodoconsult.Test.Tests.csproj", "{16F68BB5-1034-406B-8141-BB79A4CBAB2C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Test.Tests", "tests\Bodoconsult.Test.Tests\Bodoconsult.Test.Tests.csproj", "{16F68BB5-1034-406B-8141-BB79A4CBAB2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Latex", "Bodoconsult.Latex\Bodoconsult.Latex\Bodoconsult.Latex.csproj", "{1E7A075B-D3A3-4EF6-A2FB-436EE3E078C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Latex", "src\Bodoconsult.Latex\Bodoconsult.Latex.csproj", "{1E7A075B-D3A3-4EF6-A2FB-436EE3E078C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaTexConvert.Business", "Bodoconsult.Latex\LaTexConvert.Business\LaTexConvert.Business.csproj", "{41007D2B-BD3A-4DD2-9314-8448A4A8B6ED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaTexConvert.Business", "src\LaTexConvert.Business\LaTexConvert.Business.csproj", "{41007D2B-BD3A-4DD2-9314-8448A4A8B6ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaTexConvert", "Bodoconsult.Latex\LaTexConvert\LaTexConvert.csproj", "{1F80695B-BAE0-435B-81CA-EE307F0A122B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaTexConvert", "src\LaTexConvert\LaTexConvert.csproj", "{1F80695B-BAE0-435B-81CA-EE307F0A122B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Latex", "Latex", "{F74DE392-76E1-4CB8-A7C2-EEF6DE023CB7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Latex", "Latex", "{A866ABFC-C2C9-4A91-86CB-7C569CB72542}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaTexConvert.Business.Test", "tests\LaTexConvert.Business.Test\LaTexConvert.Business.Test.csproj", "{87EE1034-6B93-41A3-A5E2-9F96DE9CF83E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaTexConvert.Business.Test", "Bodoconsult.Latex\LaTexConvert.Business.Test\LaTexConvert.Business.Test.csproj", "{87EE1034-6B93-41A3-A5E2-9F96DE9CF83E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Latex.Test", "tests\Bodoconsult.Latex.Test\Bodoconsult.Latex.Test.csproj", "{46F0D3C6-A225-4D16-8412-C64EDA8F328B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Latex.Test", "Bodoconsult.Latex\Bodoconsult.Latex.Test\Bodoconsult.Latex.Test.csproj", "{46F0D3C6-A225-4D16-8412-C64EDA8F328B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8084CDA8-8D3B-48D5-B4EB-68D3B26792D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -116,17 +118,21 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{F83759E5-72C0-4BAC-9F50-FD15025C9B0D} = {8084CDA8-8D3B-48D5-B4EB-68D3B26792D4}
 		{16B37F51-33B9-476F-8600-BE64975F792F} = {72D65B3F-0BE2-44C9-B2DB-32D2F6AC863E}
+		{75127786-7AC2-4523-8901-ACD61279E17C} = {8084CDA8-8D3B-48D5-B4EB-68D3B26792D4}
 		{C3BF99C9-A2C3-4C62-AD1D-FB048C415AAE} = {72D65B3F-0BE2-44C9-B2DB-32D2F6AC863E}
+		{E667EEAC-18E6-49FD-AA80-3F59405538CE} = {8084CDA8-8D3B-48D5-B4EB-68D3B26792D4}
 		{ABA6ACE0-DEB0-4405-90FD-C1DED1E3D975} = {72D65B3F-0BE2-44C9-B2DB-32D2F6AC863E}
+		{F44E46AB-4328-4EF4-B61E-AD1404C698D4} = {8084CDA8-8D3B-48D5-B4EB-68D3B26792D4}
 		{ED7C546B-3E64-4372-9049-3D2856D9CF32} = {72D65B3F-0BE2-44C9-B2DB-32D2F6AC863E}
+		{C904776C-BBEC-456A-9ED6-6F033FA69DDD} = {8084CDA8-8D3B-48D5-B4EB-68D3B26792D4}
 		{16F68BB5-1034-406B-8141-BB79A4CBAB2C} = {72D65B3F-0BE2-44C9-B2DB-32D2F6AC863E}
-		{1E7A075B-D3A3-4EF6-A2FB-436EE3E078C9} = {F74DE392-76E1-4CB8-A7C2-EEF6DE023CB7}
-		{41007D2B-BD3A-4DD2-9314-8448A4A8B6ED} = {F74DE392-76E1-4CB8-A7C2-EEF6DE023CB7}
-		{1F80695B-BAE0-435B-81CA-EE307F0A122B} = {F74DE392-76E1-4CB8-A7C2-EEF6DE023CB7}
-		{A866ABFC-C2C9-4A91-86CB-7C569CB72542} = {72D65B3F-0BE2-44C9-B2DB-32D2F6AC863E}
-		{87EE1034-6B93-41A3-A5E2-9F96DE9CF83E} = {A866ABFC-C2C9-4A91-86CB-7C569CB72542}
-		{46F0D3C6-A225-4D16-8412-C64EDA8F328B} = {A866ABFC-C2C9-4A91-86CB-7C569CB72542}
+		{1E7A075B-D3A3-4EF6-A2FB-436EE3E078C9} = {8084CDA8-8D3B-48D5-B4EB-68D3B26792D4}
+		{41007D2B-BD3A-4DD2-9314-8448A4A8B6ED} = {8084CDA8-8D3B-48D5-B4EB-68D3B26792D4}
+		{1F80695B-BAE0-435B-81CA-EE307F0A122B} = {8084CDA8-8D3B-48D5-B4EB-68D3B26792D4}
+		{87EE1034-6B93-41A3-A5E2-9F96DE9CF83E} = {72D65B3F-0BE2-44C9-B2DB-32D2F6AC863E}
+		{46F0D3C6-A225-4D16-8412-C64EDA8F328B} = {72D65B3F-0BE2-44C9-B2DB-32D2F6AC863E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {407E8A0B-4E61-448F-B9F4-4819AF141FBE}
