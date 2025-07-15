@@ -1,3 +1,6 @@
+Bodoconsult.Text
+===============
+
 # What does the library
 
 Bodoconsult.Text is a simple tool to generate structured text documents in a C# project and export it finally to a HTML or ASCII plain text file.
@@ -10,133 +13,138 @@ The source code contain NUnit test classes, the following source code is extract
 
 ## Export as HTML without template (HtmlTextFormatter class)
 
-            var sr = new StructuredText();
-            sr.AddHeader1("Überschrift 1 '& &&&' ");
-            sr.AddParagraph(MassText, "CssTestFixture");
-            sr.AddDefinitionListLine("Def1", "Value1");
-            sr.AddDefinitionListLine("Definition 2", "Value1234");
-            sr.AddDefinitionListLine("Defini 3", "Value234556666");
-            sr.AddParagraph("");
+``` csharp
+var sr = new StructuredText();
+sr.AddHeader1("Überschrift 1 '& &&&' ");
+sr.AddParagraph(MassText, "CssTestFixture");
+sr.AddDefinitionListLine("Def1", "Value1");
+sr.AddDefinitionListLine("Definition 2", "Value1234");
+sr.AddDefinitionListLine("Defini 3", "Value234556666");
+sr.AddParagraph("");
 
-            sr.AddParagraph(FormattedMasstext,
-                "CssTestFixture");
+sr.AddParagraph(FormattedMasstext,
+    "CssTestFixture");
 
-            sr.AddCode(MassText, "CssTestFixture");
+sr.AddCode(MassText, "CssTestFixture");
 
-            sr.AddParagraph(MassText);
+sr.AddParagraph(MassText);
 
-            sr.AddListItem("Bahnhof");
-            sr.AddListItem("HauptBahnhof");
-            sr.AddListItem("SüdBahnhof");
-            sr.AddHeader2("Überschrift 2");
-            sr.AddParagraph(MassText);
-            sr.AddParagraph(MassText);
-            sr.AddHeader2("Überschrift 2");
-            sr.AddParagraph(MassText);
-            sr.AddHeader1("Überschrift 1");
-            sr.AddParagraph(MassText);
-            sr.AddParagraph(MassText);
-            sr.AddParagraph(MassText);
-            sr.AddHeader2("Überschrift 2");
-            sr.AddParagraph(MassText);
-            sr.AddParagraph(MassText);
-            sr.AddParagraph(MassText);
-            sr.AddParagraph(MassText);
-            sr.AddHeader2("Überschrift 2");
-            sr.AddParagraph(MassText);
-            sr.AddHeader1("Überschrift 1");
-            sr.AddParagraph(MassText);
-            sr.AddParagraph(MassText);
+sr.AddListItem("Bahnhof");
+sr.AddListItem("HauptBahnhof");
+sr.AddListItem("SüdBahnhof");
+sr.AddHeader2("Überschrift 2");
+sr.AddParagraph(MassText);
+sr.AddParagraph(MassText);
+sr.AddHeader2("Überschrift 2");
+sr.AddParagraph(MassText);
+sr.AddHeader1("Überschrift 1");
+sr.AddParagraph(MassText);
+sr.AddParagraph(MassText);
+sr.AddParagraph(MassText);
+sr.AddHeader2("Überschrift 2");
+sr.AddParagraph(MassText);
+sr.AddParagraph(MassText);
+sr.AddParagraph(MassText);
+sr.AddParagraph(MassText);
+sr.AddHeader2("Überschrift 2");
+sr.AddParagraph(MassText);
+sr.AddHeader1("Überschrift 1");
+sr.AddParagraph(MassText);
+sr.AddParagraph(MassText);
 
-            var f = new HtmlTextFormatter { StructuredText = sr };
-            f.GetFormattedText();
-			
-			f.SaveAsFile(fileName);
+var f = new HtmlTextFormatter { StructuredText = sr };
+f.GetFormattedText();
+
+f.SaveAsFile(fileName);
+```
 
 ## Export as HTML with a individual template (HtmlTextFormatter class)
 
-			var sr = new StructuredText();
-            sr.AddHeader1("Überschrift 'Databanka'");
-            sr.AddParagraph(MassText);
-            sr.AddDefinitionListLine("Def1", "Value1");
-            sr.AddDefinitionListLine("Definition 2", "Value1234");
-            sr.AddDefinitionListLine("Defini 3", "Value234556666");
-            sr.AddParagraph("");
-            sr.AddParagraph(MassText);
+``` csharp
+var sr = new StructuredText();
+sr.AddHeader1("Überschrift 'Databanka'");
+sr.AddParagraph(MassText);
+sr.AddDefinitionListLine("Def1", "Value1");
+sr.AddDefinitionListLine("Definition 2", "Value1234");
+sr.AddDefinitionListLine("Defini 3", "Value234556666");
+sr.AddParagraph("");
+sr.AddParagraph(MassText);
 
-            sr.AddListItem("Bahnhof");
-            sr.AddListItem("HauptBahnhof");
-            sr.AddListItem("SüdBahnhof");
-            sr.AddHeader2("Überschrift 2");
-            sr.AddParagraph(MassText);
-            sr.AddParagraph(MassText);
-            sr.AddHeader2("Überschrift 2");
-            sr.AddParagraph(MassText);
-            sr.AddHeader1("Überschrift 1");
-            sr.AddParagraph(MassText);
-            sr.AddParagraph(MassText);
-            sr.AddParagraph(MassText);
-            sr.AddHeader2("Überschrift 2");
-            sr.AddParagraph(MassText);
-            sr.AddParagraph(MassText);
-            sr.AddParagraph(MassText);
-            sr.AddParagraph(MassText);
-            sr.AddHeader2("Überschrift 2");
-            sr.AddParagraph(MassText);
-            sr.AddHeader1("Überschrift 1");
-            sr.AddParagraph(MassText);
-            sr.AddParagraph(MassText);
+sr.AddListItem("Bahnhof");
+sr.AddListItem("HauptBahnhof");
+sr.AddListItem("SüdBahnhof");
+sr.AddHeader2("Überschrift 2");
+sr.AddParagraph(MassText);
+sr.AddParagraph(MassText);
+sr.AddHeader2("Überschrift 2");
+sr.AddParagraph(MassText);
+sr.AddHeader1("Überschrift 1");
+sr.AddParagraph(MassText);
+sr.AddParagraph(MassText);
+sr.AddParagraph(MassText);
+sr.AddHeader2("Überschrift 2");
+sr.AddParagraph(MassText);
+sr.AddParagraph(MassText);
+sr.AddParagraph(MassText);
+sr.AddParagraph(MassText);
+sr.AddHeader2("Überschrift 2");
+sr.AddParagraph(MassText);
+sr.AddHeader1("Überschrift 1");
+sr.AddParagraph(MassText);
+sr.AddParagraph(MassText);
 
-            var f = new HtmlTextFormatter
-            {
-                StructuredText = sr,
-                Template = "<<<Start>>>{0}<<<Ende>>>",
-                AddTableOfContent = true
-            };
-            var result = f.GetFormattedText();
-			
-			f.SaveAsFile(fileName);
+var f = new HtmlTextFormatter
+{
+    StructuredText = sr,
+    Template = "<<<Start>>>{0}<<<Ende>>>",
+    AddTableOfContent = true
+};
+var result = f.GetFormattedText();
+
+f.SaveAsFile(fileName);
+```
 
 ## Export as plain ASCII file (PlainTextFormatter class)
 
- var sr = new StructuredText();
-            sr.AddHeader1("Überschrift 1");
-            sr.AddParagraph(MassText);
-            sr.AddDefinitionListLine("Def1", "Value1");
-            sr.AddDefinitionListLine("Definition 2", "Value1234");
-            sr.AddDefinitionListLine("Defini 3", "Value234556666");
-            sr.AddParagraph("");
-            sr.AddParagraph(MassText);
+``` csharp
+var sr = new StructuredText();
+sr.AddHeader1("Überschrift 1");
+sr.AddParagraph(MassText);
+sr.AddDefinitionListLine("Def1", "Value1");
+sr.AddDefinitionListLine("Definition 2", "Value1234");
+sr.AddDefinitionListLine("Defini 3", "Value234556666");
+sr.AddParagraph("");
+sr.AddParagraph(MassText);
 
-            sr.AddListItem("Bahnhof");
-            sr.AddListItem("HauptBahnhof");
-            sr.AddListItem("SüdBahnhof");
+sr.AddListItem("Bahnhof");
+sr.AddListItem("HauptBahnhof");
+sr.AddListItem("SüdBahnhof");
 
-            sr.AddHeader1("Überschrift 2");
-            sr.AddParagraph(MassText);
-            sr.AddParagraph(MassText);
-            sr.AddHeader1("Überschrift 2");
-            sr.AddParagraph(MassText);
-            sr.AddHeader1("Überschrift 1");
-            sr.AddParagraph(MassText);
-            sr.AddParagraph(MassText);
-            sr.AddParagraph(MassText);
-            sr.AddHeader1("Überschrift 2");
-            sr.AddParagraph(MassText);
-            sr.AddParagraph(MassText);
-            sr.AddParagraph(MassText);
-            sr.AddParagraph(MassText);
-            sr.AddHeader1("Überschrift 2");
-            sr.AddParagraph(MassText);
-            sr.AddHeader1("Überschrift 1");
-            sr.AddParagraph(MassText);
-            sr.AddParagraph(MassText);
+sr.AddHeader1("Überschrift 2");
+sr.AddParagraph(MassText);
+sr.AddParagraph(MassText);
+sr.AddHeader1("Überschrift 2");
+sr.AddParagraph(MassText);
+sr.AddHeader1("Überschrift 1");
+sr.AddParagraph(MassText);
+sr.AddParagraph(MassText);
+sr.AddParagraph(MassText);
+sr.AddHeader1("Überschrift 2");
+sr.AddParagraph(MassText);
+sr.AddParagraph(MassText);
+sr.AddParagraph(MassText);
+sr.AddParagraph(MassText);
+sr.AddHeader1("Überschrift 2");
+sr.AddParagraph(MassText);
+sr.AddHeader1("Überschrift 1");
+sr.AddParagraph(MassText);
+sr.AddParagraph(MassText);
 
-            var f = new PlainTextFormatter { StructuredText = sr };
-            var result = f.GetFormattedText();
-			
-			f.SaveAsFile(fileName);
+var f = new PlainTextFormatter { StructuredText = sr };
+var result = f.GetFormattedText();
 
+f.SaveAsFile(fileName);
+```
 
 # About us
 

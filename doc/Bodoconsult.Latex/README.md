@@ -1,3 +1,6 @@
+Bodoconsult.Latex
+===========
+
 # What does the library
 
 This library is intended for converting Office documents like Word documents or Powerpoint presentations to LaTex. Currently there is implemented only a conversion from MS PowerPoint 2016 or 2019 to LaTex-
