@@ -3,7 +3,7 @@
 using System.Diagnostics;
 using NUnit.Framework;
 
-namespace Bodoconsult.Text.Test;
+namespace Bodoconsult.Text.Test.SimpleStructuredText;
 
 [TestFixture]
 public class HtmlHelperTests

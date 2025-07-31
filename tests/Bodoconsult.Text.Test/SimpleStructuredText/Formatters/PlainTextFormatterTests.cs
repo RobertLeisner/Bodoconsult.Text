@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
+
+using System.Diagnostics;
 using Bodoconsult.Text.Formatter;
 using Bodoconsult.Text.Model;
 using Bodoconsult.Text.Test.Helpers;
@@ -6,10 +8,10 @@ using NUnit.Framework;
 
 // ReSharper disable InconsistentNaming
 
-namespace Bodoconsult.Text.Test;
+namespace Bodoconsult.Text.Test.SimpleStructuredText.Formatters;
 
 [TestFixture]
-public class UnitTestPlainTextFormatter
+public class PlainTextFormatterTests
 {
     private const string MassText = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
 

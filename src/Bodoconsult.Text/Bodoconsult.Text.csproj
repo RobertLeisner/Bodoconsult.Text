@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
+		<TargetFramework>net8</TargetFramework>
 		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
 		<Deterministic>False</Deterministic>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -31,6 +31,13 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Include="..\..\doc\Bodoconsult.Text\README.md" Link="README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Renderer\Html\Blocks\" />
+	  <Folder Include="Renderer\Html\Inlines\" />
+	  <Folder Include="Renderer\Markdown\Blocks\" />
+	  <Folder Include="Renderer\Markdown\Inlines\" />
 	</ItemGroup>
 
 </Project>

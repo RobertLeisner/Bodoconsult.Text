@@ -20,7 +20,7 @@ sr.AddParagraph(MassText, "CssTestFixture");
 sr.AddDefinitionListLine("Def1", "Value1");
 sr.AddDefinitionListLine("Definition 2", "Value1234");
 sr.AddDefinitionListLine("Defini 3", "Value234556666");
-sr.AddParagraph("");
+sr.AddParagraph(string.Empty);
 
 sr.AddParagraph(FormattedMasstext,
     "CssTestFixture");
@@ -67,7 +67,7 @@ sr.AddParagraph(MassText);
 sr.AddDefinitionListLine("Def1", "Value1");
 sr.AddDefinitionListLine("Definition 2", "Value1234");
 sr.AddDefinitionListLine("Defini 3", "Value234556666");
-sr.AddParagraph("");
+sr.AddParagraph(string.Empty);
 sr.AddParagraph(MassText);
 
 sr.AddListItem("Bahnhof");
@@ -113,7 +113,7 @@ sr.AddParagraph(MassText);
 sr.AddDefinitionListLine("Def1", "Value1");
 sr.AddDefinitionListLine("Definition 2", "Value1234");
 sr.AddDefinitionListLine("Defini 3", "Value234556666");
-sr.AddParagraph("");
+sr.AddParagraph(string.Empty);
 sr.AddParagraph(MassText);
 
 sr.AddListItem("Bahnhof");

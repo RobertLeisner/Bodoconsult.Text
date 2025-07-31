@@ -7,7 +7,7 @@ using Bodoconsult.Text.Model;
 using Bodoconsult.Text.Test.Helpers;
 using NUnit.Framework;
 
-namespace Bodoconsult.Text.Test;
+namespace Bodoconsult.Text.Test.SimpleStructuredText;
 
 [TestFixture]
 public class StructuredTextTests

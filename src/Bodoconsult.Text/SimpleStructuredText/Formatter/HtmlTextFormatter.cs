@@ -190,7 +190,7 @@ namespace Bodoconsult.Text.Formatter
         {
             var title = string.IsNullOrEmpty(Title) ? "Missing title" : Title;
 
-            var dateString = string.IsNullOrEmpty(DateString) ? "" : DateString;
+            var dateString = string.IsNullOrEmpty(DateString) ? string.Empty : DateString;
 
             _rowCount = -1;
 
@@ -308,7 +308,7 @@ namespace Bodoconsult.Text.Formatter
             var erg = new StringBuilder();
             var count = body.Count - 1;
 
-            var codeClass = string.IsNullOrEmpty(CssCode) ? "" : $" class=\"{CssCode}\"";
+            var codeClass = string.IsNullOrEmpty(CssCode) ? string.Empty : $" class=\"{CssCode}\"";
 
             var row = -1;
 
@@ -323,7 +323,7 @@ namespace Bodoconsult.Text.Formatter
 
                 row++;
 
-                var className = string.IsNullOrEmpty(ti.ClassName) ? "" : $" class=\"{ti.ClassName}\"";
+                var className = string.IsNullOrEmpty(ti.ClassName) ? string.Empty : $" class=\"{ti.ClassName}\"";
 
                 var content = HtmlHelper.GetContentAsHtml(ti.Content);
 
@@ -333,19 +333,19 @@ namespace Bodoconsult.Text.Formatter
                 {
                     case TextItemType.H1:
 
-                        id = AddTableOfContent && TocLevel > 0 ? $"id=\"H{row}\"" : "";
+                        id = AddTableOfContent && TocLevel > 0 ? $"id=\"H{row}\"" : string.Empty;
                         erg.AppendFormat("<h{2:0} {1}{3}>{0}</h{2:0}>\r\n", content, id, MoveHeaderLevel + 1, className);
                         break;
                     case TextItemType.H2:
-                        id = AddTableOfContent && TocLevel > 1 ? $"id=\"H{row}\"" : "";
+                        id = AddTableOfContent && TocLevel > 1 ? $"id=\"H{row}\"" : string.Empty;
                         erg.AppendFormat("<h{2:0} {1}{3}>{0}</h{2:0}>\r\n", content, id, MoveHeaderLevel + 2, className);
                         break;
                     case TextItemType.H3:
-                        id = AddTableOfContent && TocLevel > 2 ? $"id=\"H{row}\"" : "";
+                        id = AddTableOfContent && TocLevel > 2 ? $"id=\"H{row}\"" : string.Empty;
                         erg.AppendFormat("<h{2:0} {1}{3}>{0}</h{2:0}>\r\n", content, id, MoveHeaderLevel + 3, className);
                         break;
                     case TextItemType.H4:
-                        id = AddTableOfContent && TocLevel > 3 ? $"id=\"H{row}\"" : "";
+                        id = AddTableOfContent && TocLevel > 3 ? $"id=\"H{row}\"" : string.Empty;
                         erg.AppendFormat("<h{2:0} {1}{3}>{0}</h{2:0}>\r\n", content, id, MoveHeaderLevel + 4, className);
                         break;
                     case TextItemType.ListItem:
@@ -482,7 +482,7 @@ namespace Bodoconsult.Text.Formatter
 
                 css = CssThLeft;
 
-                var dt = col.DataType.ToString().ToLower().Replace("system.", "");
+                var dt = col.DataType.ToString().ToLower().Replace("system.", string.Empty);
 
                 switch (dt)
                 {
@@ -540,7 +540,7 @@ namespace Bodoconsult.Text.Formatter
                     string s;
                     css = alternateRow ? CssTdLeftAlt : CssTdLeft;
 
-                    var dt = col.DataType.ToString().ToLower().Replace("system.", "");
+                    var dt = col.DataType.ToString().ToLower().Replace("system.", string.Empty);
 
                     switch (dt)
                     {

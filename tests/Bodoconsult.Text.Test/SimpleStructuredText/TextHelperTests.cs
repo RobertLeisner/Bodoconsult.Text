@@ -1,3 +1,5 @@
+// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
+
 using System.Diagnostics;
 using System.IO;
 using Bodoconsult.Text.Formatter;
@@ -8,10 +10,10 @@ using NUnit.Framework;
 
 // ReSharper disable InconsistentNaming
 
-namespace Bodoconsult.Text.Test;
+namespace Bodoconsult.Text.Test.SimpleStructuredText;
 
 [TestFixture]
-public class UnitTestTextHelper
+public class TextHelperTests
 {
     private const string MassText =
         "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
@@ -90,7 +92,7 @@ public class UnitTestTextHelper
     public void TestAppendUtf8PlainTextFile_Html()
     {
 
-        var fileName = Path.Combine(FileHelper.AppPath, "Resources\\HelpFile.txt");
+        var fileName = Path.Combine(TestHelper.AppPath, "Resources\\HelpFile.txt");
 
         var sr = new StructuredText();
         sr.AddHeader1("Überschrift 1");
@@ -123,7 +125,7 @@ public class UnitTestTextHelper
     public void TestAppendUtf8PlainTextFile_Text()
     {
 
-        var fileName = Path.Combine(FileHelper.AppPath, "Resources\\HelpFile.txt");
+        var fileName = Path.Combine(TestHelper.AppPath, "Resources\\HelpFile.txt");
 
         var sr = new StructuredText();
         sr.AddHeader1("Überschrift 1");

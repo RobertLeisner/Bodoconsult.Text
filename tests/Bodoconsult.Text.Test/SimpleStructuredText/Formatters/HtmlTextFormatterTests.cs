@@ -10,7 +10,7 @@ using NUnit.Framework;
 
 // ReSharper disable InconsistentNaming
 
-namespace Bodoconsult.Text.Test;
+namespace Bodoconsult.Text.Test.SimpleStructuredText.Formatters;
 
 [TestFixture]
 public class HtmlTextFormatterTests
@@ -311,7 +311,7 @@ public class HtmlTextFormatterTests
     [Test]
     public void RealLifeGetFormattedText()
     {
-        var fileName = Path.Combine(FileHelper.TestDataPath, "StructuredText.json");
+        var fileName = Path.Combine(TestHelper.TestDataPath, "StructuredText.json");
 
         var sr = JsonHelper.LoadJsonFile<StructuredText>(fileName);
 

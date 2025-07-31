@@ -84,7 +84,7 @@ namespace Bodoconsult.Text.Formatter
 
                         var dl = (DefinitionListTextItem)ti;
 
-                        erg.AppendFormat("\r\n{0} {1}", dl.Content.PadRight(25), dl.Content2?.Replace("<para>", "").Replace("</para>", ""));
+                        erg.AppendFormat("\r\n{0} {1}", dl.Content.PadRight(25), dl.Content2?.Replace("<para>", string.Empty).Replace("</para>", string.Empty));
 
                         break;
                     case TextItemType.Xml:

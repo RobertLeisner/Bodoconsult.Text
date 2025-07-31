@@ -71,7 +71,6 @@ namespace Bodoconsult.Typography
         /// </summary>
         public Color TableBorderColor { get; set; }
 
-
         /// <summary>
         /// Border width of a table in cm
         /// </summary>
@@ -97,12 +96,10 @@ namespace Bodoconsult.Typography
         /// </summary>
         public double PageHeight { get; set; }
 
-
         /// <summary>
         /// Default font name
         /// </summary>
         public string FontName { get; set; }
-
 
         /// <summary>
         /// Default font size in pt
@@ -115,7 +112,7 @@ namespace Bodoconsult.Typography
         public double SmallFontSize { get; set; }
 
         /// <summary>
-        /// Extra small font size in pt
+        /// Tiny font size in pt
         /// </summary>
         public double ExtraSmallFontSize { get; set; }
 
@@ -154,7 +151,6 @@ namespace Bodoconsult.Typography
         /// Font size used for headings of level 2 in pt
         /// </summary>
         public double HeadingFontSize2 { get; set; }
-
 
         /// <summary>
         /// Font size used for headings of level 3 in pt
@@ -238,18 +234,15 @@ namespace Bodoconsult.Typography
         /// </summary>
         public double MarginBottom { get; private set; }
 
-
-
         /// <summary>
         /// Height of the page header in cm
         /// </summary>
         public double PageHeaderHeight { get; set; }
 
         /// <summary>
-        /// Margin between page hedaer and type area in cm
+        /// Margin between page header and type area in cm
         /// </summary>
         public double PageHeaderMargin { get; set; }
-
 
         /// <summary>
         /// Height of the page header in cm
@@ -257,7 +250,7 @@ namespace Bodoconsult.Typography
         public double PageFooterHeight { get; set; }
 
         /// <summary>
-        /// Margin between page hedaer and type area in cm
+        /// Margin between page header and type area in cm
         /// </summary>
         public double PageFooterMargin { get; set; }
 
@@ -332,15 +325,7 @@ namespace Bodoconsult.Typography
         /// </summary>
         public double TableCornerRadius { get; set; }
 
-
-        #region private fields
-
-        #endregion
-
-
         #region Methods
-
-
 
         /// <summary>
         /// Set ratios used to calculate margins. Margins are calculate as follows:
@@ -371,7 +356,7 @@ namespace Bodoconsult.Typography
         }
 
         /// <summary>
-        /// Get the width of an landscape element which should a certain number of layout columns in cm
+        /// Get the width of a landscape element which should a certain number of layout columns in cm
         /// </summary>
         /// <param name="numberOfColumnsUsed"></param>
         /// <returns></returns>
@@ -397,7 +382,7 @@ namespace Bodoconsult.Typography
 
 
         /// <summary>
-        /// Get the width of an landscape element which should a certain number of layout columns in pixels
+        /// Get the width of a landscape element which should a certain number of layout columns in pixels
         /// </summary>
         /// <param name="numberOfColumnsUsed"></param>
         /// <returns></returns>

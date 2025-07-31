@@ -42,7 +42,7 @@ namespace Bodoconsult.Typography
         double SmallFontSize { get; set; }
 
         /// <summary>
-        /// Extra small font size in pt
+        /// Tiny font size in pt
         /// </summary>
         double ExtraSmallFontSize { get; set; }
 
@@ -56,7 +56,6 @@ namespace Bodoconsult.Typography
         /// </summary>
         double TitleFontSize { get; set; }
 
-
         /// <summary>
         /// Subtitle font name
         /// </summary>
@@ -66,7 +65,6 @@ namespace Bodoconsult.Typography
         /// Subtitle font size in pt
         /// </summary>
         double SubTitleFontSize { get; set; }
-
 
         /// <summary>
         /// Font name used for headings
@@ -171,7 +169,7 @@ namespace Bodoconsult.Typography
         double PageHeaderHeight { get; set; }
 
         /// <summary>
-        /// Margin between page hedaer and type area in cm
+        /// Margin between page header and type area in cm
         /// </summary>
         double PageHeaderMargin { get; set; }
 
@@ -181,7 +179,7 @@ namespace Bodoconsult.Typography
         double PageFooterHeight { get; set; }
 
         /// <summary>
-        /// Margin between page hedaer and type area in cm
+        /// Margin between page header and type area in cm
         /// </summary>
         double PageFooterMargin { get; set; }
 
@@ -290,7 +288,7 @@ namespace Bodoconsult.Typography
         void SetMargins();
 
         /// <summary>
-        /// Get the width of an landscape element which should a certain number of layout columns in cm
+        /// Get the width of a landscape element which should a certain number of layout columns in cm
         /// </summary>
         /// <param name="numberOfColumnsUsed"></param>
         /// <returns></returns>
@@ -305,7 +303,7 @@ namespace Bodoconsult.Typography
         double GetHeight(int numberOfColumnsUsed, bool landscape = true);
 
         /// <summary>
-        /// Get the width of an landscape element which should a certain number of layout columns in pixels
+        /// Get the width of a landscape element which should a certain number of layout columns in pixels
         /// </summary>
         /// <param name="numberOfColumnsUsed"></param>
         /// <returns></returns>

@@ -23,6 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Pdf.Test", "tes
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Projektmappenelemente", "{B62D591F-9112-481B-B4D4-379B2F20C4C5}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		nuget_publish.bat = nuget_publish.bat
 		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
 	EndProjectSection
@@ -36,8 +37,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaTexConvert.Business", "src\LaTexConvert.Business\LaTexConvert.Business.csproj", "{41007D2B-BD3A-4DD2-9314-8448A4A8B6ED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaTexConvert", "src\LaTexConvert\LaTexConvert.csproj", "{1F80695B-BAE0-435B-81CA-EE307F0A122B}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Latex", "Latex", "{F74DE392-76E1-4CB8-A7C2-EEF6DE023CB7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaTexConvert.Business.Test", "tests\LaTexConvert.Business.Test\LaTexConvert.Business.Test.csproj", "{87EE1034-6B93-41A3-A5E2-9F96DE9CF83E}"
 EndProject

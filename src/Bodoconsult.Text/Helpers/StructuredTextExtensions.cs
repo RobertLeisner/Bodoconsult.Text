@@ -18,7 +18,8 @@ namespace Bodoconsult.Text.Helpers
         /// <param name="master">text object the text file gets appended</param>
         /// <param name="plainTextFileName">path to the UTF8 encoded plain text file</param>
         /// <param name="keepEmptyItems">Keep empty paragraphs</param>
-        public static void AppendUtf8PlainTextFile(this IStructuredText master, string plainTextFileName, bool keepEmptyItems = false)
+        public static void AppendUtf8PlainTextFile(this IStructuredText master, string plainTextFileName,
+            bool keepEmptyItems = false)
         {
 
             var odir = new FileInfo(plainTextFileName).Directory;
@@ -49,7 +50,7 @@ namespace Bodoconsult.Text.Helpers
             foreach (var row in data)
             {
 
-                var x = row.Replace("*", "").Trim();
+                var x = row.Replace("*", string.Empty).Trim();
 
                 if (string.IsNullOrEmpty(x))
                 {
@@ -58,6 +59,7 @@ namespace Bodoconsult.Text.Helpers
                         if (string.IsNullOrEmpty(x)) x = "??empty??";
                         master.AddParagraph(x);
                     }
+
                     continue;
                 }
 
@@ -108,7 +110,7 @@ namespace Bodoconsult.Text.Helpers
                     if (i < 0)
                     {
                         c1 = row.Substring(2).Trim();
-                        c2 = "";
+                        c2 = string.Empty;
                     }
                     else
                     {
@@ -164,9 +166,9 @@ namespace Bodoconsult.Text.Helpers
                         s = $"<<Error:File not found: {fileName}>>";
                     }
 
-                    var vorher = i == 0 ? "" : text.Substring(0, i - 1);
+                    var vorher = i == 0 ? string.Empty : text.Substring(0, i - 1);
 
-                    var nachher = j == text.Length ? "" : text.Substring(j + 2);
+                    var nachher = j == text.Length ? string.Empty : text.Substring(j + 2);
 
 
                     text = vorher + s + nachher;
@@ -185,6 +187,7 @@ namespace Bodoconsult.Text.Helpers
             {
                 // ignored
             }
+
             return text.Trim();
         }
 

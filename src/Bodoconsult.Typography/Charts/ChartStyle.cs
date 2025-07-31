@@ -176,14 +176,6 @@ namespace Bodoconsult.Typography.Charts
         /// </summary>
         public float FontSize { get; set; } = 12;
 
-
-
-
-
-
-
-
-
         ///// <summary>
         ///// Names of the columns in the data source to be used for the chart
         ///// </summary>
@@ -204,9 +196,6 @@ namespace Bodoconsult.Typography.Charts
         /// </summary>
         public int LegendLength { get; set; }
 
-
-
-
         /// <summary>
         /// Height in pixels
         /// </summary>
@@ -216,10 +205,6 @@ namespace Bodoconsult.Typography.Charts
         /// Width in pixels
         /// </summary>
         public int Width { get; set; }
-
-
-
-
 
         /// <summary>
         /// Template file name without path (template must be placed in subfolder \Template)
@@ -231,7 +216,6 @@ namespace Bodoconsult.Typography.Charts
         /// </summary>
         public string YAxisNumberformat { get; set; }
 
-
         /// <summary>
         /// Numberformat used to format values of XAxis
         /// </summary>
@@ -241,7 +225,6 @@ namespace Bodoconsult.Typography.Charts
         /// Radius in pixels for the border corners. If no rounded corners requested for the chart, set BorderCornerRadius=0
         /// </summary>
         public int ChartBorderCornerRadius { get; set; }
-
 
         /// <summary>
         /// MS Chart have unrequested margin bottom. With CorrectiveFactor measured in pixels you can remove this margin. Margin is size dependent.

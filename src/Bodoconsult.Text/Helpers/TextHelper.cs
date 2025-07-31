@@ -59,7 +59,7 @@
 //            foreach (var row in data)
 //            {
 
-//                if (string.IsNullOrEmpty(row.Replace("*", "").Trim())) continue;
+//                if (string.IsNullOrEmpty(row.Replace("*", string.Empty).Trim())) continue;
 
 //                if (row.ToLower().StartsWith("h1 "))
 //                {
@@ -108,7 +108,7 @@
 //                    if (i < 0)
 //                    {
 //                        c1 = row.Substring(2).Trim();
-//                        c2 = "";
+//                        c2 = string.Empty;
 //                    }
 //                    else
 //                    {
@@ -164,9 +164,9 @@
 //                        s = $"<<Error:File not found: {fileName}>>";
 //                    }
 
-//                    var vorher = i == 0 ? "" : text.Substring(0, i - 1);
+//                    var vorher = i == 0 ? string.Empty : text.Substring(0, i - 1);
 
-//                    var nachher = j == text.Length ? "" : text.Substring(j + 2);
+//                    var nachher = j == text.Length ? string.Empty : text.Substring(j + 2);
 
 
 //                    text = vorher + s + nachher;

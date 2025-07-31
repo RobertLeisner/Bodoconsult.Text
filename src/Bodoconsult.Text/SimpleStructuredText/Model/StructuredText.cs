@@ -194,7 +194,7 @@ namespace Bodoconsult.Text.Model
             //if (message.Contains("??pa??"))
             //{
 
-            //    var rows = message.Replace("??pa??", "").Replace("\n", "").Replace("\r", "").Replace("??pe??", "\r").Split(new []{'\r'}, StringSplitOptions.RemoveEmptyEntries);
+            //    var rows = message.Replace("??pa??", string.Empty).Replace("\n", string.Empty).Replace("\r", string.Empty).Replace("??pe??", "\r").Split(new []{'\r'}, StringSplitOptions.RemoveEmptyEntries);
             //    foreach (var row in rows)
             //    {
             //        TextItems.Add(new TextItem { LogicalType = TextItemType.P, Content = row });
