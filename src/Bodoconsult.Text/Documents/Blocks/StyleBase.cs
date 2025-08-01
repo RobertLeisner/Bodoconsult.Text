@@ -21,10 +21,10 @@ public abstract class StyleBase : Block
     /// <summary>
     /// Add the current element to a document defined in LDML (Logical document markup language)
     /// </summary>
-    /// <param name="stringBuilder">StringBuilder instance to create the LDML in</param>
+    /// <param name="document">StringBuilder instance to create the LDML in</param>
     /// <param name="indent">Current indent</param>
-    public override void ToLdmlString(StringBuilder stringBuilder, string indent)
+    public override void ToLdmlString(StringBuilder document, string indent)
     {
-        stringBuilder.AppendLine($"{indent}<Style{GetPropertiesAsAttributes()}/>");
+        document.AppendLine($"{indent}<Style{GetPropertiesAsAttributes()}/>");
     }
 }

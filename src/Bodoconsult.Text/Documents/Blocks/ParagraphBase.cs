@@ -27,26 +27,26 @@ public abstract class ParagraphBase : Block
     /// <summary>
     /// Add the current element to a document defined in LDML (Logical document markup language)
     /// </summary>
-    /// <param name="stringBuilder">StringBuilder instance to create the LDML in</param>
+    /// <param name="document">StringBuilder instance to create the LDML in</param>
     /// <param name="indent">Current indent</param>
-    public override void ToLdmlString(StringBuilder stringBuilder, string indent)
+    public override void ToLdmlString(StringBuilder document, string indent)
     {
-        AddTagWithAttributes(indent, TagToUse, stringBuilder);
+        AddTagWithAttributes(indent, TagToUse, document);
 
         // Add the blocks now
         foreach (var block in ChildBlocks)
         {
-            block.ToLdmlString(stringBuilder, $"{indent}{Indentation}");
+            block.ToLdmlString(document, $"{indent}{Indentation}");
         }
 
         // Add the inlines now
         foreach (var inline in Inlines)
         {
-            inline.ToLdmlString(stringBuilder, $"{indent}{Indentation}");
+            inline.ToLdmlString(document, $"{indent}{Indentation}");
         }
 
 
-        stringBuilder.AppendLine($"{indent}</{TagToUse}>");
+        document.AppendLine($"{indent}</{TagToUse}>");
     }
 
 

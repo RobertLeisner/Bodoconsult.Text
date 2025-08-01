@@ -10,7 +10,7 @@ namespace Bodoconsult.Text.Documents
     /// <summary>
     /// Root element for documents
     /// </summary>
-    public class TextElement
+    public abstract class TextElement
     {
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Bodoconsult.Text.Documents
         public bool IsSingleton { get; set; }
 
         /// <summary>
-        /// Parent block element
+        /// Parent element
         /// </summary>
         public TextElement Parent { get; set; }
 
@@ -38,9 +38,9 @@ namespace Bodoconsult.Text.Documents
         /// <summary>
         /// Add the current element to a document defined in LDML (Logical document markup language)
         /// </summary>
-        /// <param name="stringBuilder">StringBuilder instance to create the LDML in</param>
+        /// <param name="document">StringBuilder instance to create the LDML in</param>
         /// <param name="indent">Current indent</param>
-        public virtual void ToLdmlString(StringBuilder stringBuilder, string indent)
+        public virtual void ToLdmlString(StringBuilder document, string indent)
         {
             throw new NotSupportedException("Create an override for method ToLdmlString()");
         }

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Document Name="MyReport">
+	<DocumentMetaData Authors="Robert Leisner" Company="Bodoconsult GmbH" CompanyWebsite="http://www.bodoconsult.de" TocHeading="Table of content" TofHeading="Table of figures" ToeHeading="Table of equations" PageName="Page" IsTocRequired="False" IsFiguresTableRequired="False" IsEquationsTableRequired="False" />
 	<Section IncludeInToc="False" PageBreakBefore="False" Name="Body">
 		<Heading1>
 			<Span>Heading level 1</Span>
