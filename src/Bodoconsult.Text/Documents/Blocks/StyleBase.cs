@@ -11,6 +11,11 @@ public abstract class StyleBase : Block
 {
 
     /// <summary>
+    /// The XML tag to ue for the current instance
+    /// </summary>
+    protected string TagToUse = string.Intern("Style");
+
+    /// <summary>
     /// Default ctor
     /// </summary>
     protected StyleBase()
