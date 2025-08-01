@@ -20,6 +20,10 @@ public class Bold : SpanBase
         TagToUse = string.Intern("Bold");
     }
 
+    /// <summary>
+    /// Ctor to deliver 
+    /// </summary>
+    /// <param name="content"></param>
     public Bold(string content)
     {
         // Add allowed child inlines
