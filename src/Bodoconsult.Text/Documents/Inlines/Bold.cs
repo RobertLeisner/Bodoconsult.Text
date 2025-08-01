@@ -1,5 +1,8 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
+using System;
+using System.Collections.Generic;
+
 namespace Bodoconsult.Text.Documents;
 
 /// <summary>
@@ -8,13 +11,21 @@ namespace Bodoconsult.Text.Documents;
 public class Bold : SpanBase
 {
     /// <summary>
+    /// Static list with all allowed inline elements for paragraphs
+    /// </summary>
+    public static List<Type> AllAllowedInlines =
+    [
+        typeof(Italic),
+        typeof(LineBreak)
+    ];
+
+    /// <summary>
     /// Default ctor
     /// </summary>
     public Bold()
     {
         // Add allowed child inlines
-        AllowedInlines.Add(typeof(Italic));
-        AllowedInlines.Add(typeof(Hyperlink));
+        AllowedInlines.AddRange(AllAllowedInlines);
 
         // Tag to use
         TagToUse = string.Intern("Bold");

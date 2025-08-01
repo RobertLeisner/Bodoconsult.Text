@@ -32,7 +32,7 @@ public class Toc5: ParagraphBase
         // Add allowed inlines
         AllowedInlines.AddRange(AllAllowedInlines);
 
-        TagToUse = string.Intern("Toc4");
+        TagToUse = string.Intern("Toc5");
     }
 
     /// <summary>
@@ -45,7 +45,7 @@ public class Toc5: ParagraphBase
         // Add allowed inlines
         AllowedInlines.AddRange(AllAllowedInlines);
 
-        TagToUse = string.Intern("Toc4");
+        TagToUse = string.Intern("Toc5");
 
         Inlines.Add(new Span(){Content = content});
     }

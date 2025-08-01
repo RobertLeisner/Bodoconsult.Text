@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
+using System;
 using System.Text;
 
 namespace Bodoconsult.Text.Documents;
@@ -33,6 +34,23 @@ public class Styleset : Block
         }
 
         stringBuilder.AppendLine($"{indent}</Styleset>");
+    }
+
+    /// <summary>
+    /// Add a block element
+    /// </summary>
+    /// <param name="block">Block element to add</param>
+    public override void AddBlock(Block block)
+    {
+        var type = block.GetType();
+
+        if (block is not StyleBase)
+        {
+            throw new ArgumentException($"Type {type.Name} not allowed to be added to a styleset");
+        }
+
+        Blocks.Add(block);
+        block.Parent = this;
     }
 
 }

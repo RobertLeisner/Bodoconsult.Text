@@ -30,6 +30,6 @@ public abstract class StyleBase : Block
     /// <param name="indent">Current indent</param>
     public override void ToLdmlString(StringBuilder document, string indent)
     {
-        document.AppendLine($"{indent}<Style{GetPropertiesAsAttributes()}/>");
+        document.AppendLine($"{indent}<{TagToUse}{GetPropertiesAsAttributes()}/>");
     }
 }

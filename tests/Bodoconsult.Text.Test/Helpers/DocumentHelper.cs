@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using Bodoconsult.Text.Documents;
+using Bodoconsult.Text.Helpers;
 
 namespace Bodoconsult.Text.Test.Helpers;
 
@@ -15,6 +16,11 @@ public static class DocumentHelper
         {
             Name = "MyReport"
         };
+
+        // Styleset
+        var styleset = StylesetHelper.CreateDefaultStyleset();
+        doc.AddBlock(styleset);
+
 
         // Meta data
         var meta = new DocumentMetaData()
@@ -55,11 +61,11 @@ public static class DocumentHelper
         section.AddBlock(toc3);
 
         // Add a Toc4
-        var toc4= new Subtitle("Toc4");
+        var toc4= new Toc4("Toc4");
         section.AddBlock(toc4);
 
         // Add a Toc5
-        var toc5 = new Subtitle("Toc5");
+        var toc5 = new Toc5("Toc5");
         section.AddBlock(toc5);
 
         // Add a SectionTitle
