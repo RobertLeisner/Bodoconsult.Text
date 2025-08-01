@@ -10,12 +10,12 @@ public class ParagraphStyleBase : StyleBase
     /// <summary>
     /// Font name
     /// </summary>
-    public string FontName { get; set; } = "Calibri";
+    public string FontName { get; set; }
 
     /// <summary>
     /// Font size in pt
     /// </summary>
-    public int FontSize { get; set; } = 12;
+    public int FontSize { get; set; }
 
     /// <summary>
     /// Bold
@@ -27,29 +27,6 @@ public class ParagraphStyleBase : StyleBase
     /// </summary>
     public bool Italic { get; set; }
 
-    /// <summary>
-    /// Left margin in pt
-    /// </summary>
-    public double MarginLeft { get; set; }
 
-    /// <summary>
-    /// Left margin in pt
-    /// </summary>
-    public double MarginTop { get; set; }
-
-    /// <summary>
-    /// Left margin in pt
-    /// </summary>
-    public double MarginRight { get; set; }
-
-    /// <summary>
-    /// Left margin in pt
-    /// </summary>
-    public double MarginBottom { get; set; }
-
-    /// <summary>
-    /// The alignment of the text
-    /// </summary>
-    public TextAlignment TextAlignment { get; set; } = TextAlignment.Left;
 
 }

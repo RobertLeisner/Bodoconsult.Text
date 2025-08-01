@@ -20,6 +20,22 @@ public class Section : Block
         typeof(Paragraph),
         typeof(Heading1),
         typeof(Heading2),
+        typeof(Heading3),
+        typeof(Heading4),
+        typeof(Heading5),
+        typeof(Title),
+        typeof(Subtitle),
+        typeof(SectionTitle),
+        typeof(SectionSubtitle),
+        typeof(Toc1),
+        typeof(Toc2),
+        typeof(Toc3),
+        typeof(Toc4),
+        typeof(Toc5),
+        typeof(ParagraphCenter),
+        typeof(ParagraphJustify),
+        typeof(ParagraphRight),
+       
     ];
 
         

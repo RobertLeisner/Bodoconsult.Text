@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
-using System;
 using System.Text;
 
 namespace Bodoconsult.Text.Documents;
@@ -10,11 +9,6 @@ namespace Bodoconsult.Text.Documents;
 /// </summary>
 public abstract class StyleBase : Block
 {
-
-    /// <summary>
-    /// The XML tag to ue for the current instance
-    /// </summary>
-    protected string TagToUse = string.Intern("Paragraph");
 
     /// <summary>
     /// Default ctor
@@ -31,6 +25,6 @@ public abstract class StyleBase : Block
     /// <param name="indent">Current indent</param>
     public override void ToLdmlString(StringBuilder document, string indent)
     {
-        document.AppendLine($"{indent}<{TagToUse}Style{GetPropertiesAsAttributes()}/>");
+        document.AppendLine($"{indent}<Style{GetPropertiesAsAttributes()}/>");
     }
 }

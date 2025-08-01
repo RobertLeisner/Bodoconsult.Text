@@ -4,16 +4,9 @@ using Bodoconsult.Text.Documents;
 
 namespace Bodoconsult.Text.Renderer.PlainText
 {
-    /// <summary>
-    /// <see cref="ITextRendererElementFactory"/> implementation for plain text rendering
-    /// </summary>
     public class PlainTextRendererElementFactory : ITextRendererElementFactory
     {
-        /// <summary>
-        /// Create an instance of <see cref="ITextRendererElement"/> related to the given <see cref="TextElement"/> instance
-        /// </summary>
-        /// <param name="textElement"><see cref="TextElement"/> instance</param>
-        /// <returns><see cref="ITextRendererElement"/> instance</returns>
+
         public ITextRendererElement CreateInstance(TextElement textElement)
         {
             if (textElement is Paragraph paragraph)

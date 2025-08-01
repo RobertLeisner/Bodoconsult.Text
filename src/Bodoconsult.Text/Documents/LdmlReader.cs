@@ -20,9 +20,7 @@ namespace Bodoconsult.Text.Documents
 
         private TextElement _textElement;
 
-        /// <summary>
-        /// Read-only access to the current text element
-        /// </summary>
+
         public TextElement TextElement => _textElement;
 
         /// <summary>
@@ -57,12 +55,10 @@ namespace Bodoconsult.Text.Documents
         }
 
 
-        /// <summary>
-        /// Parse the LGML string
-        /// </summary>
+
         public void ParseLdml()
         {
-            var xmlDoc = XDocument.Parse(Ldml);
+            XDocument xmlDoc = XDocument.Parse(Ldml);
 
             var root = xmlDoc.Descendants().FirstOrDefault();
 
@@ -177,7 +173,7 @@ namespace Bodoconsult.Text.Documents
             return obj;
         }
 
-        private static void LoadProperties(TextElement element, XElement node)
+        private void LoadProperties(TextElement element, XElement node)
         {
             if (!node.HasAttributes)
             {

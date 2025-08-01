@@ -13,7 +13,6 @@ public class ParagraphStyle : ParagraphStyleBase
     public ParagraphStyle()
     {
         Name = "Paragraph";
-        TagToUse = Name;
     }
 
 }
