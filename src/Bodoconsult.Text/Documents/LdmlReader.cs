@@ -20,7 +20,9 @@ namespace Bodoconsult.Text.Documents
 
         private TextElement _textElement;
 
-
+        /// <summary>
+        /// Read-only access to current <see cref="TextElement"/> instance
+        /// </summary>
         public TextElement TextElement => _textElement;
 
         /// <summary>
@@ -55,10 +57,12 @@ namespace Bodoconsult.Text.Documents
         }
 
 
-
+        /// <summary>
+        /// Parse the LDML to a <see cref="Document"/> instance
+        /// </summary>
         public void ParseLdml()
         {
-            XDocument xmlDoc = XDocument.Parse(Ldml);
+            var xmlDoc = XDocument.Parse(Ldml);
 
             var root = xmlDoc.Descendants().FirstOrDefault();
 
@@ -113,7 +117,7 @@ namespace Bodoconsult.Text.Documents
                     if (childNode is XElement element)
                     {
 
-                        Debug.Print($"{elementName}: child {element.Name.ToString()}");
+                        Debug.Print($"{elementName}: child {element.Name}");
 
 
                         var child = GetTextElement(element.Name.ToString(), element);
