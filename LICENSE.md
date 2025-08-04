@@ -1,8 +1,9 @@
-﻿
+﻿License and license usage
+=================
 
 # The MIT License (MIT) for Bodoconsult.Text repository, for Bodoconsult.Pdf repository, for Bodoconsult.Text.Pdf repository, for Bodoconsult.Test repository, for Bodoconsult.Test.Pdf repository
 
-Licence-Url: https://licenses.nuget.org/MIT
+License-Url: https://licenses.nuget.org/MIT
 
 Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH, Vaterstetten (Germany)
 
@@ -24,7 +25,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-# Licences for libraries used by Bodoconsult.Text repository
+# Licenses for libraries used by Bodoconsult.Text repository
 
 ## System.Windows.Media by Microsoft
 
@@ -62,7 +63,7 @@ SOFTWARE.
 
 ## Bodoconsult.Typography
 
-Licence-Url: https://licenses.nuget.org/MIT
+License-Url: https://licenses.nuget.org/MIT
 
 MIT License
 
@@ -85,13 +86,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-# Licences for libraries used by Bodoconsult.Pdf
+# Licenses for libraries used by Bodoconsult.Pdf
 
 ## PdfSharp.MigraDoc
 
 Package-Url: https://www.nuget.org/packages/PdfSharp.MigraDoc
 
-Licence-Url: https://licenses.nuget.org/MIT
+License-Url: https://licenses.nuget.org/MIT
 
 MIT License
 
@@ -115,7 +116,7 @@ SOFTWARE.
 
 ## Bodoconsult.Typography
 
-Licence-Url: https://licenses.nuget.org/MIT
+License-Url: https://licenses.nuget.org/MIT
 
 MIT License
 
@@ -137,11 +138,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-# Licences for libraries used by Bodoconsult.Test.Pdf repository
+# Licenses for libraries used by Bodoconsult.Test.Pdf repository
 
 ## Bodoconsult.Typography
 
-Licence-Url: https://licenses.nuget.org/MIT
+License-Url: https://licenses.nuget.org/MIT
 
 MIT License
 
@@ -165,7 +166,7 @@ SOFTWARE.
 
 ## PdfSharp.MigraDoc
 
-Licence-Url: https://licenses.nuget.org/MIT
+License-Url: https://licenses.nuget.org/MIT
 
 MIT License
 
@@ -187,11 +188,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-# Licences for libraries used by Bodoconsult.Test
+# Licenses for libraries used by Bodoconsult.Test
 
 ## PdfSharp.MigraDoc
 
-Licence-Url: https://licenses.nuget.org/MIT
+License-Url: https://licenses.nuget.org/MIT
 
 MIT License
 
@@ -213,11 +214,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-# Licences for libraries used by Bodoconsult.Test.Pdf
+# Licenses for libraries used by Bodoconsult.Test.Pdf
 
 ## Bodoconsult.Typography
 
-Licence-Url: https://licenses.nuget.org/MIT
+License-Url: https://licenses.nuget.org/MIT
 
 MIT License
 
@@ -241,7 +242,7 @@ SOFTWARE.
 
 ## PDFsharp-MigraDoc
 
-Licence-Url: https://licenses.nuget.org/MIT
+License-Url: https://licenses.nuget.org/MIT
 
 MIT License
 
