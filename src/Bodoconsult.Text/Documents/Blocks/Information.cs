@@ -1,0 +1,52 @@
+﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
+
+using System;
+using System.Collections.Generic;
+
+namespace Bodoconsult.Text.Documents;
+
+/// <summary>
+/// Code
+/// </summary>
+public class Info : ParagraphBase
+{
+    /// <summary>
+    /// Static list with all allowed inline elements for paragraphs
+    /// </summary>
+    public static List<Type> AllAllowedInlines =
+    [
+        typeof(Span),
+        typeof(Bold),
+        typeof(Italic),
+        typeof(LineBreak)
+    ];
+
+
+    /// <summary>
+    /// Default ctor
+    /// </summary>
+    public Info()
+    {
+        // No blocks allowed
+
+        // Add allowed inlines
+        AllowedInlines.AddRange(AllAllowedInlines);
+
+        TagToUse = string.Intern("Info");
+    }
+
+    /// <summary>
+    /// Ctor with string content
+    /// </summary>
+    public Info(string content)
+    {
+        // No blocks allowed
+
+        // Add allowed inlines
+        AllowedInlines.AddRange(AllAllowedInlines);
+
+        TagToUse = string.Intern("Info");
+
+        Inlines.Add(new Span(){Content = content});
+    }
+}
