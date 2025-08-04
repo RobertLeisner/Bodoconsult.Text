@@ -38,7 +38,12 @@ public class Section : Block
         typeof(Image),
         typeof(Figure),
         typeof(Equation),
-        typeof(List)
+        typeof(List),
+        typeof(Citation),
+        typeof(Code),
+        typeof(Error),
+        typeof(Warning),
+        typeof(Info),
 
     ];
 

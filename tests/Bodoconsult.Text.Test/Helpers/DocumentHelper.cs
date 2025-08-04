@@ -95,6 +95,10 @@ public static class DocumentHelper
         var heading5 = new Heading5("Heading level 5");
         section.AddBlock(heading5);
 
+        // Add a Info
+        var info = new Info("Info");
+        section.AddBlock(info);
+
         // Add a simple paragraph
         var paragraph = new Paragraph("Blubb blabb didl dumm");
         section.AddBlock(paragraph);
@@ -136,6 +140,22 @@ public static class DocumentHelper
         paragraph = new Paragraph();
         paragraph.AddInline(italic);
         section.AddBlock(paragraph);
+
+        // Add a Citation
+        var citation = new Citation("Citation");
+        section.AddBlock(citation);
+
+        // Add a code
+        var code = new Code("Code");
+        section.AddBlock(code);
+
+        // Add an error
+        var error = new Error("Error");
+        section.AddBlock(error);
+
+        // Add a Warning
+        var warning = new Warning("Warning");
+        section.AddBlock(warning);
 
         // Add a hyperlink
         paragraph = new Paragraph("This is a link: ");
