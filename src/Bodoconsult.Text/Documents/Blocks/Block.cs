@@ -44,7 +44,8 @@ namespace Bodoconsult.Text.Documents
         /// <summary>
         /// Name of the style to apply to the block
         /// </summary>
-        public string StyleName { get; set; }
+        [DoNotSerialize]
+        public string StyleName => $"{TagToUse}Style";
 
         /// <summary>
         /// The name of the tag for the block element

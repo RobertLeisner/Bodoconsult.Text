@@ -6,12 +6,17 @@ using Bodoconsult.Text.Helpers;
 
 namespace Bodoconsult.Text.Documents
 {
-
     /// <summary>
     /// Root element for documents
     /// </summary>
-    public abstract class TextElement
+    public abstract class TextElement: DocumentElement
     {
+
+        /// <summary>
+        /// The XML tag to ue for the current instance
+        /// </summary>
+        [DoNotSerialize]
+        public string TagToUse { get; protected set; } = string.Intern("TextElement");
 
         /// <summary>
         /// Describing name of the element. This property is not used in the document itself
@@ -34,16 +39,6 @@ namespace Bodoconsult.Text.Documents
         /// </summary>
         [DoNotSerialize]
         public string Indentation { get; set; } = "    ";
-
-        /// <summary>
-        /// Add the current element to a document defined in LDML (Logical document markup language)
-        /// </summary>
-        /// <param name="document">StringBuilder instance to create the LDML in</param>
-        /// <param name="indent">Current indent</param>
-        public virtual void ToLdmlString(StringBuilder document, string indent)
-        {
-            throw new NotSupportedException("Create an override for method ToLdmlString()");
-        }
 
         /// <summary>
         /// Add the opening tag with properties if available

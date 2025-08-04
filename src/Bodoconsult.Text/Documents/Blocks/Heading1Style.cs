@@ -3,17 +3,16 @@
 namespace Bodoconsult.Text.Documents;
 
 /// <summary>
-/// A style for a normal left aligned paragraph
+/// Style for <see cref="Heading1"/> instances
 /// </summary>
-public class ParagraphStyle : ParagraphStyleBase
+public class Heading1Style : ParagraphStyleBase
 {
     /// <summary>
     /// Default ctor
     /// </summary>
-    public ParagraphStyle()
+    public Heading1Style()
     {
-        TagToUse = "ParagraphStyle";
+        TagToUse = "Heading1Style";
         Name = TagToUse;
     }
-
 }

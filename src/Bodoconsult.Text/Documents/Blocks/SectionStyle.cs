@@ -13,7 +13,7 @@ public class SectionStyle : StyleBase
     /// </summary>
     public SectionStyle()
     {
-        TagToUse = string.Intern("Section");
+        TagToUse = string.Intern("SectionStyle");
         Name = TagToUse;
     }
 

@@ -35,7 +35,11 @@ public class Section : Block
         typeof(ParagraphCenter),
         typeof(ParagraphJustify),
         typeof(ParagraphRight),
-       
+        typeof(Image),
+        typeof(Figure),
+        typeof(Equation),
+        typeof(List)
+
     ];
 
         
@@ -49,6 +53,9 @@ public class Section : Block
         AllowedBlocks.AddRange(AllAllowedBlocks);
 
         // No inlines allowed
+
+        // Tag
+        TagToUse = string.Intern("Section");
     }
 
 
@@ -56,7 +63,7 @@ public class Section : Block
     /// <summary>
     /// Include this section in the table of content
     /// </summary>
-    public bool IncludeInToc { get; set; }
+    public bool IncludeInToc { get; set; } = true;
 
     /// <summary>
     /// Add a page break before the section
@@ -71,7 +78,7 @@ public class Section : Block
     /// <param name="indent">Current indent</param>
     public override void ToLdmlString(StringBuilder stringBuilder, string indent)
     {
-        AddTagWithAttributes(indent, "Section", stringBuilder);
+        AddTagWithAttributes(indent, TagToUse, stringBuilder);
 
         // Add the blocks now
         foreach (var block in ChildBlocks)
@@ -79,7 +86,7 @@ public class Section : Block
             block.ToLdmlString(stringBuilder, $"{indent}{Indentation}");
         }
 
-        stringBuilder.AppendLine($"{indent}</Section>");
+        stringBuilder.AppendLine($"{indent}</{TagToUse}>");
     }
 
     /// <summary>

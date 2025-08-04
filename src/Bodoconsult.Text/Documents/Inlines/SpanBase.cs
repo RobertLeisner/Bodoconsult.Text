@@ -13,11 +13,6 @@ public abstract class SpanBase : Inline
     private string _content;
 
     /// <summary>
-    /// The XML tag to ue for the current instance
-    /// </summary>
-    protected string TagToUse = string.Intern("Span");
-
-    /// <summary>
     /// The content of the span element. May only be set if there is no inline child element loaded
     /// </summary>
     [DoNotSerialize]

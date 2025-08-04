@@ -1,15 +1,12 @@
-﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
-
-using Bodoconsult.Text.Documents;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Bodoconsult.Text.Documents;
 
 /// <summary>
-/// Toc5
+/// List item
 /// </summary>
-public class Toc5 : ParagraphBase
+public class ListItem : ParagraphBase
 {
     /// <summary>
     /// Static list with all allowed inline elements for paragraphs
@@ -22,31 +19,30 @@ public class Toc5 : ParagraphBase
         typeof(LineBreak)
     ];
 
-
     /// <summary>
     /// Default ctor
     /// </summary>
-    public Toc5()
+    public ListItem()
     {
         // No blocks allowed
 
         // Add allowed inlines
         AllowedInlines.AddRange(AllAllowedInlines);
 
-        TagToUse = string.Intern("Toc5");
+        TagToUse = string.Intern("ListItem");
     }
 
     /// <summary>
     /// Ctor with string content
     /// </summary>
-    public Toc5(string content)
+    public ListItem(string content)
     {
         // No blocks allowed
 
         // Add allowed inlines
         AllowedInlines.AddRange(AllAllowedInlines);
 
-        TagToUse = string.Intern("Toc5");
+        TagToUse = string.Intern("ListItem");
 
         Inlines.Add(new Span() { Content = content });
     }

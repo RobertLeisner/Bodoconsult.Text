@@ -1,30 +1,22 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
+using System;
 using System.Text;
 
 namespace Bodoconsult.Text.Documents;
 
 /// <summary>
-/// Base type for styles for a document
+///  base class for all <see cref="Document"/> related LDML objects
 /// </summary>
-public abstract class StyleBase : Block
+public abstract class DocumentElement
 {
-
-    /// <summary>
-    /// Default ctor
-    /// </summary>
-    protected StyleBase()
-    {
-        IsSingleton = true;
-    }
-
     /// <summary>
     /// Add the current element to a document defined in LDML (Logical document markup language)
     /// </summary>
     /// <param name="document">StringBuilder instance to create the LDML in</param>
     /// <param name="indent">Current indent</param>
-    public override void ToLdmlString(StringBuilder document, string indent)
+    public virtual void ToLdmlString(StringBuilder document, string indent)
     {
-        document.AppendLine($"{indent}<{TagToUse}{GetPropertiesAsAttributes()}/>");
+        throw new NotSupportedException("Create an override for method ToLdmlString()");
     }
 }

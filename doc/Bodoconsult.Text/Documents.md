@@ -17,6 +17,7 @@ LDML is a markup language to define the content of structured text documents wit
 
 ```
 
+
 ## Block elements
 
 ### General document structure
@@ -46,7 +47,11 @@ LDML is a markup language to define the content of structured text documents wit
 
 -   **Paragraph**: A paragraph with text
 
+-   **Image**: A simple image without counting
 
+-   **Figure**: A simple image with counting
+
+-   **Equation**: A simple image with counting
 
 ## Inline elements
 
@@ -56,11 +61,6 @@ LDML is a markup language to define the content of structured text documents wit
 
 -   **Italic**: Simple text
 
--   **Image**: A simple image without counting
-
--   **Figure**: A simple image with counting
-
--   **Equation**: A simple image with counting
 
 # Document object model (DOM) for LDML
 

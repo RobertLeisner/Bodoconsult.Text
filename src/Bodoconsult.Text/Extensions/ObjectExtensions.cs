@@ -25,6 +25,14 @@ public static class ObjectExtensions
 
         var basetype = underlyingType ?? t;
 
+        // Enum value
+        if (t.IsEnum)
+        {
+            var x = Enum.Parse(t, value.ToString());
+            return x;
+        }
+
+        // Other types
         return System.Convert.ChangeType(value, basetype);
     }
 

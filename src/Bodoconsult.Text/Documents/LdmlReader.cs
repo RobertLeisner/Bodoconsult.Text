@@ -191,13 +191,26 @@ namespace Bodoconsult.Text.Documents
 
             foreach (var prop in pis)
             {
-                // Prop Name
+
                 var attr = attributes.FirstOrDefault(x => x.Name == prop.Name);
 
-                if (attr != null)
+                if (attr == null)
                 {
-                    prop.SetValue(element, attr.Value.Convert(prop.PropertyType));
+                    continue;
                 }
+
+
+                //// Prop Name
+                //if (prop.PropertyType.IsEnum)
+                //{
+                //    var value = Enum.Parse(prop.PropertyType, attr.Value);
+                //    prop.SetValue(element, value);
+                //}
+                //else
+                //{
+                    prop.SetValue(element, attr.Value.Convert(prop.PropertyType));
+                //}
+
             }
         }
     }

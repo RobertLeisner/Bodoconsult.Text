@@ -146,8 +146,36 @@ public static class DocumentHelper
         paragraph.AddInline(link);
         section.AddBlock(paragraph);
 
-        
+        // Add an image
+        var image = new Image("Test image", TestHelper.TestChartImage);
+        section.AddBlock(image);
 
+        // Add a figure 1
+        var figure1 = new Image("Figure 1", TestHelper.TestChartImage);
+        section.AddBlock(figure1);
+
+        // Add a figure 2
+        var figure2 = new Image("Figure 2", TestHelper.TestDistributionImage);
+        section.AddBlock(figure2);
+
+        // Add an equation 1
+        var equiation1 = new Equation("Equiation 1", TestHelper.TestEquiationImage);
+        section.AddBlock(equiation1);
+
+        // Add an equation 2
+        var equiation2 = new Equation("Equiation 2", TestHelper.TestEquiationImage);
+        section.AddBlock(equiation2);
+
+        // Add a list
+        var list = new List();
+
+        var listItem1 = new ListItem("First list item");
+        list.AddBlock(listItem1);
+
+        var listItem2 = new ListItem("Second list item");
+        list.AddBlock(listItem2);
+
+        section.AddBlock(list);
 
         return doc;
     }

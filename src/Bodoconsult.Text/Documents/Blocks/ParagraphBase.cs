@@ -11,11 +11,6 @@ public abstract class ParagraphBase : Block
 {
 
     /// <summary>
-    /// The XML tag to ue for the current instance
-    /// </summary>
-    protected string TagToUse = string.Intern("Paragraph");
-
-    /// <summary>
     /// Add a block element
     /// </summary>
     /// <param name="block">Block element to add</param>

@@ -6,9 +6,9 @@ using System.Collections.Generic;
 namespace Bodoconsult.Text.Documents;
 
 /// <summary>
-/// Italic text span
+/// Image text
 /// </summary>
-public class Hyperlink : SpanBase
+public sealed class Figure : ImageBase
 {
     /// <summary>
     /// Static list with all allowed inline elements for paragraphs
@@ -18,36 +18,38 @@ public class Hyperlink : SpanBase
         typeof(Span),
         typeof(Bold),
         typeof(Italic),
+        typeof(Hyperlink)
     ];
 
     /// <summary>
     /// Default ctor
     /// </summary>
-    public Hyperlink()
+    public Figure()
     {
         // Add allowed child inlines
         AllowedInlines.AddRange(AllAllowedInlines);
 
         // Tag to use
-        TagToUse = string.Intern("Hyperlink");
+        TagToUse = string.Intern("Figure");
     }
 
     /// <summary>
     /// Ctor to load content
     /// </summary>
-    /// <param name="content">Clear text description of the URL</param>
-    public Hyperlink(string content)
+    /// <param name="content">Content</param>
+    /// <param name="uri">URL of the equation image. Local file path, UNC path or a web link</param>
+    public Figure(string content, string uri)
     {
         // Add allowed child inlines
+        AllowedInlines.Add(typeof(Span));
+        AllowedInlines.Add(typeof(Bold));
+        AllowedInlines.Add(typeof(Italic));
+        AllowedInlines.Add(typeof(Hyperlink));
 
         // Tag to use
-        TagToUse = string.Intern("Hyperlink");
+        TagToUse = string.Intern("Figure");
 
-        Content = content;
+        AddInline(new Span(content));
+        Uri = uri;
     }
-
-    /// <summary>
-    /// URL of the hyperlink
-    /// </summary>
-    public string Uri { get; set; }
 }

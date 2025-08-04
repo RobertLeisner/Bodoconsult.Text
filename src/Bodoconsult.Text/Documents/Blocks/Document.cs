@@ -10,6 +10,17 @@ namespace Bodoconsult.Text.Documents;
 public class Document : Block
 {
     /// <summary>
+    ///  Default font name
+    /// </summary>
+    public const string DefaultFontName = "Calibri";
+
+    /// <summary>
+    /// Default font size
+    /// </summary>
+    public const int DefaultFontSize = 12;
+
+
+    /// <summary>
     /// Default ctor
     /// </summary>
     public Document()
@@ -20,6 +31,9 @@ public class Document : Block
         AllowedBlocks.Add(typeof(Styleset));
 
         // No inlines allowed
+
+        // Tag to use
+        TagToUse = string.Intern("Document");
     }
 
     /// <summary>
@@ -29,7 +43,7 @@ public class Document : Block
     /// <param name="indent">Current indent</param>
     public override void ToLdmlString(StringBuilder document, string indent)
     {
-        AddTagWithAttributes(indent, "Document", document);
+        AddTagWithAttributes(indent, TagToUse, document);
 
         // Add the blocks now
         foreach (var block in Blocks)
@@ -37,7 +51,7 @@ public class Document : Block
             block.ToLdmlString(document, $"{indent}{Indentation}");
         }
 
-        document.AppendLine($"{indent}</Document>");
+        document.AppendLine($"{indent}</{TagToUse}>");
     }
 
     /// <summary>

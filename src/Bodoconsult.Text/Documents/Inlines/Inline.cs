@@ -27,7 +27,11 @@ namespace Bodoconsult.Text.Documents
         /// </summary>
         public List<Inline> ChildInlines => Inlines.ToList();
 
-
+        /// <summary>
+        /// Name of the style to apply to the block
+        /// </summary>
+        [DoNotSerialize]
+        public string StyleName => $"{TagToUse}Style";
 
         /// <summary>
         /// Add a block element

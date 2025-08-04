@@ -20,7 +20,7 @@ public enum TextAlignment
     /// <summary>
     /// Justified alignment
     /// </summary>
-    Jusitfy,
+    Justify,
 
     /// <summary>
     /// Right aligned

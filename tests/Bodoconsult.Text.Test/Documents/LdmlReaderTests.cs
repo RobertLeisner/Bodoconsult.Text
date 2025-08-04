@@ -1,6 +1,9 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Text;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Test.Helpers;
 using NUnit.Framework;
@@ -65,5 +68,38 @@ public class LdmlReaderTests
 
         // Assert
         Assert.That(r.TextElement, Is.Not.Null);
+    }
+
+    [Test]
+    public void ParseLdml_NewDocument_DocParsed()
+    {
+        // Arrange 
+        var sb = new StringBuilder();
+
+        var doc = DocumentHelper.CreateDocument();
+        var section = (Section)doc.ChildBlocks.FirstOrDefault(x=> x.GetType() == typeof(Section));
+
+        Assert.That(section, Is.Not.Null);
+
+        section.IncludeInToc = false;
+
+        doc.ToLdmlString(sb, string.Empty);
+
+        Debug.Print(sb.ToString());
+
+        var r = new LdmlReader(sb.ToString());
+
+        // Act  
+        r.ParseLdml();
+
+        // Assert
+        Assert.That(r.TextElement, Is.Not.Null);
+
+        var doc2 = (Document)r.TextElement;
+        var section2 = (Section)doc2.ChildBlocks.FirstOrDefault(x => x.GetType() == typeof(Section));
+
+        Assert.That(section2, Is.Not.Null);
+
+        Assert.That(section2.IncludeInToc, Is.False);
     }
 }

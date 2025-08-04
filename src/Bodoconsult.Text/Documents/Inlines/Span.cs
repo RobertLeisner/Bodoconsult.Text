@@ -11,7 +11,10 @@ public class Span: SpanBase
     /// Default ctor
     /// </summary>
     public Span()
-    { }
+    {
+        // Tag to use
+        TagToUse = string.Intern("Span");
+    }
 
     /// <summary>
     /// Ctor to load content
@@ -19,6 +22,11 @@ public class Span: SpanBase
     /// <param name="content">Content to load</param>
     public Span(string content)
     {
+
+        // Tag to use
+        TagToUse = string.Intern("Span");
+
+        // Content
         Content = content;
     }
 }

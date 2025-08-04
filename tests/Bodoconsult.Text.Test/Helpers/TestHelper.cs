@@ -22,6 +22,8 @@ internal class TestHelper
 
         TestChartImage = Path.Combine(TestDataPath, "chart3d.png");
 
+        TestEquiationImage = Path.Combine(TestDataPath, "equiation.png");
+
         TestDistributionImage = Path.Combine(TestDataPath, "NormalDistribution.de.png");
 
         TestLogoImage = Path.Combine(TestDataPath, "logo.jpg");
@@ -46,6 +48,11 @@ internal class TestHelper
     /// A chart image
     /// </summary>
     public static string TestChartImage { get; }
+
+    /// <summary>
+    /// An equiation image image
+    /// </summary>
+    public static string TestEquiationImage { get; }
 
     /// <summary>
     /// An image of a normal distribution

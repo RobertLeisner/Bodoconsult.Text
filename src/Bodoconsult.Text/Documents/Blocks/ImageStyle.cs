@@ -3,17 +3,16 @@
 namespace Bodoconsult.Text.Documents;
 
 /// <summary>
-/// A style for a normal left aligned paragraph
+/// Style for <see cref="Image"/> instances
 /// </summary>
-public class ParagraphStyle : ParagraphStyleBase
+public class ImageStyle : ImageStyleBase
 {
     /// <summary>
     /// Default ctor
     /// </summary>
-    public ParagraphStyle()
+    public ImageStyle()
     {
-        TagToUse = "ParagraphStyle";
+        TagToUse = "ImageStyle";
         Name = TagToUse;
     }
-
 }

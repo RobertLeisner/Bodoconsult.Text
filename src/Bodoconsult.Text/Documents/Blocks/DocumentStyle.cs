@@ -12,7 +12,7 @@ public class DocumentStyle: StyleBase
     /// </summary>
     public DocumentStyle()
     {
-        TagToUse = string.Intern("Document");
+        TagToUse = string.Intern("DocumentStyle");
         Name = TagToUse;
     }
 

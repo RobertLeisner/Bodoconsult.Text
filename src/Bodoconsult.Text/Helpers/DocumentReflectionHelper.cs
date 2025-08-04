@@ -34,7 +34,7 @@ public static class DocumentReflectionHelper
 
         foreach (var propInfo in props)
         {
-            if (!propInfo.PropertyType.IsPrimitive && propInfo.PropertyType != typeof(string))
+            if (!propInfo.PropertyType.IsPrimitive && propInfo.PropertyType != typeof(string) && !propInfo.PropertyType.IsEnum)
             {
                 continue;
             }
@@ -56,3 +56,5 @@ public static class DocumentReflectionHelper
     }
 
 }
+
+

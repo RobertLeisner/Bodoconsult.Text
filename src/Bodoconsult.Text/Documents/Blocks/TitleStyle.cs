@@ -1,0 +1,18 @@
+﻿namespace Bodoconsult.Text.Documents;
+
+/// <summary>
+/// Style for <see cref="Title"/> instances
+/// </summary>
+public class TitleStyle : ParagraphStyleBase
+{
+    /// <summary>
+    /// Default ctor
+    /// </summary>
+    public TitleStyle()
+    {
+        TagToUse = "TitleStyle";
+        Name = TagToUse;
+        FontSize = Document.DefaultFontSize + 8;
+        Margins.Top = Document.DefaultFontSize * 3;
+    }
+}

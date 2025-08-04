@@ -36,6 +36,9 @@ public class Paragraph: ParagraphBase
 
         // Add allowed inlines
         AllowedInlines.AddRange(AllAllowedInlines);
+
+        // Tag
+        TagToUse = string.Intern("Paragraph");
     }
 
     /// <summary>
@@ -48,6 +51,10 @@ public class Paragraph: ParagraphBase
         // Add allowed inlines
         AllowedInlines.AddRange(AllAllowedInlines);
 
+        // Tag
+        TagToUse = string.Intern("Paragraph");
+
+        // Content
         Inlines.Add(new Span(){ Content = content});
     }
 
