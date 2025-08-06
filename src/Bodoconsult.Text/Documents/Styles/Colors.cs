@@ -1,4 +1,4 @@
-﻿namespace Bodoconsult.Text.Documents;
+﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
 
 /*
  *
@@ -36,6 +36,7 @@
  * SOFTWARE.
  */
 
+namespace Bodoconsult.Text.Documents;
 
 /// <summary>
 /// Colors - A collection of well-known Colors

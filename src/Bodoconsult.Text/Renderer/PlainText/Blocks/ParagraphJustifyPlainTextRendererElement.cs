@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
+
+using System;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
 
@@ -9,14 +11,14 @@ namespace Bodoconsult.Text.Renderer.PlainText;
 /// </summary>
 public class ParagraphJustifyPlainTextRendererElement : ITextRendererElement
 {
-    private readonly ParagraphJustify _ParagraphJustify;
+    private readonly ParagraphJustify _paragraphJustify;
 
     /// <summary>
     /// Default ctor
     /// </summary>
-    public ParagraphJustifyPlainTextRendererElement(ParagraphJustify ParagraphJustify)
+    public ParagraphJustifyPlainTextRendererElement(ParagraphJustify paragraphJustify)
     {
-        _ParagraphJustify = ParagraphJustify;
+        _paragraphJustify = paragraphJustify;
     }
 
     /// <summary>
@@ -24,7 +26,7 @@ public class ParagraphJustifyPlainTextRendererElement : ITextRendererElement
     /// </summary>
     public void RenderIt(ITextDocumentRender renderer)
     {
-        DocumentRendererHelper.RenderInlineChilds(renderer, _ParagraphJustify.ChildInlines, string.Empty, true);
+        DocumentRendererHelper.RenderInlineChilds(renderer, _paragraphJustify.ChildInlines, string.Empty, true);
         renderer.Content.Append($"{Environment.NewLine}");
     }
 }

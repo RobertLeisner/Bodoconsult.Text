@@ -3,23 +3,14 @@
 namespace Bodoconsult.Text.Documents;
 
 /// <summary>
-/// Style for document element
+/// Base style for styles with page settings
 /// </summary>
-public class DocumentStyle: StyleBase
+public abstract class PageStyleBase : StyleBase
 {
-    /// <summary>
-    /// Default ctor
-    /// </summary>
-    public DocumentStyle()
-    {
-        TagToUse = string.Intern("DocumentStyle");
-        Name = TagToUse;
-    }
-
     /// <summary>
     /// Name of the paper format, i.e. A4, Letter, Legal
     /// </summary>
-    public string PaperFormatName { get; set; } = "DIN A4";
+    public string PaperFormatName { get; set; } = "A4";
 
     /// <summary>
     /// Page width in cm
@@ -50,4 +41,10 @@ public class DocumentStyle: StyleBase
     /// Left margin in cm
     /// </summary>
     public double MarginBottom { get; set; } = 2.0;
+
+    /// <summary>
+    /// Type area width in cm
+    /// </summary>
+    [DoNotSerialize]
+    public double TypeAreaWidth => PageWidth - MarginLeft - MarginRight;
 }

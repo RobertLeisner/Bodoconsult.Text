@@ -1,19 +1,19 @@
-﻿using System.Text;
+﻿using Bodoconsult.Text.Helpers;
+using System;
+using System.Text;
 
 namespace Bodoconsult.Text.Documents;
 
 /// <summary>
 /// Thickness definition for margins and 
 /// </summary>
-public class Thickness:  DocumentElement
+public class Thickness : PropertyElement
 {
     /// <summary>
     /// Default ctor
     /// </summary>
     public Thickness()
-    {
-        
-    }
+    { }
 
     /// <summary>
     /// Ctor with thickness values provided for left, top, right and bottom
@@ -63,12 +63,16 @@ public class Thickness:  DocumentElement
     public double Bottom { get; set; }
 
     /// <summary>
-    /// Add the current element to a document defined in LDML (Logical document markup language)
+    /// Get the element data as formatted property value for an LDML attribute
     /// </summary>
-    /// <param name="document">StringBuilder instance to create the LDML in</param>
-    /// <param name="indent">Current indent</param>
-    public override void ToLdmlString(StringBuilder document, string indent)
+    public override string ToPropertyValue()
     {
-        document.Append($"{Left},{Top},{Right},{Bottom}");
+        if (Left < TypeHelper.ToleranceValueComparisonsDouble && Top < TypeHelper.ToleranceValueComparisonsDouble &&
+            Right < TypeHelper.ToleranceValueComparisonsDouble && Bottom < TypeHelper.ToleranceValueComparisonsDouble)
+        {
+            return null;
+        }
+
+        return $"{Left},{Top},{Right},{Bottom}";
     }
 }

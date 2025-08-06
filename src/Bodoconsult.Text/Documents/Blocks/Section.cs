@@ -44,10 +44,7 @@ public class Section : Block
         typeof(Error),
         typeof(Warning),
         typeof(Info),
-
     ];
-
-        
 
     /// <summary>
     /// Default ctor
@@ -63,7 +60,10 @@ public class Section : Block
         TagToUse = string.Intern("Section");
     }
 
-
+    /// <summary>
+    /// Inherit the page settings from document. Default: true
+    /// </summary>
+    public bool InheritFromParent { get; set; } = true;
 
     /// <summary>
     /// Include this section in the table of content
@@ -74,7 +74,6 @@ public class Section : Block
     /// Add a page break before the section
     /// </summary>
     public bool PageBreakBefore { get; set; }
-
 
     /// <summary>
     /// Add the current element to a document defined in LDML (Logical document markup language)

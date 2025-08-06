@@ -186,7 +186,7 @@ namespace Bodoconsult.Text.Documents
 
             var attributes = node.Attributes().ToList();
 
-            var pis = DocumentReflectionHelper.GetProperties(element.GetType());
+            var pis = DocumentReflectionHelper.GetPropertiesForAttributes(element.GetType());
 
 
             foreach (var prop in pis)

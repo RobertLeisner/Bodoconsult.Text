@@ -12,6 +12,16 @@ namespace Bodoconsult.Text.Helpers;
 public static class TypeHelper
 {
     /// <summary>
+    /// Tolerated difference value for numeric values being equal as decimal
+    /// </summary>
+    public static decimal ToleranceValueComparisons { get; set; } = new(0.00000000000001);
+
+    /// <summary>
+    /// Tolerated difference value for numeric values being equal as double
+    /// </summary>
+    public static double ToleranceValueComparisonsDouble { get; set; } = 0.00000000000001;
+
+    /// <summary>
     /// Default ctor
     /// </summary>
     static TypeHelper()

@@ -50,11 +50,17 @@ namespace Bodoconsult.Text.Formatter
             var erg = new StringBuilder();
 
             // Add a title
-            if (!string.IsNullOrEmpty(Title)) erg.AppendFormat("\r\n\r\n\r\n******************************\r\n" +
-                                                               "******************************\r\n{0}\r\n" +         
+            if (!string.IsNullOrEmpty(Title))
+            {
+                erg.AppendFormat("\r\n\r\n\r\n******************************\r\n" +
+                                                               "******************************\r\n{0}\r\n" +
                                                               "******************************\r\n", Title);
+            }
 
-            if (!string.IsNullOrEmpty(DateString)) erg.AppendFormat("\r\n{0}\r\n", System.Net.WebUtility.HtmlEncode(DateString));
+            if (!string.IsNullOrEmpty(DateString))
+            {
+                erg.AppendFormat("\r\n{0}\r\n", System.Net.WebUtility.HtmlEncode(DateString));
+            }
 
             // Add rest of text
             foreach (var ti in body)
@@ -97,12 +103,12 @@ namespace Bodoconsult.Text.Formatter
                         erg.Append(GetTable((TableTextItem)ti));
                         break;
                     default:
-                        erg.Append("\r\n" + content.Replace("??empty??", "\r\n"));
+                        erg.Append($"\r\n{content.Replace("??empty??", "\r\n")}");
                         break;
                 }
             }
 
-            erg.Append("\r\n" + DateString);
+            erg.Append($"\r\n{DateString}");
 
             return erg.ToString();
         }

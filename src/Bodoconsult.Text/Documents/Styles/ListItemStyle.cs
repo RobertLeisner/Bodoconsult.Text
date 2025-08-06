@@ -1,16 +1,16 @@
 ﻿namespace Bodoconsult.Text.Documents;
 
 /// <summary>
-/// Style for <see cref="Code"/> instances
+/// Style for <see cref="ListItem"/> instances
 /// </summary>
-public class CodeStyle : ParagraphStyleBase
+public class ListItemStyle : ParagraphStyleBase
 {
     /// <summary>
     /// Default ctor
     /// </summary>
-    public CodeStyle()
+    public ListItemStyle()
     {
-        TagToUse = "CodeStyle";
+        TagToUse = "ListItemStyle";
         Name = TagToUse;
     }
 }

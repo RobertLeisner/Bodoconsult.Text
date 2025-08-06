@@ -424,11 +424,11 @@ namespace Bodoconsult.Text.Formatter
                         break;
                     case TextItemType.Code:
 
-                        var localCodeClass = string.IsNullOrEmpty(className) ? " " + codeClass : className;
+                        var localCodeClass = string.IsNullOrEmpty(className) ? $" {codeClass}" : className;
 
-                        erg.Append($"<div class=\"code\"><code{localCodeClass}>" + content.Replace("??pa??", "<p>")
-                                       .Replace("??pe??", "</p>")
-                                       .Replace("</p>\r\n", "</p>") + "</code></div>\r\n");
+                        erg.Append($"<div class=\"code\"><code{localCodeClass}>{content.Replace("??pa??", "<p>")
+                            .Replace("??pe??", "</p>")
+                            .Replace("</p>\r\n", "</p>")}</code></div>\r\n");
                         break;
                     case TextItemType.Plain:
                         erg.Append(ti.Content);
@@ -438,7 +438,7 @@ namespace Bodoconsult.Text.Formatter
                         break;
                     default:
                         content = HtmlHelper.GetContentAsHtmlParagraph(ti.Content, className);
-                        erg.Append(content + "\r\n");
+                        erg.Append($"{content}\r\n");
                         break;
                 }
             }

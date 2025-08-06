@@ -35,15 +35,55 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 using System.Text;
 using Bodoconsult.Text.Extensions;
 
 namespace Bodoconsult.Text.Documents;
 
 /// <summary>
+/// Base class for brushes
+/// </summary>
+public abstract class Brush : TextElement
+{
+}
+
+/// <summary>
+/// A brush using a solid color
+/// </summary>
+public class SolidColorBrush : DocumentElement
+{
+    /// <summary>
+    /// Default ctor
+    /// </summary>
+    /// <param name="color"></param>
+    public SolidColorBrush(Color color)
+    {
+        Color = color;
+    }
+
+    /// <summary>
+    /// Solid color to use for the brush
+    /// </summary>
+    public Color Color { get;  }
+
+    /// <summary>
+    /// Add the current element to a document defined in LDML (Logical document markup language)
+    /// </summary>
+    /// <param name="document">StringBuilder instance to create the LDML in</param>
+    /// <param name="indent">Current indent</param>
+    public override void ToLdmlString(StringBuilder document, string indent)
+    {
+        document.Append($"<SolidColorBrush Color=\"{Color.ToHtml()}\"/>");
+    }
+}
+
+
+
+/// <summary>
 /// Color defined in ARGB mode
 /// </summary>
-public class Color: DocumentElement
+public class Color : PropertyElement
 {
     /// <summary>
     /// A

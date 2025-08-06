@@ -92,6 +92,17 @@ public class CodingHelperTests
     /// Style for <see cref="Paragraph"/> instances
     /// </summary>
     [Test]
+    public void CreateRendererElements_ImageBase_AllRendererElementsCreatedAsString()
+    {
+        var baseType = typeof(ImageBase);
+
+        PrintCodeForRendererElements(baseType);
+    }
+
+    /// <summary>
+    /// Style for <see cref="Paragraph"/> instances
+    /// </summary>
+    [Test]
     public void CreateRendererElements_ParagraphBase_AllRendererElementsCreatedAsString()
     {
         var baseType = typeof(ParagraphBase);
@@ -141,6 +152,51 @@ public class CodingHelperTests
             sb.AppendLine("}");
             sb.AppendLine("}");
             sb.AppendLine("");
+        }
+
+        // Assert
+        Debug.Print(sb.ToString());
+    }
+
+    /// <summary>
+    /// Style for <see cref="Paragraph"/> instances
+    /// </summary>
+    [Test]
+    public void CreateDefaultStyleset_ImageBase_AllStylesCreatedAsString()
+    {
+        var baseType = typeof(ImageBase);
+
+        PrintCodeForDefaultStyleset(baseType);
+    }
+
+    /// <summary>
+    /// Style for <see cref="Paragraph"/> instances
+    /// </summary>
+    [Test]
+    public void CreateDefaultStyleset_ParagraphBase_AllStylesCreatedAsString()
+    {
+        var baseType = typeof(ParagraphBase);
+
+        PrintCodeForDefaultStyleset(baseType);
+    }
+
+    private static void PrintCodeForDefaultStyleset(Type baseType)
+    {
+        // Arrange 
+        var types = TypeHelper.GetTypesDerivedFromCurrentAssembly(baseType)
+            .Where(x => !x.IsAbstract);
+
+        //&& x == typeof(Paragraph)
+
+        var sb = new StringBuilder();
+
+        // Act  
+        foreach (var type in types)
+        {
+            sb.AppendLine("");
+            sb.AppendLine($"// Add style <see cref=\"{type.Name}Style\"/> for <see cref=\"{type.Name}\"/> instances ");
+            sb.AppendLine($"var {type.Name.ToLowerInvariant()}Style = new {type.Name}Style();");
+            sb.AppendLine($"styleSet.AddBlock({type.Name.ToLowerInvariant()}Style );");
         }
 
         // Assert

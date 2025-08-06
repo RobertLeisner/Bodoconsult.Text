@@ -26,12 +26,12 @@ namespace Bodoconsult.Text.Helpers
 
             if (odir == null || !odir.Exists)
             {
-                throw new Exception("Folder for file " + plainTextFileName + " not valid!");
+                throw new Exception($"Folder for file {plainTextFileName} not valid!");
             }
 
             if (!odir.Exists)
             {
-                throw new Exception("Folder " + odir.FullName + " not existing or accessible!");
+                throw new Exception($"Folder {odir.FullName} not existing or accessible!");
             }
 
             var dir = odir.FullName;

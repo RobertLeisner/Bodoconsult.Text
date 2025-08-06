@@ -97,7 +97,7 @@ namespace Bodoconsult.Text.Helpers
             }
             else
             {
-                content = startP + content.Replace("\r\n", "</p><p>") + "</p>";
+                content = $"{startP}{content.Replace("\r\n", "</p><p>")}</p>";
             }
 
             return content;

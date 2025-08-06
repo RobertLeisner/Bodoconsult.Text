@@ -7,7 +7,7 @@ using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Test.Helpers;
 using NUnit.Framework;
 
-namespace Bodoconsult.Text.Test.Documents
+namespace Bodoconsult.Text.Test.Documents.Blocks
 {
     [TestFixture]
     internal class DocumentTests

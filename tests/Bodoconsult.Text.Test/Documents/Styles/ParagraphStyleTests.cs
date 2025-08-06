@@ -6,7 +6,7 @@ using System.Text;
 using Bodoconsult.Text.Documents;
 using NUnit.Framework;
 
-namespace Bodoconsult.Text.Test.Documents;
+namespace Bodoconsult.Text.Test.Documents.Styles;
 
 [TestFixture]
 internal class ParagraphStyleTests

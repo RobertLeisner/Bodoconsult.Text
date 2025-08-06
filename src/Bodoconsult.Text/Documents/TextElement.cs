@@ -9,7 +9,7 @@ namespace Bodoconsult.Text.Documents
     /// <summary>
     /// Root element for documents
     /// </summary>
-    public abstract class TextElement: DocumentElement
+    public abstract class TextElement : DocumentElement
     {
 
         /// <summary>
@@ -32,6 +32,7 @@ namespace Bodoconsult.Text.Documents
         /// <summary>
         /// Parent element
         /// </summary>
+        [DoNotSerialize]
         public TextElement Parent { get; set; }
 
         /// <summary>
@@ -72,7 +73,7 @@ namespace Bodoconsult.Text.Documents
         /// <returns>XML string with attributes only or empty string</returns>
         public StringBuilder GetPropertiesAsAttributes()
         {
-            var pis = DocumentReflectionHelper.GetProperties(GetType());
+            var pis = DocumentReflectionHelper.GetPropertiesForAttributes(GetType());
 
             var sb = new StringBuilder();
 
@@ -88,6 +89,18 @@ namespace Bodoconsult.Text.Documents
 
                 if (value == null)
                 {
+                    continue;
+                }
+
+                if (value is PropertyElement pe)
+                {
+
+                    var propValue = pe.ToPropertyValue();
+
+                    if (!string.IsNullOrEmpty(propValue))
+                    {
+                        sb.Append($"{p.Name}=\"{propValue}\" ");
+                    }
                     continue;
                 }
 

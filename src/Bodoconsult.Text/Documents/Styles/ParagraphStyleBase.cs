@@ -35,6 +35,21 @@ public class ParagraphStyleBase : StyleBase
     /// <summary>
     /// Margins
     /// </summary>
-    public Thickness Margins { get; set; } = new Thickness(0, Document.DefaultFontSize * 0.5, 0, 0);
+    public Thickness Margins { get; set; } = new(0, Document.DefaultFontSize * 0.5, 0, 0);
+
+    /// <summary>
+    /// Border brush
+    /// </summary>
+    public Brush BorderBrush { get; set; }
+
+    /// <summary>
+    /// Current borderline width setting
+    /// </summary>
+    public Thickness BorderThickness { get; set; } = new(0, 0, 0, 0);
+
+    /// <summary>
+    /// Paddings. Padding settings are applied only if a border is set
+    /// </summary>
+    public Thickness Paddings { get; set; } = new(0, 0, 0, 0);
 
 }
