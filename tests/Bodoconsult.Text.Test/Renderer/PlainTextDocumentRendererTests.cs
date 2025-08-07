@@ -280,4 +280,88 @@ internal class PlainTextParagraphFormatterTests
 
         Debug.Print(f.GetFormattedText().ToString());
     }
+
+    [Test]
+    public void FormatText_LongStringMarginBorderPadding_MultipleLinesRightAlignment()
+    {
+        // Arrange 
+        var paragraphStyle = new ParagraphStyle
+        {
+            Margins =
+            {
+                Left = 2,
+                Right = 2
+            },
+            BorderBrush = new SolidColorBrush(Colors.Black),
+            BorderThickness =
+            {
+                Left = 1,
+                Top = 1,
+                Right = 1,
+                Bottom = 1
+            },
+            Paddings =
+            {
+                Left = 2,
+                Right = 2
+            },
+            TextAlignment = TextAlignment.Right
+        };
+
+        var pageStyle = new DocumentStyle();
+
+        const string content = TestDataHelper.MassText;
+
+        var f = new PlainTextParagraphFormatter(content, paragraphStyle, pageStyle);
+
+        // Act  
+        f.FormatText();
+
+        // Assert
+        Assert.That(f.Lines.Count, Is.GreaterThan(1));
+
+        Debug.Print(f.GetFormattedText().ToString());
+    }
+
+    [Test]
+    public void FormatText_LongStringMarginBorderPadding_MultipleLinesCenterAlignment()
+    {
+        // Arrange 
+        var paragraphStyle = new ParagraphStyle
+        {
+            Margins =
+            {
+                Left = 2,
+                Right = 2
+            },
+            BorderBrush = new SolidColorBrush(Colors.Black),
+            BorderThickness =
+            {
+                Left = 1,
+                Top = 1,
+                Right = 1,
+                Bottom = 1
+            },
+            Paddings =
+            {
+                Left = 2,
+                Right = 2
+            },
+            TextAlignment = TextAlignment.Center
+        };
+
+        var pageStyle = new DocumentStyle();
+
+        const string content = TestDataHelper.MassText;
+
+        var f = new PlainTextParagraphFormatter(content, paragraphStyle, pageStyle);
+
+        // Act  
+        f.FormatText();
+
+        // Assert
+        Assert.That(f.Lines.Count, Is.GreaterThan(1));
+
+        Debug.Print(f.GetFormattedText().ToString());
+    }
 }

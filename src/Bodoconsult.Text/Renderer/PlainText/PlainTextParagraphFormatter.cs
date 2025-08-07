@@ -17,14 +17,17 @@ public class PlainTextParagraphFormatter
 
     private readonly string _leftMargin;
     private readonly string _content;
-    private readonly ParagraphStyleBase _paragraph;
+    private readonly ParagraphStyleBase _paragraphStyle;
     private PageStyleBase _pageStyle;
     private readonly ReadOnlyMemory<char> _bytes;
     private int _maxLength;
 
     private string _leftBorderChar;
+    private string _rightBorderChar;
 
     private string _leftPadding;
+    private string _rightPadding;
+    private string _topBottomLine;
 
     /// <summary>
     /// Char used for left and right borders
@@ -35,7 +38,7 @@ public class PlainTextParagraphFormatter
     /// Char used for top and bottom borders
     /// </summary>
     public string TopBottomBorderChar { get; set; } = "-";
-    
+
     /// <summary>
     /// Lines produced from content
     /// </summary>
@@ -63,7 +66,7 @@ public class PlainTextParagraphFormatter
 
         _bytes = _content.AsMemory();
 
-        _paragraph = paragraphStyle;
+        _paragraphStyle = paragraphStyle;
         _pageStyle = pageStyle;
 
         WidthsInChars = (int)((pageStyle.TypeAreaWidth - paragraphStyle.Margins.Left - paragraphStyle.Margins.Right) / CharWidth);
@@ -77,7 +80,7 @@ public class PlainTextParagraphFormatter
         // Check if left border is needed
         if (paragraphStyle.BorderThickness.Left > 0)
         {
-            _leftBorderChar = "|";
+            _leftBorderChar = LeftRightBorderChar;
             WidthsInChars -= 1;
         }
         else
@@ -87,13 +90,50 @@ public class PlainTextParagraphFormatter
 
         // Check if right border is needed
 
+        if (paragraphStyle.BorderThickness.Left > 0)
+        {
+            _rightBorderChar = LeftRightBorderChar;
+            WidthsInChars -= 1;
+        }
+        else
+        {
+            _rightBorderChar = string.Empty;
+        }
+
         // Check if left padding is needed
+        if (paragraphStyle.Paddings.Left > 0)
+        {
+            _leftPadding = " ";
+            WidthsInChars -= 1;
+        }
+        else
+        {
+            _leftPadding = string.Empty;
+        }
 
         // Check if right padding is needed
+        if (paragraphStyle.Paddings.Right > 0)
+        {
+            _rightPadding = " ";
+            WidthsInChars -= 1;
+        }
+        else
+        {
+            _rightPadding = string.Empty;
+        }
 
-        // Check if top border is needed
-
-        // Check if bottom border is needed
+        // Check if top border and/or bottom border is needed
+        if (paragraphStyle.BorderThickness.Top > 0 || paragraphStyle.BorderThickness.Bottom > 0)
+        {
+            _topBottomLine = TopBottomBorderChar.Repeat(WidthsInChars +
+                                                                    2 * LeftRightBorderChar.Length +
+                                                                    _leftPadding.Length +
+                                                                    _rightPadding.Length);
+        }
+        else
+        {
+            _topBottomLine = string.Empty;
+        }
 
 
     }
@@ -112,40 +152,64 @@ public class PlainTextParagraphFormatter
     {
         var result = new List<string>();
 
+        if (_paragraphStyle.BorderThickness.Top > 0)
+        {
+            result.Add(_leftMargin + _topBottomLine);
+        }
+
         foreach (var line in Lines)
         {
+            FormatLine(result, line);
+        }
 
-            if (_paragraph.TextAlignment == TextAlignment.Left)
-            {
-                result.Add($"{_leftMargin}{line}");
-                continue;
-            }
-
-            if (_paragraph.TextAlignment == TextAlignment.Right)
-            {
-                result.Add($"{_leftMargin}{line.PadLeft(_maxLength)}");
-                continue;
-            }
-
-            if (_paragraph.TextAlignment == TextAlignment.Center)
-            {
-                var length = (uint)((_maxLength - line.Length) / 2.0);
-                result.Add(length > 0 ? $"{_leftMargin}{" ".Repeat(length)}{line}" : $"{_leftMargin}{line}");
-
-                continue;
-            }
-
-            // ToDo: justify
-            if (_paragraph.TextAlignment == TextAlignment.Justify)
-            {
-                result.Add($"{_leftMargin}{line}");
-                continue;
-            }
+        if (_paragraphStyle.BorderThickness.Bottom > 0)
+        {
+            result.Add(_leftMargin + _topBottomLine);
         }
 
         Lines.Clear();
         Lines.AddRange(result);
+    }
 
+    private void FormatLine(List<string> result, string line)
+    {
+
+        var missinglength = WidthsInChars - line.Length;
+
+        if (_paragraphStyle.TextAlignment == TextAlignment.Left)
+        {
+            result.Add($"{_leftMargin}{_leftBorderChar}{_leftPadding}{line}{" ".Repeat(missinglength)}{_rightPadding}{_rightBorderChar}");
+            return;
+        }
+
+        if (_paragraphStyle.TextAlignment == TextAlignment.Right)
+        {
+            result.Add($"{_leftMargin}{_leftBorderChar}{_leftPadding}{line.PadLeft(WidthsInChars)}{_rightPadding}{_rightBorderChar}");
+            return;
+        }
+
+
+        if (_paragraphStyle.TextAlignment == TextAlignment.Center)
+        {
+            var length = (uint)((WidthsInChars - line.Length) / 2.0);
+            if (length > 0)
+            {
+                result.Add($"{_leftMargin}{_leftBorderChar}{_leftPadding}{" ".Repeat(length)}{line}{" ".Repeat(length)}{_rightPadding}{_rightBorderChar}");
+            }
+            else
+            {
+                result.Add($"{_leftMargin}{_leftBorderChar}{_leftPadding}{line}{_rightPadding}{_rightBorderChar}");
+            }
+
+            return;
+        }
+
+        // ToDo: justify
+        if (_paragraphStyle.TextAlignment == TextAlignment.Justify)
+        {
+            result.Add($"{_leftMargin}{line}");
+            return;
+        }
     }
 
     private void GetLines()
