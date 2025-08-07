@@ -26,7 +26,7 @@ public class ParagraphJustifyPlainTextRendererElement : ITextRendererElement
     /// </summary>
     public void RenderIt(ITextDocumentRender renderer)
     {
-        DocumentRendererHelper.RenderInlineChilds(renderer, _paragraphJustify.ChildInlines, string.Empty, true);
+        DocumentRendererHelper.RenderInlineChilds(renderer, renderer.Content, _paragraphJustify.ChildInlines, tag: string.Empty, isBlock: true);
         renderer.Content.Append($"{Environment.NewLine}");
     }
 }

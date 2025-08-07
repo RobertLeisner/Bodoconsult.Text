@@ -26,7 +26,7 @@ public class CodePlainTextRendererElement : ITextRendererElement
     /// </summary>
     public void RenderIt(ITextDocumentRender renderer)
     {
-        DocumentRendererHelper.RenderInlineChilds(renderer, _code.ChildInlines, string.Empty, true);
+        DocumentRendererHelper.RenderInlineChilds(renderer, renderer.Content, _code.ChildInlines, tag: string.Empty, isBlock: true);
         renderer.Content.Append($"{Environment.NewLine}");
     }
 }

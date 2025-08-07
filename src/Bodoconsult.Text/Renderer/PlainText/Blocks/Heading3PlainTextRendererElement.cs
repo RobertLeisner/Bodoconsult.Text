@@ -26,7 +26,7 @@ public class Heading3PlainTextRendererElement : ITextRendererElement
     /// </summary>
     public void RenderIt(ITextDocumentRender renderer)
     {
-        DocumentRendererHelper.RenderInlineChilds(renderer, _heading3.ChildInlines, string.Empty, true);
+        DocumentRendererHelper.RenderInlineChilds(renderer, renderer.Content, _heading3.ChildInlines, tag: string.Empty, isBlock: true);
         renderer.Content.Append($"{Environment.NewLine}");
     }
 }

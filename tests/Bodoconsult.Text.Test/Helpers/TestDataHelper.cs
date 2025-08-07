@@ -40,84 +40,84 @@ public static class TestDataHelper
 
         doc.AddBlock(section);
 
-        // Add a Title
-        var title = new Title("Title");
-        section.AddBlock(title);
+        //// Add a Title
+        //var title = new Title("Title");
+        //section.AddBlock(title);
 
-        // Add a Subtitle
-        var subtitle = new Subtitle("Subtitle");
-        section.AddBlock(subtitle);
+        //// Add a Subtitle
+        //var subtitle = new Subtitle("Subtitle");
+        //section.AddBlock(subtitle);
 
-        // Add a Toc1
-        var toc1 = new Toc1("Toc1");
-        section.AddBlock(toc1);
+        //// Add a Toc1
+        //var toc1 = new Toc1("Toc1");
+        //section.AddBlock(toc1);
 
-        // Add a Toc2
-        var toc2 = new Toc2("Toc2");
-        section.AddBlock(toc2);
+        //// Add a Toc2
+        //var toc2 = new Toc2("Toc2");
+        //section.AddBlock(toc2);
 
-        // Add a Toc3
-        var toc3 = new Toc3("Toc3");
-        section.AddBlock(toc3);
+        //// Add a Toc3
+        //var toc3 = new Toc3("Toc3");
+        //section.AddBlock(toc3);
 
-        // Add a Toc4
-        var toc4= new Toc4("Toc4");
-        section.AddBlock(toc4);
+        //// Add a Toc4
+        //var toc4= new Toc4("Toc4");
+        //section.AddBlock(toc4);
 
-        // Add a Toc5
-        var toc5 = new Toc5("Toc5");
-        section.AddBlock(toc5);
+        //// Add a Toc5
+        //var toc5 = new Toc5("Toc5");
+        //section.AddBlock(toc5);
 
-        // Add a SectionTitle
-        var sectionTitle = new SectionTitle("SectionTitle");
-        section.AddBlock(sectionTitle);
+        //// Add a SectionTitle
+        //var sectionTitle = new SectionTitle("SectionTitle");
+        //section.AddBlock(sectionTitle);
 
-        // Add a SectionTitle
-        var sectionSubtitle = new SectionSubtitle("SectionSubtitle");
-        section.AddBlock(sectionSubtitle);
+        //// Add a SectionTitle
+        //var sectionSubtitle = new SectionSubtitle("SectionSubtitle");
+        //section.AddBlock(sectionSubtitle);
 
-        // Add a heading level 1
-        var heading1 = new Heading1("Heading level 1");
-        section.AddBlock(heading1);
+        //// Add a heading level 1
+        //var heading1 = new Heading1("Heading level 1");
+        //section.AddBlock(heading1);
 
-        // Add a heading level 2
-        var heading2 = new Heading2("Heading level 2");
-        section.AddBlock(heading2);
+        //// Add a heading level 2
+        //var heading2 = new Heading2("Heading level 2");
+        //section.AddBlock(heading2);
 
-        // Add a heading level 3
-        var heading3 = new Heading3("Heading level 3");
-        section.AddBlock(heading3);
+        //// Add a heading level 3
+        //var heading3 = new Heading3("Heading level 3");
+        //section.AddBlock(heading3);
 
-        // Add a heading level 3
-        var heading4 = new Heading4("Heading level 4");
-        section.AddBlock(heading4);
+        //// Add a heading level 3
+        //var heading4 = new Heading4("Heading level 4");
+        //section.AddBlock(heading4);
 
-        // Add a heading level 3
-        var heading5 = new Heading5("Heading level 5");
-        section.AddBlock(heading5);
+        //// Add a heading level 3
+        //var heading5 = new Heading5("Heading level 5");
+        //section.AddBlock(heading5);
 
-        // Add an Info
-        var info = new Info("Info");
-        section.AddBlock(info);
+        //// Add an Info
+        //var info = new Info("Info");
+        //section.AddBlock(info);
 
-        // Add a simple paragraph
-        var paragraph = new Paragraph("Blubb blabb didl dumm");
-        section.AddBlock(paragraph);
+        //// Add a simple paragraph
+        //var paragraph = new Paragraph($"Paragraph: {MassText}");
+        //section.AddBlock(paragraph);
 
-        // Add a simple Central paragraph
-        var paragraphCentral = new ParagraphCenter("Blubb blabb didl dumm");
-        section.AddBlock(paragraphCentral);
+        //// Add a simple Central paragraph
+        //var paragraphCentral = new ParagraphCenter($"ParagraphCentral: {MassText}");
+        //section.AddBlock(paragraphCentral);
 
-        // Add a simple Right paragraph
-        var paragraphRight = new ParagraphRight("Blubb blabb didl dumm");
-        section.AddBlock(paragraphRight);
+        //// Add a simple Right paragraph
+        //var paragraphRight = new ParagraphRight($"ParagraphRight: {MassText}");
+        //section.AddBlock(paragraphRight);
 
-        // Add a simple Justify paragraph
-        var paragraphJustify = new ParagraphJustify("Blubb blabb didl dumm");
-        section.AddBlock(paragraphJustify);
+        //// Add a simple Justify paragraph
+        //var paragraphJustify = new ParagraphJustify($"ParagraphJustify: {MassText}");
+        //section.AddBlock(paragraphJustify);
 
         // Add a paragraph with multiple inlines
-        paragraph = new Paragraph();
+        var paragraph = new Paragraph("Paragraph with LineBreak and Bold and BoldItalic: ");
 
         //   Add a simple span
         var span = new Span(TestDataHelper.MassText);
@@ -143,23 +143,23 @@ public static class TestDataHelper
         section.AddBlock(paragraph);
 
         // Add a Citation
-        var citation = new Citation("Citation");
+        var citation = new Citation("Citation: "+MassText);
         section.AddBlock(citation);
 
         // Add a code
-        var code = new Code("Code");
+        var code = new Code("Code " + MassText);
         section.AddBlock(code);
 
         // Add an error
-        var error = new Error("Error");
+        var error = new Error("Error " + MassText);
         section.AddBlock(error);
 
         // Add a Warning
-        var warning = new Warning("Warning");
+        var warning = new Warning("Warning " + MassText);
         section.AddBlock(warning);
 
         // Add a hyperlink
-        paragraph = new Paragraph("This is a link: ");
+        paragraph = new Paragraph("ParagraphWithHyperlink: this is a link: ");
         var link = new Hyperlink("Link to blubb")
         {
             Uri = "http://www.bodoconsult.de"

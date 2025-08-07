@@ -22,12 +22,12 @@ public class PlainTextParagraphFormatter
     private readonly ReadOnlyMemory<char> _bytes;
     private int _maxLength;
 
-    private string _leftBorderChar;
-    private string _rightBorderChar;
+    private readonly string _leftBorderChar;
+    private readonly string _rightBorderChar;
 
-    private string _leftPadding;
-    private string _rightPadding;
-    private string _topBottomLine;
+    private readonly string _leftPadding;
+    private readonly string _rightPadding;
+    private readonly string _topBottomLine;
 
     /// <summary>
     /// Char used for left and right borders
@@ -89,7 +89,6 @@ public class PlainTextParagraphFormatter
         }
 
         // Check if right border is needed
-
         if (paragraphStyle.BorderThickness.Left > 0)
         {
             _rightBorderChar = LeftRightBorderChar;
@@ -236,8 +235,19 @@ public class PlainTextParagraphFormatter
                 pos--;
             }
 
-            if (pos < 0 || pos >= length)
+            if (pos < 0)
             {
+                if (Lines.Count == 0)
+                {
+                    Lines.Add(_content);
+                }
+
+                return;
+            }
+
+            if (pos >= length)
+            {
+                Lines.Add(_content.Substring(altPos, _content.Length- altPos));
                 return;
             }
 
@@ -249,7 +259,7 @@ public class PlainTextParagraphFormatter
                 _maxLength = value.Length;
             }
 
-            Debug.Print($"{altPos} {pos}: {value.Length}: {value}");
+            //Debug.Print($"{altPos} {pos}: {value.Length}: {value}");
 
             Lines.Add(value);
 
@@ -265,7 +275,7 @@ public class PlainTextParagraphFormatter
     /// <returns><see cref="StringBuilder"/> instance containing the formatted text</returns>
     public StringBuilder GetFormattedText()
     {
-        StringBuilder sb = new StringBuilder();
+        var sb = new StringBuilder();
 
         foreach (var line in Lines)
         {
@@ -274,8 +284,4 @@ public class PlainTextParagraphFormatter
 
         return sb;
     }
-
-
-
-
 }

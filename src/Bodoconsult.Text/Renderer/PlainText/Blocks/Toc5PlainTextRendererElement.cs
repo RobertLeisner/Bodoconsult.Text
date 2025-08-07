@@ -26,7 +26,7 @@ public class Toc5PlainTextRendererElement : ITextRendererElement
     /// </summary>
     public void RenderIt(ITextDocumentRender renderer)
     {
-        DocumentRendererHelper.RenderInlineChilds(renderer, _toc5.ChildInlines, string.Empty, true);
+        DocumentRendererHelper.RenderInlineChilds(renderer, renderer.Content, _toc5.ChildInlines, tag: string.Empty, isBlock: true);
         renderer.Content.Append($"{Environment.NewLine}");
     }
 }

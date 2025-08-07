@@ -33,7 +33,7 @@ public class Heading2PlainTextRendererElement : ITextRendererElement
     {
         renderer.Content.Append($"{Environment.NewLine}{Environment.NewLine}{Environment.NewLine}{HeadingDecoration}{Environment.NewLine}");
 
-        DocumentRendererHelper.RenderInlineChilds(renderer, _paragraph.ChildInlines, null, true);
+        DocumentRendererHelper.RenderInlineChilds(renderer, renderer.Content, _paragraph.ChildInlines, tag: null, isBlock: true);
 
         renderer.Content.Append($"{Environment.NewLine}{HeadingDecoration}{Environment.NewLine}{Environment.NewLine}");
     }

@@ -116,7 +116,7 @@ public class Color : PropertyAsAttributeElement
     /// <returns>Color or null</returns>
     public static Color FromHtml(string htmlColor)
     {
-        Color color = new Color();
+        var color = new Color();
 
         if (htmlColor.Length == 7)
         {

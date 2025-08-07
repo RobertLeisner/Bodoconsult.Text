@@ -3,6 +3,8 @@
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
 using System;
+using System.Diagnostics;
+using System.Text;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
 
@@ -28,8 +30,18 @@ public class ParagraphPlainTextRendererElement: ITextRendererElement
     /// <param name="renderer">Current renderer</param>
     public void RenderIt(ITextDocumentRender renderer)
     {
-        DocumentRendererHelper.RenderInlineChilds(renderer, _paragraph .ChildInlines, string.Empty, true);
+        // Get the content of all inlines as string
+        var sb = new StringBuilder();
+        DocumentRendererHelper.RenderInlineChilds(renderer, sb, _paragraph.ChildInlines, string.Empty, true);
 
-        renderer.Content.Append($"{Environment.NewLine}");
+        //Debug.Print(sb.ToString());
+
+        // Now let the formatter work
+        var style = (ParagraphStyleBase)renderer.Styleset.FindStyle($"{_paragraph.GetType().Name}Style");
+        var formatter = new PlainTextParagraphFormatter(sb.ToString(), style, renderer.PageStyleBase);
+        formatter.FormatText();
+
+        // Now add the formatted text to the rendered content
+        renderer.Content.Append($"{formatter.GetFormattedText()}");
     }
 }

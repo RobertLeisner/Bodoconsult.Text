@@ -4,6 +4,9 @@
 // Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using Bodoconsult.Text.Documents;
+using Bodoconsult.Text.Helpers;
+using System;
+using System.Text;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
 
@@ -11,7 +14,7 @@ namespace Bodoconsult.Text.Renderer.PlainText;
 /// <summary>
 /// Render a <see cref="Span"/> element
 /// </summary>
-public class SpanPlainTextRendererElement : ITextRendererElement
+public class SpanPlainTextRendererElement :  InlinePlainTextRendererElementBase
 {
     private readonly Span _span;
 
@@ -24,19 +27,48 @@ public class SpanPlainTextRendererElement : ITextRendererElement
         _span = span;
     }
 
+    ///// <summary>
+    ///// Render the elememt
+    ///// </summary>
+    ///// <param name="renderer">Current renderer</param>
+    //public void RenderIt(ITextDocumentRender renderer)
+    //{
+    //    //if (_span.ChildInlines.Count == 0)
+    //    //{
+    //        renderer.Content.Append($"{renderer.CheckContent(_span.Content)}");
+    //    //}
+    //    //else
+    //    //{
+    //    //    DocumentRendererHelper.RenderInlineChilds(renderer, _span.ChildInlines);
+    //    //}
+    //}
+
     /// <summary>
-    /// Render the elememt
+    /// Render the inline element to string
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public void RenderIt(ITextDocumentRender renderer)
+    /// <param name="sb">String to add the inline element rendered</param>
+    public override void RenderToString(ITextDocumentRender renderer, StringBuilder sb)
     {
-        //if (_span.ChildInlines.Count == 0)
-        //{
-            renderer.Content.Append($"{renderer.CheckContent(_span.Content)}");
-        //}
-        //else
-        //{
-        //    DocumentRendererHelper.RenderInlineChilds(renderer, _span.ChildInlines);
-        //}
+        if (_span.ChildInlines.Count == 0)
+        {
+            //if (_span.Parent is Block)
+            //{
+            //    sb.Append($"{renderer.CheckContent(_span.Content)}{Environment.NewLine}");
+            //}
+            //else
+            //{
+                sb.Append($"{renderer.CheckContent(_span.Content)}");
+            //}
+        }
+        else
+        {
+            DocumentRendererHelper.RenderInlineChilds(renderer, sb, _span.ChildInlines, tag: string.Empty);
+
+            if (_span.Parent is Block)
+            {
+                sb.Append($"{Environment.NewLine}");
+            }
+        }
     }
 }

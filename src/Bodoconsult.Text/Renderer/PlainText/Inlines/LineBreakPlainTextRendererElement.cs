@@ -1,14 +1,16 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
-using System;
 using Bodoconsult.Text.Documents;
+using Bodoconsult.Text.Helpers;
+using System;
+using System.Text;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
 
 /// <summary>
 /// Render a <see cref="LineBreak"/> element
 /// </summary>
-public class LineBreakPlainTextRendererElement : ITextRendererElement
+public class LineBreakPlainTextRendererElement : InlinePlainTextRendererElementBase
 {
     private readonly LineBreak _span;
 
@@ -21,12 +23,22 @@ public class LineBreakPlainTextRendererElement : ITextRendererElement
         _span = span;
     }
 
+    ///// <summary>
+    ///// Render the elememt
+    ///// </summary>
+    ///// <param name="renderer">Current renderer</param>
+    //public void RenderIt(ITextDocumentRender renderer)
+    //{
+    //    renderer.Content.Append($"{Environment.NewLine}");
+    //}
+
     /// <summary>
-    /// Render the elememt
+    /// Render the inline element to string
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public void RenderIt(ITextDocumentRender renderer)
+    /// <param name="sb">String to add the inline element rendered</param>
+    public override void RenderToString(ITextDocumentRender renderer, StringBuilder sb)
     {
-        renderer.Content.Append($"{Environment.NewLine}");
+        sb.Append($"{Environment.NewLine}{Environment.NewLine}");
     }
 }
