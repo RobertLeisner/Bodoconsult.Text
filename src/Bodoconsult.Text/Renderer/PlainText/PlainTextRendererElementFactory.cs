@@ -17,6 +17,8 @@ namespace Bodoconsult.Text.Renderer.PlainText
         /// <returns>Instance of an <see cref="ITextRendererElement"/></returns>
         public ITextRendererElement CreateInstance(TextElement textElement)
         {
+
+            // ParagraphBase based elements
             if (textElement is Paragraph paragraph)
             {
                 return new ParagraphPlainTextRendererElement(paragraph);
@@ -32,6 +34,9 @@ namespace Bodoconsult.Text.Renderer.PlainText
                 return new Heading2PlainTextRendererElement(heading2);
             }
 
+            // ToDo: add all others
+
+            // Inline based elements
             if (textElement is Span span)
             {
                 return new SpanPlainTextRendererElement(span);

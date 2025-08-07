@@ -22,16 +22,16 @@ namespace Bodoconsult.Text.Renderer
         {
             Document = document;
 
-            var styleset = (Styleset)document.ChildBlocks.FirstOrDefault(x => x.GetType() == typeof(Styleset));
+            Styleset = (Styleset)document.ChildBlocks.FirstOrDefault(x => x.GetType() == typeof(Styleset));
 
             // No styleset: apply default styleset
-            if (styleset == null)
+            if (Styleset == null)
             {
-                styleset = StylesetHelper.CreateDefaultStyleset();
-                document.AddBlock(styleset);
+                Styleset = StylesetHelper.CreateDefaultStyleset();
+                document.AddBlock(Styleset);
             }
 
-            PageStyleBase = (PageStyleBase)styleset.FindStyle("DocumentStyle");
+            PageStyleBase = (PageStyleBase)Styleset.FindStyle("DocumentStyle");
 
         }
 

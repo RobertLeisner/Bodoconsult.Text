@@ -25,6 +25,8 @@ public class PlainTextDocumentRendererTests
 
         // Assert
         Assert.That(renderer.Document, Is.Not.Null);
+        Assert.That(renderer.Styleset, Is.Not.Null);
+        Assert.That(renderer.PageStyleBase, Is.Not.Null);
         Assert.That(renderer.Content, Is.Not.Null);
         Assert.That(renderer.Content.Length, Is.EqualTo(0));
     }
