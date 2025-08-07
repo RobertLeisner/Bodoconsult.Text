@@ -43,6 +43,12 @@ public class BaseTextDocumentRenderer : BaseDocumentRenderer, ITextDocumentRende
     {
         foreach (var section in Document.ChildBlocks)
         {
+            var type = section.GetType();
+            if (type == typeof(Styleset) || type == typeof(DocumentMetaData))
+            {
+                continue;
+            }
+
             foreach (var block in section.ChildBlocks)
             {
                 var rendererElement = TextRendererElementFactory.CreateInstance(block);

@@ -19,9 +19,30 @@ namespace Bodoconsult.Text.Renderer.PlainText
         {
 
             // ParagraphBase based elements
-            if (textElement is Paragraph paragraph)
+
+            if (textElement is Citation citation)
             {
-                return new ParagraphPlainTextRendererElement(paragraph);
+                return new CitationPlainTextRendererElement(citation);
+            }
+
+            if (textElement is Code code)
+            {
+                return new CodePlainTextRendererElement(code);
+            }
+
+            if (textElement is Equation equation)
+            {
+                return new EquationPlainTextRendererElement(equation);
+            }
+
+            if (textElement is Error error)
+            {
+                return new ErrorPlainTextRendererElement(error);
+            }
+
+            if (textElement is Figure figure)
+            {
+                return new FigurePlainTextRendererElement(figure);
             }
 
             if (textElement is Heading1 heading1)
@@ -32,6 +53,111 @@ namespace Bodoconsult.Text.Renderer.PlainText
             if (textElement is Heading2 heading2)
             {
                 return new Heading2PlainTextRendererElement(heading2);
+            }
+
+            if (textElement is Heading3 heading3)
+            {
+                return new Heading3PlainTextRendererElement(heading3);
+            }
+
+            if (textElement is Heading4 heading4)
+            {
+                return new Heading4PlainTextRendererElement(heading4);
+            }
+
+            if (textElement is Heading5 heading5)
+            {
+                return new Heading5PlainTextRendererElement(heading5);
+            }
+
+            if (textElement is Image image)
+            {
+                return new ImagePlainTextRendererElement(image);
+            }
+
+            if (textElement is Info info)
+            {
+                return new InfoPlainTextRendererElement(info);
+            }
+
+            if (textElement is List list)
+            {
+                return new ListPlainTextRendererElement(list);
+            }
+
+            if (textElement is ListItem listItem)
+            {
+                return new ListItemPlainTextRendererElement(listItem);
+            }
+
+            if (textElement is Paragraph paragraph)
+            {
+                return new ParagraphPlainTextRendererElement(paragraph);
+            }
+
+            if (textElement is ParagraphCenter paragraphCenter)
+            {
+                return new ParagraphCenterPlainTextRendererElement(paragraphCenter);
+            }
+
+            if (textElement is ParagraphJustify paragraphJustify)
+            {
+                return new ParagraphJustifyPlainTextRendererElement(paragraphJustify);
+            }
+
+            if (textElement is ParagraphRight paragraphRight)
+            {
+                return new ParagraphRightPlainTextRendererElement(paragraphRight);
+            }
+
+            if (textElement is SectionSubtitle sectionSubtitle)
+            {
+                return new SectionSubtitlePlainTextRendererElement(sectionSubtitle);
+            }
+
+            if (textElement is SectionTitle sectionTitle)
+            {
+                return new SectionTitlePlainTextRendererElement(sectionTitle);
+            }
+
+            if (textElement is Subtitle subtitle)
+            {
+                return new SubtitlePlainTextRendererElement(subtitle);
+            }
+
+            if (textElement is Title title)
+            {
+                return new TitlePlainTextRendererElement(title);
+            }
+
+            if (textElement is Toc1 toc1)
+            {
+                return new Toc1PlainTextRendererElement(toc1);
+            }
+
+            if (textElement is Toc2 toc2)
+            {
+                return new Toc2PlainTextRendererElement(toc2);
+            }
+
+            if (textElement is Toc3 toc3)
+            {
+                return new Toc3PlainTextRendererElement(toc3);
+            }
+
+            if (textElement is Toc4 toc4)
+            {
+                return new Toc4PlainTextRendererElement(toc4);
+            }
+
+            if (textElement is Toc5 toc5)
+            {
+                return new Toc5PlainTextRendererElement(toc5);
+            }
+
+            if (textElement is Warning warning)
+            {
+                return new WarningPlainTextRendererElement(warning);
             }
 
             // ToDo: add all others

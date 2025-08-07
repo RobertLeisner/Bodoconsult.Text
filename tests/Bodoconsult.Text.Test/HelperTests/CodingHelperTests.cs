@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using Bodoconsult.Text.Extensions;
 
 namespace Bodoconsult.Text.Test.HelperTests;
 
@@ -202,6 +203,54 @@ public class CodingHelperTests
         // Assert
         Debug.Print(sb.ToString());
     }
+
+
+    /// <summary>
+    /// Style for <see cref="Paragraph"/> instances
+    /// </summary>
+    [Test]
+    public void CreateRendererElementFactory_ImageBase_AllElementsCreatedAsString()
+    {
+        var baseType = typeof(ImageBase);
+
+        PrintCodeForDefaultStyleset(baseType);
+    }
+
+    /// <summary>
+    /// Style for <see cref="Paragraph"/> instances
+    /// </summary>
+    [Test]
+    public void CreateRendererElementFactory_ParagraphBase_AllElementsCreatedAsString()
+    {
+        var baseType = typeof(ParagraphBase);
+
+        PrintCodeForRendererElementFactory(baseType);
+    }
+
+    private static void PrintCodeForRendererElementFactory(Type baseType)
+    {
+        // Arrange 
+        var types = TypeHelper.GetTypesDerivedFromCurrentAssembly(baseType)
+            .Where(x => !x.IsAbstract);
+
+        //&& x == typeof(Paragraph)
+
+        var sb = new StringBuilder();
+
+        // Act  
+        foreach (var type in types)
+        {
+            sb.AppendLine("");
+            sb.AppendLine($"if (textElement is {type.Name} {type.Name.FirstCharToLowerCase()})");
+            sb.AppendLine("{");
+            sb.AppendLine($"return new {type.Name}PlainTextRendererElement({type.Name.FirstCharToLowerCase()} );");
+            sb.AppendLine("}");
+
+        }
+        // Assert
+        Debug.Print(sb.ToString());
+    }
+
 }
 
 
