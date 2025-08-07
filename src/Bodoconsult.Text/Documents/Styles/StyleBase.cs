@@ -39,19 +39,28 @@ public abstract class StyleBase : Block
             var valueAdded = false;
             foreach (var pi in pis)
             {
-                var value = (TextElement)pi.GetValue(this);
+                var value = (PropertyAsBlockElement)pi.GetValue(this);
                 if (value is null)
                 {
                     continue;
                 }
 
-                value.ToLdmlString(document, indent + Indentation);
-                valueAdded = true;
+                if (!valueAdded)
+                {
+                    document.AppendLine(">");
+                    valueAdded = true;
+                }
+
+                var newIndent = indent + Indentation;
+
+                document.AppendLine( $"{newIndent}<{pi.Name}>");
+                value.ToLdmlString(document, newIndent + Indentation);
+                document.AppendLine($"{newIndent}</{pi.Name}>");
             }
 
             if (valueAdded)
             {
-                document.AppendLine($"{indent}<{TagToUse}/>{Environment.NewLine}");
+                document.AppendLine($"{indent}</{TagToUse}>");
             }
             else
             {

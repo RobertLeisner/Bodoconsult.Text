@@ -76,7 +76,7 @@ public class LdmlReaderTests
         // Arrange 
         var sb = new StringBuilder();
 
-        var doc = DocumentHelper.CreateDocument();
+        var doc = TestDataHelper.CreateDocument();
         var section = (Section)doc.ChildBlocks.FirstOrDefault(x=> x.GetType() == typeof(Section));
 
         Assert.That(section, Is.Not.Null);
@@ -102,4 +102,35 @@ public class LdmlReaderTests
 
         Assert.That(section2.IncludeInToc, Is.False);
     }
+
+
+    [Test]
+    public void ParseLdml_Heading1Style_DocParsed()
+    {
+        // Arrange 
+        var sb = new StringBuilder();
+
+        var doc = new Heading1Style
+        {
+            BorderThickness =
+            {
+                Top = 5
+            },
+            BorderBrush = new SolidColorBrush(Colors.AliceBlue)
+        };
+
+        doc.ToLdmlString(sb, string.Empty);
+
+        Debug.Print(sb.ToString());
+
+        var r = new LdmlReader(sb.ToString());
+
+        // Act  
+        r.ParseLdml();
+
+        // Assert
+        Assert.That(r.TextElement, Is.Not.Null);
+
+    }
+
 }

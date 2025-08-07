@@ -5,7 +5,7 @@ using Bodoconsult.Text.Helpers;
 
 namespace Bodoconsult.Text.Test.Helpers;
 
-public static class DocumentHelper
+public static class TestDataHelper
 {
     public const string MassText =
         "Lorem ipsum dolor ≥ = &gt; &#61; sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
@@ -18,7 +18,7 @@ public static class DocumentHelper
         };
 
         // Styleset
-        var styleset = StylesetHelper.CreateDefaultStyleset();
+        var styleset = StylesetHelper.CreateTestStyleset();
         doc.AddBlock(styleset);
 
 
@@ -71,6 +71,7 @@ public static class DocumentHelper
         // Add a SectionTitle
         var sectionTitle = new SectionTitle("SectionTitle");
         section.AddBlock(sectionTitle);
+
         // Add a SectionTitle
         var sectionSubtitle = new SectionSubtitle("SectionSubtitle");
         section.AddBlock(sectionSubtitle);
@@ -95,7 +96,7 @@ public static class DocumentHelper
         var heading5 = new Heading5("Heading level 5");
         section.AddBlock(heading5);
 
-        // Add a Info
+        // Add an Info
         var info = new Info("Info");
         section.AddBlock(info);
 
@@ -119,20 +120,20 @@ public static class DocumentHelper
         paragraph = new Paragraph();
 
         //   Add a simple span
-        var span = new Span(DocumentHelper.MassText);
+        var span = new Span(TestDataHelper.MassText);
         paragraph.AddInline(span);
 
         //   Add a line break
         paragraph.AddInline(new LineBreak());
 
         //   Add bold text
-        var bold = new Bold(DocumentHelper.MassText);
+        var bold = new Bold(TestDataHelper.MassText);
         paragraph.AddInline(bold);
 
         section.AddBlock(paragraph);
 
         // Add a bold and italic text paragraph
-        var bold2 = new Bold(DocumentHelper.MassText);
+        var bold2 = new Bold(TestDataHelper.MassText);
 
         var italic = new Italic();
         italic.AddInline(bold2);

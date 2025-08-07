@@ -15,13 +15,27 @@ namespace Bodoconsult.Text.Renderer.PlainText;
 public class PlainTextParagraphFormatter
 {
 
-    private readonly string _leftIndent;
+    private readonly string _leftMargin;
     private readonly string _content;
     private readonly ParagraphStyleBase _paragraph;
     private PageStyleBase _pageStyle;
     private readonly ReadOnlyMemory<char> _bytes;
     private int _maxLength;
 
+    private string _leftBorderChar;
+
+    private string _leftPadding;
+
+    /// <summary>
+    /// Char used for left and right borders
+    /// </summary>
+    public string LeftRightBorderChar { get; set; } = "|";
+
+    /// <summary>
+    /// Char used for top and bottom borders
+    /// </summary>
+    public string TopBottomBorderChar { get; set; } = "-";
+    
     /// <summary>
     /// Lines produced from content
     /// </summary>
@@ -57,7 +71,30 @@ public class PlainTextParagraphFormatter
 
         var marginLeft = (uint)(paragraphStyle.Margins.Left / CharWidth);
 
-        _leftIndent = marginLeft == 0 ? string.Empty : " ".Repeat(marginLeft);
+        _leftMargin = marginLeft == 0 ? string.Empty : " ".Repeat(marginLeft);
+
+
+        // Check if left border is needed
+        if (paragraphStyle.BorderThickness.Left > 0)
+        {
+            _leftBorderChar = "|";
+            WidthsInChars -= 1;
+        }
+        else
+        {
+            _leftBorderChar = string.Empty;
+        }
+
+        // Check if right border is needed
+
+        // Check if left padding is needed
+
+        // Check if right padding is needed
+
+        // Check if top border is needed
+
+        // Check if bottom border is needed
+
 
     }
 
@@ -80,20 +117,20 @@ public class PlainTextParagraphFormatter
 
             if (_paragraph.TextAlignment == TextAlignment.Left)
             {
-                result.Add($"{_leftIndent}{line}");
+                result.Add($"{_leftMargin}{line}");
                 continue;
             }
 
             if (_paragraph.TextAlignment == TextAlignment.Right)
             {
-                result.Add($"{_leftIndent}{line.PadLeft(_maxLength)}");
+                result.Add($"{_leftMargin}{line.PadLeft(_maxLength)}");
                 continue;
             }
 
             if (_paragraph.TextAlignment == TextAlignment.Center)
             {
                 var length = (uint)((_maxLength - line.Length) / 2.0);
-                result.Add(length > 0 ? $"{_leftIndent}{" ".Repeat(length)}{line}" : $"{_leftIndent}{line}");
+                result.Add(length > 0 ? $"{_leftMargin}{" ".Repeat(length)}{line}" : $"{_leftMargin}{line}");
 
                 continue;
             }
@@ -101,7 +138,7 @@ public class PlainTextParagraphFormatter
             // ToDo: justify
             if (_paragraph.TextAlignment == TextAlignment.Justify)
             {
-                result.Add($"{_leftIndent}{line}");
+                result.Add($"{_leftMargin}{line}");
                 continue;
             }
         }
@@ -120,6 +157,7 @@ public class PlainTextParagraphFormatter
             return;
         }
 
+        // More than one line
         var pos = WidthsInChars - 1;
         var altPos = 0;
         var length = _bytes.Length - 1;
@@ -127,6 +165,8 @@ public class PlainTextParagraphFormatter
 
         while (true)
         {
+
+            // Check if current char is a blank (0x20). If not go back until a blank is found
             while (pos < length && _bytes.Span[pos] != 0x20 && pos >= 0)
             {
                 pos--;
@@ -137,6 +177,7 @@ public class PlainTextParagraphFormatter
                 return;
             }
 
+            // Take the part of the content from altPos up to pos as new line
             var value = _bytes.Slice(altPos, pos - altPos).Span.ToString();
 
             if (_maxLength < value.Length)

@@ -22,12 +22,26 @@ public abstract class DocumentElement
 }
 
 /// <summary>
-/// A property element produces an attribute in an LDML
+/// A property element produces as an attribute in LDML
 /// </summary>
-public abstract class PropertyElement: DocumentElement
+public abstract class PropertyAsAttributeElement: DocumentElement
 {
     /// <summary>
     /// Get the element data as formatted property value for an LDML attribute
+    /// </summary>
+    public virtual string ToPropertyValue()
+    {
+        throw new NotSupportedException("Create an override for method ToPropertyValue()");
+    }
+}
+
+/// <summary>
+/// A property element produces as a block in LDML
+/// </summary>
+public abstract class PropertyAsBlockElement : DocumentElement
+{
+    /// <summary>
+    /// Get the element data as formatted property value as a LDML block
     /// </summary>
     public virtual string ToPropertyValue()
     {

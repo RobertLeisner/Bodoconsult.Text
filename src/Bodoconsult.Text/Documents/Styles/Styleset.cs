@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Bodoconsult.Text.Documents;
@@ -10,6 +11,11 @@ namespace Bodoconsult.Text.Documents;
 /// </summary>
 public class Styleset : Block
 {
+    /// <summary>
+    /// Current style dictionary. Do not use directly. Public for testing only
+    /// </summary>
+    public readonly Dictionary<string, StyleBase> StyleDictionary = new();
+
     /// <summary>
     /// Default ctor
     /// </summary>
@@ -44,13 +50,25 @@ public class Styleset : Block
     {
         var type = block.GetType();
 
-        if (block is not StyleBase)
+        if (block is not StyleBase sb)
         {
             throw new ArgumentException($"Type {type.Name} not allowed to be added to a styleset");
         }
 
         Blocks.Add(block);
         block.Parent = this;
+
+        StyleDictionary.Add(block.GetType().Name, sb);
     }
 
+    /// <summary>
+    /// Find a style
+    /// </summary>
+    /// <param name="name">Nme of the style to find</param>
+    /// <returns>Found style or null</returns>
+    public StyleBase FindStyle(string name)
+    {
+        var result = StyleDictionary.TryGetValue(name, out var sb);
+        return result ? sb : null;
+    }
 }

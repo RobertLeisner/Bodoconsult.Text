@@ -1,7 +1,9 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using System;
+using System.Linq;
 using Bodoconsult.Text.Documents;
+using Bodoconsult.Text.Helpers;
 using Bodoconsult.Text.Interfaces;
 
 namespace Bodoconsult.Text.Renderer
@@ -19,12 +21,35 @@ namespace Bodoconsult.Text.Renderer
         public BaseDocumentRenderer(Document document)
         {
             Document = document;
+
+            var styleset = (Styleset)document.ChildBlocks.FirstOrDefault(x => x.GetType() == typeof(Styleset));
+
+            // No styleset: apply default styleset
+            if (styleset == null)
+            {
+                styleset = StylesetHelper.CreateDefaultStyleset();
+                document.AddBlock(styleset);
+            }
+
+            PageStyleBase = (PageStyleBase)styleset.FindStyle("DocumentStyle");
+
         }
 
         /// <summary>
         /// The document to render
         /// </summary>
         public Document Document { get; }
+
+        /// <summary>
+        /// Current styleset
+        /// </summary>
+        public Styleset Styleset { get; set; }
+
+
+        /// <summary>
+        /// Current page settings to apply
+        /// </summary>
+        public PageStyleBase PageStyleBase { get; set; }
 
         /// <summary>
         /// Prepare the document for rendering: calculate toc, figure counters

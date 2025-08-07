@@ -49,7 +49,7 @@ namespace Bodoconsult.Text.Test.Documents.Blocks
         public void ToLdmlString_ValidDoument_LdmlCreated()
         {
             // Arrange 
-            var doc = DocumentHelper.CreateDocument();
+            var doc = TestDataHelper.CreateDocument();
 
             var sb = new StringBuilder();
 
@@ -67,7 +67,7 @@ namespace Bodoconsult.Text.Test.Documents.Blocks
         public void ToLdmlString_ValidDocumentNoIndentation_LdmlCreated()
         {
             // Arrange 
-            var doc = DocumentHelper.CreateDocument();
+            var doc = TestDataHelper.CreateDocument();
             doc.Indentation = string.Empty;
 
             var sb = new StringBuilder();

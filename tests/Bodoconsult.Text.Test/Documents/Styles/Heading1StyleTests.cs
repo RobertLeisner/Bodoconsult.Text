@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
-using System;
 using System.Diagnostics;
 using System.Text;
 using Bodoconsult.Text.Documents;
@@ -9,7 +8,7 @@ using NUnit.Framework;
 namespace Bodoconsult.Text.Test.Documents.Styles;
 
 [TestFixture]
-internal class ParagraphStyleTests
+internal class Heading1StyleTests
 {
 
 
@@ -19,7 +18,7 @@ internal class ParagraphStyleTests
         // Arrange 
 
         // Act  
-        var style = new ParagraphStyle();
+        var style = new Heading1Style();
 
         // Assert
         Assert.That(style.ChildBlocks.Count, Is.EqualTo(0));
@@ -31,7 +30,7 @@ internal class ParagraphStyleTests
     public void ToLdmlString_StyleWithoutBrush_LdmlCreatedWellformed()
     {
         // Arrange 
-        var style = new ParagraphStyle();
+        var style = new Heading1Style();
 
         var sb = new StringBuilder();
 
@@ -50,8 +49,8 @@ internal class ParagraphStyleTests
     {
         // Arrange 
         var brush = new SolidColorBrush(Colors.AliceBlue);
-        
-        var style = new ParagraphStyle();
+
+        var style = new Heading1Style();
         style.BorderBrush = brush;
 
 

@@ -92,7 +92,7 @@ namespace Bodoconsult.Text.Documents
                     continue;
                 }
 
-                if (value is PropertyElement pe)
+                if (value is PropertyAsAttributeElement pe)
                 {
 
                     var propValue = pe.ToPropertyValue();

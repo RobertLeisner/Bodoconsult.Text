@@ -17,7 +17,7 @@ public class PlainTextDocumentRendererTests
     public void Ctor_ValidDocument_PropsSetCorrectly()
     {
         // Arrange 
-        var document = DocumentHelper.CreateDocument();
+        var document = TestDataHelper.CreateDocument();
         var factory = new PlainTextRendererElementFactory();
 
         // Act  
@@ -33,7 +33,7 @@ public class PlainTextDocumentRendererTests
     public void RenderIt_ValidDocument_PropsSetCorrectly()
     {
         // Arrange 
-        var document = DocumentHelper.CreateDocument();
+        var document = TestDataHelper.CreateDocument();
         var factory = new PlainTextRendererElementFactory();
 
         var renderer = new PlainTextDocumentRenderer(document, factory);
@@ -97,7 +97,7 @@ internal class PlainTextParagraphFormatterTests
         var paragraphStyle = new ParagraphStyle();
         var pageStyle = new DocumentStyle();
 
-        const string content = DocumentHelper.MassText;
+        const string content = TestDataHelper.MassText;
 
         var f = new PlainTextParagraphFormatter(content, paragraphStyle, pageStyle);
 
@@ -120,7 +120,7 @@ internal class PlainTextParagraphFormatterTests
         };
         var pageStyle = new DocumentStyle();
 
-        const string content = DocumentHelper.MassText;
+        const string content = TestDataHelper.MassText;
 
         var f = new PlainTextParagraphFormatter(content, paragraphStyle, pageStyle);
 
@@ -143,7 +143,7 @@ internal class PlainTextParagraphFormatterTests
         };
         var pageStyle = new DocumentStyle();
 
-        const string content = DocumentHelper.MassText;
+        const string content = TestDataHelper.MassText;
 
         var f = new PlainTextParagraphFormatter(content, paragraphStyle, pageStyle);
 
@@ -171,7 +171,7 @@ internal class PlainTextParagraphFormatterTests
 
         var pageStyle = new DocumentStyle();
 
-        const string content = DocumentHelper.MassText;
+        const string content = TestDataHelper.MassText;
 
         var f = new PlainTextParagraphFormatter(content, paragraphStyle, pageStyle);
 
@@ -199,7 +199,7 @@ internal class PlainTextParagraphFormatterTests
         };
         var pageStyle = new DocumentStyle();
 
-        const string content = DocumentHelper.MassText;
+        const string content = TestDataHelper.MassText;
 
         var f = new PlainTextParagraphFormatter(content, paragraphStyle, pageStyle);
 
@@ -227,7 +227,48 @@ internal class PlainTextParagraphFormatterTests
         };
         var pageStyle = new DocumentStyle();
 
-        const string content = DocumentHelper.MassText;
+        const string content = TestDataHelper.MassText;
+
+        var f = new PlainTextParagraphFormatter(content, paragraphStyle, pageStyle);
+
+        // Act  
+        f.FormatText();
+
+        // Assert
+        Assert.That(f.Lines.Count, Is.GreaterThan(1));
+
+        Debug.Print(f.GetFormattedText().ToString());
+    }
+
+    [Test]
+    public void FormatText_LongStringMarginBorderPadding_MultipleLinesLeftAlignment()
+    {
+        // Arrange 
+        var paragraphStyle = new ParagraphStyle
+        {
+            Margins =
+            {
+                Left = 2,
+                Right = 2
+            },
+            BorderBrush = new SolidColorBrush(Colors.Black),
+            BorderThickness =
+            {
+                Left = 1,
+                Top = 1,
+                Right = 1,
+                Bottom = 1
+            },
+            Paddings =
+            {
+                Left = 2,
+                Right = 2
+            },
+        };
+
+        var pageStyle = new DocumentStyle();
+
+        const string content = TestDataHelper.MassText;
 
         var f = new PlainTextParagraphFormatter(content, paragraphStyle, pageStyle);
 

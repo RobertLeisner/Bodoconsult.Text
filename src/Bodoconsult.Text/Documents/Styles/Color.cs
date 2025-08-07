@@ -36,59 +36,47 @@
  * SOFTWARE.
  */
 
-using System.Text;
 using Bodoconsult.Text.Extensions;
+using System;
+using System.Drawing;
+using System.Text;
 
 namespace Bodoconsult.Text.Documents;
 
 /// <summary>
-/// Base class for brushes
+/// Color defined in ARGB mode
 /// </summary>
-public abstract class Brush : TextElement
-{
-}
-
-/// <summary>
-/// A brush using a solid color
-/// </summary>
-public class SolidColorBrush : DocumentElement
+public class Color : PropertyAsAttributeElement
 {
     /// <summary>
     /// Default ctor
     /// </summary>
-    /// <param name="color"></param>
-    public SolidColorBrush(Color color)
-    {
-        Color = color;
-    }
+    public Color()
+    { }
 
     /// <summary>
-    /// Solid color to use for the brush
+    /// Ctor providing an HTML color code like #000000
     /// </summary>
-    public Color Color { get;  }
-
-    /// <summary>
-    /// Add the current element to a document defined in LDML (Logical document markup language)
-    /// </summary>
-    /// <param name="document">StringBuilder instance to create the LDML in</param>
-    /// <param name="indent">Current indent</param>
-    public override void ToLdmlString(StringBuilder document, string indent)
+    /// <param name="htmlColor">HTML color code like #000000</param>
+    /// <exception cref="ArgumentException">HTML color does not have a length of seven chars</exception>
+    public Color(string htmlColor)
     {
-        document.Append($"<SolidColorBrush Color=\"{Color.ToHtml()}\"/>");
+        if (htmlColor.Length == 7)
+        {
+            R = Convert.ToByte(htmlColor.Substring(1, 2), 16);
+            G = Convert.ToByte(htmlColor.Substring(3, 2), 16);
+            B = Convert.ToByte(htmlColor.Substring(5, 2), 16);
+        }
+        else
+        {
+            throw new ArgumentException("Color must length 7. Example: #000000");
+        }
     }
-}
 
-
-
-/// <summary>
-/// Color defined in ARGB mode
-/// </summary>
-public class Color : PropertyElement
-{
     /// <summary>
     /// A
     /// </summary>
-    public byte A { get; set; }
+    public byte A { get; set; } = Byte.MaxValue;
 
     /// <summary>
     /// 
@@ -122,6 +110,33 @@ public class Color : PropertyElement
     }
 
     /// <summary>
+    /// Get a color from HTML color string with 7 chars length like #000000
+    /// </summary>
+    /// <param name="htmlColor">HTML color string with 7 chars length</param>
+    /// <returns>Color or null</returns>
+    public static Color FromHtml(string htmlColor)
+    {
+        Color color = new Color();
+
+        if (htmlColor.Length == 7)
+        {
+            color.R = Convert.ToByte(htmlColor.Substring(1, 2), 16);
+            color.G = Convert.ToByte(htmlColor.Substring(3, 2), 16);
+            color.B = Convert.ToByte(htmlColor.Substring(5, 2), 16);
+            return color;
+        }
+        //string r = char.ToString(htmlColor[1]);
+        //string g = char.ToString(htmlColor[2]);
+        //string b = char.ToString(htmlColor[3]);
+
+        //c = System.Drawing.Color.FromArgb(Convert.ToInt32(r + r, 16),
+        //    Convert.ToInt32(g + g, 16),
+        //    Convert.ToInt32(b + b, 16));
+        return null;
+
+    }
+
+    /// <summary>
     /// Add the current element to a document defined in LDML (Logical document markup language)
     /// </summary>
     /// <param name="document">StringBuilder instance to create the LDML in</param>
@@ -130,4 +145,6 @@ public class Color : PropertyElement
     {
         document.Append(this.ToHtml());
     }
+
+
 }

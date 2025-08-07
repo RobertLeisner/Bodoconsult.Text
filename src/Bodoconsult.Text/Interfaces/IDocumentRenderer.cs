@@ -15,6 +15,16 @@ public interface IDocumentRenderer
     Document Document { get; }
 
     /// <summary>
+    /// Current styleset
+    /// </summary>
+    public Styleset Styleset { get; set; }
+
+    /// <summary>
+    /// Current page settings to apply
+    /// </summary>
+    public PageStyleBase PageStyleBase { get; set; }
+
+    /// <summary>
     /// Prepare the document for rendering: calculate toc, figure counters
     /// </summary>
     void PrepareDocument();

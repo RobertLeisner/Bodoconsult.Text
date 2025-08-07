@@ -38,7 +38,7 @@ public static class DocumentReflectionHelper
 
             var propType = propInfo.PropertyType;
 
-            var isPropElement = typeof(PropertyElement).IsAssignableFrom(propType);
+            var isPropElement = typeof(PropertyAsAttributeElement).IsAssignableFrom(propType);
 
             if (!propType.IsPrimitive && propType != typeof(string) && !propType.IsEnum && !isPropElement)
             {
@@ -83,7 +83,7 @@ public static class DocumentReflectionHelper
 
             var propType = propInfo.PropertyType;
 
-            var isPropElement = typeof(TextElement).IsAssignableFrom(propType);
+            var isPropElement = typeof(PropertyAsBlockElement).IsAssignableFrom(propType);
 
             if (!isPropElement)
             {

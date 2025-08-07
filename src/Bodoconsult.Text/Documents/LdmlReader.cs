@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Xml.Linq;
 using Bodoconsult.Text.Extensions;
@@ -18,12 +19,14 @@ namespace Bodoconsult.Text.Documents
     public class LdmlReader
     {
 
-        private TextElement _textElement;
+        private DocumentElement _textElement;
+
+        private readonly Type _popertyElementTpye = typeof(PropertyAsAttributeElement);
 
         /// <summary>
-        /// Read-only access to current <see cref="TextElement"/> instance
+        /// Read-only access to current <see cref="DocumentElement"/> instance
         /// </summary>
-        public TextElement TextElement => _textElement;
+        public DocumentElement TextElement => _textElement;
 
         /// <summary>
         /// LDML string to parse. Public only for unit testing
@@ -73,7 +76,7 @@ namespace Bodoconsult.Text.Documents
 
             var name = root.Name.ToString();
 
-            _textElement = GetTextElement(name, root);
+            _textElement = GetDocumentElement(name, root, null);
 
             var sb = new StringBuilder();
             _textElement.ToLdmlString(sb, string.Empty);
@@ -81,7 +84,7 @@ namespace Bodoconsult.Text.Documents
             Debug.Print(sb.ToString());
         }
 
-        private TextElement GetTextElement(string elementName, XElement node)
+        private DocumentElement GetDocumentElement(string elementName, XElement node, DocumentElement parent)
         {
             var type = Type.GetType($"Bodoconsult.Text.Documents.{elementName}");
 
@@ -89,28 +92,73 @@ namespace Bodoconsult.Text.Documents
 
             if (type == null)
             {
+                var pis = DocumentReflectionHelper.GetPropertiesForBlocks(parent.GetType());
+
+                var pi = pis.FirstOrDefault(x => x.Name == elementName);
+
+                if (pi == null)
+                {
+                    return null;
+                }
+
+                GetPropertyAsBlockElement(parent, node, pi);
                 return null;
             }
 
-            TextElement obj;
+
+            object obj;
 
             try
             {
-                obj = (TextElement)Activator.CreateInstance(type);
+                obj = Activator.CreateInstance(type);
             }
             catch //(Exception e)
             {
                 return null;
             }
 
+            if (obj is PropertyAsBlockElement propertyAsBlock)
+            {
+                LoadProperties(propertyAsBlock, node);
+                return propertyAsBlock;
+            }
+
+            return obj is not TextElement textElement ? null : GetTextElement(elementName, node, textElement);
+        }
+
+        private void GetPropertyAsBlockElement(DocumentElement parent,  XElement node, PropertyInfo pi)
+        {
+            // Check child nodes
+            var childs = node.Nodes().ToList();
+
+            foreach (var childNode in childs)
+            {
+                if (childNode is XElement element)
+                {
+
+                    Debug.Print($"{pi.Name}: child {element.Name}");
+
+
+                    var child = GetDocumentElement(element.Name.ToString(), element, null);
+                    pi.SetValue(parent, child);
+                }
+                else
+                {
+                    Debug.Print(childNode.ToString());
+                }
+            }
+        }
+
+        private TextElement GetTextElement(string elementName, XElement node, TextElement textElement)
+        {
             // Load properties
-            LoadProperties(obj, node);
+            LoadProperties(textElement, node);
 
             // Check child nodes
             var childs = node.Nodes().ToList();
 
 
-            if (obj is Block block)
+            if (textElement is Block block)
             {
                 foreach (var childNode in childs)
                 {
@@ -120,7 +168,7 @@ namespace Bodoconsult.Text.Documents
                         Debug.Print($"{elementName}: child {element.Name}");
 
 
-                        var child = GetTextElement(element.Name.ToString(), element);
+                        var child = GetDocumentElement(element.Name.ToString(), element, textElement);
 
                         if (child is Block childBlock)
                         {
@@ -136,13 +184,10 @@ namespace Bodoconsult.Text.Documents
                     {
                         Debug.Print(childNode.ToString());
                     }
-
-
-
                 }
             }
 
-            if (obj is Inline inline)
+            if (textElement is Inline inline)
             {
                 //if (obj is Span)
                 //{
@@ -155,17 +200,19 @@ namespace Bodoconsult.Text.Documents
 
                     if (childNode is XElement element)
                     {
-                        var child = GetTextElement(element.Name.ToString(), element);
+                        var child = GetDocumentElement(element.Name.ToString(), element, textElement);
 
                         if (child is Inline childInline)
                         {
                             inline.AddInline(childInline);
                         }
+
+
                     }
 
                     else if (childNode is XText text)
                     {
-                        if (obj is Span parentInline)
+                        if (TextElement is Span parentInline)
                         {
                             parentInline.Content = text.Value;
                         }
@@ -174,10 +221,10 @@ namespace Bodoconsult.Text.Documents
                 }
             }
 
-            return obj;
+            return textElement;
         }
 
-        private void LoadProperties(TextElement element, XElement node)
+        private void LoadProperties(DocumentElement element, XElement node)
         {
             if (!node.HasAttributes)
             {
@@ -192,6 +239,8 @@ namespace Bodoconsult.Text.Documents
             foreach (var prop in pis)
             {
 
+                var propType = prop.PropertyType;
+
                 var attr = attributes.FirstOrDefault(x => x.Name == prop.Name);
 
                 if (attr == null)
@@ -199,6 +248,17 @@ namespace Bodoconsult.Text.Documents
                     continue;
                 }
 
+                // Object as property based on PropertyElement
+                if (_popertyElementTpye.IsAssignableFrom(propType))
+                {
+                    var objValue = Activator.CreateInstance(propType, attr.Value);
+                    prop.SetValue(element, objValue);
+                    continue;
+                }
+
+
+
+                // Normal property
 
                 //// Prop Name
                 //if (prop.PropertyType.IsEnum)
@@ -208,7 +268,7 @@ namespace Bodoconsult.Text.Documents
                 //}
                 //else
                 //{
-                    prop.SetValue(element, attr.Value.Convert(prop.PropertyType));
+                prop.SetValue(element, attr.Value.Convert(prop.PropertyType));
                 //}
 
             }

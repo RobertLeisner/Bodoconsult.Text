@@ -1,4 +1,6 @@
-﻿using Bodoconsult.Text.Helpers;
+﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
+
+using Bodoconsult.Text.Helpers;
 using System;
 using System.Text;
 
@@ -7,7 +9,7 @@ namespace Bodoconsult.Text.Documents;
 /// <summary>
 /// Thickness definition for margins and 
 /// </summary>
-public class Thickness : PropertyElement
+public class Thickness : PropertyAsAttributeElement
 {
     /// <summary>
     /// Default ctor
@@ -40,6 +42,20 @@ public class Thickness : PropertyElement
         Right = uniformValue;
         Top = uniformValue;
         Bottom = uniformValue;
+    }
+
+    /// <summary>
+    /// Ctor providing a LDML property string with 4 numbers separated by comma like 0,6,0,0
+    /// </summary>
+    /// <param name="values">LDML property string</param>
+    public Thickness(string values)
+    {
+        var data = values.Split(',');
+
+        Left = Convert.ToDouble(data[0]);
+        Top = Convert.ToDouble(data[1]);
+        Right = Convert.ToDouble(data[2]);
+        Bottom = Convert.ToDouble(data[3]);
     }
 
     /// <summary>
