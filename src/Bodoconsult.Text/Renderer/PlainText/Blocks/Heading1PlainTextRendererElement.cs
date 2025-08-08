@@ -10,12 +10,8 @@ namespace Bodoconsult.Text.Renderer.PlainText;
 /// Text rendering element for <see cref="Heading1"/> instances
 /// </summary>
 
-public class Heading1PlainTextRendererElement : ITextRendererElement
+public class Heading1PlainTextRendererElement : ParagraphBasePlainTextRendererElement
 {
-    private readonly Heading1 _paragraph;
-
-    private const string HeadingDecoration = "****************************";
-
     /// <summary>
     /// Default ctor
     /// </summary>
@@ -23,18 +19,5 @@ public class Heading1PlainTextRendererElement : ITextRendererElement
     public Heading1PlainTextRendererElement(Heading1 paragraph)
     {
         _paragraph = paragraph;
-    }
-
-    /// <summary>
-    /// Render the elememt
-    /// </summary>
-    /// <param name="renderer">Current renderer</param>
-    public void RenderIt(ITextDocumentRender renderer)
-    {
-        renderer.Content.Append($"{Environment.NewLine}{Environment.NewLine}{Environment.NewLine}{HeadingDecoration}{Environment.NewLine}");
-
-        DocumentRendererHelper.RenderInlineChilds(renderer, renderer.Content, _paragraph.ChildInlines, tag: string.Empty, isBlock: true);
-
-        renderer.Content.Append($"{HeadingDecoration}{Environment.NewLine}{Environment.NewLine}");
     }
 }

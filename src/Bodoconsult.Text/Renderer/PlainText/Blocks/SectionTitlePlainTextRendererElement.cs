@@ -9,24 +9,16 @@ namespace Bodoconsult.Text.Renderer.PlainText;
 /// <summary>
 /// Text rendering element for <see cref="SectionTitle"/> instances
 /// </summary>
-public class SectionTitlePlainTextRendererElement : ITextRendererElement
+public class SectionTitlePlainTextRendererElement : ParagraphBasePlainTextRendererElement
 {
-    private readonly SectionTitle _sectionTitle;
+   
 
     /// <summary>
     /// Default ctor
     /// </summary>
     public SectionTitlePlainTextRendererElement(SectionTitle sectionTitle)
     {
-        _sectionTitle = sectionTitle;
+        _paragraph = sectionTitle;
     }
 
-    /// <summary>
-    /// Render the elememt
-    /// </summary>
-    public void RenderIt(ITextDocumentRender renderer)
-    {
-        DocumentRendererHelper.RenderInlineChilds(renderer, renderer.Content, _sectionTitle.ChildInlines, tag: string.Empty, isBlock: true);
-        renderer.Content.Append($"{Environment.NewLine}");
-    }
 }

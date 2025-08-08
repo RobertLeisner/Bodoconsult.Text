@@ -9,24 +9,16 @@ namespace Bodoconsult.Text.Renderer.PlainText;
 /// <summary>
 /// Text rendering element for <see cref="List"/> instances
 /// </summary>
-public class ListPlainTextRendererElement : ITextRendererElement
+public class ListPlainTextRendererElement : ParagraphBasePlainTextRendererElement
 {
-    private readonly List _list;
+  
 
     /// <summary>
     /// Default ctor
     /// </summary>
     public ListPlainTextRendererElement(List list)
     {
-        _list = list;
+        _paragraph = list;
     }
 
-    /// <summary>
-    /// Render the elememt
-    /// </summary>
-    public void RenderIt(ITextDocumentRender renderer)
-    {
-        DocumentRendererHelper.RenderInlineChilds(renderer, renderer.Content, _list.ChildInlines, tag: string.Empty, isBlock: true);
-        renderer.Content.Append($"{Environment.NewLine}");
-    }
 }

@@ -12,6 +12,6 @@ public class ParagraphRightStyle : ParagraphStyleBase
     {
         TagToUse = "ParagraphRightStyle";
         Name = TagToUse;
-        TextAlignment = TextAlignment.Justify;
+        TextAlignment = TextAlignment.Right;
     }
 }

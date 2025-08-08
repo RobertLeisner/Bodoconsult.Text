@@ -9,24 +9,16 @@ namespace Bodoconsult.Text.Renderer.PlainText;
 /// <summary>
 /// Text rendering element for <see cref="Toc4"/> instances
 /// </summary>
-public class Toc4PlainTextRendererElement : ITextRendererElement
+public class Toc4PlainTextRendererElement : ParagraphBasePlainTextRendererElement
 {
-    private readonly Toc4 _toc4;
 
     /// <summary>
     /// Default ctor
     /// </summary>
     public Toc4PlainTextRendererElement(Toc4 toc4)
     {
-        _toc4 = toc4;
-    }
+        _paragraph= toc4;
+ 
+}   }
 
-    /// <summary>
-    /// Render the elememt
-    /// </summary>
-    public void RenderIt(ITextDocumentRender renderer)
-    {
-        DocumentRendererHelper.RenderInlineChilds(renderer, renderer.Content, _toc4.ChildInlines, tag: string.Empty, isBlock: true);
-        renderer.Content.Append($"{Environment.NewLine}");
-    }
-}
+    

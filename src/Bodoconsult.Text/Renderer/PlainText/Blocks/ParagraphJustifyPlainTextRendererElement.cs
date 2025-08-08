@@ -9,24 +9,15 @@ namespace Bodoconsult.Text.Renderer.PlainText;
 /// <summary>
 /// Text rendering element for <see cref="ParagraphJustify"/> instances
 /// </summary>
-public class ParagraphJustifyPlainTextRendererElement : ITextRendererElement
+public class ParagraphJustifyPlainTextRendererElement : ParagraphBasePlainTextRendererElement
 {
-    private readonly ParagraphJustify _paragraphJustify;
 
     /// <summary>
     /// Default ctor
     /// </summary>
     public ParagraphJustifyPlainTextRendererElement(ParagraphJustify paragraphJustify)
     {
-        _paragraphJustify = paragraphJustify;
+        _paragraph = paragraphJustify;
     }
 
-    /// <summary>
-    /// Render the elememt
-    /// </summary>
-    public void RenderIt(ITextDocumentRender renderer)
-    {
-        DocumentRendererHelper.RenderInlineChilds(renderer, renderer.Content, _paragraphJustify.ChildInlines, tag: string.Empty, isBlock: true);
-        renderer.Content.Append($"{Environment.NewLine}");
-    }
 }

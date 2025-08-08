@@ -9,24 +9,15 @@ namespace Bodoconsult.Text.Renderer.PlainText;
 /// <summary>
 /// Text rendering element for <see cref="Toc5"/> instances
 /// </summary>
-public class Toc5PlainTextRendererElement : ITextRendererElement
+public class Toc5PlainTextRendererElement : ParagraphBasePlainTextRendererElement
 {
-    private readonly Toc5 _toc5;
 
     /// <summary>
     /// Default ctor
     /// </summary>
     public Toc5PlainTextRendererElement(Toc5 toc5)
     {
-        _toc5 = toc5;
+        _paragraph = toc5;
     }
 
-    /// <summary>
-    /// Render the elememt
-    /// </summary>
-    public void RenderIt(ITextDocumentRender renderer)
-    {
-        DocumentRendererHelper.RenderInlineChilds(renderer, renderer.Content, _toc5.ChildInlines, tag: string.Empty, isBlock: true);
-        renderer.Content.Append($"{Environment.NewLine}");
-    }
 }

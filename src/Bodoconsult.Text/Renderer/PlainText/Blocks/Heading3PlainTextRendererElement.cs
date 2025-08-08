@@ -9,24 +9,13 @@ namespace Bodoconsult.Text.Renderer.PlainText;
 /// <summary>
 /// Text rendering element for <see cref="Heading3"/> instances
 /// </summary>
-public class Heading3PlainTextRendererElement : ITextRendererElement
+public class Heading3PlainTextRendererElement : ParagraphBasePlainTextRendererElement
 {
-    private readonly Heading3 _heading3;
-
     /// <summary>
     /// Default ctor
     /// </summary>
     public Heading3PlainTextRendererElement(Heading3 heading3)
     {
-        _heading3 = heading3;
-    }
-
-    /// <summary>
-    /// Render the elememt
-    /// </summary>
-    public void RenderIt(ITextDocumentRender renderer)
-    {
-        DocumentRendererHelper.RenderInlineChilds(renderer, renderer.Content, _heading3.ChildInlines, tag: string.Empty, isBlock: true);
-        renderer.Content.Append($"{Environment.NewLine}");
+        _paragraph= heading3;
     }
 }

@@ -9,24 +9,14 @@ namespace Bodoconsult.Text.Renderer.PlainText;
 /// <summary>
 /// Text rendering element for <see cref="Code"/> instances
 /// </summary>
-public class CodePlainTextRendererElement : ITextRendererElement
+public class CodePlainTextRendererElement : ParagraphBasePlainTextRendererElement
 {
-    private readonly Code _code;
 
     /// <summary>
     /// Default ctor
     /// </summary>
     public CodePlainTextRendererElement(Code code)
     {
-        _code = code;
-    }
-
-    /// <summary>
-    /// Render the elememt
-    /// </summary>
-    public void RenderIt(ITextDocumentRender renderer)
-    {
-        DocumentRendererHelper.RenderInlineChilds(renderer, renderer.Content, _code.ChildInlines, tag: string.Empty, isBlock: true);
-        renderer.Content.Append($"{Environment.NewLine}");
+        _paragraph = code;
     }
 }
