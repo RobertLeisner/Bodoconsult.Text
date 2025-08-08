@@ -70,7 +70,17 @@ public class DocumentMetaData : Block
     /// <summary>
     /// The word written before the page number in a page footer. Default: Page
     /// </summary>
-    public string PageName { get; set; } = "Page";
+    public string PageNumberPrefix { get; set; } = "Page";
+
+    /// <summary>
+    /// Prefix for equations
+    /// </summary>
+    public string EquationPrefix { get; set; } = "Equation";
+
+    /// <summary>
+    /// Prefix for figures
+    /// </summary>
+    public string FigurePrefix { get; set; } = "Figure";
 
     /// <summary>
     /// Should a TOC section added at the start of the document

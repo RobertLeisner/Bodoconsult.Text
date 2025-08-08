@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Bodoconsult.Text.Documents
 {
@@ -9,9 +10,7 @@ namespace Bodoconsult.Text.Documents
     /// </summary>
     public class LdmlCalculator
     {
-
-        private string _equationPrefix = "Equation";
-        private string _figurePrefix = "Figure";
+        private readonly DocumentMetaData _documentMetaData;
 
         /// <summary>
         /// Default ctor
@@ -21,7 +20,12 @@ namespace Bodoconsult.Text.Documents
         {
             Document = document;
 
-            // ToDo: load prefeices for equations and figures from document meta data
+            _documentMetaData = (DocumentMetaData)Document.ChildBlocks.FirstOrDefault(x => x.GetType() == typeof(DocumentMetaData));
+
+            if (_documentMetaData != null)
+            {
+                _documentMetaData = new DocumentMetaData();
+            }
         }
 
         /// <summary>
@@ -106,7 +110,7 @@ namespace Bodoconsult.Text.Documents
                 EquationCounter++;
 
                 equation.TagName = $"Equation{EquationCounter}";
-                equation.CurrentPrefix = $"{_equationPrefix} {EquationCounter}:";
+                equation.CurrentPrefix = $"{_documentMetaData.EquationPrefix} {EquationCounter}:";
 
                 Equations.Add(equation);
             }
@@ -121,5 +125,44 @@ namespace Bodoconsult.Text.Documents
 
         }
 
+        /// <summary>
+        /// Prepare all items needed for TOC, TOE and TOF
+        /// </summary>
+        public void PrepareAllItemsc()
+        {
+            PrepareAllItemsForToc();
+            PrepareAllItemsForToe();
+            PrepareAllItemsForTof();
+        }
+
+        /// <summary>
+        /// Prepare all items needed for TOC
+        /// </summary>
+        public void PrepareAllItemsForToc()
+        {
+
+
+        }
+
+        /// <summary>
+        /// Prepare all items needed for TOE
+        /// </summary>
+        public void PrepareAllItemsForToe()
+        {
+            if (Equations.Count == 0)
+            {
+                return;
+            }
+
+        }
+
+        /// <summary>
+        /// Prepare all items needed for TOF
+        /// </summary>
+        public void PrepareAllItemsForTof()
+        {
+
+
+        }
     }
 }
