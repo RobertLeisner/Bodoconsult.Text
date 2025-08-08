@@ -6,9 +6,9 @@ using System.Collections.Generic;
 namespace Bodoconsult.Text.Documents;
 
 /// <summary>
-/// Heading level 1
+/// Heading level 2
 /// </summary>
-public class Heading2 : ParagraphBase
+public class Heading2 : HeadingBase
 {
     /// <summary>
     /// Static list with all allowed inline elements for paragraphs

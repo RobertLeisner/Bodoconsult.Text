@@ -8,7 +8,7 @@ namespace Bodoconsult.Text.Documents;
 /// <summary>
 /// Heading level 1
 /// </summary>
-public class Heading1 : ParagraphBase
+public class Heading1 : HeadingBase
 {
     /// <summary>
     /// Static list with all allowed inline elements for paragraphs

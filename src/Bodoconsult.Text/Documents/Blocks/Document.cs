@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
+using System;
 using System.Text;
 
 namespace Bodoconsult.Text.Documents;
@@ -29,6 +30,9 @@ public class Document : Block
         AllowedBlocks.Add(typeof(Section));
         AllowedBlocks.Add(typeof(DocumentMetaData));
         AllowedBlocks.Add(typeof(Styleset));
+        AllowedBlocks.Add(typeof(TocSection));
+        AllowedBlocks.Add(typeof(ToeSection));
+        AllowedBlocks.Add(typeof(TofSection));
 
         // No inlines allowed
 
@@ -61,6 +65,36 @@ public class Document : Block
     public override void AddInline(Inline inline)
     {
         // Do nothing
+    }
+
+    /// <summary>
+    /// Add a block element
+    /// </summary>
+    /// <param name="block">Block element to add</param>
+    public override void AddBlock(Block block)
+    {
+        base.AddBlock(block);
+
+
+        if (block is not DocumentMetaData documentMetaData)
+        {
+            return;
+        }
+
+        if (documentMetaData.IsTocRequired)
+        {
+            base.AddBlock(new TocSection());
+        }
+
+        if (documentMetaData.IsFiguresTableRequired)
+        {
+            base.AddBlock(new TofSection());
+        }
+
+        if (documentMetaData.IsEquationsTableRequired)
+        {
+            base.AddBlock(new ToeSection());
+        }
     }
 
 }

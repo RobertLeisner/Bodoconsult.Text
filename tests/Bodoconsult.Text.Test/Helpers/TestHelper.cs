@@ -22,7 +22,7 @@ internal class TestHelper
 
         TestChartImage = Path.Combine(TestDataPath, "chart3d.png");
 
-        TestEquiationImage = Path.Combine(TestDataPath, "equiation.png");
+        TestEquationImage = Path.Combine(TestDataPath, "equation.png");
 
         TestDistributionImage = Path.Combine(TestDataPath, "NormalDistribution.de.png");
 
@@ -52,7 +52,7 @@ internal class TestHelper
     /// <summary>
     /// An equiation image image
     /// </summary>
-    public static string TestEquiationImage { get; }
+    public static string TestEquationImage { get; }
 
     /// <summary>
     /// An image of a normal distribution

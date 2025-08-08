@@ -84,11 +84,11 @@
 		<Image Uri="C:\Daten\Projekte\Tools\Bodoconsult.Text\tests\Bodoconsult.Text.Test\TestData\NormalDistribution.de.png">
 			<Span>Figure 2</Span>
 		</Image>
-		<Equiation Uri="C:\Daten\Projekte\Tools\Bodoconsult.Text\tests\Bodoconsult.Text.Test\TestData\equiation.png">
-			<Span>Equiation 1</Span>
-		</Equiation>
-		<Equiation Uri="C:\Daten\Projekte\Tools\Bodoconsult.Text\tests\Bodoconsult.Text.Test\TestData\equiation.png">
-			<Span>Equiation 2</Span>
-		</Equiation>
+		<Equation Uri="C:\Daten\Projekte\Tools\Bodoconsult.Text\tests\Bodoconsult.Text.Test\TestData\equiation.png">
+			<Span>Equation 1</Span>
+		</Equation>
+		<Equation Uri="C:\Daten\Projekte\Tools\Bodoconsult.Text\tests\Bodoconsult.Text.Test\TestData\equiation.png">
+			<Span>Equation 2</Span>
+		</Equation>
 	</Section>
 </Document>

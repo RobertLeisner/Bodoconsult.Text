@@ -2,17 +2,17 @@
 
 namespace Bodoconsult.Text.Documents;
 
-
 /// <summary>
-/// Represents a document section. Every document has ho have at least one section
+/// Style for a TOC section element
 /// </summary>
-public class Section : SectionBase
+public class TocSectionStyle : PageStyleBase
 {
     /// <summary>
     /// Default ctor
     /// </summary>
-    public Section()
+    public TocSectionStyle()
     {
-        TagToUse = "Section";
+        TagToUse = string.Intern("TocSectionStyle");
+        Name = TagToUse;
     }
 }

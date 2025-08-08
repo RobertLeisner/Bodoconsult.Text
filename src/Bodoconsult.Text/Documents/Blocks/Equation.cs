@@ -32,7 +32,7 @@ public sealed class Equation : ImageBase
         AllowedInlines.AddRange(AllAllowedInlines);
 
         // Tag to use
-        TagToUse = string.Intern("Equiation");
+        TagToUse = string.Intern("Equation");
     }
 
     /// <summary>
@@ -49,7 +49,7 @@ public sealed class Equation : ImageBase
         AllowedInlines.Add(typeof(Hyperlink));
 
         // Tag to use
-        TagToUse = string.Intern("Equiation");
+        TagToUse = string.Intern("Equation");
 
         AddInline(new Span(content));
 
@@ -65,4 +65,9 @@ public sealed class Equation : ImageBase
     /// Math equation in MathML notation
     /// </summary>
     public string MathMl { get; set; }
+
+    /// <summary>
+    /// The current prefix calculated by TOE calculation
+    /// </summary>
+    public string CurrentPrefix { get; set; }
 }

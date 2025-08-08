@@ -23,6 +23,9 @@ public static class StylesetHelper
         // Add document style
         styleSet.AddBlock(new DocumentStyle());
         styleSet.AddBlock(new SectionStyle());
+        styleSet.AddBlock(new TocSectionStyle());
+        styleSet.AddBlock(new TofSectionStyle());
+        styleSet.AddBlock(new ToeSectionStyle());
 
         // Add style <see cref="CitationStyle"/> for <see cref="Citation"/> instances 
         var citationStyle = new CitationStyle();
@@ -156,6 +159,9 @@ public static class StylesetHelper
         // Add document style
         styleSet.AddBlock(new DocumentStyle());
         styleSet.AddBlock(new SectionStyle());
+        styleSet.AddBlock(new TocSectionStyle());
+        styleSet.AddBlock(new TofSectionStyle());
+        styleSet.AddBlock(new ToeSectionStyle());
 
         // Add style <see cref="CitationStyle"/> for <see cref="Citation"/> instances 
         var citationStyle = new CitationStyle();
