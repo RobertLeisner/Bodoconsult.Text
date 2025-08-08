@@ -89,20 +89,26 @@ namespace Bodoconsult.Text.Documents
                 }
 
                 // Now find the equations
-                foreach (var block in section.ChildBlocks)
+                FindEquations(section);
+            }
+        }
+
+        private void FindEquations(Section section)
+        {
+            
+            foreach (var block in section.ChildBlocks)
+            {
+                if (block is not Equation equation)
                 {
-                    if (block is not Equation equation)
-                    {
-                        continue;
-                    }
-
-                    EquationCounter++;
-
-                    equation.TagName = $"Equation{EquationCounter}";
-                    equation.CurrentPrefix = $"{_equationPrefix} {EquationCounter}:";
-
-                    Equations.Add(equation);
+                    continue;
                 }
+
+                EquationCounter++;
+
+                equation.TagName = $"Equation{EquationCounter}";
+                equation.CurrentPrefix = $"{_equationPrefix} {EquationCounter}:";
+
+                Equations.Add(equation);
             }
         }
 
