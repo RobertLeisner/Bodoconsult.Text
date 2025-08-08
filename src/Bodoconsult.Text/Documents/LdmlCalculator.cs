@@ -39,6 +39,11 @@ namespace Bodoconsult.Text.Documents
         public List<Figure> Figures { get; } = new();
 
         /// <summary>
+        /// All items of the TOF
+        /// </summary>
+        public List<Tof> TofItems { get; } = new();
+
+        /// <summary>
         /// Current figure counter
         /// </summary>
         public int FigurCounter { get; private set; }
@@ -47,6 +52,11 @@ namespace Bodoconsult.Text.Documents
         /// All equations in the document to count
         /// </summary>
         public List<Equation> Equations { get; } = new();
+
+        /// <summary>
+        /// All items of the TOE
+        /// </summary>
+        public List<Toe> ToeItems { get; } = new();
 
         /// <summary>
         /// Current equation counter
@@ -152,6 +162,18 @@ namespace Bodoconsult.Text.Documents
             if (Equations.Count == 0)
             {
                 return;
+            }
+
+            foreach (var equation in Equations)
+            {
+                var toe = new Toe();
+
+                foreach (var inline in equation.ChildInlines)
+                {
+                    toe.AddInline(inline);
+                }
+
+                ToeItems.Add(toe);
             }
 
         }

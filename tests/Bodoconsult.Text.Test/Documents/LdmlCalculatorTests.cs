@@ -24,6 +24,8 @@ public class LdmlCalculatorTests
         Assert.That(lc.FigurCounter, Is.EqualTo(0));
         Assert.That(lc.Equations, Is.Not.Null);
         Assert.That(lc.EquationCounter, Is.EqualTo(0));
+        Assert.That(lc.ToeItems, Is.Not.Null);
+        Assert.That(lc.TofItems, Is.Not.Null);
 
     }
 
@@ -48,5 +50,19 @@ public class LdmlCalculatorTests
         Assert.That(eq.TagName.Length, Is.Not.EqualTo(0));
     }
 
+    [Test]
+    public void PrepareAllItemsForToe_ValidDocument_EquationsLoaded()
+    {
+        // Arrange 
+        var doc = TestDataHelper.CreateDocument();
+        var lc = new LdmlCalculator(doc);
 
+        lc.EnumerateAllItemsForToe();
+
+        // Act  
+        lc.PrepareAllItemsForToe();
+
+        // Assert
+        Assert.That(lc.ToeItems.Count, Is.Not.EqualTo(0));
+    }
 }
