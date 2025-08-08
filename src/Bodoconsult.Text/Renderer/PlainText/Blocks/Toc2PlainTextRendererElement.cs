@@ -9,24 +9,17 @@ namespace Bodoconsult.Text.Renderer.PlainText;
 /// <summary>
 /// Text rendering element for <see cref="Toc2"/> instances
 /// </summary>
-public class Toc2PlainTextRendererElement : ITextRendererElement
+public class Toc2PlainTextRendererElement : ParagraphBasePlainTextRendererElement
 {
-    private readonly Toc2 _toc2;
+  
 
     /// <summary>
     /// Default ctor
     /// </summary>
     public Toc2PlainTextRendererElement(Toc2 toc2)
     {
-        _toc2 = toc2;
+        _paragraph = toc2;
     }
 
-    /// <summary>
-    /// Render the elememt
-    /// </summary>
-    public void RenderIt(ITextDocumentRender renderer)
-    {
-        DocumentRendererHelper.RenderInlineChilds(renderer, renderer.Content, _toc2.ChildInlines, tag: string.Empty, isBlock: true);
-        renderer.Content.Append($"{Environment.NewLine}");
-    }
+    
 }
