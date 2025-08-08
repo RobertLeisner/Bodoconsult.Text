@@ -46,7 +46,7 @@ namespace Bodoconsult.Text.Documents
         /// <summary>
         /// Current figure counter
         /// </summary>
-        public int FigurCounter { get; private set; }
+        public int FigureCounter { get; private set; }
 
         /// <summary>
         /// All equations in the document to count
@@ -131,8 +131,43 @@ namespace Bodoconsult.Text.Documents
         /// </summary>
         public void EnumerateAllItemsForTof()
         {
+            foreach (var item in Document.ChildBlocks)
+            {
+                // Only Section instances are interesting
+                if (item is not Section section)
+                {
+                    continue;
+                }
 
+                // Current section is exluded from numbering
+                if (section.DoNotIncludeInNumbering)
+                {
+                    continue;
+                }
 
+                // Now find the equations
+                FindFigure(section);
+            }
+
+        }
+
+        private void FindFigure(Section section)
+        {
+
+            foreach (var block in section.ChildBlocks)
+            {
+                if (block is not Figure figure)
+                {
+                    continue;
+                }
+
+                FigureCounter++;
+
+                figure.TagName = $"Figure{FigureCounter}";
+                figure.CurrentPrefix = $"{_documentMetaData.FigurePrefix} {FigureCounter}:";
+
+                Figures.Add(figure);
+            }
         }
 
         /// <summary>
@@ -184,6 +219,22 @@ namespace Bodoconsult.Text.Documents
         public void PrepareAllItemsForTof()
         {
 
+            if (Figures.Count == 0)
+            {
+                return;
+            }
+
+            foreach (var figure in Figures)
+            {
+                var tof = new Tof();
+
+                foreach (var inline in figure.ChildInlines)
+                {
+                    tof.AddInline(inline);
+                }
+
+                TofItems.Add(tof);
+            }
 
         }
     }

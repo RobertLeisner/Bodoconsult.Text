@@ -21,7 +21,7 @@ public class LdmlCalculatorTests
         // Assert
         Assert.That(lc.Document, Is.Not.Null);
         Assert.That(lc.Figures, Is.Not.Null);
-        Assert.That(lc.FigurCounter, Is.EqualTo(0));
+        Assert.That(lc.FigureCounter, Is.EqualTo(0));
         Assert.That(lc.Equations, Is.Not.Null);
         Assert.That(lc.EquationCounter, Is.EqualTo(0));
         Assert.That(lc.ToeItems, Is.Not.Null);
@@ -65,4 +65,42 @@ public class LdmlCalculatorTests
         // Assert
         Assert.That(lc.ToeItems.Count, Is.Not.EqualTo(0));
     }
+
+    [Test]
+    public void EnumerateAllItemsForTof_ValidDocument_FiguresLoaded()
+    {
+        // Arrange 
+        var doc = TestDataHelper.CreateDocument();
+        var lc = new LdmlCalculator(doc);
+
+        // Act  
+        lc.EnumerateAllItemsForTof();
+
+        // Assert
+        Assert.That(lc.Document, Is.Not.Null);
+        Assert.That(lc.Figures.Count, Is.Not.EqualTo(0));
+        Assert.That(lc.FigureCounter, Is.Not.EqualTo(0));
+
+        var eq = lc.Figures[0];
+
+        Assert.That(eq.CurrentPrefix.Length, Is.Not.EqualTo(0));
+        Assert.That(eq.TagName.Length, Is.Not.EqualTo(0));
+    }
+
+    [Test]
+    public void PrepareAllItemsForTof_ValidDocument_FiguresLoaded()
+    {
+        // Arrange 
+        var doc = TestDataHelper.CreateDocument();
+        var lc = new LdmlCalculator(doc);
+
+        lc.EnumerateAllItemsForTof();
+
+        // Act  
+        lc.PrepareAllItemsForTof();
+
+        // Assert
+        Assert.That(lc.TofItems.Count, Is.Not.EqualTo(0));
+    }
+
 }

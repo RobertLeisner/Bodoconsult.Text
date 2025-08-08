@@ -195,11 +195,11 @@ public static class TestDataHelper
         section.AddBlock(image);
 
         // Add a figure 1
-        var figure1 = new Image("Figure 1", TestHelper.TestChartImage);
+        var figure1 = new Figure("Figure 1", TestHelper.TestChartImage);
         section.AddBlock(figure1);
 
         // Add a figure 2
-        var figure2 = new Image("Figure 2", TestHelper.TestDistributionImage);
+        var figure2 = new Figure("Figure 2", TestHelper.TestDistributionImage);
         section.AddBlock(figure2);
 
         // Add an equation 1
