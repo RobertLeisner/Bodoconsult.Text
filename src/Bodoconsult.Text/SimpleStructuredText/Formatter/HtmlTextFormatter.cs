@@ -313,9 +313,15 @@ namespace Bodoconsult.Text.Formatter
             var row = -1;
 
             // Add a title
-            if (!string.IsNullOrEmpty(Title)) erg.AppendFormat("<p class=\"{1}\">{0}</p>", System.Net.WebUtility.HtmlEncode(Title), CssTitle);
+            if (!string.IsNullOrEmpty(Title))
+            {
+                erg.AppendFormat("<p class=\"{1}\">{0}</p>", System.Net.WebUtility.HtmlEncode(Title), CssTitle);
+            }
 
-            if (!string.IsNullOrEmpty(DateString)) erg.AppendFormat("<p>{0}</p>", System.Net.WebUtility.HtmlEncode(DateString));
+            if (!string.IsNullOrEmpty(DateString))
+            {
+                erg.AppendFormat("<p>{0}</p>", System.Net.WebUtility.HtmlEncode(DateString));
+            }
 
             // Add rest of text
             foreach (var ti in body)
@@ -420,7 +426,7 @@ namespace Bodoconsult.Text.Formatter
 
                         // c = "Hallo";
 
-                        erg.AppendFormat("<div class=\"code\"><code{0}>" + c + "</code></div>\r\n", className);
+                        erg.AppendFormat("<div class=\"code\"><code{0}>{1}</code></div>\r\n", className, c);
                         break;
                     case TextItemType.Code:
 
@@ -445,9 +451,6 @@ namespace Bodoconsult.Text.Formatter
 
             return erg.ToString();
         }
-
-
-
 
         private StringBuilder GetTable(TableTextItem ti)
         {

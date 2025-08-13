@@ -49,7 +49,10 @@ namespace Bodoconsult.Text.Model
         /// <param name="className"></param>
         public void AddHeader1(string message, string className = null)
         {
-            if (!KeepEmptyItems && string.IsNullOrEmpty(message)) return;
+            if (!KeepEmptyItems && string.IsNullOrEmpty(message))
+            {
+                return;
+            }
             TextItems.Add(new TextItem
             {
                 LogicalType = TextItemType.H1,
@@ -66,7 +69,10 @@ namespace Bodoconsult.Text.Model
         /// <param name="data">An object array to format</param>
         public void AddHeader1(string message, string className = null, params object[] data)
         {
-            if (!KeepEmptyItems && string.IsNullOrEmpty(message)) return;
+            if (!KeepEmptyItems && string.IsNullOrEmpty(message))
+            {
+                return;
+            }
             TextItems.Add(new TextItem
             {
                 LogicalType = TextItemType.H1,
@@ -182,7 +188,10 @@ namespace Bodoconsult.Text.Model
         /// <param name="className">Class name for formatting</param>
         public void AddParagraph(string message, string className = null)
         {
-            if (!KeepEmptyItems && string.IsNullOrEmpty(message)) return;
+            if (!KeepEmptyItems && string.IsNullOrEmpty(message))
+            {
+                return;
+            }
 
             TextItems.Add(new TextItem
             {
@@ -215,8 +224,15 @@ namespace Bodoconsult.Text.Model
         /// <param name="data">An object array to format</param>
         public void AddParagraph(string message, string className = null, params object[] data)
         {
-            if (!KeepEmptyItems && string.IsNullOrEmpty(message)) return;
-            if (data.Length == 1 && data[0] == null) return;
+            if (!KeepEmptyItems && string.IsNullOrEmpty(message))
+            {
+                return;
+            }
+
+            if (data.Length == 1 && data[0] == null)
+            {
+                return;
+            }
 
             AddParagraph(string.Format(message, data), className);
         }
@@ -346,7 +362,10 @@ namespace Bodoconsult.Text.Model
         /// <param name="className">Class name for formatting</param>
         public void AddXml(string message, string className = null)
         {
-            if (!KeepEmptyItems && string.IsNullOrEmpty(message)) return;
+            if (!KeepEmptyItems && string.IsNullOrEmpty(message))
+            {
+                return;
+            }
             TextItems.Add(new TextItem
             {
                 LogicalType = TextItemType.Xml,
@@ -460,9 +479,15 @@ namespace Bodoconsult.Text.Model
         /// <param name="data">data for the table content</param>
         public void AddTable(string title, DataTable data)
         {
-            if (data == null) return;
+            if (data == null)
+            {
+                return;
+            }
 
-            if (string.IsNullOrEmpty(data.TableName)) data.TableName = "dataTable";
+            if (string.IsNullOrEmpty(data.TableName))
+            {
+                data.TableName = "dataTable";
+            }
 
             using (var ms = new MemoryStream())
             {
