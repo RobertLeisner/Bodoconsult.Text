@@ -41,10 +41,5 @@ public class DocumentRendererHelper
         {
             sb.Append(tag);
         }
-
-        if (isBlock)
-        {
-            sb.Append($"{Environment.NewLine}");
-        }
     }
 }

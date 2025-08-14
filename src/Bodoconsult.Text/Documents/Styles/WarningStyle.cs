@@ -12,5 +12,16 @@ public class WarningStyle : ParagraphStyleBase
     {
         TagToUse = "WarningStyle";
         Name = TagToUse;
+        BorderBrush = new SolidColorBrush(Colors.Yellow);
+        BorderThickness.Bottom = Document.DefaultBorderWidth;
+        BorderThickness.Left = Document.DefaultBorderWidth;
+        BorderThickness.Right = Document.DefaultBorderWidth;
+        BorderThickness.Top = Document.DefaultBorderWidth;
+        Paddings.Left = Document.DefaultPaddingWidth;
+        Paddings.Right = Document.DefaultPaddingWidth;
+        Paddings.Top = Document.DefaultPaddingWidth;
+        Paddings.Bottom = Document.DefaultPaddingWidth;
+        Margins.Top = 3 * Document.DefaultPaddingWidth;
+        Margins.Bottom = 3 * Document.DefaultPaddingWidth;
     }
 }

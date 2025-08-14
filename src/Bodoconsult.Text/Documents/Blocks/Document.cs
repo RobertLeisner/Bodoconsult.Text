@@ -16,7 +16,27 @@ public class Document : Block
     public const string DefaultFontName = "Calibri";
 
     /// <summary>
-    /// Default font size
+    ///  Default font name
+    /// </summary>
+    public const string DefaultFontNameMonoSpaced = "Courier New";
+
+    /// <summary>
+    /// Default color for borders and fonts
+    /// </summary>
+    public static Color DefaultColor = Colors.Black;
+
+    /// <summary>
+    /// Default border width in pt
+    /// </summary>
+    public const int DefaultBorderWidth = 3;
+
+    /// <summary>
+    /// Default padding width in pt
+    /// </summary>
+    public const int DefaultPaddingWidth = 3;
+
+    /// <summary>
+    /// Default font size in pt
     /// </summary>
     public const int DefaultFontSize = 12;
 

@@ -14,5 +14,9 @@ public class Heading2Style : ParagraphStyleBase
     {
         TagToUse = "Heading2Style";
         Name = TagToUse;
+        BorderBrush = new SolidColorBrush(Colors.Black);
+        BorderBrush = new SolidColorBrush(Document.DefaultColor);
+        BorderThickness.Bottom = Document.DefaultBorderWidth;
+        Margins.Top = 4 * Document.DefaultFontSize;
     }
 }

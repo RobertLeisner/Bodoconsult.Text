@@ -15,5 +15,10 @@ public class CitationStyle : ParagraphStyleBase
     {
         TagToUse = "CitationStyle";
         Name = TagToUse;
+        TextAlignment = TextAlignment.Center;
+        Margins.Top = 3 * Document.DefaultPaddingWidth;
+        Margins.Bottom = 3 * Document.DefaultPaddingWidth;
+        Margins.Left = 1;
+        Margins.Right = 1;
     }
 }

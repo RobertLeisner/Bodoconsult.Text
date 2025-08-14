@@ -18,5 +18,7 @@ public class ErrorPlainTextRendererElement : ParagraphBasePlainTextRendererEleme
     public ErrorPlainTextRendererElement(Error error)
     {
         _paragraph = error;
+        LeftRightBorderChar = "!";
+        TopBottomBorderChar = "!";
     }
 }

@@ -18,6 +18,12 @@ public class ParagraphStyleBase : StyleBase
     public int FontSize { get; set; } = Document.DefaultFontSize;
 
     /// <summary>
+    /// Font color
+    /// </summary>
+    public Color FontColor { get; set; } = Document.DefaultColor;
+
+
+    /// <summary>
     /// Bold
     /// </summary>
     public bool Bold { get; set; }

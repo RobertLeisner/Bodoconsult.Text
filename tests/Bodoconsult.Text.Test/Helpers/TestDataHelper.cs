@@ -99,10 +99,6 @@ public static class TestDataHelper
         var heading5 = new Heading5("1.1.1.1.1. Heading level 5");
         section.AddBlock(heading5);
 
-        // Add an Info
-        var info = new Info("Info");
-        section.AddBlock(info);
-
         // Add a simple paragraph
         var paragraph = new Paragraph($"Paragraph: {MassText}");
         section.AddBlock(paragraph);
@@ -166,20 +162,24 @@ public static class TestDataHelper
         section.AddBlock(paragraph);
 
         // Add a Citation
-        var citation = new Citation("Citation: "+MassText);
+        var citation = new Citation($"Citation: {MassText}");
         section.AddBlock(citation);
 
         // Add a code
-        var code = new Code("Code " + MassText);
+        var code = new Code($"Code: {MassText}");
         section.AddBlock(code);
 
-        // Add an error
-        var error = new Error("Error " + MassText);
-        section.AddBlock(error);
+        // Add an info
+        var info = new Info($"Info: {MassText}");
+        section.AddBlock(info);
 
         // Add a Warning
-        var warning = new Warning("Warning " + MassText);
+        var warning = new Warning($"Warning: {MassText}");
         section.AddBlock(warning);
+
+        // Add an error
+        var error = new Error($"Error: {MassText}");
+        section.AddBlock(error);
 
         // Add a hyperlink
         paragraph = new Paragraph("ParagraphWithHyperlink: this is a link: ");

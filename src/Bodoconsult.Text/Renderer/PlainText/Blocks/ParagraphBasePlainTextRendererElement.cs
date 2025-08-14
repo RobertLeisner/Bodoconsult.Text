@@ -14,6 +14,16 @@ public abstract class ParagraphBasePlainTextRendererElement : ITextRendererEleme
     protected ParagraphBase _paragraph;
 
     /// <summary>
+    /// Char used for left and right borders
+    /// </summary>
+    public string LeftRightBorderChar { get; set; } = "|";
+
+    /// <summary>
+    /// Char used for top and bottom borders
+    /// </summary>
+    public string TopBottomBorderChar { get; set; } = "-";
+
+    /// <summary>
     /// Render the elememt
     /// </summary>
     /// <param name="renderer">Current renderer</param>
@@ -27,7 +37,11 @@ public abstract class ParagraphBasePlainTextRendererElement : ITextRendererEleme
 
         // Now let the formatter work
         var style = (ParagraphStyleBase)renderer.Styleset.FindStyle($"{_paragraph.GetType().Name}Style");
-        var formatter = new PlainTextParagraphFormatter(sb.ToString(), style, renderer.PageStyleBase);
+        var formatter = new PlainTextParagraphFormatter(sb.ToString(), style, renderer.PageStyleBase)
+            {
+                LeftRightBorderChar = LeftRightBorderChar,
+                TopBottomBorderChar = TopBottomBorderChar
+            };
         formatter.FormatText();
 
         // Now add the formatted text to the rendered content

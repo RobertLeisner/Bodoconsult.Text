@@ -24,7 +24,26 @@ internal class PlainTextParagraphFormatterTests
         var f = new PlainTextParagraphFormatter(content, paragraphStyle, pageStyle);
 
         // Assert
-        Assert.That(f.WidthsInChars, Is.Not.EqualTo(0));
+        Assert.That(f.WidthInChars, Is.EqualTo(0));
+
+    }
+
+    [Test]
+    public void CalculateValues_DefaultSetup_PropsSetCorrectly()
+    {
+        // Arrange 
+        var paragraphStyle = new ParagraphStyle();
+        var pageStyle = new DocumentStyle();
+
+        const string content = "Blubb";
+
+        var f = new PlainTextParagraphFormatter(content, paragraphStyle, pageStyle);
+
+        // Act  
+        f.CalculateValues();
+
+        // Assert
+        Assert.That(f.WidthInChars, Is.Not.EqualTo(0));
 
     }
 
@@ -43,7 +62,7 @@ internal class PlainTextParagraphFormatterTests
         f.FormatText();
 
         // Assert
-        Assert.That(f.Lines.Count, Is.EqualTo(1));
+        Assert.That(f.Lines.Count, Is.EqualTo(2));
 
         Debug.Print(f.GetFormattedText().ToString());
 
@@ -93,6 +112,62 @@ internal class PlainTextParagraphFormatterTests
     }
 
     [Test]
+    public void FormatText_LongString_MultipleLinesJustiyAlignment()
+    {
+        // Arrange 
+        var paragraphStyle = new ParagraphStyle
+        {
+            TextAlignment = TextAlignment.Justify
+        };
+        var pageStyle = new DocumentStyle();
+
+        const string content = TestDataHelper.MassText;
+
+        var f = new PlainTextParagraphFormatter(content, paragraphStyle, pageStyle);
+
+        // Act  
+        f.FormatText();
+
+        // Assert
+        Assert.That(f.Lines.Count, Is.GreaterThan(1));
+
+        Debug.Print(f.GetFormattedText().ToString());
+    }
+
+
+    [Test]
+    public void FillLine_ValidString1_StringJustified()
+    {
+        // Arrange 
+        const string value = "Lorem ipsum dolor ≥ = &gt; &#61; sit amet, consetetur";
+
+        // Act  
+        var result = PlainTextParagraphFormatter.FillLine(value, 11, 64);
+
+        // Assert
+        Debug.Print(result);
+
+        Assert.That(result.Length, Is.GreaterThan(value.Length));
+
+    }
+
+    [Test]
+    public void FillLine_ValidString2_StringJustified()
+    {
+        // Arrange 
+        const string value = "sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut";
+
+        // Act  
+        var result = PlainTextParagraphFormatter.FillLine(value, 5, 64);
+
+        // Assert
+        Debug.Print(result);
+
+        Assert.That(result.Length, Is.EqualTo(value.Length + 5));
+    }
+
+
+    [Test]
     public void FormatText_LongString_MultipleLinesCenterAlignment()
     {
         // Arrange 
@@ -126,6 +201,35 @@ internal class PlainTextParagraphFormatterTests
                 Left = 2,
                 Right = 2
             }
+        };
+
+        var pageStyle = new DocumentStyle();
+
+        const string content = TestDataHelper.MassText;
+
+        var f = new PlainTextParagraphFormatter(content, paragraphStyle, pageStyle);
+
+        // Act  
+        f.FormatText();
+
+        // Assert
+        Assert.That(f.Lines.Count, Is.GreaterThan(1));
+
+        Debug.Print(f.GetFormattedText().ToString());
+    }
+
+    [Test]
+    public void FormatText_LongStringMargin_MultipleLinesJustifyAlignment()
+    {
+        // Arrange 
+        var paragraphStyle = new ParagraphStyle
+        {
+            Margins =
+            {
+                Left = 2,
+                Right = 2
+            },
+            TextAlignment = TextAlignment.Justify
         };
 
         var pageStyle = new DocumentStyle();

@@ -1,11 +1,12 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
+using Bodoconsult.Text.Documents;
+using Bodoconsult.Text.Extensions;
+using Bodoconsult.Text.Reports;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
-using Bodoconsult.Text.Documents;
-using Bodoconsult.Text.Extensions;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
 
@@ -15,19 +16,19 @@ namespace Bodoconsult.Text.Renderer.PlainText;
 public class PlainTextParagraphFormatter
 {
 
-    private readonly string _leftMargin;
+    private string _leftMargin;
     private readonly string _content;
     private readonly ParagraphStyleBase _paragraphStyle;
     private PageStyleBase _pageStyle;
     private readonly ReadOnlyMemory<char> _bytes;
     private int _maxLength;
 
-    private readonly string _leftBorderChar;
-    private readonly string _rightBorderChar;
+    private string _leftBorderChar;
+    private string _rightBorderChar;
 
-    private readonly string _leftPadding;
-    private readonly string _rightPadding;
-    private readonly string _topBottomLine;
+    private string _leftPadding;
+    private string _rightPadding;
+    private string _topBottomLine;
 
     /// <summary>
     /// Char used for left and right borders
@@ -45,9 +46,9 @@ public class PlainTextParagraphFormatter
     public List<string> Lines { get; } = new();
 
     /// <summary>
-    /// Page with in number of chars. Public only for tests
+    /// Page width in number of chars. Public only for tests
     /// </summary>
-    public int WidthsInChars { get; }
+    public int WidthInChars { get; set; }
 
     /// <summary>
     /// Char width in cm
@@ -68,20 +69,38 @@ public class PlainTextParagraphFormatter
 
         _paragraphStyle = paragraphStyle;
         _pageStyle = pageStyle;
+    }
 
-        WidthsInChars = (int)((pageStyle.TypeAreaWidth - paragraphStyle.Margins.Left - paragraphStyle.Margins.Right) / CharWidth);
+    /// <summary>
+    /// Format the text
+    /// </summary>
+    public void FormatText()
+    {
+        CalculateValues();
+
+        GetLines();
+
+        FormatLines();
+    }
+
+    /// <summary>
+    /// Calculate all values required for formatting
+    /// </summary>
+    public void CalculateValues()
+    {
+        WidthInChars = (int)((_pageStyle.TypeAreaWidth - _paragraphStyle.Margins.Left - _paragraphStyle.Margins.Right) / CharWidth);
 
 
-        var marginLeft = (uint)(paragraphStyle.Margins.Left / CharWidth);
+        var marginLeft = (uint)(_paragraphStyle.Margins.Left / CharWidth);
 
         _leftMargin = marginLeft == 0 ? string.Empty : " ".Repeat(marginLeft);
 
 
         // Check if left border is needed
-        if (paragraphStyle.BorderThickness.Left > 0)
+        if (_paragraphStyle.BorderThickness.Left > 0)
         {
             _leftBorderChar = LeftRightBorderChar;
-            WidthsInChars -= 1;
+            WidthInChars -= 1;
         }
         else
         {
@@ -89,10 +108,10 @@ public class PlainTextParagraphFormatter
         }
 
         // Check if right border is needed
-        if (paragraphStyle.BorderThickness.Left > 0)
+        if (_paragraphStyle.BorderThickness.Left > 0)
         {
             _rightBorderChar = LeftRightBorderChar;
-            WidthsInChars -= 1;
+            WidthInChars -= 1;
         }
         else
         {
@@ -100,10 +119,10 @@ public class PlainTextParagraphFormatter
         }
 
         // Check if left padding is needed
-        if (paragraphStyle.Paddings.Left > 0)
+        if (_paragraphStyle.Paddings.Left > 0)
         {
             _leftPadding = " ";
-            WidthsInChars -= 1;
+            WidthInChars -= 1;
         }
         else
         {
@@ -111,10 +130,10 @@ public class PlainTextParagraphFormatter
         }
 
         // Check if right padding is needed
-        if (paragraphStyle.Paddings.Right > 0)
+        if (_paragraphStyle.Paddings.Right > 0)
         {
             _rightPadding = " ";
-            WidthsInChars -= 1;
+            WidthInChars -= 1;
         }
         else
         {
@@ -122,9 +141,9 @@ public class PlainTextParagraphFormatter
         }
 
         // Check if top border and/or bottom border is needed
-        if (paragraphStyle.BorderThickness.Top > 0 || paragraphStyle.BorderThickness.Bottom > 0)
+        if (_paragraphStyle.BorderThickness.Top > 0 || _paragraphStyle.BorderThickness.Bottom > 0)
         {
-            _topBottomLine = TopBottomBorderChar.Repeat(WidthsInChars +
+            _topBottomLine = TopBottomBorderChar.Repeat(WidthInChars +
                                                                     2 * LeftRightBorderChar.Length +
                                                                     _leftPadding.Length +
                                                                     _rightPadding.Length);
@@ -133,23 +152,16 @@ public class PlainTextParagraphFormatter
         {
             _topBottomLine = string.Empty;
         }
-
-
-    }
-
-    /// <summary>
-    /// Format the text
-    /// </summary>
-    public void FormatText()
-    {
-        GetLines();
-
-        FormatLines();
     }
 
     private void FormatLines()
     {
         var result = new List<string>();
+
+        if (_paragraphStyle.Margins.Top > 0)
+        {
+            result.Add("");
+        }
 
         if (_paragraphStyle.BorderThickness.Top > 0)
         {
@@ -166,6 +178,11 @@ public class PlainTextParagraphFormatter
             result.Add(_leftMargin + _topBottomLine);
         }
 
+        if (_paragraphStyle.Margins.Bottom > 0)
+        {
+            result.Add("");
+        }
+
         Lines.Clear();
         Lines.AddRange(result);
     }
@@ -173,7 +190,7 @@ public class PlainTextParagraphFormatter
     private void FormatLine(List<string> result, string line)
     {
 
-        var missinglength = WidthsInChars - line.Length;
+        var missinglength = WidthInChars - line.Length;
 
         if (_paragraphStyle.TextAlignment == TextAlignment.Left)
         {
@@ -183,22 +200,17 @@ public class PlainTextParagraphFormatter
 
         if (_paragraphStyle.TextAlignment == TextAlignment.Right)
         {
-            result.Add($"{_leftMargin}{_leftBorderChar}{_leftPadding}{line.PadLeft(WidthsInChars)}{_rightPadding}{_rightBorderChar}");
+            result.Add($"{_leftMargin}{_leftBorderChar}{_leftPadding}{line.PadLeft(WidthInChars)}{_rightPadding}{_rightBorderChar}");
             return;
         }
 
 
         if (_paragraphStyle.TextAlignment == TextAlignment.Center)
         {
-            var length = (uint)((WidthsInChars - line.Length) / 2.0);
-            if (length > 0)
-            {
-                result.Add($"{_leftMargin}{_leftBorderChar}{_leftPadding}{" ".Repeat(length)}{line}{" ".Repeat(length)}{_rightPadding}{_rightBorderChar}");
-            }
-            else
-            {
-                result.Add($"{_leftMargin}{_leftBorderChar}{_leftPadding}{line}{_rightPadding}{_rightBorderChar}");
-            }
+            var length = (uint)((WidthInChars - line.Length) / 2.0);
+            result.Add(length > 0
+                ? $"{_leftMargin}{_leftBorderChar}{_leftPadding}{" ".Repeat(length)}{line}{" ".Repeat(length)}{_rightPadding}{_rightBorderChar}"
+                : $"{_leftMargin}{_leftBorderChar}{_leftPadding}{line}{_rightPadding}{_rightBorderChar}");
 
             return;
         }
@@ -206,22 +218,92 @@ public class PlainTextParagraphFormatter
         // ToDo: justify
         if (_paragraphStyle.TextAlignment == TextAlignment.Justify)
         {
-            result.Add($"{_leftMargin}{line}");
+            line = FillLine(line, missinglength, WidthInChars);
+            result.Add($"{_leftMargin}{_leftBorderChar}{_leftPadding}{line}{_rightPadding}{_rightBorderChar}");
             return;
         }
+    }
+
+    /// <summary>
+    /// Fill a line to justify it
+    /// </summary>
+    /// <param name="line">Line to fill</param>
+    /// <param name="missinglength">Missing length</param>
+    /// <param name="widthInChars"></param>
+    /// <returns>Justified line</returns>
+    public static string FillLine(string line, int missinglength, int widthInChars)
+    {
+        if (line.Length < 0.8 * widthInChars)
+        {
+            return line;
+        }
+
+        var length = line.Length + missinglength;
+
+        var bytes = Encoding.UTF8.GetBytes(line);
+
+        var array = new Memory<byte>(new byte[length]);
+
+        for (var i = 0; i < array.Length; i++)
+        {
+            array.Slice(i, 1).Span[0] = 0x20;
+        }
+
+        var numberOfBlanks = line.SpaceCount();
+
+        var blanksPerUnit = (int)Math.Ceiling((double)missinglength / (double)numberOfBlanks);
+
+        var pos = length - 1;
+        for (var i = bytes.Length - 1; i >= 0; i--)
+        {
+            var value = bytes[i];
+
+            Debug.Print($"{i}  {pos} {value}  {missinglength}");
+
+            array.Slice(pos, 1).Span[0] = value;
+
+            // Blank
+            if (value == 0x20)
+            {
+                if (missinglength > 0 && missinglength < blanksPerUnit)
+                {
+                    missinglength = 0;
+                }
+                else if (missinglength >= blanksPerUnit)
+                {
+                    missinglength -= blanksPerUnit;
+                    pos -= blanksPerUnit + 1;
+                }
+                else
+                {
+                    pos--;
+                }
+            }
+            else // Other char
+            {
+                pos--;
+            }
+
+            if (pos < 0)
+            {
+                break;
+            }
+        }
+
+        return Encoding.UTF8.GetString(array.ToArray());
     }
 
     private void GetLines()
     {
         // Only one line
-        if (_content.Length < WidthsInChars)
+        if (_content.Length < WidthInChars)
         {
             Lines.Add(_content);
             return;
         }
 
         // More than one line
-        var pos = WidthsInChars - 1;
+        var pos = WidthInChars - 1;
         var altPos = 0;
         var length = _bytes.Length - 1;
 
@@ -247,7 +329,7 @@ public class PlainTextParagraphFormatter
 
             if (pos >= length)
             {
-                Lines.Add(_content.Substring(altPos, _content.Length- altPos));
+                Lines.Add(_content.Substring(altPos, _content.Length - altPos));
                 return;
             }
 
@@ -264,7 +346,7 @@ public class PlainTextParagraphFormatter
             Lines.Add(value);
 
             altPos = pos + 1;
-            pos += WidthsInChars - 1;
+            pos += WidthInChars - 1;
         }
     }
 

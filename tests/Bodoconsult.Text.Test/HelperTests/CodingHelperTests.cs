@@ -250,7 +250,6 @@ public class CodingHelperTests
         // Assert
         Debug.Print(sb.ToString());
     }
-
 }
 
 

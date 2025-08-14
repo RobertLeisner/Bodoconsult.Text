@@ -62,4 +62,30 @@ public static class StringExtensions
 
         return value;
     }
+
+    /// <summary>
+    /// Count the number of spaces in a string
+    /// </summary>
+    /// <param name="value">String</param>
+    /// <returns>Number of spaces in a string</returns>
+    public static int SpaceCount(this string value)
+    {
+        var count = 0;
+
+        if (string.IsNullOrEmpty(value))
+        {
+            return count;
+        }
+
+        var mem = value.AsMemory();
+        for (var i = 0; i < mem.Length; i++)
+        {
+            if (mem.Slice(i, 1).Span[0].Equals(' '))
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
 }

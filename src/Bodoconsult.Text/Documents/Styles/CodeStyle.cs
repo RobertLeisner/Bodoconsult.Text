@@ -14,5 +14,6 @@ public class CodeStyle : ParagraphStyleBase
     {
         TagToUse = "CodeStyle";
         Name = TagToUse;
+        FontName = Document.DefaultFontNameMonoSpaced;
     }
 }

@@ -65,10 +65,10 @@ public class SpanPlainTextRendererElement :  InlinePlainTextRendererElementBase
         {
             DocumentRendererHelper.RenderInlineChilds(renderer, sb, _span.ChildInlines, tag: string.Empty);
 
-            if (_span.Parent is Block)
-            {
-                sb.Append($"{Environment.NewLine}");
-            }
+            //if (_span.Parent is Block)
+            //{
+            //    sb.Append($"{Environment.NewLine}");
+            //}
         }
     }
 }

@@ -19,5 +19,7 @@ public class WarningPlainTextRendererElement : ParagraphBasePlainTextRendererEle
     public WarningPlainTextRendererElement(Warning warning)
     {
         _paragraph= warning;
+        LeftRightBorderChar = "?";
+        TopBottomBorderChar = "?";
     }
 }
