@@ -8,18 +8,9 @@ namespace Bodoconsult.Text.Documents;
 /// <summary>
 /// Toc4
 /// </summary>
-public class Toc4: ParagraphBase
+public class Toc4: TocBase
 {
-    /// <summary>
-    /// Static list with all allowed inline elements for paragraphs
-    /// </summary>
-    public static List<Type> AllAllowedInlines =
-    [
-        typeof(Span),
-        typeof(Bold),
-        typeof(Italic),
-        typeof(LineBreak)
-    ];
+   
 
 
     /// <summary>

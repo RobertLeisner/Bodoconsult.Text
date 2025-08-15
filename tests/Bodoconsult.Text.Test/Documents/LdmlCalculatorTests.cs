@@ -103,4 +103,25 @@ public class LdmlCalculatorTests
         Assert.That(lc.TofItems.Count, Is.Not.EqualTo(0));
     }
 
+    [Test]
+    public void EnumerateAllItemsForToc_ValidDocument_HeadingsLoaded()
+    {
+        // Arrange 
+        var doc = TestDataHelper.CreateDocument();
+        var lc = new LdmlCalculator(doc);
+
+        // Act  
+        lc.EnumerateAllItemsForToc();
+
+        // Assert
+        Assert.That(lc.Document, Is.Not.Null);
+        Assert.That(lc.Headings.Count, Is.Not.EqualTo(0));
+        //Assert.That(lc.Counter, Is.Not.EqualTo(0));
+
+        var eq = lc.Headings[0];
+
+        Assert.That(eq.CurrentPrefix.Length, Is.Not.EqualTo(0));
+        Assert.That(eq.TagName.Length, Is.Not.EqualTo(0));
+    }
+
 }

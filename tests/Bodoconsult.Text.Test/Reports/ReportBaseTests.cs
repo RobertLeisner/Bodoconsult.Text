@@ -45,7 +45,7 @@ namespace Bodoconsult.Text.Test.Reports
             // Arrange 
             var report = new TestReport();
             var metaData = new DocumentMetaData();
-            
+
             // Act  
             report.LoadDocumentMetaData(metaData);
 
@@ -109,9 +109,367 @@ namespace Bodoconsult.Text.Test.Reports
             Assert.That(section.ChildBlocks[0].GetType(), Is.EqualTo(typeof(Heading1)));
         }
 
-        // ToDo: add tests for level2 to level 5
+        [Test]
+        public void AddHeading_Level2_Heading2Added()
+        {
+            // Arrange 
+            var report = new TestReport();
+            report.PrepareTheDocument();
 
-        // ToDo: add tests for AppParagraph
+            // Act  
+            report.AddHeading(HeadingLevel.Level2, "Blubb");
+
+            // Assert
+            var section = report.Document.ChildBlocks[2] as Section;
+            Assert.That(section, Is.Not.Null);
+
+            Assert.That(report.Styleset, Is.Not.Null);
+            Assert.That(report.CurrentSection, Is.Not.Null);
+
+            Assert.That(section.ChildBlocks.Count, Is.EqualTo(1));
+            Assert.That(section.ChildBlocks[0].GetType(), Is.EqualTo(typeof(Heading2)));
+        }
+
+        [Test]
+        public void AddHeading_Level3_Heading3Added()
+        {
+            // Arrange 
+            var report = new TestReport();
+            report.PrepareTheDocument();
+
+            // Act  
+            report.AddHeading(HeadingLevel.Level3, "Blubb");
+
+            // Assert
+            var section = report.Document.ChildBlocks[2] as Section;
+            Assert.That(section, Is.Not.Null);
+
+            Assert.That(report.Styleset, Is.Not.Null);
+            Assert.That(report.CurrentSection, Is.Not.Null);
+
+            Assert.That(section.ChildBlocks.Count, Is.EqualTo(1));
+            Assert.That(section.ChildBlocks[0].GetType(), Is.EqualTo(typeof(Heading3)));
+        }
+
+        [Test]
+        public void AddHeading_Level4_Heading4Added()
+        {
+            // Arrange 
+            var report = new TestReport();
+            report.PrepareTheDocument();
+
+            // Act  
+            report.AddHeading(HeadingLevel.Level4, "Blubb");
+
+            // Assert
+            var section = report.Document.ChildBlocks[2] as Section;
+            Assert.That(section, Is.Not.Null);
+
+            Assert.That(report.Styleset, Is.Not.Null);
+            Assert.That(report.CurrentSection, Is.Not.Null);
+
+            Assert.That(section.ChildBlocks.Count, Is.EqualTo(1));
+            Assert.That(section.ChildBlocks[0].GetType(), Is.EqualTo(typeof(Heading4)));
+        }
+
+        [Test]
+        public void AddHeading_Level5_Heading5Added()
+        {
+            // Arrange 
+            var report = new TestReport();
+            report.PrepareTheDocument();
+
+            // Act  
+            report.AddHeading(HeadingLevel.Level5, "Blubb");
+
+            // Assert
+            var section = report.Document.ChildBlocks[2] as Section;
+            Assert.That(section, Is.Not.Null);
+
+            Assert.That(report.Styleset, Is.Not.Null);
+            Assert.That(report.CurrentSection, Is.Not.Null);
+
+            Assert.That(section.ChildBlocks.Count, Is.EqualTo(1));
+            Assert.That(section.ChildBlocks[0].GetType(), Is.EqualTo(typeof(Heading5)));
+        }
+
+        [Test]
+        public void AddParagraph_Paragraph_ParagraphAdded()
+        {
+            // Arrange 
+            var report = new TestReport();
+            report.PrepareTheDocument();
+
+            // Act  
+            report.AddParagraph(ParagraphType.Paragraph, "Blubb");
+
+            // Assert
+            var section = report.Document.ChildBlocks[2] as Section;
+            Assert.That(section, Is.Not.Null);
+
+            Assert.That(report.Styleset, Is.Not.Null);
+            Assert.That(report.CurrentSection, Is.Not.Null);
+
+            Assert.That(section.ChildBlocks.Count, Is.EqualTo(1));
+            Assert.That(section.ChildBlocks[0].GetType(), Is.EqualTo(typeof(Paragraph)));
+        }
+
+        [Test]
+        public void AddParagraph_Citation_CitationAdded()
+        {
+            // Arrange 
+            var report = new TestReport();
+            report.PrepareTheDocument();
+
+            // Act  
+            report.AddParagraph(ParagraphType.Citation, "Blubb");
+
+            // Assert
+            var section = report.Document.ChildBlocks[2] as Section;
+            Assert.That(section, Is.Not.Null);
+
+            Assert.That(report.Styleset, Is.Not.Null);
+            Assert.That(report.CurrentSection, Is.Not.Null);
+
+            Assert.That(section.ChildBlocks.Count, Is.EqualTo(1));
+            Assert.That(section.ChildBlocks[0].GetType(), Is.EqualTo(typeof(Citation)));
+        }
+
+        [Test]
+        public void AddParagraph_Code_CodeAdded()
+        {
+            // Arrange 
+            var report = new TestReport();
+            report.PrepareTheDocument();
+
+            // Act  
+            report.AddParagraph(ParagraphType.Code, "Blubb");
+
+            // Assert
+            var section = report.Document.ChildBlocks[2] as Section;
+            Assert.That(section, Is.Not.Null);
+
+            Assert.That(report.Styleset, Is.Not.Null);
+            Assert.That(report.CurrentSection, Is.Not.Null);
+
+            Assert.That(section.ChildBlocks.Count, Is.EqualTo(1));
+            Assert.That(section.ChildBlocks[0].GetType(), Is.EqualTo(typeof(Code)));
+        }
+
+        [Test]
+        public void AddParagraph_Center_CenterAdded()
+        {
+            // Arrange 
+            var report = new TestReport();
+            report.PrepareTheDocument();
+
+            // Act  
+            report.AddParagraph(ParagraphType.ParagraphCenter, "Blubb");
+
+            // Assert
+            var section = report.Document.ChildBlocks[2] as Section;
+            Assert.That(section, Is.Not.Null);
+
+            Assert.That(report.Styleset, Is.Not.Null);
+            Assert.That(report.CurrentSection, Is.Not.Null);
+
+            Assert.That(section.ChildBlocks.Count, Is.EqualTo(1));
+            Assert.That(section.ChildBlocks[0].GetType(), Is.EqualTo(typeof(ParagraphCenter)));
+        }
+
+        [Test]
+        public void AddParagraph_Right_RightAdded()
+        {
+            // Arrange 
+            var report = new TestReport();
+            report.PrepareTheDocument();
+
+            // Act  
+            report.AddParagraph(ParagraphType.ParagraphRight, "Blubb");
+
+            // Assert
+            var section = report.Document.ChildBlocks[2] as Section;
+            Assert.That(section, Is.Not.Null);
+
+            Assert.That(report.Styleset, Is.Not.Null);
+            Assert.That(report.CurrentSection, Is.Not.Null);
+
+            Assert.That(section.ChildBlocks.Count, Is.EqualTo(1));
+            Assert.That(section.ChildBlocks[0].GetType(), Is.EqualTo(typeof(ParagraphRight)));
+        }
+
+        [Test]
+        public void AddParagraph_Justify_JustifyAdded()
+        {
+            // Arrange 
+            var report = new TestReport();
+            report.PrepareTheDocument();
+
+            // Act  
+            report.AddParagraph(ParagraphType.ParagraphJustify, "Blubb");
+
+            // Assert
+            var section = report.Document.ChildBlocks[2] as Section;
+            Assert.That(section, Is.Not.Null);
+
+            Assert.That(report.Styleset, Is.Not.Null);
+            Assert.That(report.CurrentSection, Is.Not.Null);
+
+            Assert.That(section.ChildBlocks.Count, Is.EqualTo(1));
+            Assert.That(section.ChildBlocks[0].GetType(), Is.EqualTo(typeof(ParagraphJustify)));
+        }
+
+
+
+        [Test]
+        public void AddParagraph_Info_InfoAdded()
+        {
+            // Arrange 
+            var report = new TestReport();
+            report.PrepareTheDocument();
+
+            // Act  
+            report.AddParagraph(ParagraphType.Info, "Blubb");
+
+            // Assert
+            var section = report.Document.ChildBlocks[2] as Section;
+            Assert.That(section, Is.Not.Null);
+
+            Assert.That(report.Styleset, Is.Not.Null);
+            Assert.That(report.CurrentSection, Is.Not.Null);
+
+            Assert.That(section.ChildBlocks.Count, Is.EqualTo(1));
+            Assert.That(section.ChildBlocks[0].GetType(), Is.EqualTo(typeof(Info)));
+        }
+
+        [Test]
+        public void AddParagraph_Error_ErrorAdded()
+        {
+            // Arrange 
+            var report = new TestReport();
+            report.PrepareTheDocument();
+
+            // Act  
+            report.AddParagraph(ParagraphType.Error, "Blubb");
+
+            // Assert
+            var section = report.Document.ChildBlocks[2] as Section;
+            Assert.That(section, Is.Not.Null);
+
+            Assert.That(report.Styleset, Is.Not.Null);
+            Assert.That(report.CurrentSection, Is.Not.Null);
+
+            Assert.That(section.ChildBlocks.Count, Is.EqualTo(1));
+            Assert.That(section.ChildBlocks[0].GetType(), Is.EqualTo(typeof(Error)));
+        }
+
+        [Test]
+        public void AddParagraph_Warning_WarningAdded()
+        {
+            // Arrange 
+            var report = new TestReport();
+            report.PrepareTheDocument();
+
+            // Act  
+            report.AddParagraph(ParagraphType.Warning, "Blubb");
+
+            // Assert
+            var section = report.Document.ChildBlocks[2] as Section;
+            Assert.That(section, Is.Not.Null);
+
+            Assert.That(report.Styleset, Is.Not.Null);
+            Assert.That(report.CurrentSection, Is.Not.Null);
+
+            Assert.That(section.ChildBlocks.Count, Is.EqualTo(1));
+            Assert.That(section.ChildBlocks[0].GetType(), Is.EqualTo(typeof(Warning)));
+        }
+
+        [Test]
+        public void AddParagraph_Titel_TitelAdded()
+        {
+            // Arrange 
+            var report = new TestReport();
+            report.PrepareTheDocument();
+
+            // Act  
+            report.AddParagraph(ParagraphType.Title, "Blubb");
+
+            // Assert
+            var section = report.Document.ChildBlocks[2] as Section;
+            Assert.That(section, Is.Not.Null);
+
+            Assert.That(report.Styleset, Is.Not.Null);
+            Assert.That(report.CurrentSection, Is.Not.Null);
+
+            Assert.That(section.ChildBlocks.Count, Is.EqualTo(1));
+            Assert.That(section.ChildBlocks[0].GetType(), Is.EqualTo(typeof(Title)));
+        }
+
+        [Test]
+        public void AddParagraph_Subtitel_SubtitelAdded()
+        {
+            // Arrange 
+            var report = new TestReport();
+            report.PrepareTheDocument();
+
+            // Act  
+            report.AddParagraph(ParagraphType.SubTitle, "Blubb");
+
+            // Assert
+            var section = report.Document.ChildBlocks[2] as Section;
+            Assert.That(section, Is.Not.Null);
+
+            Assert.That(report.Styleset, Is.Not.Null);
+            Assert.That(report.CurrentSection, Is.Not.Null);
+
+            Assert.That(section.ChildBlocks.Count, Is.EqualTo(1));
+            Assert.That(section.ChildBlocks[0].GetType(), Is.EqualTo(typeof(Subtitle)));
+        }
+
+        [Test]
+        public void AddParagraph_SectionTitel_SectionTitelAdded()
+        {
+            // Arrange 
+            var report = new TestReport();
+            report.PrepareTheDocument();
+
+            // Act  
+            report.AddParagraph(ParagraphType.SectionTitle, "Blubb");
+
+            // Assert
+            var section = report.Document.ChildBlocks[2] as Section;
+            Assert.That(section, Is.Not.Null);
+
+            Assert.That(report.Styleset, Is.Not.Null);
+            Assert.That(report.CurrentSection, Is.Not.Null);
+
+            Assert.That(section.ChildBlocks.Count, Is.EqualTo(1));
+            Assert.That(section.ChildBlocks[0].GetType(), Is.EqualTo(typeof(SectionTitle)));
+        }
+
+        [Test]
+        public void AddParagraph_SectionSubtitel_SectionSubtitelAdded()
+        {
+            // Arrange 
+            var report = new TestReport();
+            report.PrepareTheDocument();
+
+            // Act  
+            report.AddParagraph(ParagraphType.SectionSubtitle, "Blubb");
+
+            // Assert
+            var section = report.Document.ChildBlocks[2] as Section;
+            Assert.That(section, Is.Not.Null);
+
+            Assert.That(report.Styleset, Is.Not.Null);
+            Assert.That(report.CurrentSection, Is.Not.Null);
+
+            Assert.That(section.ChildBlocks.Count, Is.EqualTo(1));
+            Assert.That(section.ChildBlocks[0].GetType(), Is.EqualTo(typeof(SectionSubtitle)));
+        }
+
 
     }
 }
+
+
