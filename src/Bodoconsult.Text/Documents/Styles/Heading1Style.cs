@@ -14,7 +14,6 @@ public class Heading1Style : ParagraphStyleBase
     {
         TagToUse = "Heading1Style";
         Name = TagToUse;
-        BorderBrush = new SolidColorBrush(Colors.Black);
         BorderBrush = new SolidColorBrush(Document.DefaultColor);
         BorderThickness.Bottom = Document.DefaultBorderWidth;
         BorderThickness.Top = Document.DefaultBorderWidth;

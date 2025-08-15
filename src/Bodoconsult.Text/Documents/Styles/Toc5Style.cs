@@ -1,4 +1,6 @@
-﻿namespace Bodoconsult.Text.Documents;
+﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
+
+namespace Bodoconsult.Text.Documents;
 
 /// <summary>
 /// Style for <see cref="Toc5"/> instances
@@ -12,5 +14,7 @@ public class Toc5Style : ParagraphStyleBase
     {
         TagToUse = "Toc5Style";
         Name = TagToUse;
+        Margins.Left = 4;
+        FontSize = Document.DefaultFontSize + 2;
     }
 }

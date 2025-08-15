@@ -1,4 +1,6 @@
-﻿namespace Bodoconsult.Text.Documents;
+﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
+
+namespace Bodoconsult.Text.Documents;
 
 /// <summary>
 /// Style for <see cref="SectionTitle"/> instances
@@ -12,5 +14,8 @@ public class SectionTitleStyle : ParagraphStyleBase
     {
         TagToUse = "SectionTitleStyle";
         Name = TagToUse;
+        TextAlignment = TextAlignment.Center;
+        Margins.Top = Document.DefaultFontSize * 4;
+        FontSize = Document.DefaultFontSize + 4;
     }
 }

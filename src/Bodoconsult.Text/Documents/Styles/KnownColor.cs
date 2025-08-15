@@ -1,4 +1,6 @@
-﻿namespace Bodoconsult.Text.Documents;
+﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
+
+namespace Bodoconsult.Text.Documents;
 
 /// <summary>
 /// Colors take from namespace System.Windows.Media.KnownColor

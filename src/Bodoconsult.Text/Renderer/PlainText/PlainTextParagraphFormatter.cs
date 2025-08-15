@@ -19,7 +19,7 @@ public class PlainTextParagraphFormatter
     private string _leftMargin;
     private readonly string _content;
     private readonly ParagraphStyleBase _paragraphStyle;
-    private PageStyleBase _pageStyle;
+    private readonly PageStyleBase _pageStyle;
     private readonly ReadOnlyMemory<char> _bytes;
     private int _maxLength;
 
@@ -64,7 +64,6 @@ public class PlainTextParagraphFormatter
     public PlainTextParagraphFormatter(string content, ParagraphStyleBase paragraphStyle, PageStyleBase pageStyle)
     {
         _content = content;
-
         _bytes = _content.AsMemory();
 
         _paragraphStyle = paragraphStyle;
@@ -158,10 +157,7 @@ public class PlainTextParagraphFormatter
     {
         var result = new List<string>();
 
-        if (_paragraphStyle.Margins.Top > 0)
-        {
-            result.Add("");
-        }
+        AddMargin(result, _paragraphStyle.Margins.Top);
 
         if (_paragraphStyle.BorderThickness.Top > 0)
         {
@@ -178,13 +174,25 @@ public class PlainTextParagraphFormatter
             result.Add(_leftMargin + _topBottomLine);
         }
 
-        if (_paragraphStyle.Margins.Bottom > 0)
-        {
-            result.Add("");
-        }
+        AddMargin(result, _paragraphStyle.Margins.Bottom);
 
         Lines.Clear();
         Lines.AddRange(result);
+    }
+
+    private void AddMargin(List<string> result, double thickness)
+    {
+        if (thickness <= 0)
+        {
+            return;
+        }
+
+        var lineNumber = (int)Math.Ceiling(thickness / _paragraphStyle.FontSize);
+
+        for (var i = 0; i < lineNumber; i++)
+        {
+            result.Add("");
+        }
     }
 
     private void FormatLine(List<string> result, string line)
@@ -192,35 +200,28 @@ public class PlainTextParagraphFormatter
 
         var missinglength = WidthInChars - line.Length;
 
-        if (_paragraphStyle.TextAlignment == TextAlignment.Left)
+        switch (_paragraphStyle.TextAlignment)
         {
-            result.Add($"{_leftMargin}{_leftBorderChar}{_leftPadding}{line}{" ".Repeat(missinglength)}{_rightPadding}{_rightBorderChar}");
-            return;
-        }
+            case TextAlignment.Left:
+                result.Add($"{_leftMargin}{_leftBorderChar}{_leftPadding}{line}{" ".Repeat(missinglength)}{_rightPadding}{_rightBorderChar}");
+                return;
+            case TextAlignment.Right:
+                result.Add($"{_leftMargin}{_leftBorderChar}{_leftPadding}{line.PadLeft(WidthInChars)}{_rightPadding}{_rightBorderChar}");
+                return;
+            case TextAlignment.Center:
+            {
+                var length = (uint)((WidthInChars - line.Length) / 2.0);
+                result.Add(length > 0
+                    ? $"{_leftMargin}{_leftBorderChar}{_leftPadding}{" ".Repeat(length)}{line}{" ".Repeat(length)}{_rightPadding}{_rightBorderChar}"
+                    : $"{_leftMargin}{_leftBorderChar}{_leftPadding}{line}{_rightPadding}{_rightBorderChar}");
 
-        if (_paragraphStyle.TextAlignment == TextAlignment.Right)
-        {
-            result.Add($"{_leftMargin}{_leftBorderChar}{_leftPadding}{line.PadLeft(WidthInChars)}{_rightPadding}{_rightBorderChar}");
-            return;
-        }
-
-
-        if (_paragraphStyle.TextAlignment == TextAlignment.Center)
-        {
-            var length = (uint)((WidthInChars - line.Length) / 2.0);
-            result.Add(length > 0
-                ? $"{_leftMargin}{_leftBorderChar}{_leftPadding}{" ".Repeat(length)}{line}{" ".Repeat(length)}{_rightPadding}{_rightBorderChar}"
-                : $"{_leftMargin}{_leftBorderChar}{_leftPadding}{line}{_rightPadding}{_rightBorderChar}");
-
-            return;
-        }
-
-        // ToDo: justify
-        if (_paragraphStyle.TextAlignment == TextAlignment.Justify)
-        {
-            line = FillLine(line, missinglength, WidthInChars);
-            result.Add($"{_leftMargin}{_leftBorderChar}{_leftPadding}{line}{_rightPadding}{_rightBorderChar}");
-            return;
+                return;
+            }
+            // ToDo: justify
+            case TextAlignment.Justify:
+                line = FillLine(line, missinglength, WidthInChars);
+                result.Add($"{_leftMargin}{_leftBorderChar}{_leftPadding}{line}{_rightPadding}{_rightBorderChar}");
+                return;
         }
     }
 
@@ -258,7 +259,7 @@ public class PlainTextParagraphFormatter
         {
             var value = bytes[i];
 
-            Debug.Print($"{i}  {pos} {value}  {missinglength}");
+            //Debug.Print($"{i}  {pos} {value}  {missinglength}");
 
             array.Slice(pos, 1).Span[0] = value;
 

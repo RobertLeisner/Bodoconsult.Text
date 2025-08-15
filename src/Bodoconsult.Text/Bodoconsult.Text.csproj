@@ -38,7 +38,8 @@
 	  <Folder Include="Renderer\Html\Inlines\" />
 	  <Folder Include="Renderer\Markdown\Blocks\" />
 	  <Folder Include="Renderer\Markdown\Inlines\" />
-	  <Folder Include="Renderer\Rtf\" />
+	  <Folder Include="Renderer\Rtf\Blocks\" />
+	  <Folder Include="Renderer\Rtf\Inlines\" />
 	</ItemGroup>
 
 </Project>
