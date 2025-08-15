@@ -1,27 +1,12 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
-using System;
-using System.Collections.Generic;
-
 namespace Bodoconsult.Text.Documents;
 
 /// <summary>
 /// Toc1
 /// </summary>
-public class Toc1 : ParagraphBase
+public class Toc1 : TocBase
 {
-    /// <summary>
-    /// Static list with all allowed inline elements for paragraphs
-    /// </summary>
-    public static List<Type> AllAllowedInlines =
-    [
-        typeof(Span),
-        typeof(Bold),
-        typeof(Italic),
-        typeof(LineBreak)
-    ];
-
-
     /// <summary>
     /// Default ctor
     /// </summary>

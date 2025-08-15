@@ -8,19 +8,8 @@ namespace Bodoconsult.Text.Documents;
 /// <summary>
 /// Toc3
 /// </summary>
-public class Toc3 : ParagraphBase
+public class Toc3 : TocBase
 {
-    /// <summary>
-    /// Static list with all allowed inline elements for paragraphs
-    /// </summary>
-    public static List<Type> AllAllowedInlines =
-    [
-        typeof(Span),
-        typeof(Bold),
-        typeof(Italic),
-        typeof(LineBreak)
-    ];
-
 
     /// <summary>
     /// Default ctor

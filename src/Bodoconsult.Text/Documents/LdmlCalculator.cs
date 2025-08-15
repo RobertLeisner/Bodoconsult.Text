@@ -34,6 +34,22 @@ namespace Bodoconsult.Text.Documents
         public Document Document { get;  }
 
         /// <summary>
+        /// All headings in the document to count
+        /// </summary>
+        public List<HeadingBase> Headings { get; } = new();
+
+        /// <summary>
+        /// All TocItems in the document to count
+        /// </summary>
+        public List<TocBase> TocItems { get; } = new();
+
+        /// <summary>
+        /// Heading counters
+        /// </summary>
+        public int[] HeadingCounters { get; } = new int[5];
+
+
+        /// <summary>
         /// All figures in the document to count
         /// </summary>
         public List<Figure> Figures { get; } = new();
@@ -79,8 +95,79 @@ namespace Bodoconsult.Text.Documents
         /// </summary>
         public void EnumerateAllItemsForToc()
         {
+            foreach (var item in Document.ChildBlocks)
+            {
+                // Only Section instances are interesting
+                if (item is not Section section)
+                {
+                    continue;
+                }
 
+                // Current section is exluded from numbering
+                if (section.DoNotIncludeInNumbering)
+                {
+                    continue;
+                }
 
+                // Now find the equations
+                FindHeadings(section);
+            }
+
+        }
+
+        private void FindHeadings(Section section)
+        {
+            foreach (var block in section.ChildBlocks)
+            {
+                if (block is not HeadingBase equation)
+                {
+                    continue;
+                }
+
+                if (equation is Heading1)
+                {
+                    HeadingCounters[0]++;
+                    HeadingCounters[1]=0;
+                    HeadingCounters[2] = 0;
+                    HeadingCounters[3] = 0;
+                    HeadingCounters[4] = 0;
+                    equation.CurrentPrefix = $"{HeadingCounters[0]}.";
+                }
+
+                if (equation is Heading2)
+                {
+                    HeadingCounters[1]++;
+                    HeadingCounters[2] = 0;
+                    HeadingCounters[3] = 0;
+                    HeadingCounters[4] = 0;
+                    equation.CurrentPrefix = $"{HeadingCounters[0]}.{HeadingCounters[1]}.";
+                }
+
+                if (equation is Heading3)
+                {
+                    HeadingCounters[2]++;
+                    HeadingCounters[3] = 0;
+                    HeadingCounters[4] = 0;
+                    equation.CurrentPrefix = $"{HeadingCounters[0]}.{HeadingCounters[1]}.{HeadingCounters[2]}.";
+                }
+
+                if (equation is Heading4)
+                {
+                    HeadingCounters[3]++;
+                    HeadingCounters[4] = 0;
+                    equation.CurrentPrefix = $"{HeadingCounters[0]}.{HeadingCounters[1]}.{HeadingCounters[2]}.{HeadingCounters[3]}.";
+                }
+
+                if (equation is Heading5)
+                {
+                    HeadingCounters[4]++;
+                    equation.CurrentPrefix = $"{HeadingCounters[0]}.{HeadingCounters[1]}.{HeadingCounters[2]}.{HeadingCounters[3]}.{HeadingCounters[4]}.";
+                }
+
+                equation.TagName = $"Heading{HeadingCounters[0]}_{HeadingCounters[1]}_{HeadingCounters[2]}_{HeadingCounters[3]}_{HeadingCounters[4]}";
+                
+                Headings.Add(equation);
+            }
         }
 
         /// <summary>
