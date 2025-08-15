@@ -66,7 +66,7 @@ public class ItalicPlainTextRendererElement : InlinePlainTextRendererElementBase
         }
         else
         {
-            DocumentRendererHelper.RenderInlineChilds(renderer, sb, _span.ChildInlines, tag: "**");
+            DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, _span.ChildInlines, tag: "**");
 
             if (_span.Parent is Block)
             {

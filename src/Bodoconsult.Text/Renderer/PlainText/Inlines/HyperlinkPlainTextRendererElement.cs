@@ -2,7 +2,6 @@
 
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
-using System;
 using System.Text;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
@@ -66,12 +65,12 @@ public class HyperlinkPlainTextRendererElement : InlinePlainTextRendererElementB
         }
         else
         {
-            DocumentRendererHelper.RenderInlineChilds(renderer, sb, _span.ChildInlines, tag: "*");
+            DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, _span.ChildInlines, string.Empty);
 
-            if (_span.Parent is Block)
-            {
-                sb.Append($"{Environment.NewLine}");
-            }
+            //if (_span.Parent is Block)
+            //{
+            //    sb.Append($"{Environment.NewLine}");
+            //}
         }
     }
 }

@@ -5,7 +5,6 @@
 
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
-using System;
 using System.Text;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
@@ -63,7 +62,7 @@ public class SpanPlainTextRendererElement :  InlinePlainTextRendererElementBase
         }
         else
         {
-            DocumentRendererHelper.RenderInlineChilds(renderer, sb, _span.ChildInlines, tag: string.Empty);
+            DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, _span.ChildInlines, tag: string.Empty);
 
             //if (_span.Parent is Block)
             //{

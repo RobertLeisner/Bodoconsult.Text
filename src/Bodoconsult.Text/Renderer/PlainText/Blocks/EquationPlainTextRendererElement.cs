@@ -26,7 +26,7 @@ public class EquationPlainTextRendererElement : ITextRendererElement
     /// </summary>
     public void RenderIt(ITextDocumentRender renderer)
     {
-        DocumentRendererHelper.RenderInlineChilds(renderer, renderer.Content, _equation.ChildInlines, tag: string.Empty, isBlock: true);
+        DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, renderer.Content, _equation.ChildInlines, tag: string.Empty, isBlock: true);
         renderer.Content.Append($"{Environment.NewLine}");
     }
 }

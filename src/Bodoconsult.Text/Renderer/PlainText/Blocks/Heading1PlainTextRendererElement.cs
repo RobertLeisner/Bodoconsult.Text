@@ -16,6 +16,6 @@ public class Heading1PlainTextRendererElement : ParagraphBasePlainTextRendererEl
     /// <param name="paragraph">Paragraph</param>
     public Heading1PlainTextRendererElement(Heading1 paragraph)
     {
-        _paragraph = paragraph;
+        Paragraph = paragraph;
     }
 }

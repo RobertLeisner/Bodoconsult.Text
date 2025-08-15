@@ -13,6 +13,9 @@ public class HtmlTextDocumentRenderer : BaseTextDocumentRenderer
     /// Default ctor
     /// </summary>
     /// <param name="document">Document to render</param>
-    public HtmlTextDocumentRenderer(Document document) : base(document)
-    { }
+    /// <param name="textRendererElementFactory">Current factory for text renderer elements</param>
+    public HtmlTextDocumentRenderer(Document document, ITextRendererElementFactory textRendererElementFactory) : base(document)
+    {
+        TextRendererElementFactory = textRendererElementFactory;
+    }
 }

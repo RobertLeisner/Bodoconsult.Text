@@ -2,10 +2,8 @@
 
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Extensions;
-using Bodoconsult.Text.Reports;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text;
 
 namespace Bodoconsult.Text.Renderer.PlainText;

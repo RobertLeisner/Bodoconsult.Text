@@ -250,6 +250,129 @@ public class CodingHelperTests
         // Assert
         Debug.Print(sb.ToString());
     }
+
+
+    /// <summary>
+    /// Style for <see cref="Paragraph"/> instances
+    /// </summary>
+    [Test]
+    public void CreateRendererElements_ImageBase_AllHtmlRendererElementsCreatedAsString()
+    {
+        var baseType = typeof(ImageBase);
+
+        PrintCodeForHtmlRendererElements(baseType);
+    }
+
+    /// <summary>
+    /// Style for <see cref="Paragraph"/> instances
+    /// </summary>
+    [Test]
+    public void CreateRendererElements_ParagraphBase_AllHtmlRendererElementsCreatedAsString()
+    {
+        var baseType = typeof(ParagraphBase);
+
+        PrintCodeForHtmlRendererElements(baseType);
+    }
+
+    private static void PrintCodeForHtmlRendererElements(Type baseType)
+    {
+        // Arrange 
+        var types = TypeHelper.GetTypesDerivedFromCurrentAssembly(baseType)
+            .Where(x => !x.IsAbstract);
+
+        //&& x == typeof(Paragraph)
+
+        var sb = new StringBuilder();
+
+        // Act  
+        foreach (var type in types)
+        {
+
+            var typeLow = type.Name.FirstCharToLowerCase();
+
+            sb.AppendLine("/// <summary>");
+            sb.AppendLine($"/// HTML rendering element for <see cref=\"{type.Name}\"/> instances");
+            sb.AppendLine("/// </summary>");
+            sb.AppendLine($"public class {type.Name}HtmlTextRendererElement : HtmlTextRendererElement");
+            sb.AppendLine("{");
+            sb.AppendLine($"private readonly {type.Name} _{typeLow};");
+            sb.AppendLine("");
+            sb.AppendLine("/// <summary>");
+            sb.AppendLine("/// Default ctor");
+            sb.AppendLine("/// </summary>");
+            sb.AppendLine($"public {type.Name}HtmlTextRendererElement({type.Name} {typeLow}) : base({typeLow})");
+            sb.AppendLine("{");
+            sb.AppendLine($"_{typeLow} = {typeLow};");
+            sb.AppendLine($"ClassName = {typeLow}.StyleName;");
+            sb.AppendLine("}");
+            sb.AppendLine("}");
+            sb.AppendLine("");
+        }
+
+        // Assert
+        Debug.Print(sb.ToString());
+    }
+
+    /// <summary>
+    /// Style for <see cref="Paragraph"/> instances
+    /// </summary>
+    [Test]
+    public void CreateRendererElements_PageStyleBase_AllHtmlStyleRendererElementsCreatedAsString()
+    {
+        var baseType = typeof(PageStyleBase);
+
+        PrintCodeForHtmlStyleRendererElements(baseType);
+    }
+
+    /// <summary>
+    /// Style for <see cref="Paragraph"/> instances
+    /// </summary>
+    [Test]
+    public void CreateRendererElements_ParagraphBase_AllHtmlStyleRendererElementsCreatedAsString()
+    {
+        var baseType = typeof(ParagraphStyleBase);
+
+        PrintCodeForHtmlStyleRendererElements(baseType);
+    }
+
+    private static void PrintCodeForHtmlStyleRendererElements(Type baseType)
+    {
+        // Arrange 
+        var types = TypeHelper.GetTypesDerivedFromCurrentAssembly(baseType)
+            .Where(x => !x.IsAbstract);
+
+        //&& x == typeof(Paragraph)
+
+        var sb = new StringBuilder();
+
+        // Act  
+        foreach (var type in types)
+        {
+
+            var typeLow = type.Name.FirstCharToLowerCase();
+
+            sb.AppendLine("/// <summary>");
+            sb.AppendLine($"/// HTML rendering element for <see cref=\"{type.Name}\"/> instances");
+            sb.AppendLine("/// </summary>");
+            sb.AppendLine($"public class {type.Name}HtmlTextRendererElement : HtmlParagraphStyleTextRendererElementBase");
+            sb.AppendLine("{");
+            sb.AppendLine($"private readonly {baseType.Name} _{typeLow};");
+            sb.AppendLine("");
+            sb.AppendLine("/// <summary>");
+            sb.AppendLine("/// Default ctor");
+            sb.AppendLine("/// </summary>");
+            sb.AppendLine($"public {type.Name}HtmlTextRendererElement({type.Name} {typeLow}) : base({typeLow})");
+            sb.AppendLine("{");
+            sb.AppendLine($"_{typeLow} = {typeLow};");
+            sb.AppendLine($"ClassName = \"{type.Name}\";");
+            sb.AppendLine("}");
+            sb.AppendLine("}");
+            sb.AppendLine("");
+        }
+
+        // Assert
+        Debug.Print(sb.ToString());
+    }
 }
 
 

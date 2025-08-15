@@ -38,7 +38,6 @@
 
 using Bodoconsult.Text.Extensions;
 using System;
-using System.Drawing;
 using System.Text;
 
 namespace Bodoconsult.Text.Documents;

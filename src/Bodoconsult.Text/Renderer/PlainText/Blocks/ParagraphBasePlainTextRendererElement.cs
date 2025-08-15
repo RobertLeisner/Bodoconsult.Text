@@ -7,11 +7,14 @@ using Bodoconsult.Text.Helpers;
 namespace Bodoconsult.Text.Renderer.PlainText;
 
 /// <summary>
-/// Text rendering element for <see cref="Paragraph"/> instances
+/// Text rendering element for <see cref="Documents.Paragraph"/> instances
 /// </summary>
 public abstract class ParagraphBasePlainTextRendererElement : ITextRendererElement
 {
-    protected ParagraphBase _paragraph;
+    /// <summary>
+    /// Current paragraph base element
+    /// </summary>
+    protected ParagraphBase Paragraph;
 
     /// <summary>
     /// Char used for left and right borders
@@ -31,12 +34,12 @@ public abstract class ParagraphBasePlainTextRendererElement : ITextRendererEleme
     {
         // Get the content of all inlines as string
         var sb = new StringBuilder();
-        DocumentRendererHelper.RenderInlineChilds(renderer, sb, _paragraph.ChildInlines, string.Empty, true);
+        DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, Paragraph.ChildInlines, string.Empty, true);
 
         //Debug.Print(sb.ToString());
 
         // Now let the formatter work
-        var style = (ParagraphStyleBase)renderer.Styleset.FindStyle($"{_paragraph.GetType().Name}Style");
+        var style = (ParagraphStyleBase)renderer.Styleset.FindStyle($"{Paragraph.GetType().Name}Style");
         var formatter = new PlainTextParagraphFormatter(sb.ToString(), style, renderer.PageStyleBase)
             {
                 LeftRightBorderChar = LeftRightBorderChar,

@@ -1,9 +1,7 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
 
 
-using System;
 using Bodoconsult.Text.Documents;
-using Bodoconsult.Text.Helpers;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
 
@@ -18,7 +16,7 @@ public class CitationPlainTextRendererElement : ParagraphBasePlainTextRendererEl
     /// </summary>
     public CitationPlainTextRendererElement(Citation citation)
     {
-        _paragraph= citation;
+        Paragraph= citation;
     }
 }
 

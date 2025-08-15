@@ -34,8 +34,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Renderer\Html\Blocks\" />
-	  <Folder Include="Renderer\Html\Inlines\" />
 	  <Folder Include="Renderer\Markdown\Blocks\" />
 	  <Folder Include="Renderer\Markdown\Inlines\" />
 	  <Folder Include="Renderer\Rtf\Blocks\" />

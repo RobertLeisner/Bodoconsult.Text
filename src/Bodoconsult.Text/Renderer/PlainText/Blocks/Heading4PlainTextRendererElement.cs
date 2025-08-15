@@ -1,8 +1,6 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
 
-using System;
 using Bodoconsult.Text.Documents;
-using Bodoconsult.Text.Helpers;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
 
@@ -17,6 +15,6 @@ public class Heading4PlainTextRendererElement : ParagraphBasePlainTextRendererEl
     /// </summary>
     public Heading4PlainTextRendererElement(Heading4 heading4)
     {
-        _paragraph = heading4;
+        Paragraph = heading4;
     }
 }

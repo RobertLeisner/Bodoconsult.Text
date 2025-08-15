@@ -1,8 +1,6 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
 
-using System;
 using Bodoconsult.Text.Documents;
-using Bodoconsult.Text.Helpers;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
 
@@ -18,7 +16,7 @@ public class WarningPlainTextRendererElement : ParagraphBasePlainTextRendererEle
     /// </summary>
     public WarningPlainTextRendererElement(Warning warning)
     {
-        _paragraph= warning;
+        Paragraph= warning;
         LeftRightBorderChar = "?";
         TopBottomBorderChar = "?";
     }

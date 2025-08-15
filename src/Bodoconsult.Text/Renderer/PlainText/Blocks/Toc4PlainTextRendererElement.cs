@@ -1,8 +1,6 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
 
-using System;
 using Bodoconsult.Text.Documents;
-using Bodoconsult.Text.Helpers;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
 
@@ -17,7 +15,7 @@ public class Toc4PlainTextRendererElement : ParagraphBasePlainTextRendererElemen
     /// </summary>
     public Toc4PlainTextRendererElement(Toc4 toc4)
     {
-        _paragraph= toc4;
+        Paragraph= toc4;
  
 }   }
 

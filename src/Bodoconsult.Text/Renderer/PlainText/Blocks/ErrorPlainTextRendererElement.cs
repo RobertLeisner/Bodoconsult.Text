@@ -1,8 +1,6 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
 
-using System;
 using Bodoconsult.Text.Documents;
-using Bodoconsult.Text.Helpers;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
 
@@ -17,7 +15,7 @@ public class ErrorPlainTextRendererElement : ParagraphBasePlainTextRendererEleme
     /// </summary>
     public ErrorPlainTextRendererElement(Error error)
     {
-        _paragraph = error;
+        Paragraph = error;
         LeftRightBorderChar = "!";
         TopBottomBorderChar = "!";
     }
