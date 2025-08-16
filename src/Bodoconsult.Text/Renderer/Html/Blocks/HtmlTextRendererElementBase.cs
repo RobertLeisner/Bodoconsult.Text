@@ -10,7 +10,7 @@ namespace Bodoconsult.Text.Renderer.Html;
 /// <summary>
 /// Base renderer implementation for HTML elements
 /// </summary>
-public class HtmlTextRendererElementBase: ITextRendererElement
+public class HtmlTextRendererElementBase : ITextRendererElement
 {
     /// <summary>
     /// Current block to renderer
@@ -21,6 +21,11 @@ public class HtmlTextRendererElementBase: ITextRendererElement
     /// CSS class name
     /// </summary>
     public string ClassName { get; protected set; }
+
+    /// <summary>
+    /// CSS to be added to the local tag
+    /// </summary>
+    public string LocalCss { get; set; }
 
     /// <summary>
     /// HTML tag to use for rendering
@@ -45,9 +50,19 @@ public class HtmlTextRendererElementBase: ITextRendererElement
         // Get the content of all inlines as string
         var sb = new StringBuilder();
 
-        DocumentRendererHelper.RenderInlineBlocksToHtml(renderer, sb, Block.ChildBlocks, string.Empty, true);
+        if (string.IsNullOrEmpty(LocalCss))
+        {
+            renderer.Content.Append($"<{TagToUse} class=\"{ClassName}\">");
+        }
+        else
+        {
+            renderer.Content.Append($"<{TagToUse} class=\"{ClassName}\" style=\"{LocalCss}\">");
+        }
 
-        DocumentRendererHelper.RenderInlineChildsToHtml(renderer, sb, Block.ChildInlines, string.Empty, true);
-        renderer.Content.Append($"<{TagToUse} class=\"{ClassName}\">{sb}</{TagToUse}>{Environment.NewLine}");
+        DocumentRendererHelper.RenderBlockChildsToHtml(renderer, sb, Block.ChildBlocks);
+
+        DocumentRendererHelper.RenderInlineChildsToHtml(renderer, sb, Block.ChildInlines);
+        renderer.Content.Append(sb);
+        renderer.Content.Append($"</{TagToUse}>{Environment.NewLine}");
     }
 }

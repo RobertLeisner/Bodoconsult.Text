@@ -30,10 +30,11 @@ public abstract class ParagraphBasePlainTextRendererElement : ITextRendererEleme
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public void RenderIt(ITextDocumentRender renderer)
+    public virtual void RenderIt(ITextDocumentRender renderer)
     {
         // Get the content of all inlines as string
         var sb = new StringBuilder();
+        DocumentRendererHelper.RenderBlockChildsToPlain(renderer, sb, Paragraph.ChildBlocks);
         DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, Paragraph.ChildInlines, string.Empty, true);
 
         //Debug.Print(sb.ToString());

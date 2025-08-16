@@ -18,5 +18,6 @@ public class ListItemHtmlTextRendererElement : HtmlTextRendererElementBase
     {
         _listItem = listItem;
         ClassName = listItem.StyleName;
+        TagToUse = "li";
     }
 }

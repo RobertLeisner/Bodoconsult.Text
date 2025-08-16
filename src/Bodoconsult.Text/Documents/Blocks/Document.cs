@@ -27,12 +27,12 @@ public class Document : Block
     /// <summary>
     /// Default border width in pt
     /// </summary>
-    public const int DefaultBorderWidth = 3;
+    public const int DefaultBorderWidth = 1;
 
     /// <summary>
     /// Default padding width in pt
     /// </summary>
-    public const int DefaultPaddingWidth = 3;
+    public const int DefaultPaddingWidth = 6;
 
     /// <summary>
     /// Default font size in pt

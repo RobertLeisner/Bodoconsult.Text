@@ -72,20 +72,32 @@ public class DocumentRendererHelper
         }
     }
 
-    public static void RenderInlineBlocksToHtml(ITextDocumentRender renderer, StringBuilder sb, List<Block> childBlocks, string empty, bool b)
+    /// <summary>
+    /// Render child blocks
+    /// </summary>
+    /// <param name="renderer">Current renderer instance</param>
+    /// <param name="sb">Current string</param>
+    /// <param name="childBlocks">Child blocks</param>
+    public static void RenderBlockChildsToHtml(ITextDocumentRender renderer, StringBuilder sb, List<Block> childBlocks)
     {
         foreach (var inline in childBlocks)
         {
-            var rendererElement = (ITextRendererElement)renderer.TextRendererElementFactory.CreateInstance(inline);
+            var rendererElement = renderer.TextRendererElementFactory.CreateInstance(inline);
             rendererElement.RenderIt(renderer);
         }
     }
 
-    public static void RenderInlineBlocksToPlain(ITextDocumentRender renderer, StringBuilder sb, List<Block> childBlocks, string empty, bool b)
+    /// <summary>
+    /// Render child blocks
+    /// </summary>
+    /// <param name="renderer">Current renderer instance</param>
+    /// <param name="sb">Current string</param>
+    /// <param name="childBlocks">Child blocks</param>
+    public static void RenderBlockChildsToPlain(ITextDocumentRender renderer, StringBuilder sb, List<Block> childBlocks)
     {
         foreach (var inline in childBlocks)
         {
-            var rendererElement = (ITextRendererElement)renderer.TextRendererElementFactory.CreateInstance(inline);
+            var rendererElement = renderer.TextRendererElementFactory.CreateInstance(inline);
             rendererElement.RenderIt(renderer);
         }
     }

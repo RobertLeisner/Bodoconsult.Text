@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
+using System.Text;
 using Bodoconsult.Text.Documents;
 
 namespace Bodoconsult.Text.Renderer.Html.Styles;
@@ -7,7 +8,7 @@ namespace Bodoconsult.Text.Renderer.Html.Styles;
 /// <summary>
 /// Base class for <see cref="PageStyleBase"/> based styles
 /// </summary>
-public abstract class HtmlPageStyleTextRendererElementBase: ITextRendererElement
+public abstract class HtmlPageStyleTextRendererElementBase : ITextRendererElement
 {
 
     /// <summary>
@@ -35,6 +36,6 @@ public abstract class HtmlPageStyleTextRendererElementBase: ITextRendererElement
     /// <param name="renderer">Current renderer</param>
     public virtual void RenderIt(ITextDocumentRender renderer)
     {
-        // ToDo: 
+        // Do nothing
     }
 }

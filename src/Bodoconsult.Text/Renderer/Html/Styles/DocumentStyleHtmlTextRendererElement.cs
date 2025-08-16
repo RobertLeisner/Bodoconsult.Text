@@ -1,4 +1,5 @@
 ﻿using Bodoconsult.Text.Documents;
+using System.Text;
 
 namespace Bodoconsult.Text.Renderer.Html.Styles;
 
@@ -16,5 +17,26 @@ public class DocumentStyleHtmlTextRendererElement : HtmlPageStyleTextRendererEle
     {
         _documentStyle = documentStyle;
         ClassName = "DocumentStyle";
+    }
+
+    /// <summary>
+    /// Render the element
+    /// </summary>
+    /// <param name="renderer">Current renderer</param>
+    public override void RenderIt(ITextDocumentRender renderer)
+    {
+        var sb = new StringBuilder();
+
+        sb.AppendLine("@page");
+        sb.AppendLine("{");
+        sb.AppendLine($"     size: {Style.PaperFormatName} {(Style.PageWidth > Style.PageHeight ? " landscape" : "")};");
+        sb.AppendLine($"     margin: {Style.MarginTop}cm {Style.MarginRight}cm {Style.MarginBottom}cm {Style.MarginLeft}cm;");
+        sb.AppendLine("}");
+
+        sb.AppendLine("body");
+        sb.AppendLine("{");
+        sb.AppendLine($"     width: 650px;");
+        sb.AppendLine("}");
+        renderer.Content.Append(sb);
     }
 }

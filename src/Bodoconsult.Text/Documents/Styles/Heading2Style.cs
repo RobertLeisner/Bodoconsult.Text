@@ -18,5 +18,7 @@ public class Heading2Style : ParagraphStyleBase
         BorderBrush = new SolidColorBrush(Document.DefaultColor);
         BorderThickness.Bottom = Document.DefaultBorderWidth;
         Margins.Top = 4 * Document.DefaultFontSize;
+        Paddings.Top = Document.DefaultPaddingWidth;
+        Paddings.Bottom = Document.DefaultPaddingWidth;
     }
 }

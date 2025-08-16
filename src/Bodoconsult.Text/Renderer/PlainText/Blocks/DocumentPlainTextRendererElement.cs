@@ -30,7 +30,7 @@ public class DocumentPlainTextRendererElement : ITextRendererElement
         // Get the content of all inlines as string
         var sb = new StringBuilder();
 
-        DocumentRendererHelper.RenderInlineBlocksToPlain(renderer, sb, _document.ChildBlocks, string.Empty, true);
+        DocumentRendererHelper.RenderBlockChildsToPlain(renderer, sb, _document.ChildBlocks);
 
         DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, _document.ChildInlines, string.Empty, true);
         renderer.Content.Append(sb);

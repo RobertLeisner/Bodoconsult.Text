@@ -31,7 +31,7 @@ public class TofSectionPlainTextRendererElement : ITextRendererElement
         // Get the content of all inlines as string
         var sb = new StringBuilder();
 
-        DocumentRendererHelper.RenderInlineBlocksToPlain(renderer, sb, _tofSection.ChildBlocks, string.Empty, true);
+        DocumentRendererHelper.RenderBlockChildsToPlain(renderer, sb, _tofSection.ChildBlocks);
 
         DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, _tofSection.ChildInlines, string.Empty, true);
         renderer.Content.Append(sb);

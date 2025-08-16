@@ -33,7 +33,7 @@ public class DocumentHtmlTextRendererElement : HtmlTextRendererElementBase
         renderer.Content.AppendLine("<meta charset=\"utf-8\">");
 
         var sb = new StringBuilder();
-        DocumentRendererHelper.RenderInlineBlocksToPlain(renderer, sb, _document.ChildBlocks, string.Empty, true);
+        DocumentRendererHelper.RenderBlockChildsToPlain(renderer, sb, _document.ChildBlocks);
         renderer.Content.Append(sb);
 
         renderer.Content.AppendLine("</body>");
