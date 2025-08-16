@@ -14,5 +14,5 @@ public interface ITextRendererElementFactory
     /// </summary>
     /// <param name="textElement"><see cref="TextElement"/> instance</param>
     /// <returns><see cref="ITextRendererElement"/> instance</returns>
-    ITextRendererElement CreateInstance(TextElement textElement);
+    ITextRendererElement CreateInstance(DocumentElement textElement);
 }

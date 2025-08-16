@@ -33,6 +33,6 @@ public class Toc3 : TocBase
 
         TagToUse = string.Intern("Toc3");
 
-        Inlines.Add(new Span(){Content = content});
+        Inlines.Add(new Span {Content = content});
     }
 }

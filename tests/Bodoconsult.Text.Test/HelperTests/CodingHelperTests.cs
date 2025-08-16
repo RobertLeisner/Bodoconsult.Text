@@ -144,7 +144,7 @@ public class CodingHelperTests
             sb.AppendLine("");
 
             sb.AppendLine("/// <summary>");
-            sb.AppendLine("/// Render the elememt");
+            sb.AppendLine("/// Render the element");
             sb.AppendLine("/// </summary>");
             sb.AppendLine(" public void RenderIt(ITextDocumentRender renderer)");
             sb.AppendLine("{");
@@ -204,16 +204,34 @@ public class CodingHelperTests
         Debug.Print(sb.ToString());
     }
 
+    /// <summary>
+    /// Style for <see cref="Paragraph"/> instances
+    /// </summary>
+    [Test]
+    public void CreateRendererElementFactory_DocumentAndSectionBase_AllElementsCreatedAsString()
+    {
+        var baseType = typeof(Document);
+
+        PrintCodeForRendererElementFactory(baseType);
+
+        baseType = typeof(Styleset);
+
+        PrintCodeForRendererElementFactory(baseType);
+
+        baseType = typeof(SectionBase);
+
+        PrintCodeForRendererElementFactory(baseType);
+    }
 
     /// <summary>
     /// Style for <see cref="Paragraph"/> instances
     /// </summary>
     [Test]
-    public void CreateRendererElementFactory_ImageBase_AllElementsCreatedAsString()
+    public void CreateRendererElementFactory_PageStyleBase_AllElementsCreatedAsString()
     {
-        var baseType = typeof(ImageBase);
+        var baseType = typeof(PageStyleBase);
 
-        PrintCodeForDefaultStyleset(baseType);
+        PrintCodeForRendererElementFactory(baseType);
     }
 
     /// <summary>
@@ -223,6 +241,17 @@ public class CodingHelperTests
     public void CreateRendererElementFactory_ParagraphBase_AllElementsCreatedAsString()
     {
         var baseType = typeof(ParagraphBase);
+
+        PrintCodeForRendererElementFactory(baseType);
+    }
+
+    /// <summary>
+    /// Style for <see cref="Paragraph"/> instances
+    /// </summary>
+    [Test]
+    public void CreateRendererElementFactory_ParagraphStyleBase_AllElementsCreatedAsString()
+    {
+        var baseType = typeof(ParagraphStyleBase);
 
         PrintCodeForRendererElementFactory(baseType);
     }
@@ -256,12 +285,18 @@ public class CodingHelperTests
     /// Style for <see cref="Paragraph"/> instances
     /// </summary>
     [Test]
-    public void CreateRendererElements_ImageBase_AllHtmlRendererElementsCreatedAsString()
+    public void CreateRendererElements_DocumentAndSectionBase_AllHtmlRendererElementsCreatedAsString()
     {
-        var baseType = typeof(ImageBase);
+        var baseType = typeof(Document);
+
+        PrintCodeForHtmlRendererElements(baseType);
+
+        baseType = typeof(SectionBase);
 
         PrintCodeForHtmlRendererElements(baseType);
     }
+
+
 
     /// <summary>
     /// Style for <see cref="Paragraph"/> instances
@@ -293,7 +328,7 @@ public class CodingHelperTests
             sb.AppendLine("/// <summary>");
             sb.AppendLine($"/// HTML rendering element for <see cref=\"{type.Name}\"/> instances");
             sb.AppendLine("/// </summary>");
-            sb.AppendLine($"public class {type.Name}HtmlTextRendererElement : HtmlTextRendererElement");
+            sb.AppendLine($"public class {type.Name}HtmlTextRendererElement : HtmlTextRendererElementBase");
             sb.AppendLine("{");
             sb.AppendLine($"private readonly {type.Name} _{typeLow};");
             sb.AppendLine("");

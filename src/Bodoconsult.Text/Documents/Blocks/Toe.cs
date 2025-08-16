@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Bodoconsult.Text.Documents;
 
 /// <summary>
-/// Toe elememt for TOE content
+/// Toe element for TOE content
 /// </summary>
 public class Toe : ParagraphBase
 {
@@ -47,6 +47,6 @@ public class Toe : ParagraphBase
 
         TagToUse = string.Intern("Toe");
 
-        Inlines.Add(new Span() { Content = content });
+        Inlines.Add(new Span { Content = content });
     }
 }

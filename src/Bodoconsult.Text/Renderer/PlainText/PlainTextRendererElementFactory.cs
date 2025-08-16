@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using Bodoconsult.Text.Documents;
+using Bodoconsult.Text.Renderer.Html;
 
 namespace Bodoconsult.Text.Renderer.PlainText
 {
@@ -9,14 +10,48 @@ namespace Bodoconsult.Text.Renderer.PlainText
     /// </summary>
     public class PlainTextRendererElementFactory : ITextRendererElementFactory
     {
-
         /// <summary>
         /// Create an instance of an <see cref="ITextRendererElement"/> for a given <see cref="TextElement"/>
         /// </summary>
         /// <param name="textElement">Given text element</param>
         /// <returns>Instance of an <see cref="ITextRendererElement"/></returns>
-        public ITextRendererElement CreateInstance(TextElement textElement)
+        public ITextRendererElement CreateInstance(DocumentElement textElement)
         {
+            // Base elements
+            if (textElement is Document document)
+            {
+                return new DocumentPlainTextRendererElement(document);
+            }
+
+            if (textElement is DocumentMetaData documentMetaData)
+            {
+                return new DocumentMetaDataPlainTextRendererElement(documentMetaData);
+            }
+
+            if (textElement is Styleset styleset)
+            {
+                return new StylesetPlainTextRendererElement(styleset);
+            }
+
+            if (textElement is Section section)
+            {
+                return new SectionPlainTextRendererElement(section);
+            }
+
+            if (textElement is TocSection tocSection)
+            {
+                return new TocSectionPlainTextRendererElement(tocSection);
+            }
+
+            if (textElement is ToeSection toeSection)
+            {
+                return new ToeSectionPlainTextRendererElement(toeSection);
+            }
+
+            if (textElement is TofSection tofSection)
+            {
+                return new TofSectionPlainTextRendererElement(tofSection);
+            }
 
             // ParagraphBase based elements
 

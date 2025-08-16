@@ -8,7 +8,7 @@ namespace Bodoconsult.Text.Documents;
 /// <summary>
 /// BaseClass for TOC Items
 /// </summary>
-public class TocBase: ParagraphBase
+public abstract class TocBase: ParagraphBase
 {
     /// <summary>
     /// Static list with all allowed inline elements for paragraphs

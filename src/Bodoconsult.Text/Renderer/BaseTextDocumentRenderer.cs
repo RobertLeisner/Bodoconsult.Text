@@ -21,6 +21,11 @@ public class BaseTextDocumentRenderer : BaseDocumentRenderer, ITextDocumentRende
     { }
 
     /// <summary>
+    /// Is the rendering of the styles required
+    /// </summary>
+    public bool IsRenderingStylesRequired { get; set; } = true;
+
+    /// <summary>
     /// Template to place the structered text. Must contain placeholder {0} for the structured text
     /// </summary>
     public string Template { get; set; } = "{0}";
@@ -41,20 +46,30 @@ public class BaseTextDocumentRenderer : BaseDocumentRenderer, ITextDocumentRende
     /// </summary>
     public override void RenderIt()
     {
-        foreach (var section in Document.ChildBlocks)
-        {
-            var type = section.GetType();
-            if (type == typeof(Styleset) || type == typeof(DocumentMetaData))
-            {
-                continue;
-            }
 
-            foreach (var block in section.ChildBlocks)
-            {
-                var rendererElement = TextRendererElementFactory.CreateInstance(block);
-                rendererElement.RenderIt(this);
-            }
-        }
+        var rendererElement = TextRendererElementFactory.CreateInstance(Document);
+        rendererElement.RenderIt(this);
+
+        //foreach (var section in Document.ChildBlocks)
+        //{
+        //    var type = section.GetType();
+
+        //    if (type == typeof(DocumentMetaData))
+        //    {
+        //        continue;
+        //    }
+
+        //    if (type == typeof(Styleset) && !IsRenderingStylesRequired)
+        //    {
+        //        continue;
+        //    }
+
+        //    foreach (var block in section.ChildBlocks)
+        //    {
+        //        var rendererElement = TextRendererElementFactory.CreateInstance(block);
+        //        rendererElement.RenderIt(this);
+        //    }
+        //}
     }
 
     /// <summary>

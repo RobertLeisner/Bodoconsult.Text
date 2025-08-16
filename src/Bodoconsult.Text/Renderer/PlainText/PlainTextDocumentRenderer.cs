@@ -17,5 +17,6 @@ public class PlainTextDocumentRenderer: BaseTextDocumentRenderer
     public PlainTextDocumentRenderer(Document document, ITextRendererElementFactory textRendererElementFactory) : base(document)
     {
         TextRendererElementFactory = textRendererElementFactory;
+        IsRenderingStylesRequired = false;
     }
 }

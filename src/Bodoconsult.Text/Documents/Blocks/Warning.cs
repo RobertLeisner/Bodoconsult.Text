@@ -47,6 +47,6 @@ public class Warning : ParagraphBase
 
         TagToUse = string.Intern("Warning");
 
-        Inlines.Add(new Span(){Content = content});
+        Inlines.Add(new Span {Content = content});
     }
 }

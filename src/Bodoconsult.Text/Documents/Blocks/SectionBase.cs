@@ -9,7 +9,7 @@ namespace Bodoconsult.Text.Documents;
 /// <summary>
 /// Base class for sections
 /// </summary>
-public class SectionBase : Block
+public abstract class SectionBase : Block
 {
 
     /// <summary>

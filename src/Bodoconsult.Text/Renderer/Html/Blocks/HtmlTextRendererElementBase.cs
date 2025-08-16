@@ -37,13 +37,16 @@ public class HtmlTextRendererElementBase: ITextRendererElement
     }
 
     /// <summary>
-    /// Render the elememt
+    /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public void RenderIt(ITextDocumentRender renderer)
+    public virtual void RenderIt(ITextDocumentRender renderer)
     {
         // Get the content of all inlines as string
         var sb = new StringBuilder();
+
+        DocumentRendererHelper.RenderInlineBlocksToHtml(renderer, sb, Block.ChildBlocks, string.Empty, true);
+
         DocumentRendererHelper.RenderInlineChildsToHtml(renderer, sb, Block.ChildInlines, string.Empty, true);
         renderer.Content.Append($"<{TagToUse} class=\"{ClassName}\">{sb}</{TagToUse}>{Environment.NewLine}");
     }

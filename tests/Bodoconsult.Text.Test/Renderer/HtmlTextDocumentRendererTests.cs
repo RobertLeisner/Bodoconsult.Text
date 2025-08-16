@@ -1,8 +1,9 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
+using System;
 using System.Diagnostics;
+using System.IO;
 using Bodoconsult.Text.Renderer.Html;
-using Bodoconsult.Text.Renderer.PlainText;
 using Bodoconsult.Text.Test.Helpers;
 using NUnit.Framework;
 
@@ -46,6 +47,17 @@ public class HtmlTextDocumentRendererTests
         Assert.That(renderer.Content.Length, Is.Not.EqualTo(0));
 
         Debug.Print(renderer.Content.ToString());
+
+        if (!Debugger.IsAttached)
+        {
+            return;
+        }
+
+        var filePath = Path.Combine(Path.GetTempPath(), "test.htm");
+
+        renderer.SaveAsFile(filePath);
+
+        FileSystemHelper.RunInDebugMode(filePath);
     }
 
 }

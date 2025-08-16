@@ -47,6 +47,6 @@ public class Info : ParagraphBase
 
         TagToUse = string.Intern("Info");
 
-        Inlines.Add(new Span(){Content = content});
+        Inlines.Add(new Span {Content = content});
     }
 }

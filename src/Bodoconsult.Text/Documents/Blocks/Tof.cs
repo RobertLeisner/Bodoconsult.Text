@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Bodoconsult.Text.Documents;
 
 /// <summary>
-/// Tof elememt for TOF content
+/// Tof element for TOF content
 /// </summary>
 public class Tof : ParagraphBase
 {
@@ -47,6 +47,6 @@ public class Tof : ParagraphBase
 
         TagToUse = string.Intern("Tof");
 
-        Inlines.Add(new Span() { Content = content });
+        Inlines.Add(new Span { Content = content });
     }
 }

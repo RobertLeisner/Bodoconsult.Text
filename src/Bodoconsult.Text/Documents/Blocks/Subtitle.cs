@@ -48,6 +48,6 @@ public class Subtitle : ParagraphBase
 
         TagToUse = string.Intern("Subtitle");
 
-        Inlines.Add(new Span(){Content = content});
+        Inlines.Add(new Span {Content = content});
     }
 }

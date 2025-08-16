@@ -55,7 +55,7 @@ public class Paragraph: ParagraphBase
         TagToUse = string.Intern("Paragraph");
 
         // Content
-        Inlines.Add(new Span(){ Content = content});
+        Inlines.Add(new Span { Content = content});
     }
 
     /// <summary>

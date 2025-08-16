@@ -27,7 +27,7 @@ public class SpanPlainTextRendererElement :  InlinePlainTextRendererElementBase
     }
 
     ///// <summary>
-    ///// Render the elememt
+    ///// Render the element
     ///// </summary>
     ///// <param name="renderer">Current renderer</param>
     //public void RenderIt(ITextDocumentRender renderer)

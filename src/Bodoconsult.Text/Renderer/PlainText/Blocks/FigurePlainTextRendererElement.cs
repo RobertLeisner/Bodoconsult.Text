@@ -22,7 +22,7 @@ public class FigurePlainTextRendererElement : ITextRendererElement
     }
 
     /// <summary>
-    /// Render the elememt
+    /// Render the element
     /// </summary>
     public void RenderIt(ITextDocumentRender renderer)
     {

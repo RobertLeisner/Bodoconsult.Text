@@ -49,7 +49,7 @@ public class ParagraphCenter: ParagraphBase
         // Add allowed inlines
         AllowedInlines.AddRange(AllAllowedInlines);
 
-        Inlines.Add(new Span(){ Content = content});
+        Inlines.Add(new Span { Content = content});
         TagToUse = string.Intern("ParagraphCenter");
     }
 

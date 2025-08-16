@@ -1,9 +1,10 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
-using System.Diagnostics;
 using Bodoconsult.Text.Renderer.PlainText;
 using Bodoconsult.Text.Test.Helpers;
 using NUnit.Framework;
+using System.Diagnostics;
+using System.IO;
 
 namespace Bodoconsult.Text.Test.Renderer;
 
@@ -45,6 +46,17 @@ public class PlainTextDocumentRendererTests
         Assert.That(renderer.Content.Length, Is.Not.EqualTo(0));
 
         Debug.Print(renderer.Content.ToString());
+
+        if (!Debugger.IsAttached)
+        {
+            return;
+        }
+
+        var filePath = Path.Combine(Path.GetTempPath(), "test.txt");
+
+        renderer.SaveAsFile(filePath);
+
+        FileSystemHelper.RunInDebugMode(filePath);
     }
 
 }

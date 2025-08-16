@@ -14,17 +14,15 @@ public static class TestDataHelper
     {
         var doc = new Document
         {
-            Name = "MyReport"
+            Name = "MyReport",
         };
 
-        // Styleset
-        var styleset = StylesetHelper.CreateTestStyleset();
-        doc.AddBlock(styleset);
-
-
-        // Meta data
-        var meta = new DocumentMetaData()
+        // Metadata (add before style set)
+        var meta = new DocumentMetaData
         {
+            Title = "Title of the document",
+            Description = "Blubb blabb bleeb",
+            Keywords = "Blubb, blabb, bleeb",
             Company = "Bodoconsult GmbH",
             CompanyWebsite = "http://www.bodoconsult.de",
             Authors = "Robert Leisner",
@@ -34,6 +32,10 @@ public static class TestDataHelper
         };
 
         doc.AddBlock(meta);
+
+        // Styleset (add after meta data)
+        var styleset = StylesetHelper.CreateTestStyleset();
+        doc.AddBlock(styleset);
 
         // New section
         var section = new Section

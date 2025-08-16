@@ -36,11 +36,6 @@ public class SolidColorBrush : Brush
     }
 
     /// <summary>
-    /// Solid color to use for the brush
-    /// </summary>
-    public Color Color { get; set; }
-
-    /// <summary>
     /// Add the current element to a document defined in LDML (Logical document markup language)
     /// </summary>
     /// <param name="document">StringBuilder instance to create the LDML in</param>

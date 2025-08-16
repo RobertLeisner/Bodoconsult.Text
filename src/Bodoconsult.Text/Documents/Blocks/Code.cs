@@ -47,6 +47,6 @@ public class Code : ParagraphBase
 
         TagToUse = string.Intern("Code");
 
-        Inlines.Add(new Span(){Content = content});
+        Inlines.Add(new Span {Content = content});
     }
 }

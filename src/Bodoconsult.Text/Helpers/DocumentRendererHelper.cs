@@ -71,4 +71,22 @@ public class DocumentRendererHelper
             sb.Append(tag);
         }
     }
+
+    public static void RenderInlineBlocksToHtml(ITextDocumentRender renderer, StringBuilder sb, List<Block> childBlocks, string empty, bool b)
+    {
+        foreach (var inline in childBlocks)
+        {
+            var rendererElement = (ITextRendererElement)renderer.TextRendererElementFactory.CreateInstance(inline);
+            rendererElement.RenderIt(renderer);
+        }
+    }
+
+    public static void RenderInlineBlocksToPlain(ITextDocumentRender renderer, StringBuilder sb, List<Block> childBlocks, string empty, bool b)
+    {
+        foreach (var inline in childBlocks)
+        {
+            var rendererElement = (ITextRendererElement)renderer.TextRendererElementFactory.CreateInstance(inline);
+            rendererElement.RenderIt(renderer);
+        }
+    }
 }

@@ -7,13 +7,14 @@ namespace Bodoconsult.Text.Renderer.Html.Styles;
 /// <summary>
 /// Base class for <see cref="PageStyleBase"/> based styles
 /// </summary>
-public class HtmlPageStyleTextRendererElementBase
+public abstract class HtmlPageStyleTextRendererElementBase: ITextRendererElement
 {
 
     /// <summary>
     /// Current block to renderer
     /// </summary>
     public PageStyleBase Style { get; private set; }
+
     /// <summary>
     /// CSS class name
     /// </summary>
@@ -23,9 +24,17 @@ public class HtmlPageStyleTextRendererElementBase
     /// Default ctor
     /// </summary>
     /// <param name="style">Current page style</param>
-    public HtmlPageStyleTextRendererElementBase(PageStyleBase style)
+    protected HtmlPageStyleTextRendererElementBase(PageStyleBase style)
     {
         Style = style;
     }
 
+    /// <summary>
+    /// Render the element
+    /// </summary>
+    /// <param name="renderer">Current renderer</param>
+    public virtual void RenderIt(ITextDocumentRender renderer)
+    {
+        // ToDo: 
+    }
 }

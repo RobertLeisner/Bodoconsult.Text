@@ -47,6 +47,6 @@ public class SectionSubtitle : ParagraphBase
 
         TagToUse = string.Intern("SectionSubtitle");
 
-        Inlines.Add(new Span(){Content = content});
+        Inlines.Add(new Span {Content = content});
     }
 }

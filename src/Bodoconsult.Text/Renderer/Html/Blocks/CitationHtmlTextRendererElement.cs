@@ -20,3 +20,4 @@ public class CitationHtmlTextRendererElement : HtmlTextRendererElementBase
         ClassName = citation.StyleName;
     }
 }
+

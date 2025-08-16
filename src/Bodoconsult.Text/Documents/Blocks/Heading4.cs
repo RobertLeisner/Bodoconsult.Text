@@ -47,6 +47,6 @@ public class Heading4 : HeadingBase
 
         TagToUse = string.Intern("Heading4");
 
-        Inlines.Add(new Span(){Content = content});
+        Inlines.Add(new Span {Content = content});
     }
 }

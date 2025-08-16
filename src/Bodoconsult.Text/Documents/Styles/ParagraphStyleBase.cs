@@ -58,4 +58,9 @@ public class ParagraphStyleBase : StyleBase
     /// </summary>
     public Thickness Paddings { get; set; } = new(0, 0, 0, 0);
 
+    /// <summary>
+    /// Indent of the first line in pt. Negative number is indicating a hanging indent
+    /// </summary>
+    public double FirstLineIndent { get; set; }
+
 }

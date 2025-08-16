@@ -47,6 +47,6 @@ public class Error : ParagraphBase
 
         TagToUse = string.Intern("Error");
 
-        Inlines.Add(new Span(){Content = content});
+        Inlines.Add(new Span {Content = content});
     }
 }

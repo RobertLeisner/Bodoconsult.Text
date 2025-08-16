@@ -43,6 +43,11 @@ public class DocumentMetaData : Block
     public string LogoPath { get; set; }
 
     /// <summary>
+    /// Title of the document
+    /// </summary>
+    public string Title { get; set; }
+
+    /// <summary>
     /// Document description
     /// </summary>
     public string Description { get; set; }

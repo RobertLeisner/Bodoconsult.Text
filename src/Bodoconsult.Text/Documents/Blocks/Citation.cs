@@ -47,6 +47,6 @@ public class Citation : ParagraphBase
 
         TagToUse = string.Intern("Citation");
 
-        Inlines.Add(new Span() { Content = content });
+        Inlines.Add(new Span { Content = content });
     }
 }
