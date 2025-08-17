@@ -14,6 +14,6 @@ public class Toc4Style : ParagraphStyleBase
     {
         TagToUse = "Toc4Style";
         Name = TagToUse;
-        Margins.Left = 3;
+        Margins.Left = 3 * Document.DefaultFontSize;
     }
 }

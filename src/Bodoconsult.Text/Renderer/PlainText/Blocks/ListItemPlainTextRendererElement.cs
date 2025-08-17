@@ -4,6 +4,7 @@ using System;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
 using System.Text;
+using Bodoconsult.Text.Extensions;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
 
@@ -13,7 +14,7 @@ namespace Bodoconsult.Text.Renderer.PlainText;
 public class ListItemPlainTextRendererElement : ParagraphBasePlainTextRendererElement
 {
 
-    private ListItem _listItem;
+    private readonly ListItem _listItem;
 
     /// <summary>
     /// Default ctor
@@ -33,30 +34,44 @@ public class ListItemPlainTextRendererElement : ParagraphBasePlainTextRendererEl
         // Get the content of all inlines as string
         var sb = new StringBuilder();
 
-        var list = (List)Paragraph.Parent;
+        var list = (List)_listItem.Parent;
 
         switch (list.ListStyleType)
         {
             case ListStyleTypeEnum.Disc:
-                sb.Append('-');
+                sb.Append('*');
                 break;
             case ListStyleTypeEnum.Circle:
-                sb.Append('-');
+                sb.Append('o');
                 break;
             case ListStyleTypeEnum.Square:
                 sb.Append('-');
                 break;
             case ListStyleTypeEnum.Decimal:
+                list.Counter++;
+                sb.Append(list.Counter);
                 break;
             case ListStyleTypeEnum.DecimalLeadingZero:
+                list.Counter++;
+                sb.Append(list.Counter.ToString("00"));
                 break;
             case ListStyleTypeEnum.UpperRoman:
+                list.Counter++;
+                sb.Append(list.Counter.ArabicToRoman().ToUpperInvariant());
                 break;
             case ListStyleTypeEnum.LowerRoman:
+                list.Counter++;
+                sb.Append(list.Counter.ArabicToRoman().ToLowerInvariant());
                 break;
             case ListStyleTypeEnum.UpperLatin:
+                // ToDo: Get latin letter
+                list.Counter++;
+                sb.Append(list.Counter);
                 break;
             case ListStyleTypeEnum.LowerLatin:
+                // ToDo: Get latin letter
+                list.Counter++;
+                sb.Append(list.Counter);
                 break;
             case ListStyleTypeEnum.Customized:
                 sb.Append(list.ListStyleTypeChar);

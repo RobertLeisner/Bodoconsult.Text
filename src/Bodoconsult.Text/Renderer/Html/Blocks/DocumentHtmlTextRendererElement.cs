@@ -26,7 +26,6 @@ public class DocumentHtmlTextRendererElement : HtmlTextRendererElementBase
     /// <param name="renderer">Current renderer</param>
     public override void RenderIt(ITextDocumentRender renderer)
     {
-        // Get the content of all inlines as string
         renderer.Content.AppendLine("<!DOCTYPE html>");
         renderer.Content.AppendLine("<html>");
         renderer.Content.AppendLine("<head>");

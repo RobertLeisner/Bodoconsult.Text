@@ -17,5 +17,6 @@ public class SectionTitleStyle : ParagraphStyleBase
         TextAlignment = TextAlignment.Center;
         Margins.Top = Document.DefaultFontSize * 4;
         FontSize = Document.DefaultFontSize + 4;
+        Bold = true;
     }
 }

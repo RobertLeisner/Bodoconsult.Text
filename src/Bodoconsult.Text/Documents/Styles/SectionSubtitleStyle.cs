@@ -17,5 +17,6 @@ public class SectionSubtitleStyle : ParagraphStyleBase
         FontSize = Document.DefaultFontSize + 2;
         Margins.Top = Document.DefaultFontSize * 2;
         TextAlignment = TextAlignment.Center;
+        Bold = true;
     }
 }

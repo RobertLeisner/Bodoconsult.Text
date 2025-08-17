@@ -17,5 +17,6 @@ public class SubtitleStyle : ParagraphStyleBase
         FontSize = Document.DefaultFontSize + 4;
         Margins.Top = Document.DefaultFontSize * 2;
         TextAlignment = TextAlignment.Center;
+        Bold = true;
     }
 }

@@ -85,6 +85,10 @@ public sealed class List : ParagraphBase
     /// </summary>
     public char ListStyleTypeChar { get; set; } = ' ';
 
+    /// <summary>
+    /// Counter for numbered lists
+    /// </summary>
+    public int Counter { get; set; }
 
     /// <summary>
     /// Add a block element

@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Bodoconsult.Text.Documents;
@@ -11,6 +12,9 @@ namespace Bodoconsult.Text.Documents;
 /// </summary>
 public class Styleset : Block
 {
+
+    private List<string> _keys;
+
     /// <summary>
     /// Current style dictionary. Do not use directly. Public for testing only
     /// </summary>
@@ -22,6 +26,18 @@ public class Styleset : Block
     public Styleset()
     {
         IsSingleton = true;
+    }
+
+    /// <summary>
+    /// Get the index of the stylename
+    /// </summary>
+    /// <param name="styleName">Stylename</param>
+    /// <returns>Index of the stylename</returns>
+    public int GetIndexOfStyle(string styleName)
+    {
+        _keys ??= StyleDictionary.Keys.ToList();
+        var index = _keys.IndexOf(styleName);
+        return index;
     }
 
     /// <summary>

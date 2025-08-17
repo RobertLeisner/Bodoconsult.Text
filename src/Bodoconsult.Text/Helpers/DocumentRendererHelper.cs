@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using Bodoconsult.Text.Renderer.Html;
 using Bodoconsult.Text.Renderer.PlainText;
+using Bodoconsult.Text.Renderer.Rtf.Inlines;
 
 namespace Bodoconsult.Text.Helpers;
 
@@ -99,6 +100,36 @@ public class DocumentRendererHelper
         {
             var rendererElement = renderer.TextRendererElementFactory.CreateInstance(inline);
             rendererElement.RenderIt(renderer);
+        }
+    }
+
+    /// <summary>
+    /// Render child blocks
+    /// </summary>
+    /// <param name="renderer">Current renderer instance</param>
+    /// <param name="sb">Current string</param>
+    /// <param name="childBlocks">Child blocks</param>
+    public static void RenderBlockChildsToRtf(ITextDocumentRender renderer, StringBuilder sb, List<Block> childBlocks)
+    {
+        foreach (var inline in childBlocks)
+        {
+            var rendererElement = renderer.TextRendererElementFactory.CreateInstance(inline);
+            rendererElement.RenderIt(renderer);
+        }
+    }
+
+    /// <summary>
+    /// Render child inlines
+    /// </summary>
+    /// <param name="renderer">Current renderer instance</param>
+    /// <param name="sb">Current string</param>
+    /// <param name="childInlines">Child inlines</param>
+    public static void RenderInlineChildsToRtf(ITextDocumentRender renderer, StringBuilder sb, List<Inline> childInlines)
+    {
+        foreach (var inline in childInlines)
+        {
+            var rendererElement = (InlineRtfTextRendererElementBase)renderer.TextRendererElementFactory.CreateInstance(inline);
+            rendererElement.RenderToString(renderer, sb);
         }
     }
 }

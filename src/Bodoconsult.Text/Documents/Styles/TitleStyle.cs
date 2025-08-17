@@ -16,5 +16,6 @@ public class TitleStyle : ParagraphStyleBase
         Margins.Top = Document.DefaultFontSize * 4;
         Margins.Bottom = Document.DefaultFontSize * 2;
         TextAlignment = TextAlignment.Center;
+        Bold = true;
     }
 }

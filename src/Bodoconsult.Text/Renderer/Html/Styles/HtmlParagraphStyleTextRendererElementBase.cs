@@ -49,6 +49,17 @@ public class HtmlParagraphStyleTextRendererElementBase: ITextRendererElement
         sb.AppendLine("{");
         sb.AppendLine($"     font-family: \"{Style.FontName}\";");
         sb.AppendLine($"     font-size: {Style.FontSize}pt;");
+
+        if (Style.Bold)
+        {
+            sb.AppendLine($"     font-weight: bold;");
+        }
+
+        if (Style.Italic)
+        {
+            sb.AppendLine($"     font-style: italic;");
+        }
+
         sb.AppendLine($"     margin: {Style.Margins.Top}pt {Style.Margins.Right}pt {Style.Margins.Bottom}pt {Style.Margins.Left}pt;");
         sb.AppendLine($"     padding: {Style.Paddings.Top}pt {Style.Paddings.Right}pt {Style.Paddings.Bottom}pt {Style.Paddings.Left}pt;");
         sb.AppendLine($"     border-width: {Style.BorderThickness.Top}pt {Style.BorderThickness.Right}pt {Style.BorderThickness.Bottom}pt {Style.BorderThickness.Left}pt;");
