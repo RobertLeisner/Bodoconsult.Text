@@ -60,12 +60,21 @@ public class RtfTextRendererElementBase : ITextRendererElement
         //    renderer.Content.Append($"<{TagToUse} class=\"{ClassName}\" style=\"{LocalCss}\">");
         //}
 
-        renderer.Content.Append($"\\pard\\plain \\s{renderer.Styleset.GetIndexOfStyle(Block.StyleName)} ");
+        if (Block is ParagraphBase paragraph)
+        {
+            var style = (ParagraphStyleBase)renderer.Styleset.FindStyle(paragraph.StyleName);
+            renderer.Content.Append($"\\pard\\plain \\q{renderer.Styleset.GetIndexOfStyle(Block.StyleName)} {RtfHelper.GetFormatSettings(style)} {{");
+        }
+        else
+        {
+            renderer.Content.Append($"\\pard\\plain \\q{renderer.Styleset.GetIndexOfStyle(Block.StyleName)} {{");
+        }
+            
 
         DocumentRendererHelper.RenderBlockChildsToRtf(renderer, sb, Block.ChildBlocks);
 
         DocumentRendererHelper.RenderInlineChildsToRtf(renderer, sb, Block.ChildInlines);
         renderer.Content.Append(sb);
-        renderer.Content.Append($"\\par{Environment.NewLine}");
+        renderer.Content.Append($"\\par }}{Environment.NewLine}");
     }
 }

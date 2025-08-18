@@ -4,6 +4,7 @@ using System;
 using System.Text;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Extensions;
+using Bodoconsult.Text.Helpers;
 
 namespace Bodoconsult.Text.Renderer.Rtf.Styles;
 
@@ -45,7 +46,7 @@ public class RtfParagraphStyleTextRendererElementBase : ITextRendererElement
 
         var sb = new StringBuilder();
 
-        sb.Append($"{{s{renderer.Styleset.GetIndexOfStyle(name)} fs{Style.FontSize * 4} {name}");
+        sb.Append($"{{p{renderer.Styleset.GetIndexOfStyle(name)} "+ RtfHelper.GetFormatSettings(Style)+" {name}");
         //sb.AppendLine("{");
         //sb.AppendLine($"     font-family: \"{Style.FontName}\";");
         //sb.AppendLine($"     font-size: {Style.FontSize}pt;");
@@ -71,5 +72,4 @@ public class RtfParagraphStyleTextRendererElementBase : ITextRendererElement
         sb.Append($"}}{Environment.NewLine}");
         renderer.Content.Append(sb);
     }
-
 }
