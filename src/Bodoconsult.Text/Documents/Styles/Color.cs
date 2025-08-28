@@ -145,5 +145,11 @@ public class Color : PropertyAsAttributeElement
         document.Append(this.ToHtml());
     }
 
-
+    /// <summary>
+    /// Get the element data as formatted property value for an LDML attribute
+    /// </summary>
+    public override string ToPropertyValue()
+    {
+        return this.ToHtml();
+    }
 }

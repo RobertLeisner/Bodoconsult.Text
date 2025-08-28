@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using Bodoconsult.Text.Documents;
+using Bodoconsult.Text.Extensions;
 using Bodoconsult.Text.Helpers;
 
 namespace Bodoconsult.Text.Test.Helpers;
@@ -16,6 +17,11 @@ public static class TestDataHelper
         {
             Name = "MyReport",
         };
+
+
+        // Styleset (add after meta data)
+        var styleset = StylesetHelper.CreateTestStyleset();
+        doc.AddBlock(styleset);
 
         // Metadata (add before style set)
         var meta = new DocumentMetaData
@@ -33,9 +39,8 @@ public static class TestDataHelper
 
         doc.AddBlock(meta);
 
-        // Styleset (add after meta data)
-        var styleset = StylesetHelper.CreateTestStyleset();
-        doc.AddBlock(styleset);
+        // Add TOC, TOF and TOE
+        doc.AddBaseSections();
 
         // New section
         var section = new Section
@@ -175,9 +180,17 @@ public static class TestDataHelper
         var info = new Info($"Info: {MassText}");
         section.AddBlock(info);
 
+        // Keep distance between info and warning
+        paragraph = new Paragraph(MassText);
+        section.AddBlock(paragraph);
+
         // Add a Warning
         var warning = new Warning($"Warning: {MassText}");
         section.AddBlock(warning);
+
+        // Keep distance between warning and error
+        paragraph = new Paragraph(MassText);
+        section.AddBlock(paragraph);
 
         // Add an error
         var error = new Error($"Error: {MassText}");
@@ -193,23 +206,43 @@ public static class TestDataHelper
         section.AddBlock(paragraph);
 
         // Add an image
-        var image = new Image("Test image", TestHelper.TestChartImage);
+        var image = new Image("Test image", TestHelper.TestChartImage)
+        {
+            OriginalHeight = 1075,
+            OriginalWidth = 1725
+        };
         section.AddBlock(image);
 
         // Add a figure 1
-        var figure1 = new Figure("Figure 1", TestHelper.TestChartImage);
+        var figure1 = new Figure("Figure 1", TestHelper.TestChartImage)
+        {
+            OriginalHeight = 1075,
+            OriginalWidth = 1725
+        }; ;
         section.AddBlock(figure1);
 
         // Add a figure 2
-        var figure2 = new Figure("Figure 2", TestHelper.TestDistributionImage);
+        var figure2 = new Figure("Figure 2", TestHelper.TestDistributionImage)
+        {
+            OriginalHeight = 1075,
+            OriginalWidth = 1725
+        }; ;
         section.AddBlock(figure2);
 
         // Add an equation 1
-        var equiation1 = new Equation("Equation 1", TestHelper.TestEquationImage);
+        var equiation1 = new Equation("Equation 1", TestHelper.TestEquationImage)
+        {
+            OriginalHeight = 159,
+            OriginalWidth = 588
+        }; ;
         section.AddBlock(equiation1);
 
         // Add an equation 2
-        var equiation2 = new Equation("Equation 2", TestHelper.TestEquationImage);
+        var equiation2 = new Equation("Equation 2", TestHelper.TestEquationImage)
+        {
+            OriginalHeight = 159,
+            OriginalWidth = 588
+        }; ;
         section.AddBlock(equiation2);
 
         // Add a list

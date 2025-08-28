@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using System;
+using System.Diagnostics;
 using System.Text;
 using Bodoconsult.Text.Helpers;
 
@@ -27,6 +28,7 @@ public abstract class StyleBase : Block
     /// <param name="indent">Current indent</param>
     public override void ToLdmlString(StringBuilder document, string indent)
     {
+        Debug.Print(TagToUse);
         document.Append($"{indent}<{TagToUse}{GetPropertiesAsAttributes()}");
 
         var pis = DocumentReflectionHelper.GetPropertiesForBlocks(GetType());

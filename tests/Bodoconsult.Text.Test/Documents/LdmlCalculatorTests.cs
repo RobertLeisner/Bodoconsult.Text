@@ -104,6 +104,22 @@ public class LdmlCalculatorTests
     }
 
     [Test]
+    public void PrepareAllItemsForToc_ValidDocument_TocLoaded()
+    {
+        // Arrange 
+        var doc = TestDataHelper.CreateDocument();
+        var lc = new LdmlCalculator(doc);
+
+        lc.EnumerateAllItemsForToc();
+
+        // Act  
+        lc.PrepareAllItemsForToc();
+
+        // Assert
+        Assert.That(lc.TocItems.Count, Is.Not.EqualTo(0));
+    }
+
+    [Test]
     public void EnumerateAllItemsForToc_ValidDocument_HeadingsLoaded()
     {
         // Arrange 

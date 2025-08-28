@@ -92,12 +92,50 @@ public class DocumentMetaDataRtfTextRendererElement : RtfTextRendererElementBase
 
     private void ColorParsing(Styleset styleset, StringBuilder sb)
     {
+        var baseType = typeof(ParagraphStyleBase);
 
+        foreach (var style in styleset.StyleDictionary.Values.Where(x => baseType.IsAssignableFrom(x.GetType())))
+        {
+            if (style is not ParagraphStyleBase paragraphStyle)
+            {
+                continue;
+            }
+
+            if (!styleset.Colors.Exists(x => x.R == paragraphStyle.FontColor.R &&
+                                             x.G == paragraphStyle.FontColor.G &&
+                                             x.B == paragraphStyle.FontColor.B &&
+                                             x.A == paragraphStyle.FontColor.A))
+            {
+                styleset.Colors.Add(paragraphStyle.FontColor);
+            }
+
+            if (paragraphStyle.BorderBrush == null)
+            {
+                continue;
+            }
+
+            if (!styleset.Colors.Exists(x => x.R == paragraphStyle.BorderBrush.Color.R &&
+                                             x.G == paragraphStyle.BorderBrush.Color.G &&
+                                             x.B == paragraphStyle.BorderBrush.Color.B &&
+                                             x.A == paragraphStyle.BorderBrush.Color.A))
+            {
+                styleset.Colors.Add(paragraphStyle.BorderBrush.Color);
+            }
+        }
+
+
+        sb.AppendLine("{\\colortbl;");
+
+        foreach (var color in styleset.Colors)
+        {
+            sb.AppendLine($"\\red{color.R}\\green{color.G}\\blue{color.B};");
+        }
+
+        sb.AppendLine("}");
     }
 
     private void FontsParsing(Styleset styleset, StringBuilder sb)
     {
-        var fonts = new List<string>();
 
         var baseType = typeof(ParagraphStyleBase);
 
@@ -108,19 +146,19 @@ public class DocumentMetaDataRtfTextRendererElement : RtfTextRendererElementBase
                 continue;
             }
 
-            if (fonts.Exists(x => x == paragraphStyle.FontName))
+            if (styleset.Fonts.Exists(x => x == paragraphStyle.FontName))
             {
                 continue;
             }
 
-            fonts.Add(paragraphStyle.FontName);
+            styleset.Fonts.Add(paragraphStyle.FontName);
         }
 
         sb.AppendLine("{\\fonttbl");
 
-        for (var i = 0; i < fonts.Count; i++)
+        for (var i = 0; i < styleset.Fonts.Count; i++)
         {
-            sb.AppendLine($"{{\\f{i} {fonts[i]};}}");
+            sb.AppendLine($"{{\\f{i} {styleset.Fonts[i]};}}");
         }
 
         sb.AppendLine("}");

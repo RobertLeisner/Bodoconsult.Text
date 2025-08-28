@@ -131,7 +131,7 @@ namespace Bodoconsult.Text.Documents
                     HeadingCounters[2] = 0;
                     HeadingCounters[3] = 0;
                     HeadingCounters[4] = 0;
-                    equation.CurrentPrefix = $"{HeadingCounters[0]}.";
+                    equation.CurrentPrefix = $"{HeadingCounters[0]}. ";
                 }
 
                 if (equation is Heading2)
@@ -140,7 +140,7 @@ namespace Bodoconsult.Text.Documents
                     HeadingCounters[2] = 0;
                     HeadingCounters[3] = 0;
                     HeadingCounters[4] = 0;
-                    equation.CurrentPrefix = $"{HeadingCounters[0]}.{HeadingCounters[1]}.";
+                    equation.CurrentPrefix = $"{HeadingCounters[0]}.{HeadingCounters[1]}. ";
                 }
 
                 if (equation is Heading3)
@@ -148,20 +148,20 @@ namespace Bodoconsult.Text.Documents
                     HeadingCounters[2]++;
                     HeadingCounters[3] = 0;
                     HeadingCounters[4] = 0;
-                    equation.CurrentPrefix = $"{HeadingCounters[0]}.{HeadingCounters[1]}.{HeadingCounters[2]}.";
+                    equation.CurrentPrefix = $"{HeadingCounters[0]}.{HeadingCounters[1]}.{HeadingCounters[2]}. ";
                 }
 
                 if (equation is Heading4)
                 {
                     HeadingCounters[3]++;
                     HeadingCounters[4] = 0;
-                    equation.CurrentPrefix = $"{HeadingCounters[0]}.{HeadingCounters[1]}.{HeadingCounters[2]}.{HeadingCounters[3]}.";
+                    equation.CurrentPrefix = $"{HeadingCounters[0]}.{HeadingCounters[1]}.{HeadingCounters[2]}.{HeadingCounters[3]}. ";
                 }
 
                 if (equation is Heading5)
                 {
                     HeadingCounters[4]++;
-                    equation.CurrentPrefix = $"{HeadingCounters[0]}.{HeadingCounters[1]}.{HeadingCounters[2]}.{HeadingCounters[3]}.{HeadingCounters[4]}.";
+                    equation.CurrentPrefix = $"{HeadingCounters[0]}.{HeadingCounters[1]}.{HeadingCounters[2]}.{HeadingCounters[3]}.{HeadingCounters[4]}. ";
                 }
 
                 equation.TagName = $"Heading{HeadingCounters[0]}_{HeadingCounters[1]}_{HeadingCounters[2]}_{HeadingCounters[3]}_{HeadingCounters[4]}";
@@ -207,7 +207,7 @@ namespace Bodoconsult.Text.Documents
                 EquationCounter++;
 
                 equation.TagName = $"Equation{EquationCounter}";
-                equation.CurrentPrefix = $"{_documentMetaData.EquationPrefix} {EquationCounter}:";
+                equation.CurrentPrefix = $"{_documentMetaData.EquationPrefix} {EquationCounter}: ";
 
                 Equations.Add(equation);
             }
@@ -251,7 +251,7 @@ namespace Bodoconsult.Text.Documents
                 FigureCounter++;
 
                 figure.TagName = $"Figure{FigureCounter}";
-                figure.CurrentPrefix = $"{_documentMetaData.FigurePrefix} {FigureCounter}:";
+                figure.CurrentPrefix = $"{_documentMetaData.FigurePrefix} {FigureCounter}: ";
 
                 Figures.Add(figure);
             }
@@ -260,7 +260,7 @@ namespace Bodoconsult.Text.Documents
         /// <summary>
         /// Prepare all items needed for TOC, TOE and TOF
         /// </summary>
-        public void PrepareAllItemsc()
+        public void PrepareAllItems()
         {
             PrepareAllItemsForToc();
             PrepareAllItemsForToe();
@@ -322,6 +322,54 @@ namespace Bodoconsult.Text.Documents
 
                 TofItems.Add(tof);
             }
+
+        }
+
+        /// <summary>
+        /// Prepare all sections TOC, TOE and TOF
+        /// </summary>
+        public void PrepareAllSections()
+        {
+            PrepareTocSection();
+            PrepareToeSection();
+            PrepareTofSection();
+        }
+
+        /// <summary>
+        /// Prepare section TOF
+        /// </summary>
+        public void PrepareTofSection()
+        {
+            // Get the section
+
+            // No section found: leave here
+
+            // Add all TOC items to section
+        }
+
+        /// <summary>
+        /// Prepare section TOE
+        /// </summary>
+        public void PrepareToeSection()
+        {
+            // Get the section
+
+            // No section found: leave here
+
+            // Add all TOC items to section
+        }
+
+        /// <summary>
+        /// Prepare section TOC
+        /// </summary>
+        public void PrepareTocSection()
+        {
+
+            // Get the section
+
+            // No section found: leave here
+
+            // Add all TOC items to section
 
         }
     }

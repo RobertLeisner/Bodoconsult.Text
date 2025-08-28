@@ -1,15 +1,15 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
+using Bodoconsult.Text.DocumentFactory;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
-using Bodoconsult.Text.Reports;
 using Bodoconsult.Text.Test.TestData;
 using NUnit.Framework;
 
-namespace Bodoconsult.Text.Test.Reports
+namespace Bodoconsult.Text.Test.DocumentFactory
 {
     [TestFixture]
-    internal class ReportBaseTests
+    internal class DocumentFactoryBaseTests
     {
 
         [Test]
@@ -18,7 +18,7 @@ namespace Bodoconsult.Text.Test.Reports
             // Arrange 
 
             // Act  
-            var report = new TestReport();
+            var report = new TestReportFactory();
 
             // Assert
             Assert.That(report.Document, Is.Not.Null);
@@ -29,7 +29,7 @@ namespace Bodoconsult.Text.Test.Reports
         public void CreateNewSection_ValidSetup_SectionCreatedAndLoaded()
         {
             // Arrange 
-            var report = new TestReport();
+            var report = new TestReportFactory();
 
             // Act  
             report.CreateNewSection("Body");
@@ -43,7 +43,7 @@ namespace Bodoconsult.Text.Test.Reports
         public void LoadDocumentMetaData_ValidSetup_MetaDataLoaded()
         {
             // Arrange 
-            var report = new TestReport();
+            var report = new TestReportFactory();
             var metaData = new DocumentMetaData();
 
             // Act  
@@ -58,7 +58,7 @@ namespace Bodoconsult.Text.Test.Reports
         public void LoadStyleset_ValidSetup_StyleSetLoaded()
         {
             // Arrange 
-            var report = new TestReport();
+            var report = new TestReportFactory();
             var styleset = StylesetHelper.CreateDefaultStyleset();
 
             // Act  
@@ -73,7 +73,7 @@ namespace Bodoconsult.Text.Test.Reports
         public void PrepareTheDocument_ValidSetup_MetadataAndStyleSetLoadedBodySectionCreated()
         {
             // Arrange 
-            var report = new TestReport();
+            var report = new TestReportFactory();
 
             // Act  
             report.PrepareTheDocument();
@@ -92,7 +92,7 @@ namespace Bodoconsult.Text.Test.Reports
         public void AddHeading_Level1_Heading1Added()
         {
             // Arrange 
-            var report = new TestReport();
+            var report = new TestReportFactory();
             report.PrepareTheDocument();
 
             // Act  
@@ -113,7 +113,7 @@ namespace Bodoconsult.Text.Test.Reports
         public void AddHeading_Level2_Heading2Added()
         {
             // Arrange 
-            var report = new TestReport();
+            var report = new TestReportFactory();
             report.PrepareTheDocument();
 
             // Act  
@@ -134,7 +134,7 @@ namespace Bodoconsult.Text.Test.Reports
         public void AddHeading_Level3_Heading3Added()
         {
             // Arrange 
-            var report = new TestReport();
+            var report = new TestReportFactory();
             report.PrepareTheDocument();
 
             // Act  
@@ -155,7 +155,7 @@ namespace Bodoconsult.Text.Test.Reports
         public void AddHeading_Level4_Heading4Added()
         {
             // Arrange 
-            var report = new TestReport();
+            var report = new TestReportFactory();
             report.PrepareTheDocument();
 
             // Act  
@@ -176,7 +176,7 @@ namespace Bodoconsult.Text.Test.Reports
         public void AddHeading_Level5_Heading5Added()
         {
             // Arrange 
-            var report = new TestReport();
+            var report = new TestReportFactory();
             report.PrepareTheDocument();
 
             // Act  
@@ -197,7 +197,7 @@ namespace Bodoconsult.Text.Test.Reports
         public void AddParagraph_Paragraph_ParagraphAdded()
         {
             // Arrange 
-            var report = new TestReport();
+            var report = new TestReportFactory();
             report.PrepareTheDocument();
 
             // Act  
@@ -218,7 +218,7 @@ namespace Bodoconsult.Text.Test.Reports
         public void AddParagraph_Citation_CitationAdded()
         {
             // Arrange 
-            var report = new TestReport();
+            var report = new TestReportFactory();
             report.PrepareTheDocument();
 
             // Act  
@@ -239,7 +239,7 @@ namespace Bodoconsult.Text.Test.Reports
         public void AddParagraph_Code_CodeAdded()
         {
             // Arrange 
-            var report = new TestReport();
+            var report = new TestReportFactory();
             report.PrepareTheDocument();
 
             // Act  
@@ -260,7 +260,7 @@ namespace Bodoconsult.Text.Test.Reports
         public void AddParagraph_Center_CenterAdded()
         {
             // Arrange 
-            var report = new TestReport();
+            var report = new TestReportFactory();
             report.PrepareTheDocument();
 
             // Act  
@@ -281,7 +281,7 @@ namespace Bodoconsult.Text.Test.Reports
         public void AddParagraph_Right_RightAdded()
         {
             // Arrange 
-            var report = new TestReport();
+            var report = new TestReportFactory();
             report.PrepareTheDocument();
 
             // Act  
@@ -302,7 +302,7 @@ namespace Bodoconsult.Text.Test.Reports
         public void AddParagraph_Justify_JustifyAdded()
         {
             // Arrange 
-            var report = new TestReport();
+            var report = new TestReportFactory();
             report.PrepareTheDocument();
 
             // Act  
@@ -325,7 +325,7 @@ namespace Bodoconsult.Text.Test.Reports
         public void AddParagraph_Info_InfoAdded()
         {
             // Arrange 
-            var report = new TestReport();
+            var report = new TestReportFactory();
             report.PrepareTheDocument();
 
             // Act  
@@ -346,7 +346,7 @@ namespace Bodoconsult.Text.Test.Reports
         public void AddParagraph_Error_ErrorAdded()
         {
             // Arrange 
-            var report = new TestReport();
+            var report = new TestReportFactory();
             report.PrepareTheDocument();
 
             // Act  
@@ -367,7 +367,7 @@ namespace Bodoconsult.Text.Test.Reports
         public void AddParagraph_Warning_WarningAdded()
         {
             // Arrange 
-            var report = new TestReport();
+            var report = new TestReportFactory();
             report.PrepareTheDocument();
 
             // Act  
@@ -388,7 +388,7 @@ namespace Bodoconsult.Text.Test.Reports
         public void AddParagraph_Titel_TitelAdded()
         {
             // Arrange 
-            var report = new TestReport();
+            var report = new TestReportFactory();
             report.PrepareTheDocument();
 
             // Act  
@@ -409,7 +409,7 @@ namespace Bodoconsult.Text.Test.Reports
         public void AddParagraph_Subtitel_SubtitelAdded()
         {
             // Arrange 
-            var report = new TestReport();
+            var report = new TestReportFactory();
             report.PrepareTheDocument();
 
             // Act  
@@ -430,7 +430,7 @@ namespace Bodoconsult.Text.Test.Reports
         public void AddParagraph_SectionTitel_SectionTitelAdded()
         {
             // Arrange 
-            var report = new TestReport();
+            var report = new TestReportFactory();
             report.PrepareTheDocument();
 
             // Act  
@@ -451,7 +451,7 @@ namespace Bodoconsult.Text.Test.Reports
         public void AddParagraph_SectionSubtitel_SectionSubtitelAdded()
         {
             // Arrange 
-            var report = new TestReport();
+            var report = new TestReportFactory();
             report.PrepareTheDocument();
 
             // Act  

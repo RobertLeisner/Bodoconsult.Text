@@ -47,4 +47,22 @@ public abstract class PageStyleBase : StyleBase
     /// </summary>
     [DoNotSerialize]
     public double TypeAreaWidth => PageWidth - MarginLeft - MarginRight;
+
+    /// <summary>
+    /// Type area height in cm
+    /// </summary>
+    [DoNotSerialize]
+    public double TypeAreaHeight => PageHeight - MarginTop - MarginBottom;
+
+    /// <summary>
+    /// Max image width in cm
+    /// </summary>
+    [DoNotSerialize]
+    public double MaxImageWidth => 0.95 * TypeAreaWidth;
+
+    /// <summary>
+    /// Max image height in cm
+    /// </summary>
+    [DoNotSerialize]
+    public double MaxImageHeight => 0.33 * TypeAreaHeight;
 }

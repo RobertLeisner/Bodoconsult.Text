@@ -13,4 +13,14 @@ public abstract class ImageBase: ParagraphBase
     /// </summary>
     public string Uri { get; set; }
 
+    /// <summary>
+    /// Original width in pixels px
+    /// </summary>
+    public int OriginalWidth { get; set; }
+
+    /// <summary>
+    /// Original height in pixels px
+    /// </summary>
+    public int OriginalHeight { get; set; }
+
 }

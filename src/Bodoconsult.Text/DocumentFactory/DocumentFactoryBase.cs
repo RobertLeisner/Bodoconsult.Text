@@ -1,45 +1,46 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
-using Bodoconsult.Text.Documents;
 using System;
+using Bodoconsult.Text.Documents;
+using Bodoconsult.Text.Extensions;
 using Bodoconsult.Text.Helpers;
 
-namespace Bodoconsult.Text.Reports;
+namespace Bodoconsult.Text.DocumentFactory;
 
 /// <summary>
-/// Base class for <see cref="Document"/> based reports
+/// Base class for <see cref="Document"/> based documents like documents etc.
 /// </summary>
-public abstract class ReportBase
+public abstract class DocumentFactoryBase
 {
     /// <summary>
     /// Default ctor
     /// </summary>
-    protected ReportBase()
+    protected DocumentFactoryBase()
     {
         Document = new Document();
     }
 
     /// <summary>
-    /// Ctor to provide a predefined document as base for the reprot
+    /// Ctor to provide a predefined document as base for the document
     /// </summary>
     /// <param name="document"></param>
-    protected ReportBase(Document document)
+    protected DocumentFactoryBase(Document document)
     {
         Document = document;
     }
 
     /// <summary>
-    /// Metadata to use for the report
+    /// Metadata to use for the document
     /// </summary>
     public DocumentMetaData DocumentMetaData { get; private set; } = new();
 
     /// <summary>
-    /// Styleset to use for the report
+    /// Styleset to use for the document
     /// </summary>
     public Styleset Styleset { get; private set; } = StylesetHelper.CreateDefaultStyleset();
 
     /// <summary>
-    /// Current document to use for report
+    /// Current LDML document
     /// </summary>
     public Document Document { get; }
 
@@ -74,6 +75,9 @@ public abstract class ReportBase
     {
         Document.AddBlock(DocumentMetaData);
         Document.AddBlock(Styleset);
+
+        Document.AddBaseSections();
+
         CreateNewSection("Body");
     }
 
@@ -122,7 +126,7 @@ public abstract class ReportBase
     }
 
     /// <summary>
-    /// Add a paragraph to a report
+    /// Add a paragraph to a document
     /// </summary>
     /// <param name="paragraphType">Paragraph type</param>
     /// <param name="content">Content</param>
@@ -176,97 +180,10 @@ public abstract class ReportBase
     }
 
     /// <summary>
-    /// Create the full report. Implement all logic needed to create the full report you want to get
+    /// Create the full document. Implement all logic needed to create the full document you want to get
     /// </summary>
-    public virtual void CreateReport()
+    public virtual void CreateDocument()
     {
-        throw new NotSupportedException("Override this method in your derived report class");
+        throw new NotSupportedException("Override this method in your derived document factory class");
     }
-}
-
-/// <summary>
-/// Heading level enum
-/// </summary>
-public enum HeadingLevel
-{
-    /// <summary>
-    /// Heading level 1
-    /// </summary>
-    Level1,
-    /// <summary>
-    /// Heading level 2
-    /// </summary>
-    Level2,
-    /// <summary>
-    /// Heading level 3
-    /// </summary>
-    Level3,
-    /// <summary>
-    /// Heading level 4
-    /// </summary>
-    Level4,
-    /// <summary>
-    /// Heading level 5
-    /// </summary>
-    Level5
-}
-
-/// <summary>
-/// Paragraph style
-/// </summary>
-public enum ParagraphType
-{
-    /// <summary>
-    /// Left aligned paragraph
-    /// </summary>
-    Paragraph,
-    /// <summary>
-    /// Centered paragraph
-    /// </summary>
-    ParagraphCenter,
-    /// <summary>
-    /// Justified paragraph
-    /// </summary>
-    ParagraphJustify,
-    /// <summary>
-    /// Right aligned paragraph
-    /// </summary>
-    ParagraphRight,
-    /// <summary>
-    /// Paragraph containing a citation
-    /// </summary>
-    Citation,
-    /// <summary>
-    /// Paragraph containing a code piece
-    /// </summary>
-    Code,
-    /// <summary>
-    /// Paragraph containing an info message
-    /// </summary>
-    Info,
-    /// <summary>
-    /// Paragraph containing a warning message
-    /// </summary>
-    Warning,
-    /// <summary>
-    /// Paragraph containing an error message
-    /// </summary>
-    Error,
-    /// <summary>
-    /// Title
-    /// </summary>
-    Title,
-    /// <summary>
-    /// Subtitle
-    /// </summary>
-    SubTitle,
-    /// <summary>
-    /// Section title
-    /// </summary>
-    SectionTitle,
-    /// <summary>
-    /// Section subtitle
-    /// </summary>
-    SectionSubtitle
-
 }

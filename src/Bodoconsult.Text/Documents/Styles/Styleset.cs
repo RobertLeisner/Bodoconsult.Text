@@ -29,6 +29,17 @@ public class Styleset : Block
     }
 
     /// <summary>
+    /// Fonts list used i.e. for RTF rendering. Filled by the renderer instance
+    /// </summary>
+    public List<string> Fonts { get;  }= new();
+
+
+    /// <summary>
+    /// List of all colors i.e. for RTF rendering. Filled by the renderer instance
+    /// </summary>
+    public List<Color> Colors { get; } = new();
+
+    /// <summary>
     /// Get the index of the stylename
     /// </summary>
     /// <param name="styleName">Stylename</param>
@@ -37,6 +48,27 @@ public class Styleset : Block
     {
         _keys ??= StyleDictionary.Keys.ToList();
         var index = _keys.IndexOf(styleName);
+        return index;
+    }
+
+    /// <summary>
+    /// Get the index of a color in the color table
+    /// </summary>
+    /// <param name="color">Color</param>
+    /// <returns>Index of the color in the color table</returns>
+    public int GetIndexOfColor(Color color)
+    {
+        var c = Colors.FirstOrDefault(x => x.R == color.R &&
+                                           x.G == color.G &&
+                                           x.B == color.B &&
+                                           x.A == color.A);
+
+        if (c == null)
+        {
+            return 0;
+        }
+
+        var index = Colors.IndexOf(color);
         return index;
     }
 

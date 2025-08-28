@@ -18,7 +18,7 @@ public class CitationStyle : ParagraphStyleBase
         TextAlignment = TextAlignment.Center;
         Margins.Top = 3 * Document.DefaultPaddingWidth;
         Margins.Bottom = 3 * Document.DefaultPaddingWidth;
-        Margins.Left = 1;
-        Margins.Right = 1;
+        Margins.Left = Document.DefaultMarginLeft;
+        Margins.Right = Document.DefaultMarginRight;
     }
 }

@@ -3,7 +3,7 @@
 using System;
 using Bodoconsult.Text.Documents;
 
-namespace Bodoconsult.Text.Reports
+namespace Bodoconsult.Text.DocumentFactory
 {
     /// <summary>
     /// Abstract class for report elements, which must have a RenderIt() method at least

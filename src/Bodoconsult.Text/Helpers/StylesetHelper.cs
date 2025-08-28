@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using Bodoconsult.Text.Documents;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Bodoconsult.Text.Helpers;
 
@@ -279,9 +280,56 @@ public static class StylesetHelper
         styleSet.AddBlock(warningStyle);
 
         return styleSet;
-
-
-
     }
 
+    /// <summary>
+    /// Get the maximum width and height of images from document
+    /// </summary>
+    /// <param name="styleset">Current styleset</param>
+    /// <param name="maxWidth">Maximum width in twips</param>
+    /// <param name="maxHeight">Maximum height in twips</param>
+    public static void GetMaxWidthAndHeight(Styleset styleset, out int maxWidth, out int maxHeight)
+    {
+        var style = (DocumentStyle)styleset.FindStyle(nameof(DocumentStyle));
+
+        maxWidth = MeasurementHelper.GetTwipsFromCm(style.MaxImageWidth);
+        maxHeight = MeasurementHelper.GetTwipsFromCm(style.MaxImageHeight);
+    }
+
+    /// <summary>
+    /// Get the current width and height of an image
+    /// </summary>
+    /// <param name="originalWidth">Original width in twips</param>
+    /// <param name="originalHeight">Original width in twips</param>
+    /// <param name="maxWidth">Maximum width in twips</param>
+    /// <param name="maxHeight">Maximum height in twips</param>
+    /// <param name="width">Current width in twips</param>
+    /// <param name="height">Current height in twips</param>
+    public static void GetWidthAndHeight(int originalWidth, int originalHeight, int maxWidth, int maxHeight, out int width, out int height)
+    {
+        if (originalHeight > originalWidth) // Portrait
+        {
+            width = originalWidth > maxWidth ? maxWidth : originalWidth;
+            height = (int)(originalHeight / (double)originalWidth * width);
+
+            if (originalHeight <= maxHeight)
+            {
+                return;
+            }
+            height = maxHeight;
+            width = (int)(originalWidth / (double)originalHeight * maxHeight);
+        }
+        else // Landscape
+        {
+            height = originalHeight > maxHeight ? maxHeight : originalHeight;
+            width = (int)(originalWidth / (double)originalHeight * height);
+
+            if (originalWidth <= maxWidth)
+            {
+                return;
+            }
+            width = maxWidth;
+            height = (int)(originalHeight / (double)originalWidth * maxWidth);
+        }
+    }
 }

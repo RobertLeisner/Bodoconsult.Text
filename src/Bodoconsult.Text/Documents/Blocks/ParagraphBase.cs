@@ -43,6 +43,4 @@ public abstract class ParagraphBase : Block
 
         document.AppendLine($"{indent}</{TagToUse}>");
     }
-
-
 }

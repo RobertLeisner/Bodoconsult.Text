@@ -123,6 +123,12 @@ namespace Bodoconsult.Text.Documents
                 return propertyAsBlock;
             }
 
+            if (obj is SpanBase span)
+            {
+                span.Content = node.Value;
+                return span;
+            }
+
             return obj is not TextElement textElement ? null : GetTextElement(elementName, node, textElement);
         }
 
@@ -137,7 +143,6 @@ namespace Bodoconsult.Text.Documents
                 {
 
                     Debug.Print($"{pi.Name}: child {element.Name}");
-
 
                     var child = GetDocumentElement(element.Name.ToString(), element, null);
                     pi.SetValue(parent, child);

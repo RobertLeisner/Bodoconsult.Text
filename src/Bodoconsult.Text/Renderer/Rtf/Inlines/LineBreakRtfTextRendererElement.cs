@@ -37,6 +37,6 @@ public class LineBreakRtfTextRendererElement : InlineRtfTextRendererElementBase
     /// <param name="sb">String to add the inline element rendered</param>
     public override void RenderToString(ITextDocumentRender renderer, StringBuilder sb)
     {
-        sb.Append("</br>");
+        sb.Append("\\line");
     }
 }

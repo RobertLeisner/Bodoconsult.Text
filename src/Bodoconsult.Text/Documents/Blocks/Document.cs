@@ -39,6 +39,15 @@ public class Document : Block
     /// </summary>
     public const int DefaultFontSize = 12;
 
+    /// <summary>
+    /// Default margin left. Default 1cm = 28.3pt
+    /// </summary>
+    public static double DefaultMarginLeft { get; set; } = 28.3;
+
+    /// <summary>
+    /// Default margin right. Default 1cm = 28.3pt
+    /// </summary>
+    public static double DefaultMarginRight { get; set; } = 28.3;
 
     /// <summary>
     /// Default ctor
@@ -58,6 +67,36 @@ public class Document : Block
         // Tag to use
         TagToUse = string.Intern("Document");
     }
+
+    /// <summary>
+    /// Styleset to use for the document
+    /// </summary>
+    [DoNotSerialize]
+    public Styleset Styleset { get; private set; }
+
+    /// <summary>
+    /// Metadata to use for the document
+    /// </summary>
+    [DoNotSerialize]
+    public DocumentMetaData DocumentMetaData { get; private set; }
+
+    /// <summary>
+    /// Current TOC section or null if no TOC is required 
+    /// </summary>
+    [DoNotSerialize]
+    public TocSection TocSection { get; private set; }
+
+    /// <summary>
+    /// Current TOF section or null if no TOF is required 
+    /// </summary>
+    [DoNotSerialize]
+    public TofSection TofSection { get; private set; }
+
+    /// <summary>
+    /// Current TOE section or null if no TOE is required 
+    /// </summary>
+    [DoNotSerialize]
+    public ToeSection ToeSection { get; private set; }
 
     /// <summary>
     /// Add the current element to a document defined in LDML (Logical document markup language)
@@ -94,26 +133,23 @@ public class Document : Block
     {
         base.AddBlock(block);
 
-
-        if (block is not DocumentMetaData documentMetaData)
+        switch (block)
         {
-            return;
-        }
-
-        if (documentMetaData.IsTocRequired)
-        {
-            base.AddBlock(new TocSection());
-        }
-
-        if (documentMetaData.IsFiguresTableRequired)
-        {
-            base.AddBlock(new TofSection());
-        }
-
-        if (documentMetaData.IsEquationsTableRequired)
-        {
-            base.AddBlock(new ToeSection());
+            case Styleset styleset:
+                Styleset = styleset;
+                return;
+            case DocumentMetaData documentMetaData:
+                DocumentMetaData = documentMetaData;
+                return;
+            case TocSection tocSection:
+                TocSection = tocSection;
+                return;
+            case TofSection tofSection:
+                TofSection = tofSection;
+                return;
+            case ToeSection toeSection:
+                ToeSection = toeSection;
+                return;
         }
     }
-
 }

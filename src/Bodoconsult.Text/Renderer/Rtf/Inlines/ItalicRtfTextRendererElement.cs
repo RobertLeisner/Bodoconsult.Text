@@ -54,11 +54,13 @@ public class ItalicRtfTextRendererElement : InlineRtfTextRendererElementBase
     {
         if (_span.ChildInlines.Count == 0)
         {
-                sb.Append($"<i>{renderer.CheckContent(_span.Content)}</i>");
+                sb.Append($"\\i{{{renderer.CheckContent(_span.Content)}}}\\i0");
         }
         else
         {
+            sb.Append($"\\i{{");
             DocumentRendererHelper.RenderInlineChildsToRtf(renderer, sb, _span.ChildInlines);
+            sb.Append($"}}\\i");
         }
     }
 }
