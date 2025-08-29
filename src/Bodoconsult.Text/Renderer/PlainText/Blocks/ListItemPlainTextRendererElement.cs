@@ -32,59 +32,69 @@ public class ListItemPlainTextRendererElement : ParagraphBasePlainTextRendererEl
     public override void RenderIt(ITextDocumentRender renderer)
     {
         // Get the content of all inlines as string
-        var sb = new StringBuilder();
+        string listChars = " ";
 
         var list = (List)_listItem.Parent;
 
         switch (list.ListStyleType)
         {
             case ListStyleTypeEnum.Disc:
-                sb.Append('*');
+                listChars = "*";
                 break;
             case ListStyleTypeEnum.Circle:
-                sb.Append('o');
+                listChars = "o";
                 break;
             case ListStyleTypeEnum.Square:
-                sb.Append('-');
+                listChars = "-";
                 break;
             case ListStyleTypeEnum.Decimal:
                 list.Counter++;
-                sb.Append(list.Counter);
+                listChars = $"{list.Counter}";
                 break;
             case ListStyleTypeEnum.DecimalLeadingZero:
                 list.Counter++;
-                sb.Append(list.Counter.ToString("00"));
+                listChars = $"{list.Counter:00}";
                 break;
             case ListStyleTypeEnum.UpperRoman:
                 list.Counter++;
-                sb.Append(list.Counter.ArabicToRoman().ToUpperInvariant());
+                listChars = $"{list.Counter.ArabicToRoman().ToUpperInvariant()}";
                 break;
             case ListStyleTypeEnum.LowerRoman:
                 list.Counter++;
-                sb.Append(list.Counter.ArabicToRoman().ToLowerInvariant());
+                listChars = $"{list.Counter.ArabicToRoman().ToLowerInvariant()}";
                 break;
             case ListStyleTypeEnum.UpperLatin:
                 // ToDo: Get latin letter
                 list.Counter++;
-                sb.Append(list.Counter);
+                listChars = $"{list.Counter}";
                 break;
             case ListStyleTypeEnum.LowerLatin:
                 // ToDo: Get latin letter
                 list.Counter++;
-                sb.Append(list.Counter);
+                listChars = $"{list.Counter}";
                 break;
             case ListStyleTypeEnum.Customized:
-                sb.Append(list.ListStyleTypeChar);
+                listChars = list.ListStyleTypeChar.ToString();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
 
-        sb.Append(' ');
+        var sb = new StringBuilder();
 
         DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, Paragraph.ChildInlines, string.Empty, false);
 
+        // Now let the formatter work
+        var style = (ParagraphStyleBase)renderer.Styleset.FindStyle($"{Paragraph.GetType().Name}Style");
+        var formatter = new PlainTextParagraphFormatter(sb.ToString(), style, renderer.PageStyleBase)
+        {
+            LeftRightBorderChar = LeftRightBorderChar,
+            TopBottomBorderChar = TopBottomBorderChar,
+            ListChars = listChars,
+        };
+        formatter.FormatText();
+
         // Now add the formatted text to the rendered content
-        renderer.Content.AppendLine(sb.ToString());
+        renderer.Content.Append($"{formatter.GetFormattedText()}");
     }
 }

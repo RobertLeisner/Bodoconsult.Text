@@ -1,8 +1,9 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
 
-using System;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
+using System;
+using System.Text;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
 
@@ -26,7 +27,9 @@ public class EquationPlainTextRendererElement : ITextRendererElement
     /// </summary>
     public void RenderIt(ITextDocumentRender renderer)
     {
-        DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, renderer.Content, _equation.ChildInlines, tag: string.Empty, isBlock: true);
-        renderer.Content.Append($"{Environment.NewLine}");
+        var sb = new StringBuilder();
+        sb.Append(_equation.CurrentPrefix);
+        DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, _equation.ChildInlines, tag: string.Empty, isBlock: true);
+        renderer.Content.Append($"![{sb}]({_equation.Uri} \"{sb}\"){Environment.NewLine}{Environment.NewLine}");
     }
 }

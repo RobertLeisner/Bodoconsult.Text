@@ -253,10 +253,10 @@ public static class TestDataHelper
         // Add a list
         var list = new List();
 
-        var listItem1 = new ListItem("First list item");
+        var listItem1 = new ListItem($"First list item: {MassText}");
         list.AddBlock(listItem1);
 
-        var listItem2 = new ListItem("Second list item");
+        var listItem2 = new ListItem($"Second list item: {MassText}");
         list.AddBlock(listItem2);
 
         section.AddBlock(list);

@@ -2,8 +2,11 @@
 
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Extensions;
+using Bodoconsult.Text.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
@@ -49,9 +52,14 @@ public class PlainTextParagraphFormatter
     public int WidthInChars { get; set; }
 
     /// <summary>
+    /// List chars
+    /// </summary>
+    public string ListChars { get; set; }
+
+    /// <summary>
     /// Char width in cm
     /// </summary>
-    private const double CharWidth = 0.25;
+    private const double CharWidth = 0.20;
 
     /// <summary>
     /// Default ctor
@@ -85,10 +93,10 @@ public class PlainTextParagraphFormatter
     /// </summary>
     public void CalculateValues()
     {
-        WidthInChars = (int)((_pageStyle.TypeAreaWidth - _paragraphStyle.Margins.Left - _paragraphStyle.Margins.Right) / CharWidth);
+        WidthInChars = (int)((_pageStyle.TypeAreaWidth - MeasurementHelper.GetCmFromPt(_paragraphStyle.Margins.Left) - MeasurementHelper.GetCmFromPt(_paragraphStyle.Margins.Right)) / CharWidth);
 
 
-        var marginLeft = (uint)(_paragraphStyle.Margins.Left / CharWidth);
+        var marginLeft = (uint)((MeasurementHelper.GetCmFromPt(_paragraphStyle.Margins.Left)) / CharWidth);
 
         _leftMargin = marginLeft == 0 ? string.Empty : " ".Repeat(marginLeft);
 
@@ -162,9 +170,25 @@ public class PlainTextParagraphFormatter
             result.Add(_leftMargin + _topBottomLine);
         }
 
+        var firstIndex = 0;
+        var isFirstLine = false;
+
         foreach (var line in Lines)
         {
-            FormatLine(result, line);
+            if (!string.IsNullOrEmpty(line))
+            {
+                if (firstIndex == 0)
+                {
+                    isFirstLine = true;
+                    firstIndex = 99;
+                }
+                else
+                {
+                    isFirstLine = false;
+                }
+            }
+
+            FormatLine(result, line, isFirstLine);
         }
 
         if (_paragraphStyle.BorderThickness.Bottom > 0)
@@ -193,34 +217,53 @@ public class PlainTextParagraphFormatter
         }
     }
 
-    private void FormatLine(List<string> result, string line)
+    private void FormatLine(List<string> result, string line, bool isFirstLine)
     {
 
         var missinglength = WidthInChars - line.Length;
 
+        if (string.IsNullOrEmpty(line))
+        {
+            result.Add(line);
+            return;
+        }
+
+        string fLine;
+
         switch (_paragraphStyle.TextAlignment)
         {
-            case TextAlignment.Left:
-                result.Add($"{_leftMargin}{_leftBorderChar}{_leftPadding}{line}{" ".Repeat(missinglength)}{_rightPadding}{_rightBorderChar}");
-                return;
+
             case TextAlignment.Right:
-                result.Add($"{_leftMargin}{_leftBorderChar}{_leftPadding}{line.PadLeft(WidthInChars)}{_rightPadding}{_rightBorderChar}");
-                return;
+                fLine = $"{_leftMargin}{_leftBorderChar}{_leftPadding}{line.PadLeft(WidthInChars)}{_rightPadding}{_rightBorderChar}";
+                break;
             case TextAlignment.Center:
             {
                 var length = (uint)((WidthInChars - line.Length) / 2.0);
-                result.Add(length > 0
+                fLine = (length > 0
                     ? $"{_leftMargin}{_leftBorderChar}{_leftPadding}{" ".Repeat(length)}{line}{" ".Repeat(length)}{_rightPadding}{_rightBorderChar}"
                     : $"{_leftMargin}{_leftBorderChar}{_leftPadding}{line}{_rightPadding}{_rightBorderChar}");
 
-                return;
+                break;
             }
             // ToDo: justify
             case TextAlignment.Justify:
                 line = FillLine(line, missinglength, WidthInChars);
-                result.Add($"{_leftMargin}{_leftBorderChar}{_leftPadding}{line}{_rightPadding}{_rightBorderChar}");
-                return;
+                fLine = $"{_leftMargin}{_leftBorderChar}{_leftPadding}{line}{_rightPadding}{_rightBorderChar}";
+                break;
+            default:
+                fLine =
+                    $"{_leftMargin}{_leftBorderChar}{_leftPadding}{line}{" ".Repeat(missinglength)}{_rightPadding}{_rightBorderChar}";
+                break;
         }
+
+        // Add list char if necessary
+        if (isFirstLine && !string.IsNullOrEmpty(ListChars))
+        {
+            result.Add(ListChars + fLine[(ListChars.Length)..]);
+            return;
+        }
+
+        result.Add(fLine);
     }
 
     /// <summary>
@@ -311,7 +354,7 @@ public class PlainTextParagraphFormatter
         {
 
             // Check if current char is a blank (0x20). If not go back until a blank is found
-            while (pos < length && _bytes.Span[pos] != 0x20 && pos >= 0)
+            while (pos < length && pos >= 0 && _bytes.Span[pos] != 0x20)
             {
                 pos--;
             }

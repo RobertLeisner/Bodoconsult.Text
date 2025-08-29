@@ -14,5 +14,6 @@ public class ListItemStyle : ParagraphStyleBase
     {
         TagToUse = "ListItemStyle";
         Name = TagToUse;
+        Margins.Left = Document.DefaultMarginLeft;
     }
 }

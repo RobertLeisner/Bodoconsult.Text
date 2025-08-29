@@ -4,13 +4,14 @@ using System;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Extensions;
 using Bodoconsult.Text.Helpers;
+using Bodoconsult.Text.Interfaces;
 
 namespace Bodoconsult.Text.DocumentFactory;
 
 /// <summary>
 /// Base class for <see cref="Document"/> based documents like documents etc.
 /// </summary>
-public abstract class DocumentFactoryBase
+public abstract class DocumentFactoryBase : IDocumentFactory
 {
     /// <summary>
     /// Default ctor

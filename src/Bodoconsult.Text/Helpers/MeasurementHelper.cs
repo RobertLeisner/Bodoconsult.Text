@@ -107,4 +107,14 @@ public static class MeasurementHelper
     {
         return twips / 15;
     }
+
+    /// <summary>
+    /// Get cm from typographic points pt
+    /// </summary>
+    /// <param name="pt">Typographic points pt</param>
+    /// <returns>cm</returns>
+    public static double GetCmFromPt(double pt)
+    {
+        return pt * CentimeterPerPoint;
+    }
 }
