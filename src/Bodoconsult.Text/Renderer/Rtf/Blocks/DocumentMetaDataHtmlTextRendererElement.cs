@@ -3,9 +3,7 @@
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
 using System.Text;
 
 namespace Bodoconsult.Text.Renderer.Rtf.Blocks;

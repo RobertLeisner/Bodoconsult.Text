@@ -3,7 +3,6 @@
 using System;
 using System.Text;
 using Bodoconsult.Text.Documents;
-using Bodoconsult.Text.Extensions;
 using Bodoconsult.Text.Helpers;
 
 namespace Bodoconsult.Text.Renderer.Rtf.Styles;

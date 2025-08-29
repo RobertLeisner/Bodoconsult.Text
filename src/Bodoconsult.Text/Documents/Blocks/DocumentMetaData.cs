@@ -83,6 +83,11 @@ public class DocumentMetaData : Block
     public string EquationPrefix { get; set; } = "Equation";
 
     /// <summary>
+    /// Prefix for citation sources
+    /// </summary>
+    public string CitationSourcePrefix { get; set; } = "Source: ";
+
+    /// <summary>
     /// Prefix for figures
     /// </summary>
     public string FigurePrefix { get; set; } = "Figure";

@@ -3,7 +3,6 @@
 using System.Text;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
-using Bodoconsult.Text.Renderer.PlainText;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
 

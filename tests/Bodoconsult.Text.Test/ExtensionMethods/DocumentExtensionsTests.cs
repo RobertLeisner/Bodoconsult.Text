@@ -3,11 +3,6 @@
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Bodoconsult.Text.Extensions;
 
 namespace Bodoconsult.Text.Test.ExtensionMethods

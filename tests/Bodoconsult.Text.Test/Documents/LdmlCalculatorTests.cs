@@ -1,5 +1,7 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
+using System.Diagnostics;
+using System.Text;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Test.Helpers;
 using NUnit.Framework;
@@ -27,6 +29,8 @@ public class LdmlCalculatorTests
         Assert.That(lc.ToeItems, Is.Not.Null);
         Assert.That(lc.TofItems, Is.Not.Null);
 
+        PrintDoc(doc);
+
     }
 
     [Test]
@@ -48,6 +52,8 @@ public class LdmlCalculatorTests
 
         Assert.That(eq.CurrentPrefix.Length, Is.Not.EqualTo(0));
         Assert.That(eq.TagName.Length, Is.Not.EqualTo(0));
+
+        PrintDoc(doc);
     }
 
     [Test]
@@ -64,6 +70,8 @@ public class LdmlCalculatorTests
 
         // Assert
         Assert.That(lc.ToeItems.Count, Is.Not.EqualTo(0));
+
+        PrintDoc(doc);
     }
 
     [Test]
@@ -85,6 +93,8 @@ public class LdmlCalculatorTests
 
         Assert.That(eq.CurrentPrefix.Length, Is.Not.EqualTo(0));
         Assert.That(eq.TagName.Length, Is.Not.EqualTo(0));
+
+        PrintDoc(doc);
     }
 
     [Test]
@@ -101,6 +111,8 @@ public class LdmlCalculatorTests
 
         // Assert
         Assert.That(lc.TofItems.Count, Is.Not.EqualTo(0));
+
+        PrintDoc(doc);
     }
 
     [Test]
@@ -117,6 +129,21 @@ public class LdmlCalculatorTests
 
         // Assert
         Assert.That(lc.TocItems.Count, Is.Not.EqualTo(0));
+
+        PrintDoc(doc);
+        
+    }
+
+    private void PrintDoc(Document doc)
+    {
+        if (!Debugger.IsAttached)
+        {
+            return;
+        }
+
+        var sb = new StringBuilder();
+        doc.ToLdmlString(sb, string.Empty);
+        Debug.Print(sb.ToString());
     }
 
     [Test]
@@ -138,6 +165,8 @@ public class LdmlCalculatorTests
 
         Assert.That(eq.CurrentPrefix.Length, Is.Not.EqualTo(0));
         Assert.That(eq.TagName.Length, Is.Not.EqualTo(0));
+
+        PrintDoc(doc);
     }
 
 }

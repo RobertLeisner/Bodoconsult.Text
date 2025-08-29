@@ -2,7 +2,6 @@
 
 using System.Text;
 using Bodoconsult.Text.Documents;
-using Bodoconsult.Text.Helpers;
 
 namespace Bodoconsult.Text.Renderer.Html;
 

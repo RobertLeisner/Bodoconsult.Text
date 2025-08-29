@@ -4,7 +4,6 @@ using System;
 using System.Text;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
-using Bodoconsult.Text.Renderer.Rtf;
 
 namespace Bodoconsult.Text.Renderer.Rtf.Inlines;
 

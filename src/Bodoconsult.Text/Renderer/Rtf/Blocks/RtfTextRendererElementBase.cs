@@ -4,8 +4,6 @@ using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
 using System;
 using System.Text;
-using System.Xml.Linq;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Bodoconsult.Text.Renderer.Rtf.Blocks;
 

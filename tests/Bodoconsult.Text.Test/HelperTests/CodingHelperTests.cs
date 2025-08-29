@@ -3,13 +3,10 @@
 using System;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
-using Microsoft.VisualBasic;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Xml.Linq;
 using Bodoconsult.Text.Extensions;
 
 namespace Bodoconsult.Text.Test.HelperTests;

@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using Bodoconsult.Text.Documents;
-using Bodoconsult.Text.Renderer.Rtf;
 using Bodoconsult.Text.Renderer.Rtf.Blocks;
 using Bodoconsult.Text.Renderer.Rtf.Inlines;
 using Bodoconsult.Text.Renderer.Rtf.Styles;
@@ -257,6 +256,11 @@ public class RtfTextRendererElementFactory : ITextRendererElementFactory
         if (textElement is CitationStyle citationStyle)
         {
             return new CitationStyleRtfTextRendererElement(citationStyle);
+        }
+
+        if (textElement is CitationSourceStyle citationSourceStyle)
+        {
+            return new CitationSourceStyleRtfTextRendererElement(citationSourceStyle);
         }
 
         if (textElement is CodeStyle codeStyle)

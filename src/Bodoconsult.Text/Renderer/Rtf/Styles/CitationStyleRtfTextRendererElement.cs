@@ -20,3 +20,20 @@ public class CitationStyleRtfTextRendererElement : RtfParagraphStyleTextRenderer
         ClassName = "CitationStyle";
     }
 }
+
+/// <summary>
+/// Rtf rendering element for <see cref="CitationStyle"/> instances
+/// </summary>
+public class CitationSourceStyleRtfTextRendererElement : RtfParagraphStyleTextRendererElementBase
+{
+    private readonly CitationSourceStyle _citationSourceStyle;
+
+    /// <summary>
+    /// Default ctor
+    /// </summary>
+    public CitationSourceStyleRtfTextRendererElement(CitationSourceStyle citationSourceStyle) : base(citationSourceStyle)
+    {
+        _citationSourceStyle = citationSourceStyle;
+        ClassName = "CitationSourceStyle";
+    }
+}

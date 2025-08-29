@@ -2,7 +2,6 @@
 
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Renderer.Html.Styles;
-using Bodoconsult.Text.Renderer.PlainText;
 
 namespace Bodoconsult.Text.Renderer.Html
 {
@@ -253,6 +252,11 @@ namespace Bodoconsult.Text.Renderer.Html
             if (textElement is CitationStyle citationStyle)
             {
                 return new CitationStyleHtmlTextRendererElement(citationStyle);
+            }
+
+            if (textElement is CitationSourceStyle citationSourceStyle)
+            {
+                return new CitationSourceStyleHtmlTextRendererElement(citationSourceStyle);
             }
 
             if (textElement is CodeStyle codeStyle)

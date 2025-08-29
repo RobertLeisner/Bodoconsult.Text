@@ -49,4 +49,9 @@ public class Citation : ParagraphBase
 
         Inlines.Add(new Span { Content = content });
     }
+
+    /// <summary>
+    /// Source of the citation
+    /// </summary>
+    public string Source { get; set; }
 }

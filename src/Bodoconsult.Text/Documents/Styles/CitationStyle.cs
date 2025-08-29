@@ -17,8 +17,9 @@ public class CitationStyle : ParagraphStyleBase
         Name = TagToUse;
         TextAlignment = TextAlignment.Center;
         Margins.Top = 3 * Document.DefaultPaddingWidth;
-        Margins.Bottom = 3 * Document.DefaultPaddingWidth;
+        Margins.Bottom = 0;
         Margins.Left = Document.DefaultMarginLeft;
         Margins.Right = Document.DefaultMarginRight;
+        Italic = true;
     }
 }
