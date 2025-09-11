@@ -45,19 +45,10 @@ namespace Bodoconsult.Text.Renderer
         /// </summary>
         public Styleset Styleset { get; set; }
 
-
         /// <summary>
         /// Current page settings to apply
         /// </summary>
         public PageStyleBase PageStyleBase { get; set; }
-
-        /// <summary>
-        /// Prepare the document for rendering: calculate toc, figure counters
-        /// </summary>
-        public void PrepareDocument()
-        {
-            throw new NotImplementedException();
-        }
 
         /// <summary>
         /// Render the document
@@ -66,7 +57,6 @@ namespace Bodoconsult.Text.Renderer
         {
             throw new NotSupportedException("Create an overload for this method");
         }
-
 
         /// <summary>
         /// Save the rendered document as file

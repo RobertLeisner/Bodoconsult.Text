@@ -40,7 +40,7 @@ public static class DocumentReflectionHelper
 
             var isPropElement = typeof(PropertyAsAttributeElement).IsAssignableFrom(propType);
 
-            if (!propType.IsPrimitive && propType != typeof(string) && !propType.IsEnum && !isPropElement)
+            if (!propType.IsPrimitive && propType != typeof(string) && !propType.IsEnum && !isPropElement && !(propType.IsGenericType && propType.GetGenericTypeDefinition() == typeof(List<>)))
             {
                 continue;
             }
@@ -87,7 +87,10 @@ public static class DocumentReflectionHelper
 
             if (!isPropElement)
             {
-                continue;
+                if (!(propType.IsGenericType && propType.GetGenericTypeDefinition() == typeof(List<>)))
+                {
+                    continue;
+                }
             }
 
             var attr = propInfo.GetCustomAttributes(typeof(DoNotSerializeAttribute), true);

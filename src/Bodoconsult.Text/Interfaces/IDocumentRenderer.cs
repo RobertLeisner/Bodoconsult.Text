@@ -25,11 +25,6 @@ public interface IDocumentRenderer
     public PageStyleBase PageStyleBase { get; set; }
 
     /// <summary>
-    /// Prepare the document for rendering: calculate toc, figure counters
-    /// </summary>
-    void PrepareDocument();
-
-    /// <summary>
     /// Render the document
     /// </summary>
     void RenderIt();

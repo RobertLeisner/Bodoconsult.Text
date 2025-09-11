@@ -4,7 +4,6 @@ using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
 using System;
 using System.Text;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
 

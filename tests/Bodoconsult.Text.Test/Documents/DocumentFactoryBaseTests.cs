@@ -1,12 +1,11 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
-using Bodoconsult.Text.DocumentFactory;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
 using Bodoconsult.Text.Test.TestData;
 using NUnit.Framework;
 
-namespace Bodoconsult.Text.Test.DocumentFactory
+namespace Bodoconsult.Text.Test.Documents
 {
     [TestFixture]
     internal class DocumentFactoryBaseTests

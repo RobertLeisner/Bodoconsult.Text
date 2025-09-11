@@ -3,6 +3,7 @@
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Extensions;
 using Bodoconsult.Text.Helpers;
+using NUnit.Framework;
 
 namespace Bodoconsult.Text.Test.Helpers;
 
@@ -261,6 +262,20 @@ public static class TestDataHelper
 
         section.AddBlock(list);
 
+        // Keep distance
+        paragraph = new Paragraph(MassText);
+        section.AddBlock(paragraph);
+
+        // Add a table
+        var dt = DataHelper.GetData();
+
+        var dtp = new DataTableParser(dt);
+        dtp.ParseColumns();
+        dtp.ParseRows();
+
+        // Assert
+        section.AddBlock(dtp.Table);
+
         return doc;
     }
 
@@ -271,7 +286,13 @@ public static class TestDataHelper
             Name = "MyReport",
         };
 
+        CreateRealWorldReportContent(doc);
 
+        return doc;
+    }
+
+    public static void CreateRealWorldReportContent(Document doc)
+    {
         // Styleset (add after meta data)
         var styleset = StylesetHelper.CreateTestStyleset();
         doc.AddBlock(styleset);
@@ -506,7 +527,5 @@ public static class TestDataHelper
         list.AddBlock(listItem2);
 
         section.AddBlock(list);
-
-        return doc;
     }
 }

@@ -24,6 +24,7 @@ namespace Bodoconsult.Text.Documents
         /// <summary>
         /// All child blocks of the element
         /// </summary>
+        [DoNotSerialize]
         public List<Block> ChildBlocks => Blocks.ToList();
 
         /// <summary>
@@ -39,6 +40,7 @@ namespace Bodoconsult.Text.Documents
         /// <summary>
         /// All child blocks of the element
         /// </summary>
+        [DoNotSerialize]
         public List<Inline> ChildInlines => Inlines.ToList();
 
         /// <summary>

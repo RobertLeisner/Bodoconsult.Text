@@ -31,6 +31,10 @@ public static class StylesetHelper
         var citationStyle = new CitationStyle();
         styleSet.AddBlock(citationStyle);
 
+        // Add style CitationStyle for Citation instances 
+        var citationSourceStyle = new CitationSourceStyle();
+        styleSet.AddBlock(citationSourceStyle);
+
         // Add style CodeStyle for Code instances 
         var codeStyle = new CodeStyle();
         styleSet.AddBlock(codeStyle);

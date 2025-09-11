@@ -44,6 +44,7 @@ public abstract class SectionBase : Block
         typeof(Error),
         typeof(Warning),
         typeof(Info),
+        typeof(Table),
     ];
 
     /// <summary>

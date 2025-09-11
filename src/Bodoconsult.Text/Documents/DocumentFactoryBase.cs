@@ -1,12 +1,12 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
-using System;
-using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Extensions;
 using Bodoconsult.Text.Helpers;
 using Bodoconsult.Text.Interfaces;
+using System;
+using System.Collections.Generic;
 
-namespace Bodoconsult.Text.DocumentFactory;
+namespace Bodoconsult.Text.Documents;
 
 /// <summary>
 /// Base class for <see cref="Document"/> based documents like documents etc.
@@ -131,8 +131,9 @@ public abstract class DocumentFactoryBase : IDocumentFactory
     /// </summary>
     /// <param name="paragraphType">Paragraph type</param>
     /// <param name="content">Content</param>
+    /// <param name="source">Source for citation</param>
     /// <exception cref="ArgumentOutOfRangeException">Paragraph type not found</exception>
-    public void AddParagraph(ParagraphType paragraphType, string content)
+    public void AddParagraph(ParagraphType paragraphType, string content, string source = null)
     {
         switch (paragraphType)
         {
@@ -149,7 +150,10 @@ public abstract class DocumentFactoryBase : IDocumentFactory
                 CurrentSection.AddBlock(new ParagraphJustify(content));
                 break;
             case ParagraphType.Citation:
-                CurrentSection.AddBlock(new Citation(content));
+                CurrentSection.AddBlock(new Citation(content)
+                {
+                    Source = source
+                });
                 break;
             case ParagraphType.Code:
                 CurrentSection.AddBlock(new Code(content));
@@ -179,6 +183,80 @@ public abstract class DocumentFactoryBase : IDocumentFactory
                 throw new ArgumentOutOfRangeException(nameof(paragraphType), paragraphType, null);
         }
     }
+
+    /// <summary>
+    /// Add a list
+    /// </summary>
+    /// <param name="list">List items</param>
+    /// <param name="listStyle">List style</param>
+    public void AddList(List<string> list, ListStyleTypeEnum listStyle)
+    {
+        var block = new List();
+
+        foreach (var item in list)
+        {
+            var listItem = new ListItem(item);
+            block.AddBlock(listItem);
+        }
+
+        CurrentSection.AddBlock(block);
+    }
+
+    /// <summary>
+    /// Add an image
+    /// </summary>
+    /// <param name="content">Title of the equation</param>
+    /// <param name="uri">URI of the equation image</param>
+    /// <param name="originalWidth">Original image width</param>
+    /// <param name="originalHeight">Original image height</param>
+    /// <returns>Equation instance for setting enhanced properties</returns>
+    public void AddImage(string content, string uri, int originalWidth, int originalHeight)
+    {
+        var result = new Image(content, uri)
+        {
+            OriginalWidth = originalWidth,
+            OriginalHeight = originalHeight
+        };
+        CurrentSection.AddBlock(result);
+    }
+
+    /// <summary>
+    /// Add a figure
+    /// </summary>
+    /// <param name="content">Title of the equation</param>
+    /// <param name="uri">URI of the equation image</param>
+    /// <param name="originalWidth">Original image width</param>
+    /// <param name="originalHeight">Original image height</param>
+    /// <returns>Equation instance for setting enhanced properties</returns>
+    public void AddFigure(string content, string uri, int originalWidth, int originalHeight)
+    {
+        var result = new Figure(content, uri)
+        {
+            OriginalWidth = originalWidth,
+            OriginalHeight = originalHeight
+        };
+        CurrentSection.AddBlock(result);
+    }
+
+    /// <summary>
+    /// Add an equation
+    /// </summary>
+    /// <param name="content">Title of the equation</param>
+    /// <param name="uri">URI of the equation image</param>
+    /// <param name="originalWidth">Original image width</param>
+    /// <param name="originalHeight">Original image height</param>
+    /// <returns>Equation instance for setting enhanced properties</returns>
+    public Equation AddEquation(string content, string uri, int originalWidth, int originalHeight)
+    {
+        var result = new Equation(content, uri)
+        {
+            OriginalWidth = originalWidth,
+            OriginalHeight = originalHeight
+        };
+        CurrentSection.AddBlock(result);
+        return result;
+    }
+
 
     /// <summary>
     /// Create the full document. Implement all logic needed to create the full document you want to get

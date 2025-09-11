@@ -10,6 +10,11 @@ namespace Bodoconsult.Text.Interfaces;
 public interface IDocumentFactory
 {
     /// <summary>
+    /// Current LDML document
+    /// </summary>
+    Document Document { get; }
+
+    /// <summary>
     /// Load existing document metadata and replace the existing one
     /// </summary>
     /// <param name="documentMetaData">Document metadata</param>
@@ -20,6 +25,11 @@ public interface IDocumentFactory
     /// </summary>
     /// <param name="styleset">Styleset to load</param>
     void LoadStyleset(Styleset styleset);
+
+    /// <summary>
+    /// Load the styleset and the metadata to the document and create a default section "Body"
+    /// </summary>
+    void PrepareTheDocument();
 
     /// <summary>
     /// Create the full document. Implement all logic needed to create the full document you want to get

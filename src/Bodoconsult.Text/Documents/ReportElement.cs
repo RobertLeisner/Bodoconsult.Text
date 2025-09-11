@@ -1,9 +1,8 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using System;
-using Bodoconsult.Text.Documents;
 
-namespace Bodoconsult.Text.DocumentFactory
+namespace Bodoconsult.Text.Documents
 {
     /// <summary>
     /// Abstract class for report elements, which must have a RenderIt() method at least

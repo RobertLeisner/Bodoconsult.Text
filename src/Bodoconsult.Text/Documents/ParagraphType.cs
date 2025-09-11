@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
-namespace Bodoconsult.Text.DocumentFactory;
+namespace Bodoconsult.Text.Documents;
 
 /// <summary>
 /// Paragraph style

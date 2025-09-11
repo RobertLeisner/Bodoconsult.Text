@@ -1,14 +1,15 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
+using Bodoconsult.Text.Extensions;
+using Bodoconsult.Text.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml.Linq;
-using Bodoconsult.Text.Extensions;
-using Bodoconsult.Text.Helpers;
 
 namespace Bodoconsult.Text.Documents
 {
@@ -94,15 +95,30 @@ namespace Bodoconsult.Text.Documents
             {
                 var pis = DocumentReflectionHelper.GetPropertiesForBlocks(parent.GetType());
 
+
+
                 var pi = pis.FirstOrDefault(x => x.Name == elementName);
 
                 if (pi == null)
                 {
                     return null;
                 }
+                // List?
+                if (!(pi.PropertyType.IsGenericType && pi.PropertyType.GetGenericTypeDefinition() == typeof(List<>)))
+                {
 
-                GetPropertyAsBlockElement(parent, node, pi);
-                return null;
+                    // No list
+                    GetPropertyAsBlockElement(parent, node, pi);
+                    return null;
+                }
+
+                // list
+
+                Debug.Print(pi.Name);
+
+                GetListPropertyAsBlockElements(parent, pi, node);
+
+                
             }
 
 
@@ -130,6 +146,31 @@ namespace Bodoconsult.Text.Documents
             }
 
             return obj is not TextElement textElement ? null : GetTextElement(elementName, node, textElement);
+        }
+
+        private void GetListPropertyAsBlockElements(DocumentElement parent, PropertyInfo pi, XElement node)
+        {
+            var genType = pi.PropertyType.GenericTypeArguments[0];
+            Debug.Print(genType.Name);
+
+            foreach (var childNode in node.Nodes())
+            {
+                Debug.Print(childNode.ToString());
+                if (childNode is XElement element)
+                {
+
+                    Debug.Print($"{pi.Name}: child {element.Name}");
+
+                    var child = GetDocumentElement(element.Name.ToString(), element, null);
+                    pi.PropertyType.GetMethod("Add").Invoke(parent, new[] { child });
+                }
+                else
+                {
+                    Debug.Print(childNode.ToString());
+                }
+
+            }
+
         }
 
         private void GetPropertyAsBlockElement(DocumentElement parent,  XElement node, PropertyInfo pi)
