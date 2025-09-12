@@ -6,54 +6,35 @@ using System.Text;
 
 namespace Bodoconsult.Text.Documents;
 
-
-
-
 /// <summary>
-/// Table cell
+/// A table row
 /// </summary>
-public class Cell : ParagraphBase
+public class Row : Block
 {
     /// <summary>
-    /// Static list with all allowed inline elements for paragraphs
+    /// Static list with all allowed inline elements for rows
     /// </summary>
-    public static List<Type> AllAllowedInlines =
+    public static List<Type> AllAllowedBlocks =
     [
-        typeof(Span),
-        typeof(Bold),
-        typeof(Italic),
-        typeof(LineBreak),
-        typeof(Value)
+        typeof(Cell),
     ];
-
 
     /// <summary>
     /// Default ctor
     /// </summary>
-    public Cell()
+    public Row()
     {
-        // No blocks allowed
+        // Blocks allowed
 
-        // Add allowed inlines
-        AllowedInlines.AddRange(AllAllowedInlines);
+        // No inlines allowed
 
-        TagToUse = string.Intern("Cell");
+        TagToUse = string.Intern("Row");
     }
 
     /// <summary>
-    /// Ctor with string content
+    /// Cells in the row
     /// </summary>
-    public Cell(string content)
-    {
-        // No blocks allowed
-
-        // Add allowed inlines
-        AllowedInlines.AddRange(AllAllowedInlines);
-
-        TagToUse = string.Intern("Cell");
-
-        Inlines.Add(new Value { Content = content });
-    }
+    public List<Cell> Cells { get; set; } = new();
 
     /// <summary>
     /// Add the current element to a document defined in LDML (Logical document markup language)
@@ -63,12 +44,12 @@ public class Cell : ParagraphBase
     public override void ToLdmlString(StringBuilder document, string indent)
     {
         document.AppendLine($"{indent}<{TagToUse}>");
-
-        foreach (var item in Inlines)
+        document.AppendLine($"{indent}{Indentation}<Cells>");
+        foreach (var cell in Cells)
         {
-            item.ToLdmlString(document, $"{indent}{Indentation}");
+            cell.ToLdmlString(document, $"{indent}{Indentation}{Indentation}");
         }
-
+        document.AppendLine($"{indent}{Indentation}</Cells>");
         document.AppendLine($"{indent}</{TagToUse}>");
     }
 }

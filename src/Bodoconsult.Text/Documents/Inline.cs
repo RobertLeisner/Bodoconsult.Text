@@ -25,6 +25,7 @@ namespace Bodoconsult.Text.Documents
         /// <summary>
         /// All child inlines bound to the element
         /// </summary>
+        [DoNotSerialize]
         public List<Inline> ChildInlines => Inlines.ToList();
 
         /// <summary>

@@ -31,12 +31,14 @@ public class Styleset : Block
     /// <summary>
     /// Fonts list used i.e. for RTF rendering. Filled by the renderer instance
     /// </summary>
+    [DoNotSerialize]
     public List<string> Fonts { get;  }= new();
 
 
     /// <summary>
     /// List of all colors i.e. for RTF rendering. Filled by the renderer instance
     /// </summary>
+    [DoNotSerialize]
     public List<Color> Colors { get; } = new();
 
     /// <summary>

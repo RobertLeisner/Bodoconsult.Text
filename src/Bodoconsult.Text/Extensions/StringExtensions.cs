@@ -88,4 +88,16 @@ public static class StringExtensions
 
         return count;
     }
+
+    /// <summary>
+    /// Make first char of a string an uppercase char. The rest is lowercase
+    /// </summary>
+    /// <param name="value">String</param>
+    /// <returns>String with first char being uppercase. The rest is lowercase</returns>
+    public static string FirstCharToUpperCase(this string value)
+    {
+        return value.Length == 1 ?
+            char.ToUpper(value[0]).ToString() :
+            char.ToUpper(value[0]) + value[1..].ToLowerInvariant();
+    }
 }

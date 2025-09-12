@@ -93,34 +93,9 @@ namespace Bodoconsult.Text.Documents
 
             if (type == null)
             {
-                var pis = DocumentReflectionHelper.GetPropertiesForBlocks(parent.GetType());
-
-
-
-                var pi = pis.FirstOrDefault(x => x.Name == elementName);
-
-                if (pi == null)
-                {
-                    return null;
-                }
-                // List?
-                if (!(pi.PropertyType.IsGenericType && pi.PropertyType.GetGenericTypeDefinition() == typeof(List<>)))
-                {
-
-                    // No list
-                    GetPropertyAsBlockElement(parent, node, pi);
-                    return null;
-                }
-
-                // list
-
-                Debug.Print(pi.Name);
-
-                GetListPropertyAsBlockElements(parent, pi, node);
-
-                
+                HandleObjectTypes(elementName, node, parent);
+                return null;
             }
-
 
             object obj;
 
@@ -133,19 +108,39 @@ namespace Bodoconsult.Text.Documents
                 return null;
             }
 
-            if (obj is PropertyAsBlockElement propertyAsBlock)
+            switch (obj)
             {
-                LoadProperties(propertyAsBlock, node);
-                return propertyAsBlock;
+                case PropertyAsBlockElement propertyAsBlock:
+                    LoadProperties(propertyAsBlock, node);
+                    return propertyAsBlock;
+                case SpanBase span:
+                    span.Content = node.Value;
+                    return span;
+                default:
+                    return obj is not TextElement textElement ? null : GetTextElement(elementName, node, textElement);
+            }
+        }
+
+        private void HandleObjectTypes(string elementName, XElement node, DocumentElement parent)
+        {
+            var pis = DocumentReflectionHelper.GetPropertiesForBlocks(parent.GetType());
+            var pi = pis.FirstOrDefault(x => x.Name == elementName);
+
+            if (pi == null)
+            {
+                return;
+            }
+            
+            // List?
+            if (!(pi.PropertyType.IsGenericType && pi.PropertyType.GetGenericTypeDefinition() == typeof(List<>)))
+            {
+                // No list
+                GetPropertyAsBlockElement(parent, node, pi);
+                return;
             }
 
-            if (obj is SpanBase span)
-            {
-                span.Content = node.Value;
-                return span;
-            }
-
-            return obj is not TextElement textElement ? null : GetTextElement(elementName, node, textElement);
+            // List
+            GetListPropertyAsBlockElements(parent, pi, node);
         }
 
         private void GetListPropertyAsBlockElements(DocumentElement parent, PropertyInfo pi, XElement node)
@@ -153,27 +148,32 @@ namespace Bodoconsult.Text.Documents
             var genType = pi.PropertyType.GenericTypeArguments[0];
             Debug.Print(genType.Name);
 
+            var list = pi.GetValue(parent);
+
             foreach (var childNode in node.Nodes())
             {
-                Debug.Print(childNode.ToString());
-                if (childNode is XElement element)
-                {
-
-                    Debug.Print($"{pi.Name}: child {element.Name}");
-
-                    var child = GetDocumentElement(element.Name.ToString(), element, null);
-                    pi.PropertyType.GetMethod("Add").Invoke(parent, new[] { child });
-                }
-                else
-                {
-                    Debug.Print(childNode.ToString());
-                }
-
+                GetListItemAsBlock(pi, childNode, list);
             }
-
         }
 
-        private void GetPropertyAsBlockElement(DocumentElement parent,  XElement node, PropertyInfo pi)
+        private void GetListItemAsBlock(PropertyInfo pi, XNode childNode, object list)
+        {
+            if (childNode is XElement element)
+            {
+                Debug.Print($"{childNode}: {pi.Name}: child {element.Name}");
+
+                var child = GetDocumentElement(element.Name.ToString(), element, null);
+
+                var method = pi.PropertyType.GetMethod("Add");
+                method?.Invoke(list, [child]);
+            }
+            else
+            {
+                Debug.Print(childNode.ToString());
+            }
+        }
+
+        private void GetPropertyAsBlockElement(DocumentElement parent, XElement node, PropertyInfo pi)
         {
             // Check child nodes
             var childs = node.Nodes().ToList();
@@ -203,48 +203,41 @@ namespace Bodoconsult.Text.Documents
             // Check child nodes
             var childs = node.Nodes().ToList();
 
-
-            if (textElement is Block block)
+            switch (textElement)
             {
-                foreach (var childNode in childs)
-                {
-                    if (childNode is XElement element)
+                case Block block:
                     {
-
-                        Debug.Print($"{elementName}: child {element.Name}");
-
-
-                        var child = GetDocumentElement(element.Name.ToString(), element, textElement);
-
-                        if (child is Block childBlock)
+                        foreach (var childNode in childs)
                         {
-                            block.AddBlock(childBlock);
+                            HandleChildsForBlocks(elementName, textElement, childNode, block);
                         }
 
-                        if (child is Inline childInline)
-                        {
-                            block.AddInline(childInline);
-                        }
+                        break;
                     }
-                    else
+                case Inline inline:
                     {
-                        Debug.Print(childNode.ToString());
+                        //if (obj is Span)
+                        //{
+                        //    Debug.Print("Blubb");
+                        //}
+
+                        foreach (var childNode in childs)
+                        {
+                            HandleChildsForInlines(textElement, childNode, inline);
+                        }
+
+                        break;
                     }
-                }
             }
 
-            if (textElement is Inline inline)
+            return textElement;
+        }
+
+        private void HandleChildsForInlines(TextElement textElement, XNode childNode, Inline inline)
+        {
+            switch (childNode)
             {
-                //if (obj is Span)
-                //{
-                //    Debug.Print("Blubb");
-                //}
-
-
-                foreach (var childNode in childs)
-                {
-
-                    if (childNode is XElement element)
+                case XElement element:
                     {
                         var child = GetDocumentElement(element.Name.ToString(), element, textElement);
 
@@ -253,21 +246,42 @@ namespace Bodoconsult.Text.Documents
                             inline.AddInline(childInline);
                         }
 
-
+                        break;
                     }
-
-                    else if (childNode is XText text)
+                case XText text:
                     {
                         if (TextElement is Span parentInline)
                         {
                             parentInline.Content = text.Value;
                         }
                         Debug.Print(childNode.ToString());
+                        break;
                     }
+            }
+        }
+
+        private void HandleChildsForBlocks(string elementName, TextElement textElement, XNode childNode, Block block)
+        {
+            if (childNode is XElement element)
+            {
+                Debug.Print($"{elementName}: child {element.Name}");
+
+                var child = GetDocumentElement(element.Name.ToString(), element, textElement);
+
+                switch (child)
+                {
+                    case Block childBlock:
+                        block.AddBlock(childBlock);
+                        break;
+                    case Inline childInline:
+                        block.AddInline(childInline);
+                        break;
                 }
             }
-
-            return textElement;
+            else
+            {
+                Debug.Print(childNode.ToString());
+            }
         }
 
         private void LoadProperties(DocumentElement element, XElement node)
@@ -281,43 +295,61 @@ namespace Bodoconsult.Text.Documents
 
             var pis = DocumentReflectionHelper.GetPropertiesForAttributes(element.GetType());
 
-
             foreach (var prop in pis)
             {
-
-                var propType = prop.PropertyType;
-
-                var attr = attributes.FirstOrDefault(x => x.Name == prop.Name);
-
-                if (attr == null)
-                {
-                    continue;
-                }
-
-                // Object as property based on PropertyElement
-                if (_popertyElementTpye.IsAssignableFrom(propType))
-                {
-                    var objValue = Activator.CreateInstance(propType, attr.Value);
-                    prop.SetValue(element, objValue);
-                    continue;
-                }
-
-
-
-                // Normal property
-
-                //// Prop Name
-                //if (prop.PropertyType.IsEnum)
-                //{
-                //    var value = Enum.Parse(prop.PropertyType, attr.Value);
-                //    prop.SetValue(element, value);
-                //}
-                //else
-                //{
-                prop.SetValue(element, attr.Value.Convert(prop.PropertyType));
-                //}
-
+                LoadProperty(element, prop, attributes);
             }
+        }
+
+        private void LoadProperty(DocumentElement element, PropertyInfo prop, List<XAttribute> attributes)
+        {
+            var propType = prop.PropertyType;
+
+            var attr = attributes.FirstOrDefault(x => x.Name == prop.Name);
+
+            if (attr == null)
+            {
+                return;
+            }
+
+            // Object as property based on PropertyElement
+            if (_popertyElementTpye.IsAssignableFrom(propType))
+            {
+                var objValue = Activator.CreateInstance(propType, attr.Value);
+                prop.SetValue(element, objValue);
+                return;
+            }
+
+            // Property is a Type property
+            if (propType == typeof(Type))
+            {
+                var type = Type.GetType(attr.Value);
+                prop.SetValue(element, type);
+                return;
+            }
+
+            // Normal property
+
+            //// Prop Name
+            //if (propType.IsEnum)
+            //{
+            //    var value = Enum.Parse(propType, attr.Value);
+            //    prop.SetValue(element, value);
+            //}
+            //else
+            //{
+
+            try
+            {
+                prop.SetValue(element, attr.Value.Convert(propType));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            //}
         }
     }
 }

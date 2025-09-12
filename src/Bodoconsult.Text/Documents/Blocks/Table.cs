@@ -6,14 +6,12 @@ using System.Text;
 
 namespace Bodoconsult.Text.Documents;
 
-
-
-
 /// <summary>
-/// Table cell
+/// A table
 /// </summary>
-public class Cell : ParagraphBase
+public class Table : Block
 {
+
     /// <summary>
     /// Static list with all allowed inline elements for paragraphs
     /// </summary>
@@ -23,37 +21,43 @@ public class Cell : ParagraphBase
         typeof(Bold),
         typeof(Italic),
         typeof(LineBreak),
-        typeof(Value)
     ];
-
 
     /// <summary>
     /// Default ctor
     /// </summary>
-    public Cell()
+    public Table()
     {
         // No blocks allowed
 
-        // Add allowed inlines
+        // No inlines allowed
         AllowedInlines.AddRange(AllAllowedInlines);
 
-        TagToUse = string.Intern("Cell");
+        TagToUse = string.Intern("Table");
     }
 
     /// <summary>
-    /// Ctor with string content
+    /// Ctor providing a table legend
     /// </summary>
-    public Cell(string content)
+    public Table(string content)
     {
         // No blocks allowed
 
-        // Add allowed inlines
+        // No inlines allowed
         AllowedInlines.AddRange(AllAllowedInlines);
 
-        TagToUse = string.Intern("Cell");
-
-        Inlines.Add(new Value { Content = content });
+        TagToUse = string.Intern("Table");
     }
+
+    /// <summary>
+    /// Columns of the table
+    /// </summary>
+    public List<Column> Columns { get; set; } = new();
+
+    /// <summary>
+    /// Rows of the table
+    /// </summary>
+    public List<Row> Rows { get; set; } = new();
 
     /// <summary>
     /// Add the current element to a document defined in LDML (Logical document markup language)
@@ -63,12 +67,22 @@ public class Cell : ParagraphBase
     public override void ToLdmlString(StringBuilder document, string indent)
     {
         document.AppendLine($"{indent}<{TagToUse}>");
-
-        foreach (var item in Inlines)
+        
+        document.AppendLine($"{indent}{Indentation}<Columns>");
+        foreach (var column in Columns)
         {
-            item.ToLdmlString(document, $"{indent}{Indentation}");
+            column.ToLdmlString(document, indent + Indentation+Indentation);
         }
+        document.AppendLine($"{indent}{Indentation}</Columns>");
+
+        document.AppendLine($"{indent}{Indentation}<Rows>");
+        foreach (var row in Rows)
+        {
+            row.ToLdmlString(document, indent + Indentation + Indentation);
+        }
+        document.AppendLine($"{indent}{Indentation}</Rows>");
 
         document.AppendLine($"{indent}</{TagToUse}>");
     }
+
 }
