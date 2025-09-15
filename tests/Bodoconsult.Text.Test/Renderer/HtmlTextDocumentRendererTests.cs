@@ -2,6 +2,8 @@
 
 using System.Diagnostics;
 using System.IO;
+using System.Security.AccessControl;
+using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Renderer.Html;
 using Bodoconsult.Text.Test.Helpers;
 using NUnit.Framework;
@@ -35,6 +37,13 @@ public class HtmlTextDocumentRendererTests
     {
         // Arrange 
         var document = TestDataHelper.CreateDocument();
+
+        var calc = new LdmlCalculator(document);
+        calc.UpdateAllTables();
+        calc.EnumerateAllItems();
+        calc.PrepareAllItems();
+        calc.PrepareAllSections();
+
         var factory = new HtmlTextRendererElementFactory();
 
         var renderer = new HtmlTextDocumentRenderer(document, factory);

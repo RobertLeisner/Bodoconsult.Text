@@ -10,7 +10,7 @@ namespace Bodoconsult.Text.Renderer.Html;
 /// <summary>
 /// Base renderer implementation for HTML elements
 /// </summary>
-public class HtmlTextRendererElementBase : ITextRendererElement
+public abstract class HtmlTextRendererElementBase : ITextRendererElement
 {
     /// <summary>
     /// Current block to renderer
@@ -62,6 +62,47 @@ public class HtmlTextRendererElementBase : ITextRendererElement
         DocumentRendererHelper.RenderBlockChildsToHtml(renderer, sb, Block.ChildBlocks);
 
         DocumentRendererHelper.RenderInlineChildsToHtml(renderer, sb, Block.ChildInlines);
+        renderer.Content.Append(sb);
+        renderer.Content.Append($"</{TagToUse}>{Environment.NewLine}");
+    }
+}
+
+/// <summary>
+/// Base renderer implementation for HTML link elements
+/// </summary>
+public class HtmlLinkTextRendererElementBase : HtmlTextRendererElementBase
+{
+    /// <summary>
+    /// Default ctor
+    /// </summary>
+    /// <param name="block">Current block</param>
+    public HtmlLinkTextRendererElementBase(Block block) : base(block)
+    { }
+
+    /// <summary>
+    /// Render the element
+    /// </summary>
+    /// <param name="renderer">Current renderer</param>
+    public override void RenderIt(ITextDocumentRender renderer)
+    {
+        // Get the content of all inlines as string
+        var sb = new StringBuilder();
+
+        if (string.IsNullOrEmpty(LocalCss))
+        {
+            renderer.Content.Append($"<{TagToUse} class=\"{ClassName}\">");
+        }
+        else
+        {
+            renderer.Content.Append($"<{TagToUse} class=\"{ClassName}\" style=\"{LocalCss}\">");
+        }
+
+        sb.Append($"<a href=\"#{Block.TagName}\">");
+
+        DocumentRendererHelper.RenderInlineChildsToHtml(renderer, sb, Block.ChildInlines);
+
+        sb.Append("</a>");
+
         renderer.Content.Append(sb);
         renderer.Content.Append($"</{TagToUse}>{Environment.NewLine}");
     }

@@ -1,4 +1,6 @@
-﻿using Bodoconsult.Text.Documents;
+﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
+
+using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
 using System.Text;
 
@@ -26,12 +28,14 @@ public class TocSectionHtmlTextRendererElement : HtmlTextRendererElementBase
     /// <param name="renderer">Current renderer</param>
     public override void RenderIt(ITextDocumentRender renderer)
     {
+        if (_tocSection.ChildBlocks.Count==0)
+        {
+            return;
+        }
+
         // Get the content of all inlines as string
-        var sb = new StringBuilder();
+        renderer.Content.AppendLine($"<p class=\"TocHeadingStyle\">{renderer.CheckContent(renderer.Document.DocumentMetaData.TocHeading)}</p>");
 
-        DocumentRendererHelper.RenderBlockChildsToPlain(renderer, sb, _tocSection.ChildBlocks);
-
-        // DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, _tocSection.ChildInlines, string.Empty, true);
-        renderer.Content.Append(sb);
+        DocumentRendererHelper.RenderBlockChildsToPlain(renderer, _tocSection.ChildBlocks);
     }
 }

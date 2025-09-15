@@ -7,7 +7,7 @@ namespace Bodoconsult.Text.Renderer.Html;
 /// <summary>
 /// HTML rendering element for <see cref="Heading3"/> instances
 /// </summary>
-public class Heading3HtmlTextRendererElement : HtmlTextRendererElementBase
+public class Heading3HtmlTextRendererElement : HeadingBaseHtmlTextRendererElement
 {
     private readonly Heading3 _heading3;
 

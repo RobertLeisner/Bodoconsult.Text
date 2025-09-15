@@ -15,5 +15,6 @@ public class ToeSection : SectionBase
         TagToUse = "ToeSection";
         IncludeInToc = false;
         DoNotIncludeInNumbering = true;
+        AllowedBlocks.Add(typeof(Toe));
     }
 }

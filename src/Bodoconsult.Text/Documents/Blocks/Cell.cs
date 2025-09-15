@@ -6,9 +6,6 @@ using System.Text;
 
 namespace Bodoconsult.Text.Documents;
 
-
-
-
 /// <summary>
 /// Table cell
 /// </summary>
@@ -54,6 +51,12 @@ public class Cell : ParagraphBase
 
         Inlines.Add(new Value { Content = content });
     }
+
+    /// <summary>
+    /// Column related to the cell
+    /// </summary>
+    [DoNotSerialize]
+    public Column Column { get; set; }
 
     /// <summary>
     /// Add the current element to a document defined in LDML (Logical document markup language)

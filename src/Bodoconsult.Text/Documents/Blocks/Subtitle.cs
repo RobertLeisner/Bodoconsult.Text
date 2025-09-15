@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using Bodoconsult.Text.Helpers;
 
 namespace Bodoconsult.Text.Documents;
 
@@ -48,6 +49,6 @@ public class Subtitle : ParagraphBase
 
         TagToUse = string.Intern("Subtitle");
 
-        Inlines.Add(new Span {Content = content});
+        ElementContentParser.Parse(content, this);
     }
 }

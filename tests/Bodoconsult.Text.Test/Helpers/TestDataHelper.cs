@@ -37,7 +37,8 @@ public static class TestDataHelper
             Authors = "Robert Leisner",
             IsTocRequired = true,
             IsFiguresTableRequired = true,
-            IsEquationsTableRequired = true
+            IsEquationsTableRequired = true,
+            IsTablesTableRequired = true
         };
 
         doc.AddBlock(meta);
@@ -269,12 +270,16 @@ public static class TestDataHelper
         // Add a table
         var dt = DataHelper.GetData();
 
-        var dtp = new DataTableParser(dt);
+        var dtp = new DataTableParser(dt, "Portfolio");
         dtp.ParseColumns();
         dtp.ParseRows();
 
         // Assert
         section.AddBlock(dtp.Table);
+
+        // Keep distance between warning and error
+        paragraph = new Paragraph(MassText);
+        section.AddBlock(paragraph);
 
         return doc;
     }

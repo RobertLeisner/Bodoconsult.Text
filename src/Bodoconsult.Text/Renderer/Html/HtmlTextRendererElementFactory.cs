@@ -53,6 +53,11 @@ namespace Bodoconsult.Text.Renderer.Html
                 return new TofSectionHtmlTextRendererElement(tofSection);
             }
 
+            if (textElement is TotSection totSection)
+            {
+                return new TotSectionHtmlTextRendererElement(totSection);
+            }
+
             // ParagraphBase based elements
             if (textElement is Citation citation)
             {
@@ -62,6 +67,16 @@ namespace Bodoconsult.Text.Renderer.Html
             if (textElement is Code code)
             {
                 return new CodeHtmlTextRendererElement(code);
+            }
+
+            if (textElement is Cell cell)
+            {
+                return new CellHtmlTextRendererElement(cell);
+            }
+
+            if (textElement is Column column)
+            {
+                return new ColumnHtmlTextRendererElement(column);
             }
 
             if (textElement is Equation equation)
@@ -144,6 +159,11 @@ namespace Bodoconsult.Text.Renderer.Html
                 return new ParagraphRightHtmlTextRendererElement(paragraphRight);
             }
 
+            if (textElement is Row row)
+            {
+                return new RowHtmlTextRendererElement(row);
+            }
+
             if (textElement is SectionSubtitle sectionSubtitle)
             {
                 return new SectionSubtitleHtmlTextRendererElement(sectionSubtitle);
@@ -157,6 +177,11 @@ namespace Bodoconsult.Text.Renderer.Html
             if (textElement is Subtitle subtitle)
             {
                 return new SubtitleHtmlTextRendererElement(subtitle);
+            }
+
+            if (textElement is Table table)
+            {
+                return new TableHtmlTextRendererElement(table);
             }
 
             if (textElement is Title title)
@@ -187,6 +212,21 @@ namespace Bodoconsult.Text.Renderer.Html
             if (textElement is Toc5 toc5)
             {
                 return new Toc5HtmlTextRendererElement(toc5);
+            }
+
+            if (textElement is Toe toe)
+            {
+                return new ToeHtmlTextRendererElement(toe);
+            }
+
+            if (textElement is Tof tof)
+            {
+                return new TofHtmlTextRendererElement(tof);
+            }
+
+            if (textElement is Tot tot)
+            {
+                return new TotHtmlTextRendererElement(tot);
             }
 
             if (textElement is Warning warning)
@@ -222,6 +262,11 @@ namespace Bodoconsult.Text.Renderer.Html
                 return new HyperlinkHtmlTextRendererElement(hyperlink);
             }
 
+            if (textElement is Value value)
+            {
+                return new ValueHtmlTextRendererElement(value);
+            }
+
             // Base styles
             if (textElement is DocumentStyle documentStyle)
             {
@@ -246,6 +291,26 @@ namespace Bodoconsult.Text.Renderer.Html
             if (textElement is TofSectionStyle tofSectionStyle)
             {
                 return new TofSectionStyleHtmlTextRendererElement(tofSectionStyle);
+            }
+
+            if (textElement is CellLeftStyle cellLeftStyle)
+            {
+                return new CellLeftStyleHtmlTextRendererElement(cellLeftStyle);
+            }
+
+            if (textElement is CellRightStyle cellRightStyle)
+            {
+                return new CellRightStyleHtmlTextRendererElement(cellRightStyle);
+            }
+
+            if (textElement is CellCenterStyle cellCenterStyle)
+            {
+                return new CellCenterStyleHtmlTextRendererElement(cellCenterStyle);
+            }
+
+            if (textElement is ColumnStyle columnStyle)
+            {
+                return new ColumnStyleHtmlTextRendererElement(columnStyle);
             }
 
             // Paragraph style based
@@ -344,6 +409,11 @@ namespace Bodoconsult.Text.Renderer.Html
                 return new ParagraphStyleHtmlTextRendererElement(paragraphStyle);
             }
 
+            if (textElement is RowStyle rowStyle)
+            {
+                return new RowStyleHtmlTextRendererElement(rowStyle);
+            }
+
             if (textElement is SectionSubtitleStyle sectionSubtitleStyle)
             {
                 return new SectionSubtitleStyleHtmlTextRendererElement(sectionSubtitleStyle);
@@ -357,6 +427,21 @@ namespace Bodoconsult.Text.Renderer.Html
             if (textElement is SubtitleStyle subtitleStyle)
             {
                 return new SubtitleStyleHtmlTextRendererElement(subtitleStyle);
+            }
+
+            if (textElement is TableStyle tableStyle)
+            {
+                return new TableStyleHtmlTextRendererElement(tableStyle);
+            }
+
+            if (textElement is TableHeaderStyle tableHeaderStyle)
+            {
+                return new TableHeaderStyleHtmlTextRendererElement(tableHeaderStyle);
+            }
+
+            if (textElement is TableLegendStyle tableLegendStyle)
+            {
+                return new TableLegendStyleHtmlTextRendererElement(tableLegendStyle);
             }
 
             if (textElement is TitleStyle titleStyle)
@@ -387,6 +472,42 @@ namespace Bodoconsult.Text.Renderer.Html
             if (textElement is Toc5Style toc5Style)
             {
                 return new Toc5StyleHtmlTextRendererElement(toc5Style);
+            }
+
+            if (textElement is ToeStyle toeStyle)
+            {
+                return new ToeStyleHtmlTextRendererElement(toeStyle);
+            }
+
+            if (textElement is TofStyle tofStyle)
+            {
+                return new TofStyleHtmlTextRendererElement(tofStyle);
+            }
+
+            if (textElement is TotStyle totStyle)
+            {
+                return new TotStyleHtmlTextRendererElement(totStyle);
+            }
+
+            if (textElement is TocHeadingStyle tocHeadingStyle)
+            {
+                return new TocHeadingStyleHtmlTextRendererElement(tocHeadingStyle);
+            }
+
+            if (textElement is TofHeadingStyle tofHeadingStyle)
+            {
+                return new TofHeadingStyleHtmlTextRendererElement(tofHeadingStyle);
+            }
+
+            if (textElement is ToeHeadingStyle toeHeadingStyle)
+            {
+                return new ToeHeadingStyleHtmlTextRendererElement(toeHeadingStyle);
+            }
+
+
+            if (textElement is TotHeadingStyle totHeadingStyle)
+            {
+                return new TotHeadingStyleHtmlTextRendererElement(totHeadingStyle);
             }
 
             if (textElement is WarningStyle warningStyle)

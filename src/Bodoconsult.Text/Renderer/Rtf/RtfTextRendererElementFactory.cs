@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using Bodoconsult.Text.Documents;
+using Bodoconsult.Text.Renderer.Html;
 using Bodoconsult.Text.Renderer.Rtf.Blocks;
 using Bodoconsult.Text.Renderer.Rtf.Inlines;
 using Bodoconsult.Text.Renderer.Rtf.Styles;
@@ -57,6 +58,11 @@ public class RtfTextRendererElementFactory : ITextRendererElementFactory
             return new TofSectionRtfTextRendererElement(tofSection);
         }
 
+        if (textElement is TotSection totSection)
+        {
+            return new TotSectionRtfTextRendererElement(totSection);
+        }
+
         // ParagraphBase based elements
         if (textElement is Citation citation)
         {
@@ -66,6 +72,16 @@ public class RtfTextRendererElementFactory : ITextRendererElementFactory
         if (textElement is Code code)
         {
             return new CodeRtfTextRendererElement(code);
+        }
+
+        if (textElement is Cell cell)
+        {
+            return new CellRtfTextRendererElement(cell);
+        }
+
+        if (textElement is Column column)
+        {
+            return new ColumnRtfTextRendererElement(column);
         }
 
         if (textElement is Equation equation)
@@ -148,6 +164,11 @@ public class RtfTextRendererElementFactory : ITextRendererElementFactory
             return new ParagraphRightRtfTextRendererElement(paragraphRight);
         }
 
+        if (textElement is Row row)
+        {
+            return new  RowRtfTextRendererElement(row);
+        }
+
         if (textElement is SectionSubtitle sectionSubtitle)
         {
             return new SectionSubtitleRtfTextRendererElement(sectionSubtitle);
@@ -161,6 +182,11 @@ public class RtfTextRendererElementFactory : ITextRendererElementFactory
         if (textElement is Subtitle subtitle)
         {
             return new SubtitleRtfTextRendererElement(subtitle);
+        }
+
+        if (textElement is Table table)
+        {
+            return new TableRtfTextRendererElement(table);
         }
 
         if (textElement is Title title)

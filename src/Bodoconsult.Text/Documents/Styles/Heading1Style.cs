@@ -21,5 +21,7 @@ public class Heading1Style : ParagraphStyleBase
         Margins.Bottom = 1 * Document.DefaultFontSize;
         Paddings.Top = Document.DefaultPaddingWidth;
         Paddings.Bottom = Document.DefaultPaddingWidth;
+        FontSize = Document.DefaultFontSize + 6;
+        Bold = true;
     }
 }

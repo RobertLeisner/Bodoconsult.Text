@@ -26,6 +26,12 @@ public static class DocumentExtensions
             document.AddBlock(tofSection);
         }
 
+        if (document.DocumentMetaData.IsTablesTableRequired)
+        {
+            var totSection = new TotSection();
+            document.AddBlock(totSection);
+        }
+
         if (document.DocumentMetaData.IsEquationsTableRequired)
         {
             var toeSection = new ToeSection();

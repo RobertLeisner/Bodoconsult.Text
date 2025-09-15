@@ -16,5 +16,6 @@ public class Toc1Style : ParagraphStyleBase
         Name = TagToUse;
         Margins.Left = 0;
         FontSize = Document.DefaultFontSize + 2;
+        Bold = true;
     }
 }

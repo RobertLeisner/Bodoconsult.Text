@@ -20,5 +20,7 @@ public class Heading2Style : ParagraphStyleBase
         Margins.Top = 4 * Document.DefaultFontSize;
         Paddings.Top = Document.DefaultPaddingWidth;
         Paddings.Bottom = Document.DefaultPaddingWidth;
+        FontSize = Document.DefaultFontSize + 4;
+        Bold = true;
     }
 }

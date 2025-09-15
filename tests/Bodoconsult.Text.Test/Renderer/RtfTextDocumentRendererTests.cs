@@ -1,10 +1,11 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
-using System.Diagnostics;
-using System.IO;
+using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Renderer.Rtf;
 using Bodoconsult.Text.Test.Helpers;
 using NUnit.Framework;
+using System.Diagnostics;
+using System.IO;
 
 namespace Bodoconsult.Text.Test.Renderer;
 
@@ -35,6 +36,12 @@ public class RtfTextDocumentRendererTests
     {
         // Arrange 
         var document = TestDataHelper.CreateDocument();
+
+        var calc = new LdmlCalculator(document);
+        calc.EnumerateAllItems();
+        calc.PrepareAllItems();
+        calc.PrepareAllSections();
+
         var factory = new RtfTextRendererElementFactory();
 
         var renderer = new RtfTextDocumentRenderer(document, factory);

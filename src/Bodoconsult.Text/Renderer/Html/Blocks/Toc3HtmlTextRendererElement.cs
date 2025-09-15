@@ -7,7 +7,7 @@ namespace Bodoconsult.Text.Renderer.Html;
 /// <summary>
 /// HTML rendering element for <see cref="Toc3"/> instances
 /// </summary>
-public class Toc3HtmlTextRendererElement : HtmlTextRendererElementBase
+public class Toc3HtmlTextRendererElement : HtmlLinkTextRendererElementBase
 {
     private readonly Toc3 _toc3;
 

@@ -34,7 +34,7 @@ public abstract class ParagraphBasePlainTextRendererElement : ITextRendererEleme
     {
         // Get the content of all inlines as string
         var sb = new StringBuilder();
-        DocumentRendererHelper.RenderBlockChildsToPlain(renderer, sb, Paragraph.ChildBlocks);
+        DocumentRendererHelper.RenderBlockChildsToPlain(renderer, Paragraph.ChildBlocks);
         DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, Paragraph.ChildInlines, string.Empty, true);
 
         //Debug.Print(sb.ToString());

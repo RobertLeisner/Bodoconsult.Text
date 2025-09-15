@@ -1,5 +1,6 @@
 // Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
+using Bodoconsult.Text.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -47,6 +48,8 @@ public class Table : Block
         AllowedInlines.AddRange(AllAllowedInlines);
 
         TagToUse = string.Intern("Table");
+
+        ElementContentParser.Parse(content, this);
     }
 
     /// <summary>
@@ -58,6 +61,11 @@ public class Table : Block
     /// Rows of the table
     /// </summary>
     public List<Row> Rows { get; set; } = new();
+
+    /// <summary>
+    /// Prefix for the table
+    /// </summary>
+    public string CurrentPrefix { get; set; }
 
     /// <summary>
     /// Add the current element to a document defined in LDML (Logical document markup language)

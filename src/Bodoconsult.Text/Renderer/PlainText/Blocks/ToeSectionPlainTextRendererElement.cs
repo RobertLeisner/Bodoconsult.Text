@@ -30,7 +30,7 @@ public class ToeSectionPlainTextRendererElement : ITextRendererElement
         // Get the content of all inlines as string
         var sb = new StringBuilder();
 
-        DocumentRendererHelper.RenderBlockChildsToPlain(renderer, sb, _toeSection.ChildBlocks);
+        DocumentRendererHelper.RenderBlockChildsToPlain(renderer, _toeSection.ChildBlocks);
 
         DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, _toeSection.ChildInlines, string.Empty, true);
         renderer.Content.Append(sb);

@@ -1,8 +1,11 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
-using System.Collections.Generic;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Test.Helpers;
+using System.Collections.Generic;
+using System.Data;
+using Bodoconsult.Text.Helpers;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Bodoconsult.Text.Test.TestData;
 
@@ -48,6 +51,8 @@ internal class TestReportFactory : DocumentFactoryBase
 
         AddParagraph(ParagraphType.Paragraph, TestDataHelper.MassText);
 
+        AddTable(DataHelper.GetData(), "Sample portfolio");
+
         // Add a figure 1
         AddFigure("A chart", TestHelper.TestChartImage, 1725, 1075);
 
@@ -80,12 +85,20 @@ internal class TestReportFactory : DocumentFactoryBase
         // Add a heading level 1
         AddHeading(HeadingLevel.Level1, "Asset classes en detail");
 
+        // Add a heading level 2
+        AddHeading(HeadingLevel.Level2, "Shares");
+
+        // Add a heading level 3
+        AddHeading(HeadingLevel.Level3, "Domestic shares");
+
         // Add a simple Right paragraph
         AddParagraph(ParagraphType.ParagraphRight, TestDataHelper.MassText);
 
         // Add a simple Justify paragraph
         AddParagraph(ParagraphType.ParagraphJustify, TestDataHelper.MassText);
 
+        // Add an equation image
+        AddEquation("Sample equation", TestHelper.TestEquationImage, 200, 50);
 
         // Add a code
         AddParagraph(ParagraphType.Code, TestDataHelper.MassText);
@@ -93,6 +106,10 @@ internal class TestReportFactory : DocumentFactoryBase
         // Add an info
         AddParagraph(ParagraphType.Paragraph, TestDataHelper.MassText);
         AddParagraph(ParagraphType.Info, TestDataHelper.MassText);
+
+        // Add a heading level 3
+        AddHeading(HeadingLevel.Level3, "International shares");
+
 
         // Add a Warning
         AddParagraph(ParagraphType.Paragraph, TestDataHelper.MassText);

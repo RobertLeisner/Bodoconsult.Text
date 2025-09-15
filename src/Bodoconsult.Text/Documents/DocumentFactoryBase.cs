@@ -5,6 +5,7 @@ using Bodoconsult.Text.Helpers;
 using Bodoconsult.Text.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Bodoconsult.Text.Documents;
 
@@ -257,6 +258,21 @@ public abstract class DocumentFactoryBase : IDocumentFactory
         return result;
     }
 
+    /// <summary>
+    /// Add a table
+    /// </summary>
+    /// <param name="table">Table to add</param>
+    /// <param name="legend">Legend for the table</param>
+    public void AddTable(DataTable table, string legend)
+    {
+        var dtp = new DataTableParser(table);
+        dtp.ParseColumns();
+        dtp.ParseRows();
+
+        ElementContentParser.Parse(legend, dtp.Table);
+
+        CurrentSection.AddBlock(dtp.Table);
+    }
 
     /// <summary>
     /// Create the full document. Implement all logic needed to create the full document you want to get

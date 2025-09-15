@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
+using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Renderer.PlainText;
 using Bodoconsult.Text.Test.Helpers;
 using NUnit.Framework;
@@ -35,6 +36,12 @@ public class PlainTextDocumentRendererTests
     {
         // Arrange 
         var document = TestDataHelper.CreateDocument();
+
+        var calc = new LdmlCalculator(document);
+        calc.EnumerateAllItems();
+        calc.PrepareAllItems();
+        calc.PrepareAllSections();
+
         var factory = new PlainTextRendererElementFactory();
 
         var renderer = new PlainTextDocumentRenderer(document, factory);

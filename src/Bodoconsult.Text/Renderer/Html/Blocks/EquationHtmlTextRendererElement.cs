@@ -3,6 +3,7 @@
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Bodoconsult.Text.Renderer.Html;
@@ -41,18 +42,24 @@ public class EquationHtmlTextRendererElement : HtmlTextRendererElementBase
             renderer.Content.Append($"<{TagToUse} class=\"{ClassName}\" style=\"{LocalCss}\">");
         }
 
+        renderer.Content.Append($"<a name=\"{_equation.TagName}\" />");
 
+        var childs = new List<Inline>();
 
-        sb.Append(_equation.CurrentPrefix);
+        if (!string.IsNullOrEmpty(_equation.CurrentPrefix))
+        {
+            childs.Add(new Span(_equation.CurrentPrefix));
+        }
 
-        DocumentRendererHelper.RenderInlineChildsToHtml(renderer, sb, Block.ChildInlines);
+        childs.AddRange(_equation.ChildInlines);
+        DocumentRendererHelper.RenderInlineChildsToHtml(renderer, sb, childs);
 
         // Get max height and with for images in twips
         StylesetHelper.GetMaxWidthAndHeight(renderer.Styleset, out var maxWidth, out var maxHeight);
 
         StylesetHelper.GetWidthAndHeight(MeasurementHelper.GetTwipsFromPx(_equation.OriginalWidth), MeasurementHelper.GetTwipsFromPx(_equation.OriginalHeight), maxWidth, maxHeight, out var width, out var height);
 
-        renderer.Content.Append($"<img src=\"{_equation.Uri}\" alt=\"{sb}\" width=\"{MeasurementHelper.GetPxFromTwips(width)}px\" height=\"{MeasurementHelper.GetPxFromTwips(height)}px\"/><br>");
+        renderer.Content.Append($"<img src=\"{_equation.Uri}\" alt=\"{sb}\" width=\"{MeasurementHelper.GetPxFromTwips(width)}px\" height=\"{MeasurementHelper.GetPxFromTwips(height)}px\"/><br/>");
 
         renderer.Content.Append(sb);
         renderer.Content.Append($"</{TagToUse}>{Environment.NewLine}");

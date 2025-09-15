@@ -1,4 +1,6 @@
-﻿using Bodoconsult.Text.Documents;
+﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
+
+using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
 using System.Text;
 
@@ -25,10 +27,17 @@ public class ToeSectionHtmlTextRendererElement : HtmlTextRendererElementBase
     /// <param name="renderer">Current renderer</param>
     public override void RenderIt(ITextDocumentRender renderer)
     {
+        if (_toeSection.ChildBlocks.Count == 0)
+        {
+            return;
+        }
+
         // Get the content of all inlines as string
         var sb = new StringBuilder();
 
-        DocumentRendererHelper.RenderBlockChildsToPlain(renderer, sb, _toeSection.ChildBlocks);
+        renderer.Content.AppendLine($"<p class=\"ToeHeadingStyle\">{renderer.CheckContent(renderer.Document.DocumentMetaData.ToeHeading)}</p>");
+
+        DocumentRendererHelper.RenderBlockChildsToHtml(renderer, sb, _toeSection.ChildBlocks);
 
         // DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, _toeSection.ChildInlines, string.Empty, true);
         renderer.Content.Append(sb);

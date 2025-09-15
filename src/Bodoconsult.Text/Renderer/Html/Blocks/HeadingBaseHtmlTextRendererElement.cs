@@ -3,6 +3,7 @@
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Bodoconsult.Text.Renderer.Html;
@@ -41,11 +42,20 @@ public class HeadingBaseHtmlTextRendererElement : HtmlTextRendererElementBase
             renderer.Content.Append($"<{TagToUse} class=\"{ClassName}\" style=\"{LocalCss}\">");
         }
 
-        sb.Append(_headingBase.CurrentPrefix);
+        sb.Append($"<a name=\"{_headingBase.TagName}\" />");
 
         //DocumentRendererHelper.RenderBlockChildsToHtml(renderer, sb, Block.ChildBlocks);
 
-        DocumentRendererHelper.RenderInlineChildsToHtml(renderer, sb, Block.ChildInlines);
+        var childs = new List<Inline>();
+
+        if (!string.IsNullOrEmpty(_headingBase.CurrentPrefix))
+        {
+            childs.Add(new Span(_headingBase.CurrentPrefix));
+        }
+
+        childs.AddRange(_headingBase.ChildInlines);
+
+        DocumentRendererHelper.RenderInlineChildsToHtml(renderer, sb, childs);
         renderer.Content.Append(sb);
         renderer.Content.Append($"</{TagToUse}>{Environment.NewLine}");
     }

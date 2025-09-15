@@ -15,5 +15,11 @@ public class TocSection : SectionBase
         TagToUse = "TocSection";
         IncludeInToc = false;
         DoNotIncludeInNumbering = true;
+        AllowedBlocks.Clear();
+        AllowedBlocks.Add(typeof(Toc1));
+        AllowedBlocks.Add(typeof(Toc2));
+        AllowedBlocks.Add(typeof(Toc3));
+        AllowedBlocks.Add(typeof(Toc4));
+        AllowedBlocks.Add(typeof(Toc5));
     }
 }

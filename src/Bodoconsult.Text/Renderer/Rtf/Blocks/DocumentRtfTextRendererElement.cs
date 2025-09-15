@@ -31,7 +31,7 @@ public class DocumentRtfTextRendererElement : RtfTextRendererElementBase
         renderer.Content.AppendLine("{\\rtf1\\ansi\\deff0");
 
         var sb = new StringBuilder();
-        DocumentRendererHelper.RenderBlockChildsToPlain(renderer, sb, _document.ChildBlocks);
+        DocumentRendererHelper.RenderBlockChildsToRtf(renderer, sb, _document.ChildBlocks);
         renderer.Content.Append(sb);
 
         renderer.Content.AppendLine("}");

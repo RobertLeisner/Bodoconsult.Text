@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using Bodoconsult.Text.Helpers;
 
 namespace Bodoconsult.Text.Documents;
 
@@ -47,6 +48,6 @@ public class Warning : ParagraphBase
 
         TagToUse = string.Intern("Warning");
 
-        Inlines.Add(new Span {Content = content});
+        ElementContentParser.Parse(content, this);
     }
 }

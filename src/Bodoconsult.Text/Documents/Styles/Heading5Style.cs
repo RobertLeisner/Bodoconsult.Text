@@ -14,5 +14,6 @@ public class Heading5Style : ParagraphStyleBase
     {
         TagToUse = "Heading5Style";
         Name = TagToUse;
+        Italic = true;
     }
 }

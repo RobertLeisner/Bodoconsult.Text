@@ -21,6 +21,19 @@ public class DataTableParser
     }
 
     /// <summary>
+    /// Default ctor
+    /// </summary>
+    /// <param name="dataTable">Current <see cref="DataTable"/> to parse</param>
+    /// <param name="legend"></param>
+    public DataTableParser(DataTable dataTable, string legend)
+    {
+        DataTable = dataTable ?? throw new ArgumentNullException(nameof(dataTable));
+        Table = new Table(legend);
+    }
+
+
+
+    /// <summary>
     /// Current <see cref="DataTable"/> to parse
     /// </summary>
     public DataTable DataTable  { get;  }

@@ -26,10 +26,17 @@ public class TofSectionHtmlTextRendererElement : HtmlTextRendererElementBase
     /// <param name="renderer">Current renderer</param>
     public override void RenderIt(ITextDocumentRender renderer)
     {
+        if (_tofSection.ChildBlocks.Count == 0)
+        {
+            return;
+        }
+
         // Get the content of all inlines as string
         var sb = new StringBuilder();
 
-        DocumentRendererHelper.RenderBlockChildsToPlain(renderer, sb, _tofSection.ChildBlocks);
+        renderer.Content.AppendLine($"<p class=\"TofHeadingStyle\">{renderer.CheckContent(renderer.Document.DocumentMetaData.TofHeading)}</p>");
+
+        DocumentRendererHelper.RenderBlockChildsToHtml(renderer, sb, _tofSection.ChildBlocks);
 
         // DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, _tofSection.ChildInlines, string.Empty, true);
         renderer.Content.Append(sb);

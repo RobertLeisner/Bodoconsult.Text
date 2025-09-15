@@ -60,9 +60,25 @@ namespace Bodoconsult.Text.Documents
         public List<Tof> TofItems { get; } = new();
 
         /// <summary>
+        /// All items of the TOT
+        /// </summary>
+        public List<Tot> TotItems { get; } = new();
+
+        /// <summary>
         /// Current figure counter
         /// </summary>
         public int FigureCounter { get; private set; }
+
+
+        /// <summary>
+        /// Current table counter
+        /// </summary>
+        public int TableCounter { get; private set; }
+
+        /// <summary>
+        /// All tables in the document to count
+        /// </summary>
+        public List<Table> Tables { get; } = new();
 
         /// <summary>
         /// All equations in the document to count
@@ -79,6 +95,49 @@ namespace Bodoconsult.Text.Documents
         /// </summary>
         public int EquationCounter { get; private set; }
 
+        /// <summary>
+        /// Update column references for tables in all sections of the document
+        /// </summary>
+        public void UpdateAllTables()
+        {
+            var sections = Document.ChildBlocks.Where(x => x.GetType() == typeof(Section));
+
+            foreach (var section in sections)
+            {
+                UpdateTableSection((Section)section);
+            }
+        }
+
+        /// <summary>
+        /// Update column references for tables in a section
+        /// </summary>
+        /// <param name="section">Current section</param>
+        public static void  UpdateTableSection(Section section)
+        {
+            foreach (var table in section.ChildBlocks.Where(x => x.GetType() == typeof(Table)))
+            {
+                UpdateTable((Table)table);
+            }
+        }
+
+        /// <summary>
+        /// Update column references for a table
+        /// </summary>
+        /// <param name="table">Current table</param>
+        public static void UpdateTable(Table table)
+        {
+            var cols = table.Columns;
+
+            foreach (var row in table.Rows)
+            {
+                for (var index = 0; index < row.Cells.Count; index++)
+                {
+                    var cell = row.Cells[index];
+                    cell.Column = cols[index];
+                }
+            }
+        }
+
 
         /// <summary>
         /// Enumerate all items needed for TOC, TO´F and TOE
@@ -88,6 +147,7 @@ namespace Bodoconsult.Text.Documents
             EnumerateAllItemsForToc();
             EnumerateAllItemsForToe();
             EnumerateAllItemsForTof();
+            EnumerateAllItemsForTot();
         }
 
         /// <summary>
@@ -258,6 +318,50 @@ namespace Bodoconsult.Text.Documents
         }
 
         /// <summary>
+        /// Enumerate all items needed for TOF
+        /// </summary>
+        public void EnumerateAllItemsForTot()
+        {
+            foreach (var item in Document.ChildBlocks)
+            {
+                // Only Section instances are interesting
+                if (item is not Section section)
+                {
+                    continue;
+                }
+
+                // Current section is exluded from numbering
+                if (section.DoNotIncludeInNumbering)
+                {
+                    continue;
+                }
+
+                // Now find the equations
+                FindTable(section);
+            }
+
+        }
+
+        private void FindTable(Section section)
+        {
+
+            foreach (var block in section.ChildBlocks)
+            {
+                if (block is not Table table)
+                {
+                    continue;
+                }
+
+                TableCounter++;
+
+                table.TagName = $"Table{TableCounter}";
+                table.CurrentPrefix = $"{_documentMetaData.TablePrefix} {TableCounter}: ";
+
+                Tables.Add(table);
+            }
+        }
+
+        /// <summary>
         /// Prepare all items needed for TOC, TOE and TOF
         /// </summary>
         public void PrepareAllItems()
@@ -265,6 +369,7 @@ namespace Bodoconsult.Text.Documents
             PrepareAllItemsForToc();
             PrepareAllItemsForToe();
             PrepareAllItemsForTof();
+            PrepareAllItemsForTot();
         }
 
         /// <summary>
@@ -272,8 +377,38 @@ namespace Bodoconsult.Text.Documents
         /// </summary>
         public void PrepareAllItemsForToc()
         {
+            if (Headings.Count == 0)
+            {
+                return;
+            }
 
+            foreach (var heading in Headings)
+            {
+                TocBase tocItem = heading switch
+                {
+                    Heading1 => new Toc1(),
+                    Heading2 => new Toc2(),
+                    Heading3 => new Toc3(),
+                    Heading4 => new Toc4(),
+                    Heading5 => new Toc5(),
+                    _ => null
+                };
 
+                if (tocItem == null)
+                {
+                    continue;
+                }
+
+                tocItem.TagName = heading.TagName;
+
+                tocItem.AddInline(new Span(heading.CurrentPrefix));
+                foreach (var inline in heading.ChildInlines)
+                {
+                    tocItem.AddInline(inline);
+                }
+
+                TocItems.Add(tocItem);
+            }
         }
 
         /// <summary>
@@ -288,8 +423,11 @@ namespace Bodoconsult.Text.Documents
 
             foreach (var equation in Equations)
             {
-                var toe = new Toe();
-
+                var toe = new Toe()
+                {
+                    TagName = equation.TagName
+                };
+                toe.AddInline(new Span(equation.CurrentPrefix));
                 foreach (var inline in equation.ChildInlines)
                 {
                     toe.AddInline(inline);
@@ -313,14 +451,45 @@ namespace Bodoconsult.Text.Documents
 
             foreach (var figure in Figures)
             {
-                var tof = new Tof();
-
+                var tof = new Tof()
+                {
+                    TagName = figure.TagName
+                };
+                tof.AddInline(new Span(figure.CurrentPrefix));
                 foreach (var inline in figure.ChildInlines)
                 {
                     tof.AddInline(inline);
                 }
 
                 TofItems.Add(tof);
+            }
+
+        }
+
+        /// <summary>
+        /// Prepare all items needed for TOF
+        /// </summary>
+        public void PrepareAllItemsForTot()
+        {
+
+            if (Tables.Count == 0)
+            {
+                return;
+            }
+
+            foreach (var table in Tables)
+            {
+                var tot = new Tot
+                {
+                    TagName = table.TagName
+                };
+                tot.AddInline(new Span(table.CurrentPrefix));
+                foreach (var inline in table.ChildInlines)
+                {
+                    tot.AddInline(inline);
+                }
+
+                TotItems.Add(tot);
             }
 
         }
@@ -333,6 +502,7 @@ namespace Bodoconsult.Text.Documents
             PrepareTocSection();
             PrepareToeSection();
             PrepareTofSection();
+            PrepareTotSection();
         }
 
         /// <summary>
@@ -340,11 +510,53 @@ namespace Bodoconsult.Text.Documents
         /// </summary>
         public void PrepareTofSection()
         {
+            // No items 
+            if (TofItems.Count == 0)
+            {
+                return;
+            }
+
             // Get the section
+            var section = Document.TofSection;
 
             // No section found: leave here
+            if (section == null)
+            {
+                return;
+            }
 
-            // Add all TOC items to section
+            // Add all TOF items to section
+            foreach (var tofItem in TofItems)
+            {
+                section.AddBlock(tofItem);
+            }
+        }
+
+        /// <summary>
+        /// Prepare section TOT
+        /// </summary>
+        public void PrepareTotSection()
+        {
+            // No items 
+            if (TotItems.Count == 0)
+            {
+                return;
+            }
+
+            // Get the section
+            var section = Document.TotSection;
+
+            // No section found: leave here
+            if (section == null)
+            {
+                return;
+            }
+
+            // Add all TOT items to section
+            foreach (var totItem in TotItems)
+            {
+                section.AddBlock(totItem);
+            }
         }
 
         /// <summary>
@@ -352,11 +564,26 @@ namespace Bodoconsult.Text.Documents
         /// </summary>
         public void PrepareToeSection()
         {
+            // No items 
+            if (ToeItems.Count == 0)
+            {
+                return;
+            }
+
             // Get the section
+            var section = Document.ToeSection;
 
             // No section found: leave here
+            if (section == null)
+            {
+                return;
+            }
 
-            // Add all TOC items to section
+            // Add all TOE items to section
+            foreach (var toeItem in ToeItems)
+            {
+                section.AddBlock(toeItem);
+            }
         }
 
         /// <summary>
@@ -364,12 +591,26 @@ namespace Bodoconsult.Text.Documents
         /// </summary>
         public void PrepareTocSection()
         {
+            // No items
+            if (TocItems.Count == 0)
+            {
+                return;
+            }
 
             // Get the section
+            var section = Document.TocSection;
 
             // No section found: leave here
+            if (section == null)
+            {
+                return;
+            }
 
             // Add all TOC items to section
+            foreach (var tocItem in TocItems)
+            {
+                section.AddBlock(tocItem);
+            }
 
         }
     }

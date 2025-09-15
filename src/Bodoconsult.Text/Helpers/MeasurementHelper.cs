@@ -117,4 +117,14 @@ public static class MeasurementHelper
     {
         return pt * CentimeterPerPoint;
     }
+
+    /// <summary>
+    /// Get picels px from typographic points
+    /// </summary>
+    /// <param name="pt">Typographic points</param>
+    /// <returns>Pixels</returns>
+    public static int GetPxFromPt(double pt)
+    {
+        return GetPxFromTwips(GetTwipsFromPt(pt))  ;
+    }
 }

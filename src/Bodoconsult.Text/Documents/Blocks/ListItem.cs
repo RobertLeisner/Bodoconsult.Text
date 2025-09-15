@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Bodoconsult.Text.Helpers;
 
 namespace Bodoconsult.Text.Documents;
 
@@ -44,6 +45,6 @@ public class ListItem : ParagraphBase
 
         TagToUse = string.Intern("ListItem");
 
-        Inlines.Add(new Span { Content = content });
+        ElementContentParser.Parse(content, this);
     }
 }

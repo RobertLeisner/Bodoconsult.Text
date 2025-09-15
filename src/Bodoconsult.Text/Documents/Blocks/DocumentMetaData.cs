@@ -73,6 +73,11 @@ public class DocumentMetaData : Block
     public string ToeHeading { get; set; } = "Table of equations";
 
     /// <summary>
+    /// Table of tables (TOT) heading
+    /// </summary>
+    public string TotHeading { get; set; } = "Table of tables";
+
+    /// <summary>
     /// The word written before the page number in a page footer. Default: Page
     /// </summary>
     public string PageNumberPrefix { get; set; } = "Page";
@@ -86,6 +91,12 @@ public class DocumentMetaData : Block
     /// Prefix for citation sources
     /// </summary>
     public string CitationSourcePrefix { get; set; } = "Source: ";
+
+
+    /// <summary>
+    /// Prefix for tables
+    /// </summary>
+    public string TablePrefix { get; set; } = "Table";
 
     /// <summary>
     /// Prefix for figures
@@ -106,6 +117,11 @@ public class DocumentMetaData : Block
     /// Should add table of equations be added at the start of the document
     /// </summary>
     public bool IsEquationsTableRequired { get; set; }
+
+    /// <summary>
+    /// Should add table of tables be added at the start of the document
+    /// </summary>
+    public bool IsTablesTableRequired { get; set; }
 
     /// <summary>
     /// Add the current element to a document defined in LDML (Logical document markup language)

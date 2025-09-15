@@ -1,5 +1,7 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
+using Bodoconsult.Text.Helpers;
+
 namespace Bodoconsult.Text.Documents;
 
 /// <summary>
@@ -33,6 +35,6 @@ public class Toc2 : TocBase
 
         TagToUse = string.Intern("Toc2");
 
-        Inlines.Add(new Span {Content = content});
+        ElementContentParser.Parse(content, this);
     }
 }

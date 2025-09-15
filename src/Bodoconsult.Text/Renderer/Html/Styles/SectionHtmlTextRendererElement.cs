@@ -29,7 +29,7 @@ public class SectionHtmlTextRendererElement : HtmlTextRendererElementBase
         // Get the content of all inlines as string
         var sb = new StringBuilder();
 
-        DocumentRendererHelper.RenderBlockChildsToPlain(renderer, sb, _section.ChildBlocks);
+        DocumentRendererHelper.RenderBlockChildsToHtml(renderer, sb, _section.ChildBlocks);
 
         // DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, _section.ChildInlines, string.Empty, true);
         renderer.Content.Append(sb);

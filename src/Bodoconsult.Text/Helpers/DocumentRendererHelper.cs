@@ -89,12 +89,25 @@ public class DocumentRendererHelper
     }
 
     /// <summary>
+    /// Render table rows
+    /// </summary>
+    /// <param name="renderer">Current renderer instance</param>
+    /// <param name="rows">Child blocks</param>
+    public static void RenderRowsToHtml(ITextDocumentRender renderer, List<Row> rows)
+    {
+        foreach (var inline in rows)
+        {
+            var rendererElement = renderer.TextRendererElementFactory.CreateInstance(inline);
+            rendererElement.RenderIt(renderer);
+        }
+    }
+
+    /// <summary>
     /// Render child blocks
     /// </summary>
     /// <param name="renderer">Current renderer instance</param>
-    /// <param name="sb">Current string</param>
     /// <param name="childBlocks">Child blocks</param>
-    public static void RenderBlockChildsToPlain(ITextDocumentRender renderer, StringBuilder sb, List<Block> childBlocks)
+    public static void RenderBlockChildsToPlain(ITextDocumentRender renderer, List<Block> childBlocks)
     {
         foreach (var inline in childBlocks)
         {
@@ -132,4 +145,19 @@ public class DocumentRendererHelper
             rendererElement.RenderToString(renderer, sb);
         }
     }
+
+    /// <summary>
+    /// Render tables cells  to HTML
+    /// </summary>
+    /// <param name="renderer">Current renderer</param>
+    /// <param name="cells">List of all cellss to render</param>
+    public static void RenderCellsToHtml(ITextDocumentRender renderer, List<Cell> cells)
+    {
+        foreach (var inline in cells)
+        {
+            var rendererElement = (CellHtmlTextRendererElement)renderer.TextRendererElementFactory.CreateInstance(inline);
+            rendererElement.RenderIt(renderer);
+        }
+    }
 }
+

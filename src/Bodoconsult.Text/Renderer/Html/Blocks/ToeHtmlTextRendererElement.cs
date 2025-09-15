@@ -7,7 +7,7 @@ namespace Bodoconsult.Text.Renderer.Html;
 /// <summary>
 /// HTML rendering element for <see cref="Toe"/> instances
 /// </summary>
-public class ToeHtmlTextRendererElement : HtmlTextRendererElementBase
+public class ToeHtmlTextRendererElement : HtmlLinkTextRendererElementBase
 {
     private readonly Toe _toe;
 

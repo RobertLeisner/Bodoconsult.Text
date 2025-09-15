@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using Bodoconsult.Text.Documents;
+using Bodoconsult.Text.Renderer.Rtf.Blocks;
 
 namespace Bodoconsult.Text.Renderer.PlainText
 {
@@ -52,6 +53,11 @@ namespace Bodoconsult.Text.Renderer.PlainText
                 return new TofSectionPlainTextRendererElement(tofSection);
             }
 
+            if (textElement is TotSection totSection)
+            {
+                return new TotSectionPlainTextRendererElement(totSection);
+            }
+
             // ParagraphBase based elements
 
             if (textElement is Citation citation)
@@ -62,6 +68,16 @@ namespace Bodoconsult.Text.Renderer.PlainText
             if (textElement is Code code)
             {
                 return new CodePlainTextRendererElement(code);
+            }
+
+            if (textElement is Cell cell)
+            {
+                return new CellPlainTextRendererElement(cell);
+            }
+
+            if (textElement is Column column)
+            {
+                return new ColumnPlainTextRendererElement(column);
             }
 
             if (textElement is Equation equation)
@@ -144,6 +160,11 @@ namespace Bodoconsult.Text.Renderer.PlainText
                 return new ParagraphRightPlainTextRendererElement(paragraphRight);
             }
 
+            if (textElement is Row row)
+            {
+                return new RowPlainTextRendererElement(row);
+            }
+
             if (textElement is SectionSubtitle sectionSubtitle)
             {
                 return new SectionSubtitlePlainTextRendererElement(sectionSubtitle);
@@ -157,6 +178,11 @@ namespace Bodoconsult.Text.Renderer.PlainText
             if (textElement is Subtitle subtitle)
             {
                 return new SubtitlePlainTextRendererElement(subtitle);
+            }
+
+            if (textElement is Table table)
+            {
+                return new TablePlainTextRendererElement(table);
             }
 
             if (textElement is Title title)

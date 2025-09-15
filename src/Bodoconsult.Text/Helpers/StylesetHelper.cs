@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
+using System.Diagnostics;
 using Bodoconsult.Text.Documents;
 
 namespace Bodoconsult.Text.Helpers;
@@ -31,6 +32,18 @@ public static class StylesetHelper
         var citationStyle = new CitationStyle();
         styleSet.AddBlock(citationStyle);
 
+        // Add style CellStyleLeft for Cell instances
+        var cellStyleLeft = new CellLeftStyle();
+        styleSet.AddBlock(cellStyleLeft);
+
+        // Add style CellStyleRight for Cell instances
+        var cellStyleRight = new CellRightStyle();
+        styleSet.AddBlock(cellStyleRight);
+
+        // Add style CellStyleCenter for Cell instances
+        var cellStyleCenter = new CellCenterStyle();
+        styleSet.AddBlock(cellStyleCenter);
+
         // Add style CitationStyle for Citation instances 
         var citationSourceStyle = new CitationSourceStyle();
         styleSet.AddBlock(citationSourceStyle);
@@ -38,6 +51,10 @@ public static class StylesetHelper
         // Add style CodeStyle for Code instances 
         var codeStyle = new CodeStyle();
         styleSet.AddBlock(codeStyle);
+
+        // Add style ColumnStyle for Column instances 
+        var columnStyle = new ColumnStyle();
+        styleSet.AddBlock(columnStyle);
 
         // Add style EquationStyle for Equation instances 
         var equationStyle = new EquationStyle();
@@ -103,6 +120,10 @@ public static class StylesetHelper
         var paragraphrightStyle = new ParagraphRightStyle();
         styleSet.AddBlock(paragraphrightStyle);
 
+        // Add style RowStyle for Row instances 
+        var rowStyle = new RowStyle();
+        styleSet.AddBlock(rowStyle);
+
         // Add style SectionSubtitleStyle for SectionSubtitle instances 
         var sectionsubtitleStyle = new SectionSubtitleStyle();
         styleSet.AddBlock(sectionsubtitleStyle);
@@ -114,6 +135,18 @@ public static class StylesetHelper
         // Add style SubtitleStyle for Subtitle instances 
         var subtitleStyle = new SubtitleStyle();
         styleSet.AddBlock(subtitleStyle);
+
+        // Add style TableStyle for Table instances 
+        var tableStyle = new TableStyle();
+        styleSet.AddBlock(tableStyle);
+
+        // Add style TableHeaderStyle for Table instances 
+        var tableHeaderStyle = new TableHeaderStyle();
+        styleSet.AddBlock(tableHeaderStyle);
+
+        // Add style TableLegendStyle for Table instances 
+        var tableLegendStyle = new TableLegendStyle();
+        styleSet.AddBlock(tableLegendStyle);
 
         // Add style TitleStyle for Title instances 
         var titleStyle = new TitleStyle();
@@ -139,14 +172,39 @@ public static class StylesetHelper
         var toc5Style = new Toc5Style();
         styleSet.AddBlock(toc5Style);
 
+        // Add style TocHeadingStyle for TocHeading instances 
+        var tocHeadingStyle = new TocHeadingStyle();
+        styleSet.AddBlock(tocHeadingStyle);
+
+        // Add style TofHeadingStyle for TofHeading instances 
+        var tofHeadingStyle = new TofHeadingStyle();
+        styleSet.AddBlock(tofHeadingStyle);
+
+        // Add style TocHeadingStyle for TocHeading instances 
+        var toeHeadingStyle = new ToeHeadingStyle();
+        styleSet.AddBlock(toeHeadingStyle);
+
+        // Add style ToeStyle for Toe instances 
+        var toeStyle = new ToeStyle();
+        styleSet.AddBlock(toeStyle);
+
+        // Add style TofStyle for Toe instances 
+        var tofStyle = new TofStyle();
+        styleSet.AddBlock(tofStyle);
+
+        // Add style TotStyle for Toe instances 
+        var totStyle = new TotStyle();
+        styleSet.AddBlock(totStyle);
+
+        // Add style TotHeadingStyle for TotHeading instances 
+        var totHeadingStyle = new TotHeadingStyle();
+        styleSet.AddBlock(totHeadingStyle);
+
         // Add style WarningStyle for Warning instances 
         var warningStyle = new WarningStyle();
         styleSet.AddBlock(warningStyle);
 
         return styleSet;
-
-
-
     }
 
     /// <summary>
@@ -178,6 +236,22 @@ public static class StylesetHelper
         // Add style CodeStyle for Code instances 
         var codeStyle = new CodeStyle();
         styleSet.AddBlock(codeStyle);
+
+        // Add style ColumnStyle for Column instances 
+        var columnStyle = new ColumnStyle();
+        styleSet.AddBlock(columnStyle);
+
+        // Add style CellStyleLeft for Cell instances
+        var cellStyleLeft = new CellLeftStyle();
+        styleSet.AddBlock(cellStyleLeft);
+
+        // Add style CellStyleRight for Cell instances
+        var cellStyleRight = new CellRightStyle();
+        styleSet.AddBlock(cellStyleRight);
+
+        // Add style CellStyleCenter for Cell instances
+        var cellStyleCenter = new CellCenterStyle();
+        styleSet.AddBlock(cellStyleCenter);
 
         // Add style EquationStyle for Equation instances 
         var equationStyle = new EquationStyle();
@@ -246,6 +320,10 @@ public static class StylesetHelper
         var paragraphrightStyle = new ParagraphRightStyle();
         styleSet.AddBlock(paragraphrightStyle);
 
+        // Add style RowStyle for Row instances 
+        var rowStyle = new RowStyle();
+        styleSet.AddBlock(rowStyle);
+
         // Add style SectionSubtitleStyle for SectionSubtitle instances 
         var sectionsubtitleStyle = new SectionSubtitleStyle();
         styleSet.AddBlock(sectionsubtitleStyle);
@@ -257,6 +335,18 @@ public static class StylesetHelper
         // Add style SubtitleStyle for Subtitle instances 
         var subtitleStyle = new SubtitleStyle();
         styleSet.AddBlock(subtitleStyle);
+
+        // Add style TableStyle for Table instances 
+        var tableStyle = new TableStyle();
+        styleSet.AddBlock(tableStyle);
+
+        // Add style TableHeaderStyle for Table instances 
+        var tableHeaderStyle = new TableHeaderStyle();
+        styleSet.AddBlock(tableHeaderStyle);
+
+        // Add style TableLegendStyle for Table instances 
+        var tableLegendStyle = new TableLegendStyle();
+        styleSet.AddBlock(tableLegendStyle);
 
         // Add style TitleStyle for Title instances 
         var titleStyle = new TitleStyle();
@@ -281,6 +371,34 @@ public static class StylesetHelper
         // Add style Toc5Style for Toc5 instances 
         var toc5Style = new Toc5Style();
         styleSet.AddBlock(toc5Style);
+
+        // Add style ToeStyle for Toe instances 
+        var toeStyle = new ToeStyle();
+        styleSet.AddBlock(toeStyle);
+
+        // Add style TofStyle for Toe instances 
+        var tofStyle = new TofStyle();
+        styleSet.AddBlock(tofStyle);
+
+        // Add style TotStyle for Toe instances 
+        var totStyle = new TotStyle();
+        styleSet.AddBlock(totStyle);
+
+        // Add style TocHeadingStyle for TocHeading instances 
+        var tocHeadingStyle = new TocHeadingStyle();
+        styleSet.AddBlock(tocHeadingStyle);
+
+        // Add style TofHeadingStyle for TofHeading instances 
+        var tofHeadingStyle = new TofHeadingStyle();
+        styleSet.AddBlock(tofHeadingStyle);
+
+        // Add style TocHeadingStyle for TocHeading instances 
+        var toeHeadingStyle = new ToeHeadingStyle();
+        styleSet.AddBlock(toeHeadingStyle);
+
+        // Add style TotHeadingStyle for TotHeading instances 
+        var totHeadingStyle = new TotHeadingStyle();
+        styleSet.AddBlock(totHeadingStyle);
 
         // Add style WarningStyle for Warning instances 
         var warningStyle = new WarningStyle();

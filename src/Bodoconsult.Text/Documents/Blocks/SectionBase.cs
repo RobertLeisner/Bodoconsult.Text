@@ -50,7 +50,7 @@ public abstract class SectionBase : Block
     /// <summary>
     /// Default ctor
     /// </summary>
-    public SectionBase()
+    protected SectionBase()
     {
         // Add all allowed blocks
         AllowedBlocks.AddRange(AllAllowedBlocks);

@@ -35,6 +35,11 @@ public class Document : Block
     public const int DefaultPaddingWidth = 6;
 
     /// <summary>
+    /// Default padding width in pt
+    /// </summary>
+    public const int DefaultTablePaddingWidth = 2;
+
+    /// <summary>
     /// Default font size in pt
     /// </summary>
     public const int DefaultFontSize = 12;
@@ -61,6 +66,7 @@ public class Document : Block
         AllowedBlocks.Add(typeof(TocSection));
         AllowedBlocks.Add(typeof(ToeSection));
         AllowedBlocks.Add(typeof(TofSection));
+        AllowedBlocks.Add(typeof(TotSection));
 
         // No inlines allowed
 
@@ -97,6 +103,12 @@ public class Document : Block
     /// </summary>
     [DoNotSerialize]
     public ToeSection ToeSection { get; private set; }
+
+    /// <summary>
+    /// Current TOT section or null if no TOT is required 
+    /// </summary>
+    [DoNotSerialize]
+    public TotSection TotSection { get; private set; }
 
     /// <summary>
     /// Add the current element to a document defined in LDML (Logical document markup language)
@@ -149,6 +161,9 @@ public class Document : Block
                 return;
             case ToeSection toeSection:
                 ToeSection = toeSection;
+                return;
+            case TotSection totSection:
+                TotSection = totSection;
                 return;
         }
     }

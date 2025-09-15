@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using Bodoconsult.Text.Helpers;
 
 namespace Bodoconsult.Text.Documents;
 
@@ -51,7 +52,7 @@ public class ParagraphJustify: ParagraphBase
         // Add allowed inlines
         AllowedInlines.AddRange(AllAllowedInlines);
 
-        Inlines.Add(new Span { Content = content});
+        ElementContentParser.Parse(content, this);
         TagToUse = string.Intern("ParagraphJustify");
     }
 

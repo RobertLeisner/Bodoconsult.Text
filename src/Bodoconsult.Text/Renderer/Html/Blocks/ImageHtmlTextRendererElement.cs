@@ -48,7 +48,7 @@ public class ImageHtmlTextRendererElement : HtmlTextRendererElementBase
 
         StylesetHelper.GetWidthAndHeight(MeasurementHelper.GetTwipsFromPx(_image.OriginalWidth), MeasurementHelper.GetTwipsFromPx(_image.OriginalHeight), maxWidth, maxHeight, out var width, out var height);
 
-        renderer.Content.Append($"<img src=\"{_image.Uri}\" alt=\"{sb}\" width=\"{MeasurementHelper.GetPxFromTwips(width)}px\" height=\"{MeasurementHelper.GetPxFromTwips(height)}px\"/><br>");
+        renderer.Content.Append($"<img src=\"{_image.Uri}\" alt=\"{sb}\" width=\"{MeasurementHelper.GetPxFromTwips(width)}px\" height=\"{MeasurementHelper.GetPxFromTwips(height)}px\"/><br/>");
         renderer.Content.Append(sb);
         renderer.Content.Append($"</{TagToUse}>{Environment.NewLine}");
     }

@@ -14,5 +14,9 @@ public class Heading4Style : ParagraphStyleBase
     {
         TagToUse = "Heading4Style";
         Name = TagToUse;
+        Bold = true;
+        Margins.Top = Document.DefaultFontSize;
+        Paddings.Top = Document.DefaultPaddingWidth;
+        Paddings.Bottom = Document.DefaultPaddingWidth;
     }
 }

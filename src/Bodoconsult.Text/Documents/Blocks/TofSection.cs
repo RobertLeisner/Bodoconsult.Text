@@ -15,5 +15,7 @@ public class TofSection : SectionBase
         TagToUse = "TofSection";
         IncludeInToc = false;
         DoNotIncludeInNumbering = true;
+        AllowedBlocks.Clear();
+        AllowedBlocks.Add(typeof(Tof));
     }
 }

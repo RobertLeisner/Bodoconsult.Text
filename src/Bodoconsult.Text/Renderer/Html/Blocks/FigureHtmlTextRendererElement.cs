@@ -3,6 +3,7 @@
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Bodoconsult.Text.Renderer.Html;
@@ -41,18 +42,26 @@ public class FigureHtmlTextRendererElement : HtmlTextRendererElementBase
             renderer.Content.Append($"<{TagToUse} class=\"{ClassName}\" style=\"{LocalCss}\">");
         }
 
+        renderer.Content.Append($"<a name=\"{_figure.TagName}\" />");
 
+        var childs = new List<Inline>();
 
-        sb.Append(_figure.CurrentPrefix);
+        if (!string.IsNullOrEmpty(_figure.CurrentPrefix))
+        {
+            childs.Add(new Span(_figure.CurrentPrefix));
+        }
 
-        DocumentRendererHelper.RenderInlineChildsToHtml(renderer, sb, Block.ChildInlines);
+        childs.AddRange(_figure.ChildInlines);
+        DocumentRendererHelper.RenderInlineChildsToHtml(renderer, sb, childs);
 
         // Get max height and with for images in twips
         StylesetHelper.GetMaxWidthAndHeight(renderer.Styleset, out var maxWidth, out var maxHeight);
 
         StylesetHelper.GetWidthAndHeight(MeasurementHelper.GetTwipsFromPx(_figure.OriginalWidth), MeasurementHelper.GetTwipsFromPx(_figure.OriginalHeight), maxWidth, maxHeight, out var width, out var height);
 
-        renderer.Content.Append($"<img src=\"{_figure.Uri}\" alt=\"{sb}\" width=\"{MeasurementHelper.GetPxFromTwips(width)}px\" height=\"{MeasurementHelper.GetPxFromTwips(height)}px\"/><br>");
+
+
+        renderer.Content.Append($"<img src=\"{_figure.Uri}\" alt=\"{sb}\" width=\"{MeasurementHelper.GetPxFromTwips(width)}px\" height=\"{MeasurementHelper.GetPxFromTwips(height)}px\"/><br/>");
 
         renderer.Content.Append(sb);
         renderer.Content.Append($"</{TagToUse}>{Environment.NewLine}");

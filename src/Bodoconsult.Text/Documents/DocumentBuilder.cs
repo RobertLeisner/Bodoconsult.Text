@@ -77,6 +77,7 @@ public class DocumentBuilder: IDocumentBuilder
     public void CalculateDocument()
     {
         var calc = new LdmlCalculator(Document);
+        calc.UpdateAllTables();
         calc.EnumerateAllItems();
         calc.PrepareAllItems();
         calc.PrepareAllSections();

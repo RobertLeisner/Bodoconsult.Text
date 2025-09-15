@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
+using Bodoconsult.Text.Helpers;
 using System;
 using System.Collections.Generic;
 
@@ -47,6 +48,6 @@ public class Heading3 : HeadingBase
 
         TagToUse = string.Intern("Heading3");
 
-        Inlines.Add(new Span {Content = content});
+        ElementContentParser.Parse(content, this);
     }
 }

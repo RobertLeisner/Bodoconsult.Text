@@ -98,6 +98,29 @@ public class LdmlCalculatorTests
     }
 
     [Test]
+    public void EnumerateAllItemsForTot_ValidDocument_FiguresLoaded()
+    {
+        // Arrange 
+        var doc = TestDataHelper.CreateDocument();
+        var lc = new LdmlCalculator(doc);
+
+        // Act  
+        lc.EnumerateAllItemsForTot();
+
+        // Assert
+        Assert.That(lc.Document, Is.Not.Null);
+        Assert.That(lc.Tables.Count, Is.Not.EqualTo(0));
+        Assert.That(lc.TableCounter, Is.Not.EqualTo(0));
+
+        var eq = lc.Tables[0];
+
+        Assert.That(eq.CurrentPrefix.Length, Is.Not.EqualTo(0));
+        Assert.That(eq.TagName.Length, Is.Not.EqualTo(0));
+
+        PrintDoc(doc);
+    }
+
+    [Test]
     public void PrepareAllItemsForTof_ValidDocument_FiguresLoaded()
     {
         // Arrange 
@@ -132,6 +155,104 @@ public class LdmlCalculatorTests
 
         PrintDoc(doc);
         
+    }
+
+    [Test]
+    public void PrepareAllItemsForTot_ValidDocument_FiguresLoaded()
+    {
+        // Arrange 
+        var doc = TestDataHelper.CreateDocument();
+        var lc = new LdmlCalculator(doc);
+
+        lc.EnumerateAllItemsForTot();
+
+        // Act  
+        lc.PrepareAllItemsForTot();
+
+        // Assert
+        Assert.That(lc.TotItems.Count, Is.Not.EqualTo(0));
+
+        PrintDoc(doc);
+    }
+
+    [Test]
+    public void PrepareTotSection_ValidDocument_ItemsLoaded()
+    {
+        // Arrange 
+        var doc = TestDataHelper.CreateDocument();
+        var lc = new LdmlCalculator(doc);
+
+        lc.EnumerateAllItemsForTot();
+
+        lc.PrepareAllItemsForTot();
+
+        // Act  
+        lc.PrepareTotSection();
+
+        // Assert
+        Assert.That(doc.TotSection.ChildBlocks.Count, Is.Not.EqualTo(0));
+
+        PrintDoc(doc);
+    }
+
+    [Test]
+    public void PrepareTofSection_ValidDocument_ItemsLoaded()
+    {
+        // Arrange 
+        var doc = TestDataHelper.CreateDocument();
+        var lc = new LdmlCalculator(doc);
+
+        lc.EnumerateAllItemsForTof();
+
+        lc.PrepareAllItemsForTof();
+
+        // Act  
+        lc.PrepareTofSection();
+
+        // Assert
+        Assert.That(doc.TofSection.ChildBlocks.Count, Is.Not.EqualTo(0));
+
+        PrintDoc(doc);
+    }
+
+    [Test]
+    public void PrepareTocSection_ValidDocument_ItemsLoaded()
+    {
+        // Arrange 
+        var doc = TestDataHelper.CreateDocument();
+        var lc = new LdmlCalculator(doc);
+
+        lc.EnumerateAllItemsForToc();
+
+        lc.PrepareAllItemsForToc();
+
+        // Act  
+        lc.PrepareTocSection();
+
+        // Assert
+        Assert.That(doc.TocSection.ChildBlocks.Count, Is.Not.EqualTo(0));
+
+        PrintDoc(doc);
+    }
+
+    [Test]
+    public void PrepareToeSection_ValidDocument_ItemsLoaded()
+    {
+        // Arrange 
+        var doc = TestDataHelper.CreateDocument();
+        var lc = new LdmlCalculator(doc);
+
+        lc.EnumerateAllItemsForToe();
+
+        lc.PrepareAllItemsForToe();
+
+        // Act  
+        lc.PrepareToeSection();
+
+        // Assert
+        Assert.That(doc.ToeSection.ChildBlocks.Count, Is.Not.EqualTo(0));
+
+        PrintDoc(doc);
     }
 
     private void PrintDoc(Document doc)
