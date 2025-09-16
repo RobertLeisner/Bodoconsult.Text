@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
-using System.Diagnostics;
 using Bodoconsult.Text.Documents;
 
 namespace Bodoconsult.Text.Helpers;
@@ -27,6 +26,7 @@ public static class StylesetHelper
         styleSet.AddBlock(new TocSectionStyle());
         styleSet.AddBlock(new TofSectionStyle());
         styleSet.AddBlock(new ToeSectionStyle());
+        styleSet.AddBlock(new TotSectionStyle());
 
         // Add style CitationStyle for Citation instances 
         var citationStyle = new CitationStyle();
@@ -192,7 +192,7 @@ public static class StylesetHelper
         var tofStyle = new TofStyle();
         styleSet.AddBlock(tofStyle);
 
-        // Add style TotStyle for Toe instances 
+        // Add style TotStyle for Tot instances 
         var totStyle = new TotStyle();
         styleSet.AddBlock(totStyle);
 
@@ -224,6 +224,7 @@ public static class StylesetHelper
         styleSet.AddBlock(new TocSectionStyle());
         styleSet.AddBlock(new TofSectionStyle());
         styleSet.AddBlock(new ToeSectionStyle());
+        styleSet.AddBlock(new TotSectionStyle());
 
         // Add style CitationStyle for Citation instances 
         var citationStyle = new CitationStyle();
@@ -392,7 +393,7 @@ public static class StylesetHelper
         var tofHeadingStyle = new TofHeadingStyle();
         styleSet.AddBlock(tofHeadingStyle);
 
-        // Add style TocHeadingStyle for TocHeading instances 
+        // Add style ToeHeadingStyle for ToeHeading instances 
         var toeHeadingStyle = new ToeHeadingStyle();
         styleSet.AddBlock(toeHeadingStyle);
 
@@ -430,7 +431,8 @@ public static class StylesetHelper
     /// <param name="maxHeight">Maximum height in twips</param>
     /// <param name="width">Current width in twips</param>
     /// <param name="height">Current height in twips</param>
-    public static void GetWidthAndHeight(int originalWidth, int originalHeight, int maxWidth, int maxHeight, out int width, out int height)
+    public static void GetWidthAndHeight(int originalWidth, int originalHeight, int maxWidth,
+        int maxHeight, out int width, out int height)
     {
         if (originalHeight > originalWidth) // Portrait
         {

@@ -1,8 +1,9 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
+using System.Collections.Generic;
+using System.Text;
 using Bodoconsult.Text.Documents;
-using Bodoconsult.Text.Renderer.Html;
-using Bodoconsult.Text.Renderer.Rtf.Blocks;
+using Bodoconsult.Text.Helpers;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
 
@@ -21,18 +22,24 @@ public class CellPlainTextRendererElement : ITextRendererElement
         _cell = cell;
     }
 
-    private string GetClassName(Cell cell)
-    {
-        // ToDo: Other alignments
-        return "CellLeftStyle";
-    }
-
     /// <summary>
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
     public void RenderIt(ITextDocumentRender renderer)
     {
-        throw new System.NotImplementedException();
+        // Do nothing
+    }
+
+    /// <summary>
+    /// Render the element
+    /// </summary>
+    /// <param name="renderer">Current renderer</param>
+    /// <param name="row"></param>
+    public void RenderToString(ITextDocumentRender renderer, List<string> row)
+    {
+        var sb = new StringBuilder();
+        DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, _cell.ChildInlines);
+        row.Add(sb.ToString());
     }
 }

@@ -3,7 +3,9 @@
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
 
@@ -27,9 +29,6 @@ public class FigurePlainTextRendererElement : ITextRendererElement
     /// </summary>
     public void RenderIt(ITextDocumentRender renderer)
     {
-        var sb = new StringBuilder();
-        sb.Append(_figure.CurrentPrefix);
-        DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, _figure.ChildInlines, tag: string.Empty, isBlock: true);
-        renderer.Content.Append($"![{sb}]({_figure.Uri} \"{sb}\"){Environment.NewLine}{Environment.NewLine}");
+        DocumentRendererHelper.CreateImagePlainText(renderer, _figure);
     }
 }

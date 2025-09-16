@@ -7,33 +7,24 @@ namespace Bodoconsult.Text.Renderer.Rtf.Blocks;
 /// <summary>
 /// Rtf rendering element for <see cref="Column"/> instances
 /// </summary>
-public class ColumnRtfTextRendererElement : RtfTextRendererElementBase
+public class ColumnRtfTextRendererElement : ITextRendererElement
 {
     private readonly Column _column;
 
     /// <summary>
     /// Default ctor
     /// </summary>
-    public ColumnRtfTextRendererElement(Column column) : base(column)
+    public ColumnRtfTextRendererElement(Column column)
     {
         _column = column;
-        ClassName = column.StyleName;
     }
-}
-
-/// <summary>
-/// Rtf rendering element for <see cref="Table"/> instances
-/// </summary>
-public class TableRtfTextRendererElement : RtfTextRendererElementBase
-{
-    private readonly Table _table;
 
     /// <summary>
-    /// Default ctor
+    /// Render the element
     /// </summary>
-    public TableRtfTextRendererElement(Table table) : base(table)
+    /// <param name="renderer">Current renderer</param>
+    public void RenderIt(ITextDocumentRender renderer)
     {
-        _table = table;
-        ClassName = table.StyleName;
+        
     }
 }

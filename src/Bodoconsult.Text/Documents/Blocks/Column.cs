@@ -33,6 +33,12 @@ public class Column : Block
     public string Format { get; set; }
 
     /// <summary>
+    /// Maximum length of the content
+    /// </summary>
+    [DoNotSerialize]
+    public int MaxLength { get; set; }
+
+    /// <summary>
     /// Add the current element to a document defined in LDML (Logical document markup language)
     /// </summary>
     /// <param name="document">StringBuilder instance to create the LDML in</param>

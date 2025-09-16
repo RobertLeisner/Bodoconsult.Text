@@ -27,8 +27,6 @@ public class ImagePlainTextRendererElement : ITextRendererElement
     /// </summary>
     public void RenderIt(ITextDocumentRender renderer)
     {
-        var sb = new StringBuilder();
-        DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, _image.ChildInlines, tag: string.Empty, isBlock: true);
-        renderer.Content.Append($"![{sb}]({_image.Uri} \"{sb}\"){Environment.NewLine}{Environment.NewLine}");
+        DocumentRendererHelper.CreateImagePlainText(renderer, _image);
     }
 }

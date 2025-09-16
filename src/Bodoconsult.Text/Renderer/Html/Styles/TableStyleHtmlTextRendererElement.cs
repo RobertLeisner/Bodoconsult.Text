@@ -2,8 +2,6 @@
 
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
-using System;
-using System.Buffers;
 using System.Text;
 
 namespace Bodoconsult.Text.Renderer.Html.Styles;

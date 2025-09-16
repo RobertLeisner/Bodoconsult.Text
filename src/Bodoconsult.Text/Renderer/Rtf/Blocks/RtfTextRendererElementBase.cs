@@ -50,23 +50,14 @@ public class RtfTextRendererElementBase : ITextRendererElement
         // Get the content of all inlines as string
         var sb = new StringBuilder();
 
-        //if (string.IsNullOrEmpty(LocalCss))
-        //{
-        //    renderer.Content.Append($"<{TagToUse} class=\"{ClassName}\">");
-        //}
-        //else
-        //{
-        //    renderer.Content.Append($"<{TagToUse} class=\"{ClassName}\" style=\"{LocalCss}\">");
-        //}
-
         if (Block is ParagraphBase paragraph)
         {
             var style = (ParagraphStyleBase)renderer.Styleset.FindStyle(paragraph.StyleName);
-            renderer.Content.Append($"\\pard\\plain \\q{renderer.Styleset.GetIndexOfStyle(Block.StyleName)} {RtfHelper.GetFormatSettings(style, renderer.Styleset)} {{");
+            renderer.Content.Append($"\\pard\\plain\\q{renderer.Styleset.GetIndexOfStyle(Block.StyleName)}{RtfHelper.GetFormatSettings(style, renderer.Styleset)}{{");
         }
         else
         {
-            renderer.Content.Append($"\\pard\\plain \\q{renderer.Styleset.GetIndexOfStyle(Block.StyleName)} {{");
+            renderer.Content.Append($"\\pard\\plain\\q{renderer.Styleset.GetIndexOfStyle(Block.StyleName)}{{");
         }
 
 
@@ -77,7 +68,7 @@ public class RtfTextRendererElementBase : ITextRendererElement
         CleanRtfString(sb);
 
         renderer.Content.Append(sb);
-        renderer.Content.Append($"\\par }}{Environment.NewLine}");
+        renderer.Content.Append($"\\par}}{Environment.NewLine}");
     }
 
     /// <summary>

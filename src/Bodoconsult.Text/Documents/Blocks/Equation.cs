@@ -66,8 +66,4 @@ public sealed class Equation : ImageBase
     /// </summary>
     public string MathMl { get; set; }
 
-    /// <summary>
-    /// The current prefix calculated by TOE calculation
-    /// </summary>
-    public string CurrentPrefix { get; set; }
 }

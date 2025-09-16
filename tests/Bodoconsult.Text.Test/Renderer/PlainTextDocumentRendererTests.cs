@@ -65,5 +65,4 @@ public class PlainTextDocumentRendererTests
 
         FileSystemHelper.RunInDebugMode(filePath);
     }
-
 }

@@ -52,9 +52,4 @@ public sealed class Figure : ImageBase
         AddInline(new Span(content));
         Uri = uri;
     }
-
-    /// <summary>
-    /// The current prefix calculated by TOF calculation
-    /// </summary>
-    public string CurrentPrefix { get; set; }
 }

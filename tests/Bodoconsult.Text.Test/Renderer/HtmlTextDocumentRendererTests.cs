@@ -2,7 +2,6 @@
 
 using System.Diagnostics;
 using System.IO;
-using System.Security.AccessControl;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Renderer.Html;
 using Bodoconsult.Text.Test.Helpers;

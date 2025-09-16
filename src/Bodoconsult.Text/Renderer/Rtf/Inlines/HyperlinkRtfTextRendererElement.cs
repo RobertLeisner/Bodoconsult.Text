@@ -55,7 +55,7 @@ public class HyperlinkRtfTextRendererElement : InlineRtfTextRendererElementBase
         if (_span.ChildInlines.Count == 0)
         {
             var content = renderer.CheckContent(_span.Content);
-            sb.Append($"<a href=\"{_span.Uri}\" title=\"{content}\">{content}</a>");
+            sb.Append($"{{\\field{{\\*\\fldinst HYPERLINK \"{_span.Uri}\"}}{{\\{content}}}}}");
         }
         else
         {

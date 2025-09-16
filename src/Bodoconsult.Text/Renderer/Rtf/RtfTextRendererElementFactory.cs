@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using Bodoconsult.Text.Documents;
-using Bodoconsult.Text.Renderer.Html;
 using Bodoconsult.Text.Renderer.Rtf.Blocks;
 using Bodoconsult.Text.Renderer.Rtf.Inlines;
 using Bodoconsult.Text.Renderer.Rtf.Styles;
@@ -219,6 +218,21 @@ public class RtfTextRendererElementFactory : ITextRendererElementFactory
             return new Toc5RtfTextRendererElement(toc5);
         }
 
+        if (textElement is Tof tof)
+        {
+            return new TofRtfTextRendererElement(tof);
+        }
+
+        if (textElement is Tot tot)
+        {
+            return new TotRtfTextRendererElement(tot);
+        }
+
+        if (textElement is Toe toe)
+        {
+            return new ToeRtfTextRendererElement(toe);
+        }
+
         if (textElement is Warning warning)
         {
             return new WarningRtfTextRendererElement(warning);
@@ -252,6 +266,11 @@ public class RtfTextRendererElementFactory : ITextRendererElementFactory
             return new HyperlinkRtfTextRendererElement(hyperlink);
         }
 
+        if (textElement is Value value)
+        {
+            return new ValueRtfTextRendererElement(value);
+        }
+
         // Base styles
         if (textElement is DocumentStyle documentStyle)
         {
@@ -278,6 +297,11 @@ public class RtfTextRendererElementFactory : ITextRendererElementFactory
             return new TofSectionStyleRtfTextRendererElement(tofSectionStyle);
         }
 
+        if (textElement is TotSectionStyle totSectionStyle)
+        {
+            return new TotSectionStyleRtfTextRendererElement(totSectionStyle);
+        }
+
         // Paragraph style based
         if (textElement is CitationStyle citationStyle)
         {
@@ -287,6 +311,26 @@ public class RtfTextRendererElementFactory : ITextRendererElementFactory
         if (textElement is CitationSourceStyle citationSourceStyle)
         {
             return new CitationSourceStyleRtfTextRendererElement(citationSourceStyle);
+        }
+
+        if (textElement is CellLeftStyle cellLeftStyle)
+        {
+            return new CellLeftStyleRtfTextRendererElement(cellLeftStyle);
+        }
+
+        if (textElement is CellRightStyle cellRightStyle)
+        {
+            return new CellRightStyleRtfTextRendererElement(cellRightStyle);
+        }
+
+        if (textElement is CellCenterStyle cellCenterStyle)
+        {
+            return new CellCenterStyleRtfTextRendererElement(cellCenterStyle);
+        }
+
+        if (textElement is ColumnStyle columnStyle)
+        {
+            return new ColumnStyleRtfTextRendererElement(columnStyle);
         }
 
         if (textElement is CodeStyle codeStyle)
@@ -374,6 +418,11 @@ public class RtfTextRendererElementFactory : ITextRendererElementFactory
             return new ParagraphStyleRtfTextRendererElement(paragraphStyle);
         }
 
+        if (textElement is RowStyle rowStyle)
+        {
+            return new RowStyleRtfTextRendererElement(rowStyle);
+        }
+
         if (textElement is SectionSubtitleStyle sectionSubtitleStyle)
         {
             return new SectionSubtitleStyleRtfTextRendererElement(sectionSubtitleStyle);
@@ -387,6 +436,21 @@ public class RtfTextRendererElementFactory : ITextRendererElementFactory
         if (textElement is SubtitleStyle subtitleStyle)
         {
             return new SubtitleStyleRtfTextRendererElement(subtitleStyle);
+        }
+
+        if (textElement is TableStyle tableStyle)
+        {
+            return new TableStyleRtfTextRendererElement(tableStyle);
+        }
+
+        if (textElement is TableHeaderStyle tableHeaderStyle)
+        {
+            return new TableHeaderStyleRtfTextRendererElement(tableHeaderStyle);
+        }
+
+        if (textElement is TableLegendStyle tableLegendStyle)
+        {
+            return new TableLegendStyleRtfTextRendererElement(tableLegendStyle);
         }
 
         if (textElement is TitleStyle titleStyle)
@@ -417,6 +481,41 @@ public class RtfTextRendererElementFactory : ITextRendererElementFactory
         if (textElement is Toc5Style toc5Style)
         {
             return new Toc5StyleRtfTextRendererElement(toc5Style);
+        }
+
+        if (textElement is ToeStyle toeStyle)
+        {
+            return new ToeStyleRtfTextRendererElement(toeStyle);
+        }
+
+        if (textElement is TofStyle tofStyle)
+        {
+            return new TofStyleRtfTextRendererElement(tofStyle);
+        }
+
+        if (textElement is TotStyle totStyle)
+        {
+            return new TotStyleRtfTextRendererElement(totStyle);
+        }
+
+        if (textElement is TocHeadingStyle tocHeadingStyle)
+        {
+            return new TocHeadingStyleRtfTextRendererElement(tocHeadingStyle);
+        }
+
+        if (textElement is ToeHeadingStyle toeHeadingStyle)
+        {
+            return new ToeHeadingStyleRtfTextRendererElement(toeHeadingStyle);
+        }
+
+        if (textElement is TofHeadingStyle tofHeadingStyle)
+        {
+            return new TofHeadingStyleRtfTextRendererElement(tofHeadingStyle);
+        }
+
+        if (textElement is TotHeadingStyle totHeadingStyle)
+        {
+            return new TotHeadingStyleRtfTextRendererElement(totHeadingStyle);
         }
 
         if (textElement is WarningStyle warningStyle)

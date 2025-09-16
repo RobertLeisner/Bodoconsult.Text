@@ -3,9 +3,6 @@
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Test.Helpers;
 using System.Collections.Generic;
-using System.Data;
-using Bodoconsult.Text.Helpers;
-using static System.Collections.Specialized.BitVector32;
 
 namespace Bodoconsult.Text.Test.TestData;
 

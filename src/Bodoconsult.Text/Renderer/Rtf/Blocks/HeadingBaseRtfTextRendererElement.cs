@@ -3,7 +3,9 @@
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Bodoconsult.Text.Renderer.Rtf.Blocks;
 
@@ -32,34 +34,23 @@ public class HeadingBaseRtfTextRendererElement : RtfTextRendererElementBase
         // Get the content of all inlines as string
         var sb = new StringBuilder();
 
-        //if (string.IsNullOrEmpty(LocalCss))
-        //{
-        //    renderer.Content.Append($"<{TagToUse} class=\"{ClassName}\">");
-        //}
-        //else
-        //{
-        //    renderer.Content.Append($"<{TagToUse} class=\"{ClassName}\" style=\"{LocalCss}\">");
-        //}
+        var style = (ParagraphStyleBase)renderer.Styleset.FindStyle(_headingBase.StyleName);
+        renderer.Content.Append($"\\pard\\plain\\q{renderer.Styleset.GetIndexOfStyle(Block.StyleName)} {RtfHelper.GetFormatSettings(style, renderer.Styleset)}");
 
-        if (Block is ParagraphBase paragraph)
+        var childs = new List<Inline>();
+
+        if (!string.IsNullOrEmpty(_headingBase.CurrentPrefix))
         {
-            var style = (ParagraphStyleBase)renderer.Styleset.FindStyle(paragraph.StyleName);
-            renderer.Content.Append($"\\pard\\plain \\q{renderer.Styleset.GetIndexOfStyle(Block.StyleName)} {RtfHelper.GetFormatSettings(style, renderer.Styleset)} {{");
-        }
-        else
-        {
-            renderer.Content.Append($"\\pard\\plain \\q{renderer.Styleset.GetIndexOfStyle(Block.StyleName)} {{");
+            childs.Add(new Span(_headingBase.CurrentPrefix));
         }
 
-        sb.Append(_headingBase.CurrentPrefix);
+        childs.AddRange(_headingBase.ChildInlines);
 
-        //DocumentRendererHelper.RenderBlockChildsToRtf(renderer, sb, Block.ChildBlocks);
-
-        DocumentRendererHelper.RenderInlineChildsToRtf(renderer, sb, Block.ChildInlines);
+        DocumentRendererHelper.RenderInlineChildsToRtf(renderer, sb, childs);
 
         CleanRtfString(sb);
 
-        renderer.Content.Append(sb);
-        renderer.Content.Append($"\\par }}{Environment.NewLine}");
+        renderer.Content.Append($"{{{{\\*\\bkmkstart {_headingBase.TagName}}}{{{sb}}}{{\\*\\bkmkend {_headingBase.TagName}}}}}");
+        renderer.Content.Append($"\\par{Environment.NewLine}");
     }
 }

@@ -1,9 +1,8 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
-using System;
+using System.Collections.Generic;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
-using Bodoconsult.Text.Renderer.Html;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
 
@@ -28,19 +27,20 @@ public class RowPlainTextRendererElement : ITextRendererElement
     /// <param name="renderer">Current renderer</param>
     public void RenderIt(ITextDocumentRender renderer)
     {
-        //if (string.IsNullOrEmpty(LocalCss))
-        //{
-        //    renderer.Content.AppendLine($"<{TagToUse} class=\"{ClassName}\">");
-        //}
-        //else
-        //{
-        //    renderer.Content.AppendLine($"<{TagToUse} class=\"{ClassName}\" style=\"{LocalCss}\">");
-        //}
+        //renderer.Content.Append('|');
+        //DocumentRendererHelper.RenderCellsToPlain(renderer, _row.Cells);
+        //renderer.Content.Append($"{Environment.NewLine}");
+    }
 
-
-
-        //DocumentRendererHelper.RenderCellsToHtml(renderer, _row.Cells);
-
-        //renderer.Content.Append($"</{TagToUse}>{Environment.NewLine}");
+    /// <summary>
+    /// Render the element
+    /// </summary>
+    /// <param name="renderer">Current renderer</param>
+    /// <param name="rows">Current row list</param>
+    public void RenderToString(ITextDocumentRender renderer, List<List<string>> rows)
+    {
+        var row = new List<string>();
+        DocumentRendererHelper.RenderCellsToPlain(renderer, _row.Cells, row);
+        rows.Add(row);
     }
 }

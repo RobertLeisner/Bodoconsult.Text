@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
-using System.Diagnostics;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Interfaces;
 using Bodoconsult.Text.Renderer.PlainText;
@@ -8,7 +7,6 @@ using Bodoconsult.Text.Test.Helpers;
 using Bodoconsult.Text.Test.TestData;
 using NUnit.Framework;
 using System.IO;
-using System.Text;
 using Bodoconsult.Text.Helpers;
 using Bodoconsult.Text.Renderer.Html;
 using Bodoconsult.Text.Renderer.Rtf;

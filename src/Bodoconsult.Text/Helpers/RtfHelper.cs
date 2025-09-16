@@ -15,8 +15,9 @@ public static class RtfHelper
     /// </summary>
     /// <param name="style">Style</param>
     /// <param name="styleset">Current styleset</param>
+    /// <param name="isTable">Is paragraph in a table</param>
     /// <returns>RTF format settings</returns>
-    public static StringBuilder GetFormatSettings(ParagraphStyleBase style, Styleset styleset)
+    public static StringBuilder GetFormatSettings(ParagraphStyleBase style, Styleset styleset, bool isTable = false)
     {
         var sb = new StringBuilder();
 
@@ -44,32 +45,32 @@ public static class RtfHelper
         sb.Append($"\\sa{MeasurementHelper.GetTwipsFromPt(style.Margins.Bottom)}");
 
         // bordor top
-        if (style.BorderBrush != null)
+        if (style.BorderBrush != null && !isTable)
         {
 
             var colorIndex = styleset.GetIndexOfColor(style.BorderBrush.Color) + 1;
 
             if (style.BorderThickness.Top > 0)
             {
-                sb.Append($"\\brdrt\\brdrs\\brdrw10\\brsp60\\brdrcf{colorIndex} ");
+                sb.Append($"\\brdrt\\brdrs\\brdrw10\\brsp60\\brdrcf{colorIndex}");
             }
 
             // bordor bottom
             if (style.BorderThickness.Bottom > 0)
             {
-                sb.Append($"\\brdrb\\brdrs\\brdrw10\\brsp60\\brdrcf{colorIndex} ");
+                sb.Append($"\\brdrb\\brdrs\\brdrw10\\brsp60\\brdrcf{colorIndex}");
             }
 
             // bordor left
             if (style.BorderThickness.Left > 0)
             {
-                sb.Append($"\\brdrl\\brdrs\\brdrw10\\brsp60\\brdrcf{colorIndex} ");
+                sb.Append($"\\brdrl\\brdrs\\brdrw10\\brsp60\\brdrcf{colorIndex}");
             }
 
             // bordor right
             if (style.BorderThickness.Right > 0)
             {
-                sb.Append($"\\brdrr\\brdrs\\brdrw10\\brsp60\\brdrcf{colorIndex} ");
+                sb.Append($"\\brdrr\\brdrs\\brdrw10\\brsp60\\brdrcf{colorIndex}");
             }
         }
         
@@ -101,7 +102,6 @@ public static class RtfHelper
         {
             sb.Append("\\b");
         }
-
         return sb;
     }
 }

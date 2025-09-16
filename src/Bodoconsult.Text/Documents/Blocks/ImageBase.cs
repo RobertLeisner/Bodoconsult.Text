@@ -23,4 +23,9 @@ public abstract class ImageBase: ParagraphBase
     /// </summary>
     public int OriginalHeight { get; set; }
 
+    /// <summary>
+    /// The current prefix calculated by TOF calculation
+    /// </summary>
+    public string CurrentPrefix { get; set; }
+
 }

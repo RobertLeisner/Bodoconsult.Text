@@ -28,7 +28,22 @@ public class TofSectionPlainTextRendererElement : ITextRendererElement
     public void RenderIt(ITextDocumentRender renderer)
     {
         // Get the content of all inlines as string
+        if (_tofSection.ChildBlocks.Count == 0)
+        {
+            return;
+        }
+
+        var style = (ParagraphStyleBase)renderer.Styleset.FindStyle("TotHeadingStyle");
+        var sectionStyle = (PageStyleBase)renderer.Styleset.FindStyle("DocumentStyle");
+
+        // Get the content of all inlines as string
         var sb = new StringBuilder();
+
+        var pr = new PlainTextParagraphFormatter(renderer.CheckContent(renderer.Document.DocumentMetaData.TofHeading),
+            style, sectionStyle);
+        pr.CalculateValues();
+        pr.FormatText();
+        sb.Append(pr.GetFormattedText());
 
         DocumentRendererHelper.RenderBlockChildsToPlain(renderer, _tofSection.ChildBlocks);
 

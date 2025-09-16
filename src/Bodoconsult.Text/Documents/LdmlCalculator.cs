@@ -127,7 +127,6 @@ namespace Bodoconsult.Text.Documents
         public static void UpdateTable(Table table)
         {
             var cols = table.Columns;
-
             foreach (var row in table.Rows)
             {
                 for (var index = 0; index < row.Cells.Count; index++)

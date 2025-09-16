@@ -7,7 +7,7 @@ namespace Bodoconsult.Text.Renderer.Rtf.Blocks;
 /// <summary>
 /// Rtf rendering element for <see cref="Toc3"/> instances
 /// </summary>
-public class Toc3RtfTextRendererElement : RtfTextRendererElementBase
+public class Toc3RtfTextRendererElement : ToxRtfTextRendererElementBase
 {
     private readonly Toc3 _toc3;
 

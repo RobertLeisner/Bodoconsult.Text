@@ -38,6 +38,7 @@ public class RtfTextDocumentRendererTests
         var document = TestDataHelper.CreateDocument();
 
         var calc = new LdmlCalculator(document);
+        calc.UpdateAllTables();
         calc.EnumerateAllItems();
         calc.PrepareAllItems();
         calc.PrepareAllSections();

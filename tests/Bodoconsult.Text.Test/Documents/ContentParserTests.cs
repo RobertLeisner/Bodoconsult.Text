@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
-using System.Collections.Generic;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
 using NUnit.Framework;

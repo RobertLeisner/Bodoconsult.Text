@@ -27,9 +27,6 @@ public class EquationPlainTextRendererElement : ITextRendererElement
     /// </summary>
     public void RenderIt(ITextDocumentRender renderer)
     {
-        var sb = new StringBuilder();
-        sb.Append(_equation.CurrentPrefix);
-        DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, _equation.ChildInlines, tag: string.Empty, isBlock: true);
-        renderer.Content.Append($"![{sb}]({_equation.Uri} \"{sb}\"){Environment.NewLine}{Environment.NewLine}");
+        DocumentRendererHelper.CreateImagePlainText(renderer, _equation);
     }
 }

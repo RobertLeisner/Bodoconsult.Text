@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using Bodoconsult.Text.Documents;
-using Bodoconsult.Text.Renderer.Rtf.Blocks;
 
 namespace Bodoconsult.Text.Renderer.PlainText
 {
@@ -215,6 +214,21 @@ namespace Bodoconsult.Text.Renderer.PlainText
                 return new Toc5PlainTextRendererElement(toc5);
             }
 
+            if (textElement is Tof tof)
+            {
+                return new TofPlainTextRendererElement(tof);
+            }
+
+            if (textElement is Toe toe)
+            {
+                return new ToePlainTextRendererElement(toe);
+            }
+
+            if (textElement is Tot tot)
+            {
+                return new TotPlainTextRendererElement(tot);
+            }
+
             if (textElement is Warning warning)
             {
                 return new WarningPlainTextRendererElement(warning);
@@ -246,6 +260,11 @@ namespace Bodoconsult.Text.Renderer.PlainText
             if (textElement is Hyperlink hyperlink)
             {
                 return new HyperlinkPlainTextRendererElement(hyperlink);
+            }
+
+            if (textElement is Value value)
+            {
+                return new ValuePlainTextRendererElement(value);
             }
 
             return null;

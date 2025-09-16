@@ -13,7 +13,7 @@ namespace Bodoconsult.Text.Renderer.PlainText;
 /// <summary>
 /// Render a <see cref="Span"/> element
 /// </summary>
-public class SpanPlainTextRendererElement :  InlinePlainTextRendererElementBase
+public class SpanPlainTextRendererElement : InlinePlainTextRendererElementBase
 {
     private readonly Span _span;
 
@@ -57,7 +57,7 @@ public class SpanPlainTextRendererElement :  InlinePlainTextRendererElementBase
             //}
             //else
             //{
-                sb.Append($"{renderer.CheckContent(_span.Content)}");
+            sb.Append($"{renderer.CheckContent(_span.Content)}");
             //}
         }
         else

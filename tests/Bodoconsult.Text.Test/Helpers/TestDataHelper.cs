@@ -3,7 +3,6 @@
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Extensions;
 using Bodoconsult.Text.Helpers;
-using NUnit.Framework;
 
 namespace Bodoconsult.Text.Test.Helpers;
 
@@ -142,9 +141,10 @@ public static class TestDataHelper
         heading4 = new Heading4("2.1.1.1. Heading level 4");
         section.AddBlock(heading4);
 
-        // Add a heading level 4
+        // Add a heading level 5
         heading5 = new Heading5("2.1.1.1.1. Heading level 5");
         section.AddBlock(heading5);
+
 
         // Add a paragraph with multiple inlines
         paragraph = new Paragraph("Paragraph with LineBreak and Bold and BoldItalic: ");
@@ -239,18 +239,20 @@ public static class TestDataHelper
         // Add an equation 1
         var equiation1 = new Equation("Equation 1", TestHelper.TestEquationImage)
         {
-            OriginalHeight = 159,
-            OriginalWidth = 588
+            OriginalHeight = 100,
+            OriginalWidth = 300
         }; ;
         section.AddBlock(equiation1);
+
 
         // Add an equation 2
         var equiation2 = new Equation("Equation 2", TestHelper.TestEquationImage)
         {
-            OriginalHeight = 159,
-            OriginalWidth = 588
+            OriginalHeight = 100,
+            OriginalWidth = 300
         }; ;
         section.AddBlock(equiation2);
+
 
         // Add a list
         var list = new List();

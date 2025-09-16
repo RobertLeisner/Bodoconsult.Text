@@ -55,7 +55,8 @@ public class DataTableParser
             {
                 Name = column.ColumnName,
                 DataType = column.DataType,
-                Format = GetFormat(column.DataType)
+                Format = GetFormat(column.DataType),
+                Parent = Table
             };
 
             Table.Columns.Add(col);
@@ -95,16 +96,21 @@ public class DataTableParser
     {
         foreach (DataRow row in DataTable.Rows)
         {
-
             var newRow = new Row();
 
             foreach (var column in Table.Columns)
             {
                 var value = row[column.Name].ToString();
 
-                var cell = new Cell(value);
+                var cell = new Cell(value)
+                {
+                    Parent = newRow
+                };
+
                 newRow.Cells.Add(cell);
             }
+
+            newRow.Parent = Table;
 
             Table.Rows.Add(newRow);
         }

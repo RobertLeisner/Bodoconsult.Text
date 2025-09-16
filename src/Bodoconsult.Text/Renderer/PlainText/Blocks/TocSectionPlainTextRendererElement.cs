@@ -29,7 +29,22 @@ public class TocSectionPlainTextRendererElement : ITextRendererElement
     public void RenderIt(ITextDocumentRender renderer)
     {
         // Get the content of all inlines as string
+        if (_tocSection.ChildBlocks.Count == 0)
+        {
+            return;
+        }
+
+        var style = (ParagraphStyleBase)renderer.Styleset.FindStyle("TocHeadingStyle");
+        var sectionStyle = (PageStyleBase)renderer.Styleset.FindStyle("DocumentStyle");
+
+        // Get the content of all inlines as string
         var sb = new StringBuilder();
+
+        var pr = new PlainTextParagraphFormatter(renderer.CheckContent(renderer.Document.DocumentMetaData.TocHeading),
+            style, sectionStyle);
+        pr.CalculateValues();
+        pr.FormatText();
+        sb.Append(pr.GetFormattedText());
 
         DocumentRendererHelper.RenderBlockChildsToPlain(renderer, _tocSection.ChildBlocks);
 

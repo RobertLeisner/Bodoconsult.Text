@@ -293,6 +293,11 @@ namespace Bodoconsult.Text.Renderer.Html
                 return new TofSectionStyleHtmlTextRendererElement(tofSectionStyle);
             }
 
+            if (textElement is TotSectionStyle totSectionStyle)
+            {
+                return new TotSectionStyleHtmlTextRendererElement(totSectionStyle);
+            }
+
             if (textElement is CellLeftStyle cellLeftStyle)
             {
                 return new CellLeftStyleHtmlTextRendererElement(cellLeftStyle);
