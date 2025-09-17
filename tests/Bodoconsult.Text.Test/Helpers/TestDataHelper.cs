@@ -48,7 +48,8 @@ public static class TestDataHelper
         // New section
         var section = new Section
         {
-            Name = "Body"
+            Name = "Body",
+            IsRestartPageNumberingRequired = true
         };
 
         doc.AddBlock(section);

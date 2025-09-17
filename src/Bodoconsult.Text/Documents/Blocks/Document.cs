@@ -9,6 +9,8 @@ namespace Bodoconsult.Text.Documents;
 /// </summary>
 public class Document : Block
 {
+    private bool _isFirstSection;
+
     /// <summary>
     ///  Default font name
     /// </summary>
@@ -143,28 +145,57 @@ public class Document : Block
     /// <param name="block">Block element to add</param>
     public override void AddBlock(Block block)
     {
-        base.AddBlock(block);
+        
 
         switch (block)
         {
             case Styleset styleset:
                 Styleset = styleset;
-                return;
+                break;
             case DocumentMetaData documentMetaData:
                 DocumentMetaData = documentMetaData;
-                return;
+                break;
             case TocSection tocSection:
+                if (!_isFirstSection)
+                {
+                    tocSection.IsFirstSection = true;
+                    _isFirstSection = true;
+                }
                 TocSection = tocSection;
-                return;
+                break;
             case TofSection tofSection:
+                if (!_isFirstSection)
+                {
+                    tofSection.IsFirstSection = true;
+                    _isFirstSection = true;
+                }
                 TofSection = tofSection;
-                return;
+                break;
             case ToeSection toeSection:
+                if (!_isFirstSection)
+                {
+                    toeSection.IsFirstSection = true;
+                    _isFirstSection = true;
+                }
                 ToeSection = toeSection;
-                return;
+                break;
             case TotSection totSection:
+                if (!_isFirstSection)
+                {
+                    totSection.IsFirstSection = true;
+                    _isFirstSection = true;
+                }
                 TotSection = totSection;
-                return;
+                break;
+            case Section section:
+                if (!_isFirstSection)
+                {
+                    section.IsFirstSection = true;
+                    _isFirstSection = true;
+                }
+                break;
         }
+
+        base.AddBlock(block);
     }
 }

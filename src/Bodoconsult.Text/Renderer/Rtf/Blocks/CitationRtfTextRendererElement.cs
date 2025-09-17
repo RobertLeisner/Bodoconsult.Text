@@ -37,7 +37,7 @@ public class CitationRtfTextRendererElement : RtfTextRendererElementBase
             return;
         }
         var style = (ParagraphStyleBase)renderer.Styleset.FindStyle("CitationSourceStyle");
-        renderer.Content.Append($"\\pard\\plain\\q{renderer.Styleset.GetIndexOfStyle("CitationSourceStyle")} {RtfHelper.GetFormatSettings(style, renderer.Styleset)} {{");
+        renderer.Content.Append($@"\pard\plain\q{renderer.Styleset.GetIndexOfStyle("CitationSourceStyle")} {RtfHelper.GetFormatSettings(style, renderer.Styleset)} {{");
         renderer.Content.Append($"{renderer.Document.DocumentMetaData.CitationSourcePrefix}{_citation.Source}");
         renderer.Content.Append($"\\par }}{Environment.NewLine}");
     }

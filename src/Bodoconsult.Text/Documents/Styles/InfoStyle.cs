@@ -25,5 +25,6 @@ public class InfoStyle : ParagraphStyleBase
         Paddings.Bottom = Document.DefaultPaddingWidth;
         Margins.Top = 3 * Document.DefaultPaddingWidth;
         Margins.Bottom = 3 * Document.DefaultPaddingWidth;
+        KeepTogether = true;
     }
 }

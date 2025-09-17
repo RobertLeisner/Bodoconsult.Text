@@ -28,7 +28,7 @@ public class DocumentRtfTextRendererElement : RtfTextRendererElementBase
     /// <param name="renderer">Current renderer</param>
     public override void RenderIt(ITextDocumentRender renderer)
     {
-        renderer.Content.AppendLine("{\\rtf1\\ansi\\deff0");
+        renderer.Content.AppendLine(@"{\rtf1\ansi\deff0");
 
         var sb = new StringBuilder();
         DocumentRendererHelper.RenderBlockChildsToRtf(renderer, sb, _document.ChildBlocks);

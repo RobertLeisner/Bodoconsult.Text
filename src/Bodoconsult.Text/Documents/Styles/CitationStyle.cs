@@ -21,5 +21,7 @@ public class CitationStyle : ParagraphStyleBase
         Margins.Left = Document.DefaultMarginLeft;
         Margins.Right = Document.DefaultMarginRight;
         Italic = true;
+        KeepWithNextParagraph = true;
+        KeepTogether = true;
     }
 }

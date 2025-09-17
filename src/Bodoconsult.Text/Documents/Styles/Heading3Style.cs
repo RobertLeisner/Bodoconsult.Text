@@ -19,5 +19,6 @@ public class Heading3Style : ParagraphStyleBase
         Margins.Top = 2 * Document.DefaultFontSize;
         Paddings.Top = Document.DefaultPaddingWidth;
         Paddings.Bottom = Document.DefaultPaddingWidth;
+        KeepWithNextParagraph = true;
     }
 }

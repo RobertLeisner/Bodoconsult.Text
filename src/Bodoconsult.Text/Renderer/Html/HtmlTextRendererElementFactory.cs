@@ -439,9 +439,19 @@ namespace Bodoconsult.Text.Renderer.Html
                 return new TableStyleHtmlTextRendererElement(tableStyle);
             }
 
-            if (textElement is TableHeaderStyle tableHeaderStyle)
+            if (textElement is TableHeaderLeftStyle tableHeaderLeftStyle)
             {
-                return new TableHeaderStyleHtmlTextRendererElement(tableHeaderStyle);
+                return new TableHeaderLeftStyleHtmlTextRendererElement(tableHeaderLeftStyle);
+            }
+
+            if (textElement is TableHeaderRightStyle tableHeaderRightStyle)
+            {
+                return new TableHeaderRightStyleHtmlTextRendererElement(tableHeaderRightStyle);
+            }
+
+            if (textElement is TableHeaderCenterStyle tableHeaderCenterStyle)
+            {
+                return new TableHeaderCenterStyleHtmlTextRendererElement(tableHeaderCenterStyle);
             }
 
             if (textElement is TableLegendStyle tableLegendStyle)

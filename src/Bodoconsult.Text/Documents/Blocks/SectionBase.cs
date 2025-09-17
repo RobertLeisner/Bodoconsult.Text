@@ -77,10 +77,36 @@ public abstract class SectionBase : Block
     public bool PageBreakBefore { get; set; }
 
     /// <summary>
+    /// Is the section the first section. Default false
+    /// </summary>
+    [DoNotSerialize]
+    public bool IsFirstSection { get; set; }
+
+    /// <summary>
     /// Do not include the current section in the numbering for TOC, TOE and TOF
     /// </summary>
     public bool DoNotIncludeInNumbering { get; set; }
 
+    /// <summary>
+    /// Is a header required? Default: true
+    /// </summary>
+    public bool IsHeaderRequired { get; set; } = true;
+
+    /// <summary>
+    /// Is a footer required? Default: true
+    /// </summary>
+    public bool IsFooterRequired { get; set; } = true;
+
+    /// <summary>
+    /// Is a restart of the page numbering required? Default: false
+    /// </summary>
+    public bool IsRestartPageNumberingRequired { get; set; } = false;
+
+    /// <summary>
+    /// Page number format
+    /// </summary>
+    public PageNumberFormatEnum PageNumberFormat { get; set; } = PageNumberFormatEnum.Decimal;
+    
     /// <summary>
     /// Add the current element to a document defined in LDML (Logical document markup language)
     /// </summary>

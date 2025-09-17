@@ -27,41 +27,41 @@ public class CellRtfTextRendererElement : RtfTextRendererElementBase
     /// Render cell to RTF string
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public void RenderToString(ITextDocumentRender renderer)
+    /// <param name="sb">Current string builder</param>
+    public void RenderToString(ITextDocumentRender renderer, StringBuilder sb)
     {
-        ParagraphStyleBase style;
-
         var type = _cell.Column.DataType;
 
-        // Right aligned
-        if (type == typeof(double) || type == typeof(float) ||
-            type == typeof(short) || type == typeof(int) ||
-            type == typeof(long) || type == typeof(Int128) ||
-            type == typeof(byte))
-        {
-            style = (ParagraphStyleBase)renderer.Styleset.FindStyle("CellRightStyle");
-        }
-        else
-        // Centered aligned
-        if (type == typeof(bool) || type == typeof(DateTime))
-        {
-            style = (ParagraphStyleBase)renderer.Styleset.FindStyle("CellCenterStyle");
-        }
+        var style = (ParagraphStyleBase)renderer.Styleset.FindStyle($"Cell{DocumentRendererHelper.GetAlignment(type)}Style");
 
-        // Default: left aligned
-        else
-        {
-            style = (ParagraphStyleBase)renderer.Styleset.FindStyle("CellLeftStyle");
-        }
 
-        renderer.Content.Append("\\intbl\\pard\\plain");
-        renderer.Content.Append(RtfHelper.GetFormatSettings(style, renderer.Styleset, true));
+        //// Right aligned
+        //if (type == typeof(double) || type == typeof(float) ||
+        //    type == typeof(short) || type == typeof(int) ||
+        //    type == typeof(long) || type == typeof(Int128) ||
+        //    type == typeof(byte))
+        //{
+        //    style = (ParagraphStyleBase)renderer.Styleset.FindStyle("CellRightStyle");
+        //}
+        //else
+        //// Centered aligned
+        //if (type == typeof(bool) || type == typeof(DateTime))
+        //{
+        //    style = (ParagraphStyleBase)renderer.Styleset.FindStyle("CellCenterStyle");
+        //}
+        //// Default: left aligned
+        //else
+        //{
+        //    style = (ParagraphStyleBase)renderer.Styleset.FindStyle("CellLeftStyle");
+        //}
+        sb.Append(@"\intbl\pard\plain");
+        sb.Append(RtfHelper.GetFormatSettings(style, renderer.Styleset, true));
 
-        var sb = new StringBuilder();
+        sb.Append('{');
 
         DocumentRendererHelper.RenderInlineChildsToRtf(renderer, sb, _cell.ChildInlines);
 
-
-        renderer.Content.Append($"{{{sb}}}\\cell ");
+        sb.Append("}\\cell ");
+       
     }
 }

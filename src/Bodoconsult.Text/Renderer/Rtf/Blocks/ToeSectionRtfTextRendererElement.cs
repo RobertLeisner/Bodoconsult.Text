@@ -10,7 +10,7 @@ namespace Bodoconsult.Text.Renderer.Rtf.Blocks;
 /// <summary>
 /// Rtf rendering element for <see cref="ToeSection"/> instances
 /// </summary>
-public class ToeSectionRtfTextRendererElement : RtfTextRendererElementBase
+public class ToeSectionRtfTextRendererElement : SectionBaseRtfTextRendererElement
 {
     private readonly ToeSection _toeSection;
 
@@ -34,15 +34,17 @@ public class ToeSectionRtfTextRendererElement : RtfTextRendererElementBase
             return;
         }
 
-        // Get the content of all inlines as string
-        var style = (ParagraphStyleBase)renderer.Styleset.FindStyle("ToeHeadingStyle");
-        renderer.Content.Append($"\\pard\\plain\\q{renderer.Styleset.GetIndexOfStyle(Block.StyleName)} {RtfHelper.GetFormatSettings(style, renderer.Styleset)}{{");
+        RenderItInternal(renderer, "ToeHeadingStyle", renderer.Document.DocumentMetaData.ToeHeading);
 
-        var sb = new StringBuilder(renderer.CheckContent(renderer.Document.DocumentMetaData.ToeHeading));
-        CleanRtfString(sb);
-        renderer.Content.Append(sb);
-        renderer.Content.Append($"\\par}}{Environment.NewLine}");
+        //// Get the content of all inlines as string
+        //var style = (ParagraphStyleBase)renderer.Styleset.FindStyle("ToeHeadingStyle");
+        //renderer.Content.Append($"\\pard\\plain\\q{renderer.Styleset.GetIndexOfStyle(Block.StyleName)} {RtfHelper.GetFormatSettings(style, renderer.Styleset)}{{");
 
-        base.RenderIt(renderer);
+        //var sb = new StringBuilder(renderer.CheckContent(renderer.Document.DocumentMetaData.ToeHeading));
+        //CleanRtfString(sb);
+        //renderer.Content.Append(sb);
+        //renderer.Content.Append($"\\par}}{Environment.NewLine}");
+
+        //base.RenderIt(renderer);
     }
 }

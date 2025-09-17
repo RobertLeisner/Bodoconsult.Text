@@ -22,7 +22,6 @@ public class ParagraphStyleBase : StyleBase
     /// </summary>
     public Color FontColor { get; set; } = Document.DefaultColor;
 
-
     /// <summary>
     /// Bold
     /// </summary>
@@ -63,4 +62,18 @@ public class ParagraphStyleBase : StyleBase
     /// </summary>
     public double FirstLineIndent { get; set; }
 
+    /// <summary>
+    /// Add a page break before the heading. Default: false
+    /// </summary>
+    public bool PageBreakBefore { get; set; } = false;
+
+    /// <summary>
+    /// Add a page break before the heading. Default: false
+    /// </summary>
+    public bool KeepWithNextParagraph { get; set; } = false;
+
+    /// <summary>
+    /// Keep the paragraph together on one side. Default: false
+    /// </summary>
+    public bool KeepTogether { get; set; } = false;
 }

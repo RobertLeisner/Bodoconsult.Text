@@ -14,5 +14,6 @@ public class Section : SectionBase
     public Section()
     {
         TagToUse = "Section";
+        PageBreakBefore = true;
     }
 }

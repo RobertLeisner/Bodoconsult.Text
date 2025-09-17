@@ -28,9 +28,9 @@ public class RowRtfTextRendererElement : ITextRendererElement
     /// <param name="renderer">Current renderer</param>
     public void RenderIt(ITextDocumentRender renderer)
     {
-        renderer.Content.Append("\\trowd\\trautofit1\\trqc\\trpaddfb3\\trpaddfr3\\trpaddft3\\trpaddfl3\\trpaddb80\\trpaddr80\\trpaddt80\\trpaddl80");
+        renderer.Content.Append(@"\trowd\trautofit1\trqc\trpaddfb3\trpaddfr3\trpaddft3\trpaddfl3\trpaddb80\trpaddr80\trpaddt80\trpaddl80");
 
-        DocumentRendererHelper.RenderCellWidthsToRtf(renderer, _row.Cells);
+        //DocumentRendererHelper.RenderCellWidthsToRtf(renderer, _row.Cells);
 
         DocumentRendererHelper.RenderCellsToRtf(renderer, _row.Cells);
 

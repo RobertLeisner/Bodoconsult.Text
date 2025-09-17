@@ -21,5 +21,7 @@ public class TocSection : SectionBase
         AllowedBlocks.Add(typeof(Toc3));
         AllowedBlocks.Add(typeof(Toc4));
         AllowedBlocks.Add(typeof(Toc5));
+        PageBreakBefore = true;
+        PageNumberFormat = PageNumberFormatEnum.UpperRoman;
     }
 }

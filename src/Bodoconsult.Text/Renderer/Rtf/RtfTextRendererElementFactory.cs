@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using Bodoconsult.Text.Documents;
+using Bodoconsult.Text.Renderer.Html.Styles;
 using Bodoconsult.Text.Renderer.Rtf.Blocks;
 using Bodoconsult.Text.Renderer.Rtf.Inlines;
 using Bodoconsult.Text.Renderer.Rtf.Styles;
@@ -443,9 +444,19 @@ public class RtfTextRendererElementFactory : ITextRendererElementFactory
             return new TableStyleRtfTextRendererElement(tableStyle);
         }
 
-        if (textElement is TableHeaderStyle tableHeaderStyle)
+        if (textElement is TableHeaderLeftStyle tableHeaderLeftStyle)
         {
-            return new TableHeaderStyleRtfTextRendererElement(tableHeaderStyle);
+            return new TableHeaderLeftStyleRtfTextRendererElement(tableHeaderLeftStyle);
+        }
+
+        if (textElement is TableHeaderRightStyle tableHeaderRightStyle)
+        {
+            return new TableHeaderRightStyleRtfTextRendererElement(tableHeaderRightStyle);
+        }
+
+        if (textElement is TableHeaderCenterStyle tableHeaderCenterStyle)
+        {
+            return new TableHeaderCenterStyleRtfTextRendererElement(tableHeaderCenterStyle);
         }
 
         if (textElement is TableLegendStyle tableLegendStyle)

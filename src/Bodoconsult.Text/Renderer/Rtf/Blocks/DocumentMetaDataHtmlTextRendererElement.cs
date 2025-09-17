@@ -41,7 +41,7 @@ public class DocumentMetaDataRtfTextRendererElement : RtfTextRendererElementBase
         sb.AppendLine("{\\info ");
 
         var date = DateTime.Now;
-        sb.AppendLine($"{{\\creatim\\yr{date.Year}\\mo{date.Month}\\dy{date.Day}\\hr{date.Hour}\\min{date.Minute}}}");
+        sb.AppendLine($@"{{\creatim\yr{date.Year}\mo{date.Month}\dy{date.Day}\hr{date.Hour}\min{date.Minute}}}");
         sb.AppendLine("{\\edmins0}");
         sb.AppendLine("{\\nofpages1}");
         sb.AppendLine("{\\nofwords0}");
@@ -81,7 +81,7 @@ public class DocumentMetaDataRtfTextRendererElement : RtfTextRendererElementBase
         sb.AppendLine(style.PageHeight < style.PageWidth ? "\\landscape" : "\\portrait");
 
         sb.AppendLine(
-            $"\\paperw{MeasurementHelper.GetTwipsFromCm((float)style.PageWidth)}\\paperh{MeasurementHelper.GetTwipsFromCm((float)style.PageHeight)}\\margl{MeasurementHelper.GetTwipsFromCm((float)style.MarginLeft)}\\margr{MeasurementHelper.GetTwipsFromCm((float)style.MarginRight)}\\margt{MeasurementHelper.GetTwipsFromCm((float)style.MarginTop)}\\margb{MeasurementHelper.GetTwipsFromCm((float)style.MarginBottom)} ");
+            $@"\paperw{MeasurementHelper.GetTwipsFromCm((float)style.PageWidth)}\paperh{MeasurementHelper.GetTwipsFromCm((float)style.PageHeight)}\margl{MeasurementHelper.GetTwipsFromCm((float)style.MarginLeft)}\margr{MeasurementHelper.GetTwipsFromCm((float)style.MarginRight)}\margt{MeasurementHelper.GetTwipsFromCm((float)style.MarginTop)}\margb{MeasurementHelper.GetTwipsFromCm((float)style.MarginBottom)} ");
 
 
         // Now add all to content
@@ -126,7 +126,7 @@ public class DocumentMetaDataRtfTextRendererElement : RtfTextRendererElementBase
 
         foreach (var color in styleset.Colors)
         {
-            sb.AppendLine($"\\red{color.R}\\green{color.G}\\blue{color.B};");
+            sb.AppendLine($@"\red{color.R}\green{color.G}\blue{color.B};");
         }
 
         sb.AppendLine("}");

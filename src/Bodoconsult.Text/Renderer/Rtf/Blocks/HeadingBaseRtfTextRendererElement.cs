@@ -35,7 +35,7 @@ public class HeadingBaseRtfTextRendererElement : RtfTextRendererElementBase
         var sb = new StringBuilder();
 
         var style = (ParagraphStyleBase)renderer.Styleset.FindStyle(_headingBase.StyleName);
-        renderer.Content.Append($"\\pard\\plain\\q{renderer.Styleset.GetIndexOfStyle(Block.StyleName)} {RtfHelper.GetFormatSettings(style, renderer.Styleset)}");
+        renderer.Content.Append($@"\pard\plain\q{renderer.Styleset.GetIndexOfStyle(Block.StyleName)} {RtfHelper.GetFormatSettings(style, renderer.Styleset)}");
 
         var childs = new List<Inline>();
 
@@ -50,7 +50,7 @@ public class HeadingBaseRtfTextRendererElement : RtfTextRendererElementBase
 
         CleanRtfString(sb);
 
-        renderer.Content.Append($"{{{{\\*\\bkmkstart {_headingBase.TagName}}}{{{sb}}}{{\\*\\bkmkend {_headingBase.TagName}}}}}");
+        renderer.Content.Append($@"{{{{\*\bkmkstart {_headingBase.TagName}}}{{{sb}}}{{\*\bkmkend {_headingBase.TagName}}}}}");
         renderer.Content.Append($"\\par{Environment.NewLine}");
     }
 }

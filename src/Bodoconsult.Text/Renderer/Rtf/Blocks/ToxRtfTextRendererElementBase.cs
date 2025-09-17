@@ -33,7 +33,7 @@ public abstract class ToxRtfTextRendererElementBase : RtfTextRendererElementBase
         var sb = new StringBuilder();
 
         var style = (ParagraphStyleBase)renderer.Styleset.FindStyle(_tot.StyleName);
-        renderer.Content.Append($"\\pard\\plain\\q{renderer.Styleset.GetIndexOfStyle(Block.StyleName)}{RtfHelper.GetFormatSettings(style, renderer.Styleset)}");
+        renderer.Content.Append($@"\pard\plain\q{renderer.Styleset.GetIndexOfStyle(Block.StyleName)}{RtfHelper.GetFormatSettings(style, renderer.Styleset)}");
 
         DocumentRendererHelper.RenderInlineChildsToRtf(renderer, sb, Block.ChildInlines);
 

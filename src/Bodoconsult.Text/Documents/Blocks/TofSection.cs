@@ -17,5 +17,7 @@ public class TofSection : SectionBase
         DoNotIncludeInNumbering = true;
         AllowedBlocks.Clear();
         AllowedBlocks.Add(typeof(Tof));
+        PageBreakBefore = true;
+        PageNumberFormat = PageNumberFormatEnum.UpperRoman;
     }
 }

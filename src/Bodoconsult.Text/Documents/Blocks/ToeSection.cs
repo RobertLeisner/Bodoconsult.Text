@@ -16,5 +16,7 @@ public class ToeSection : SectionBase
         IncludeInToc = false;
         DoNotIncludeInNumbering = true;
         AllowedBlocks.Add(typeof(Toe));
+        PageBreakBefore = true;
+        PageNumberFormat = PageNumberFormatEnum.UpperRoman;
     }
 }

@@ -80,7 +80,8 @@ public abstract class DocumentFactoryBase : IDocumentFactory
 
         Document.AddBaseSections();
 
-        CreateNewSection("Body");
+        var section = CreateNewSection("Body");
+        section.IsRestartPageNumberingRequired = true;
     }
 
 
@@ -88,7 +89,7 @@ public abstract class DocumentFactoryBase : IDocumentFactory
     /// Create a new section in the document
     /// </summary>
     /// <param name="sectionName">Name of the new section</param>
-    public void CreateNewSection(string sectionName)
+    public Section CreateNewSection(string sectionName)
     {
         var section = new Section
         {
@@ -96,6 +97,7 @@ public abstract class DocumentFactoryBase : IDocumentFactory
         };
         Document.AddBlock(section);
         CurrentSection = section;
+        return section;
     }
 
     /// <summary>

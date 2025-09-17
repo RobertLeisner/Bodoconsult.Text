@@ -5,16 +5,16 @@ using Bodoconsult.Text.Documents;
 namespace Bodoconsult.Text.Renderer.Rtf.Styles;
 
 /// <summary>
-/// Rtf rendering element for <see cref="TableHeaderStyle"/> instances
+/// Rtf rendering element for <see cref="TableHeaderRightStyle"/> instances
 /// </summary>
-public class TableHeaderStyleRtfTextRendererElement : RtfParagraphStyleTextRendererElementBase
+public class TableHeaderRightStyleRtfTextRendererElement : RtfParagraphStyleTextRendererElementBase
 {
     private readonly ParagraphStyleBase _style;
 
     /// <summary>
     /// Default ctor
     /// </summary>
-    public TableHeaderStyleRtfTextRendererElement(TableHeaderStyle style) : base(style)
+    public TableHeaderRightStyleRtfTextRendererElement(TableHeaderRightStyle style) : base(style)
     {
         _style = style;
         ClassName = "TableHeaderStyle";

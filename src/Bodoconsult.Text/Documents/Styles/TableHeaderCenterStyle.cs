@@ -1,22 +1,21 @@
-﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
-
-namespace Bodoconsult.Text.Documents;
+﻿namespace Bodoconsult.Text.Documents;
 
 /// <summary>
 /// Style for <see cref="Table"/> instances
 /// </summary>
-public class TableHeaderStyle : ParagraphStyleBase
+public class TableHeaderCenterStyle : ParagraphStyleBase
 {
     /// <summary>
     /// Default ctor
     /// </summary>
-    public TableHeaderStyle()
+    public TableHeaderCenterStyle()
     {
-        TagToUse = "TableHeaderStyle";
+        TagToUse = "TableHeaderCenterStyle";
         Name = TagToUse;
         Bold = true;
         BorderBrush = new SolidColorBrush(Colors.Black);
         BorderThickness = new Thickness(1.0, 1.0, 1.0, 1.0);
-        Paddings = new Thickness(Document.DefaultPaddingWidth);
+        Paddings = new Thickness(Document.DefaultTablePaddingWidth);
+        TextAlignment = TextAlignment.Center;
     }
 }

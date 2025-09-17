@@ -18,5 +18,6 @@ public class Heading4Style : ParagraphStyleBase
         Margins.Top = Document.DefaultFontSize;
         Paddings.Top = Document.DefaultPaddingWidth;
         Paddings.Bottom = Document.DefaultPaddingWidth;
+        KeepWithNextParagraph = true;
     }
 }

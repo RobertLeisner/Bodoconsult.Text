@@ -56,7 +56,7 @@ public class BoldRtfTextRendererElement : InlineRtfTextRendererElementBase
     {
         if (_span.ChildInlines.Count == 0)
         {
-            sb.Append($"\\b{{{renderer.CheckContent(_span.Content)}}}\\b0");
+            sb.Append($@"\b{{{renderer.CheckContent(_span.Content)}}}\b0");
         }
         else
         {

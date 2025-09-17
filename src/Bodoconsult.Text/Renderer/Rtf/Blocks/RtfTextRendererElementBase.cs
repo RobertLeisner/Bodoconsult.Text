@@ -53,11 +53,11 @@ public class RtfTextRendererElementBase : ITextRendererElement
         if (Block is ParagraphBase paragraph)
         {
             var style = (ParagraphStyleBase)renderer.Styleset.FindStyle(paragraph.StyleName);
-            renderer.Content.Append($"\\pard\\plain\\q{renderer.Styleset.GetIndexOfStyle(Block.StyleName)}{RtfHelper.GetFormatSettings(style, renderer.Styleset)}{{");
+            renderer.Content.Append($@"\pard\plain\q{renderer.Styleset.GetIndexOfStyle(Block.StyleName)}{RtfHelper.GetFormatSettings(style, renderer.Styleset)}{{");
         }
         else
         {
-            renderer.Content.Append($"\\pard\\plain\\q{renderer.Styleset.GetIndexOfStyle(Block.StyleName)}{{");
+            renderer.Content.Append($@"\pard\plain\q{renderer.Styleset.GetIndexOfStyle(Block.StyleName)}{{");
         }
 
 

@@ -52,25 +52,25 @@ public static class RtfHelper
 
             if (style.BorderThickness.Top > 0)
             {
-                sb.Append($"\\brdrt\\brdrs\\brdrw10\\brsp60\\brdrcf{colorIndex}");
+                sb.Append($@"\brdrt\brdrs\brdrw10\brsp60\brdrcf{colorIndex}");
             }
 
             // bordor bottom
             if (style.BorderThickness.Bottom > 0)
             {
-                sb.Append($"\\brdrb\\brdrs\\brdrw10\\brsp60\\brdrcf{colorIndex}");
+                sb.Append($@"\brdrb\brdrs\brdrw10\brsp60\brdrcf{colorIndex}");
             }
 
             // bordor left
             if (style.BorderThickness.Left > 0)
             {
-                sb.Append($"\\brdrl\\brdrs\\brdrw10\\brsp60\\brdrcf{colorIndex}");
+                sb.Append($@"\brdrl\brdrs\brdrw10\brsp60\brdrcf{colorIndex}");
             }
 
             // bordor right
             if (style.BorderThickness.Right > 0)
             {
-                sb.Append($"\\brdrr\\brdrs\\brdrw10\\brsp60\\brdrcf{colorIndex}");
+                sb.Append($@"\brdrr\brdrs\brdrw10\brsp60\brdrcf{colorIndex}");
             }
         }
         
@@ -102,6 +102,25 @@ public static class RtfHelper
         {
             sb.Append("\\b");
         }
+
+        // Pagebreak before?
+        if (style.PageBreakBefore)
+        {
+            sb.Append("\\pagebb");
+        }
+
+        // keep with next paragraph
+        if (style.PageBreakBefore)
+        {
+            sb.Append("\\keepn");
+        }
+
+        // keep paragraph together
+        if (style.KeepTogether)
+        {
+            sb.Append("\\keep");
+        }
+
         return sb;
     }
 }

@@ -16,3 +16,4 @@ public class SectionStyle : PageStyleBase
         Name = TagToUse;
     }
 }
+

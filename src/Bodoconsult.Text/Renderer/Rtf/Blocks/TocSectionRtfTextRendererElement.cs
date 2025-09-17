@@ -1,16 +1,13 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
 
 using Bodoconsult.Text.Documents;
-using Bodoconsult.Text.Helpers;
-using System;
-using System.Text;
 
 namespace Bodoconsult.Text.Renderer.Rtf.Blocks;
 
 /// <summary>
 /// Rtf rendering element for <see cref="TocSection"/> instances
 /// </summary>
-public class TocSectionRtfTextRendererElement : RtfTextRendererElementBase
+public class TocSectionRtfTextRendererElement : SectionBaseRtfTextRendererElement
 {
     private readonly TocSection _tocSection;
 
@@ -34,15 +31,17 @@ public class TocSectionRtfTextRendererElement : RtfTextRendererElementBase
             return;
         }
 
-        // Get the content of all inlines as string
-        var style = (ParagraphStyleBase)renderer.Styleset.FindStyle("TocHeadingStyle");
-        renderer.Content.Append($"\\pard\\plain\\q{renderer.Styleset.GetIndexOfStyle(Block.StyleName)} {RtfHelper.GetFormatSettings(style, renderer.Styleset)}{{");
+        RenderItInternal(renderer, "TocHeadingStyle", renderer.Document.DocumentMetaData.TocHeading);
 
-        var sb = new StringBuilder(renderer.CheckContent(renderer.Document.DocumentMetaData.TocHeading));
-        CleanRtfString(sb);
-        renderer.Content.Append(sb);
-        renderer.Content.Append($"\\par}}{Environment.NewLine}");
+        //// Get the content of all inlines as string
+        //var style = (ParagraphStyleBase)renderer.Styleset.FindStyle("TocHeadingStyle");
+        //renderer.Content.Append($"\\pard\\plain\\q{renderer.Styleset.GetIndexOfStyle(Block.StyleName)} {RtfHelper.GetFormatSettings(style, renderer.Styleset)}{{");
 
-        base.RenderIt(renderer);
+        //var sb = new StringBuilder(renderer.CheckContent(renderer.Document.DocumentMetaData.TocHeading));
+        //CleanRtfString(sb);
+        //renderer.Content.Append(sb);
+        //renderer.Content.Append($"\\par}}{Environment.NewLine}");
+
+        //base.RenderIt(renderer);
     }
 }

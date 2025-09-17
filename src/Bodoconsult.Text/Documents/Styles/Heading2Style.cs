@@ -17,10 +17,11 @@ public class Heading2Style : ParagraphStyleBase
         BorderBrush = new SolidColorBrush(Colors.Black);
         BorderBrush = new SolidColorBrush(Document.DefaultColor);
         BorderThickness.Bottom = Document.DefaultBorderWidth;
-        Margins.Top = 4 * Document.DefaultFontSize;
+        Margins.Top = 1 * Document.DefaultFontSize;
         Paddings.Top = Document.DefaultPaddingWidth;
         Paddings.Bottom = Document.DefaultPaddingWidth;
         FontSize = Document.DefaultFontSize + 4;
         Bold = true;
+        KeepWithNextParagraph = true;
     }
 }

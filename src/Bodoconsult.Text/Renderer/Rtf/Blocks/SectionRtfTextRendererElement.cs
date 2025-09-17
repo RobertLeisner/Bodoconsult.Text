@@ -7,7 +7,7 @@ namespace Bodoconsult.Text.Renderer.Rtf.Blocks;
 /// <summary>
 /// Rtf rendering element for <see cref="Section"/> instances
 /// </summary>
-public class SectionRtfTextRendererElement : RtfTextRendererElementBase
+public class SectionRtfTextRendererElement : SectionBaseRtfTextRendererElement
 {
     private readonly Section _section;
 
@@ -18,5 +18,19 @@ public class SectionRtfTextRendererElement : RtfTextRendererElementBase
     {
         _section = section;
         ClassName = section.StyleName;
+    }
+
+    /// <summary>
+    /// Render the element
+    /// </summary>
+    /// <param name="renderer">Current renderer</param>
+    public override void RenderIt(ITextDocumentRender renderer)
+    {
+        if (_section.ChildBlocks.Count == 0)
+        {
+            return;
+        }
+
+        RenderItInternal(renderer, "SectionStyle", string.Empty);
     }
 }

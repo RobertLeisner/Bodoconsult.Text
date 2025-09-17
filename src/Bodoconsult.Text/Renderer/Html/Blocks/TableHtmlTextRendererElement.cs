@@ -45,14 +45,7 @@ public class TableHtmlTextRendererElement : HtmlTextRendererElementBase
         }
 
         // Header row
-        renderer.Content.AppendLine("<tr class=\"RowStyle\">");
-
-        foreach (var column in _table.Columns)
-        {
-            renderer.Content.AppendLine($"<th class=\"TableHeaderStyle\">{column.Name}</th>");
-        }
-
-        renderer.Content.AppendLine("</tr>");
+        AddHeaderRow(renderer, _table);
 
 
         // Rows
@@ -77,5 +70,17 @@ public class TableHtmlTextRendererElement : HtmlTextRendererElementBase
         sb.Append($"</p>{Environment.NewLine}");
 
         renderer.Content.Append(sb);
+    }
+
+    private static void AddHeaderRow(ITextDocumentRender renderer, Table table)
+    {
+        renderer.Content.AppendLine("<tr class=\"RowStyle\">");
+
+        foreach (var column in table.Columns)
+        {
+            renderer.Content.AppendLine($"<th class=\"TableHeader{DocumentRendererHelper.GetAlignment(column.DataType)}Style\">{column.Name}</th>");
+        }
+
+        renderer.Content.AppendLine("</tr>");
     }
 }

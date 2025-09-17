@@ -54,7 +54,7 @@ public class ItalicRtfTextRendererElement : InlineRtfTextRendererElementBase
     {
         if (_span.ChildInlines.Count == 0)
         {
-                sb.Append($"\\i{{{renderer.CheckContent(_span.Content)}}}\\i0");
+                sb.Append($@"\i{{{renderer.CheckContent(_span.Content)}}}\i0");
         }
         else
         {

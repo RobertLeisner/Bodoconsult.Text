@@ -140,9 +140,17 @@ public static class StylesetHelper
         var tableStyle = new TableStyle();
         styleSet.AddBlock(tableStyle);
 
-        // Add style TableHeaderStyle for Table instances 
-        var tableHeaderStyle = new TableHeaderStyle();
-        styleSet.AddBlock(tableHeaderStyle);
+        // Add style TableHeaderLeftStyle for Table instances 
+        var tableHeaderLeftStyle = new TableHeaderLeftStyle();
+        styleSet.AddBlock(tableHeaderLeftStyle);
+
+        // Add style TableHeaderCenterStyle for Table instances 
+        var tableHeaderCenterStyle = new TableHeaderCenterStyle();
+        styleSet.AddBlock(tableHeaderCenterStyle);
+
+        // Add style TableHeaderRightStyle for Table instances 
+        var tableHeaderRightStyle = new TableHeaderRightStyle();
+        styleSet.AddBlock(tableHeaderRightStyle);
 
         // Add style TableLegendStyle for Table instances 
         var tableLegendStyle = new TableLegendStyle();
@@ -341,9 +349,17 @@ public static class StylesetHelper
         var tableStyle = new TableStyle();
         styleSet.AddBlock(tableStyle);
 
-        // Add style TableHeaderStyle for Table instances 
-        var tableHeaderStyle = new TableHeaderStyle();
-        styleSet.AddBlock(tableHeaderStyle);
+        // Add style TableHeaderLeftStyle for Table instances 
+        var tableHeaderLeftStyle = new TableHeaderLeftStyle();
+        styleSet.AddBlock(tableHeaderLeftStyle);
+
+        // Add style TableHeaderCenterStyle for Table instances 
+        var tableHeaderCenterStyle = new TableHeaderCenterStyle();
+        styleSet.AddBlock(tableHeaderCenterStyle);
+
+        // Add style TableHeaderRightStyle for Table instances 
+        var tableHeaderRightStyle = new TableHeaderRightStyle();
+        styleSet.AddBlock(tableHeaderRightStyle);
 
         // Add style TableLegendStyle for Table instances 
         var tableLegendStyle = new TableLegendStyle();

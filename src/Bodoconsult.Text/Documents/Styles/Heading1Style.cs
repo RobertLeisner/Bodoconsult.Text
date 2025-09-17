@@ -23,5 +23,7 @@ public class Heading1Style : ParagraphStyleBase
         Paddings.Bottom = Document.DefaultPaddingWidth;
         FontSize = Document.DefaultFontSize + 6;
         Bold = true;
+        PageBreakBefore = true;
+        KeepWithNextParagraph = true;
     }
 }

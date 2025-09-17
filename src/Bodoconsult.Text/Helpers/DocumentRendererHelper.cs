@@ -215,11 +215,25 @@ public class DocumentRendererHelper
     /// <param name="cells">List of all cells to render</param>
     public static void RenderCellsToRtf(ITextDocumentRender renderer, List<Cell> cells)
     {
-        foreach (var cell in cells)
+        //foreach (var cell in cells)
+        //{
+        //    var rendererElement = (CellRtfTextRendererElement)renderer.TextRendererElementFactory.CreateInstance(cell);
+        //    rendererElement.RenderToString(renderer);
+        //}
+
+        var sb = new StringBuilder();
+
+        for (var index = 0; index < cells.Count; index++)
         {
+            var cell = cells[index];
+            //var twips = cell.Column.MaxLength * 200;
+            renderer.Content.Append($@"\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs \cellx{index + 1}000 ");
+
             var rendererElement = (CellRtfTextRendererElement)renderer.TextRendererElementFactory.CreateInstance(cell);
-            rendererElement.RenderToString(renderer);
+            rendererElement.RenderToString(renderer, sb);
         }
+
+        renderer.Content.Append(sb);
     }
     /// <summary>
     /// Render table cells to RTF
@@ -232,7 +246,7 @@ public class DocumentRendererHelper
         {
             //var cell = cells[index];
             //var twips = cell.Column.MaxLength * 200;
-            renderer.Content.Append($"\\clbrdrt\\brdrs\\clbrdrl\\brdrs\\clbrdrb\\brdrs\\clbrdrr\\brdrs \\cellx{index+1}000 ");
+            renderer.Content.Append($@"\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs \cellx{index+1}000 ");
         }
     }
 
@@ -249,17 +263,17 @@ public class DocumentRendererHelper
             type == typeof(long) || type == typeof(Int128) ||
             type == typeof(byte))
         {
-            return "\\qr ";
+            return "Right";
         }
 
         // Centered aligned
         if (type == typeof(bool) || type == typeof(DateTime))
         {
-            return "\\qc ";
+            return "Center";
         }
 
         // Default: left aligned
-        return "\\ql ";
+        return "Left";
     }
 
     /// <summary>
@@ -274,7 +288,7 @@ public class DocumentRendererHelper
         var sb = new StringBuilder();
 
         var style = (ParagraphStyleBase)renderer.Styleset.FindStyle(image.StyleName);
-        renderer.Content.Append($"\\pard\\plain\\q{renderer.Styleset.GetIndexOfStyle(image.StyleName)}{RtfHelper.GetFormatSettings(style, renderer.Styleset)}");
+        renderer.Content.Append($@"\pard\plain\q{renderer.Styleset.GetIndexOfStyle(image.StyleName)}{RtfHelper.GetFormatSettings(style, renderer.Styleset)}");
 
         // Get max height and with for images in twips
         StylesetHelper.GetMaxWidthAndHeight(renderer.Styleset, out var maxWidth, out var maxHeight);
@@ -286,7 +300,7 @@ public class DocumentRendererHelper
 
         var path = image.Uri.ToLowerInvariant();
 
-        sb.Append("{{\\*\\shppict\\pict");
+        sb.Append(@"{{\*\shppict\pict");
 
         if (path.EndsWith(".jpg") || path.EndsWith(".jpeg"))
         {
@@ -301,7 +315,7 @@ public class DocumentRendererHelper
             throw new NotSupportedException("Unsupported image format. Use JPEG or PNG images!");
         }
 
-        sb.Append($"\\picw{width}\\pich{height}\\picwgoal{width}\\pichgoal{height}\\bin{{");
+        sb.Append($@"\picw{width}\pich{height}\picwgoal{width}\pichgoal{height}\bin{{");
 
         var str = BitConverter.ToString(bytes, 0).Replace("-", string.Empty);
         sb.Append(str);
@@ -320,7 +334,7 @@ public class DocumentRendererHelper
 
         RenderInlineChildsToRtf(renderer, sb, childs);
 
-        renderer.Content.Append($"{{\\*\\bkmkstart {image.TagName}}}{{{sb}}}{{\\*\\bkmkend {image.TagName}}}}}");
+        renderer.Content.Append($@"{{\*\bkmkstart {image.TagName}}}{{{sb}}}{{\*\bkmkend {image.TagName}}}}}");
 
         renderer.Content.Append($"}}\\par}}{Environment.NewLine}");
     }
