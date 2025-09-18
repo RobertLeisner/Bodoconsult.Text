@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using Bodoconsult.Text.Documents;
+using Bodoconsult.Text.Renderer.Html;
 
 namespace Bodoconsult.Text.Renderer.PlainText
 {
@@ -77,6 +78,21 @@ namespace Bodoconsult.Text.Renderer.PlainText
             if (textElement is Column column)
             {
                 return new ColumnPlainTextRendererElement(column);
+            }
+
+            if (textElement is DefinitionList definitionList)
+            {
+                return new DefinitionListPlainTextRendererElement(definitionList);
+            }
+
+            if (textElement is DefinitionListTerm definitionListTerm)
+            {
+                return new DefinitionListTermPlainTextRendererElement(definitionListTerm);
+            }
+
+            if (textElement is DefinitionListItem definitionListItem)
+            {
+                return new DefinitionListItemPlainTextRendererElement(definitionListItem);
             }
 
             if (textElement is Equation equation)

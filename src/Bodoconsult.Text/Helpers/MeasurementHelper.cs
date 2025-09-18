@@ -15,13 +15,24 @@ public static class MeasurementHelper
     public const double CentimeterPerPoint = 0.0352775;
 
     /// <summary>
+    /// Twips per inch for typographic points
+    /// </summary>
+    public const double TwipsPerInchTypographicPoint = 1445.1;
+
+    /// <summary>
+    /// Twips per inch for PostScript(R) points
+    /// </summary>
+    public const double TwipsPerInchPostscriptPoint = 1440;
+
+
+    /// <summary>
     /// Convert cm into Twips
     /// </summary>
     /// <param name="i">cm</param>
     /// <returns>Twips</returns>
     public static int GetTwipsFromCm(float i)
     {
-        var result = i / 2.54f * 1440;
+        var result = i / 2.54f * TwipsPerInchTypographicPoint;
         return (int)Math.Ceiling(result);
     }
 
@@ -32,7 +43,7 @@ public static class MeasurementHelper
     /// <returns>Twips</returns>
     public static int GetTwipsFromMm(float i)
     {
-        var result = i / 25.4f * 1440;
+        var result = i / 25.4f * TwipsPerInchTypographicPoint;
         return (int)Math.Ceiling(result);
     }
 
@@ -43,7 +54,7 @@ public static class MeasurementHelper
     /// <returns>Twips</returns>
     public static int GetTwipsFromCm(double i)
     {
-        var result = i / 2.54f * 1440;
+        var result = i / 2.54f * TwipsPerInchTypographicPoint;
         return (int)Math.Ceiling(result);
     }
 
@@ -54,7 +65,7 @@ public static class MeasurementHelper
     /// <returns>Twips</returns>
     public static int GetTwipsFromMm(double i)
     {
-        var result = i / 25.4f * 1440;
+        var result = i / 25.4f * TwipsPerInchTypographicPoint;
         return (int)Math.Ceiling(result);
     }
 

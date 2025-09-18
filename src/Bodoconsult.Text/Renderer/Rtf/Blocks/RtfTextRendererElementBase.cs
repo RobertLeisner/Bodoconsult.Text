@@ -48,7 +48,7 @@ public class RtfTextRendererElementBase : ITextRendererElement
     public virtual void RenderIt(ITextDocumentRender renderer)
     {
         // Get the content of all inlines as string
-        var sb = new StringBuilder();
+
 
         if (Block is ParagraphBase paragraph)
         {
@@ -61,14 +61,13 @@ public class RtfTextRendererElementBase : ITextRendererElement
         }
 
 
-        DocumentRendererHelper.RenderBlockChildsToRtf(renderer, sb, Block.ChildBlocks);
+        DocumentRendererHelper.RenderBlockChildsToRtf(renderer, Block.ChildBlocks);
 
+        var sb = new StringBuilder();
         DocumentRendererHelper.RenderInlineChildsToRtf(renderer, sb, Block.ChildInlines);
-
         CleanRtfString(sb);
-
         renderer.Content.Append(sb);
-        renderer.Content.Append($"\\par}}{Environment.NewLine}");
+        renderer.Content.Append($"}}\\par{Environment.NewLine}");
     }
 
     /// <summary>

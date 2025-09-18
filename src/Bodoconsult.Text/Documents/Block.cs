@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Bodoconsult.Text.Documents
 {
@@ -12,6 +13,15 @@ namespace Bodoconsult.Text.Documents
     public abstract class Block: TextElement
     {
         /// <summary>
+        /// Default ctor
+        /// </summary>
+        protected Block()
+        {
+            Blocks = new LdmlList<Block>(this);
+            Inlines = new LdmlList<Inline>(this);
+        }
+
+        /// <summary>
         /// Allowed child block types
         /// </summary>
         protected List<Type> AllowedBlocks = new();
@@ -19,13 +29,13 @@ namespace Bodoconsult.Text.Documents
         /// <summary>
         /// All child blocks of the element
         /// </summary>
-        protected List<Block> Blocks = new();
+        protected LdmlList<Block> Blocks;
 
         /// <summary>
         /// All child blocks of the element
         /// </summary>
         [DoNotSerialize]
-        public List<Block> ChildBlocks => Blocks.ToList();
+        public ReadOnlyLdmlList<Block> ChildBlocks => Blocks.ToList();
 
         /// <summary>
         /// Allowed child inline types
@@ -35,13 +45,13 @@ namespace Bodoconsult.Text.Documents
         /// <summary>
         /// All child inlines of the element
         /// </summary>
-        protected List<Inline> Inlines = new();
+        protected LdmlList<Inline> Inlines;
 
         /// <summary>
         /// All child blocks of the element
         /// </summary>
         [DoNotSerialize]
-        public List<Inline> ChildInlines => Inlines.ToList();
+        public ReadOnlyLdmlList<Inline> ChildInlines => Inlines.ToList();
 
         /// <summary>
         /// Name of the style to apply to the block
@@ -91,6 +101,31 @@ namespace Bodoconsult.Text.Documents
 
             Inlines.Add(inline);
             inline.Parent = this;
+        }
+
+        /// <summary>
+        /// Add the current element to a document defined in LDML (Logical document markup language)
+        /// </summary>
+        /// <param name="document">StringBuilder instance to create the LDML in</param>
+        /// <param name="indent">Current indent</param>
+        public override void ToLdmlString(StringBuilder document, string indent)
+        {
+            AddTagWithAttributes(indent, TagToUse, document);
+
+            // Add the blocks now
+            foreach (var block in ChildBlocks)
+            {
+                block.ToLdmlString(document, $"{indent}{Indentation}");
+            }
+
+            // Add the inlines now
+            foreach (var inline in Inlines)
+            {
+                inline.ToLdmlString(document, $"{indent}{Indentation}");
+            }
+
+
+            document.AppendLine($"{indent}</{TagToUse}>");
         }
 
     }

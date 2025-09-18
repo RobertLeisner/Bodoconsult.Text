@@ -26,12 +26,6 @@ public class SectionHtmlTextRendererElement : HtmlTextRendererElementBase
     /// <param name="renderer">Current renderer</param>
     public override void RenderIt(ITextDocumentRender renderer)
     {
-        // Get the content of all inlines as string
-        var sb = new StringBuilder();
-
-        DocumentRendererHelper.RenderBlockChildsToHtml(renderer, sb, _section.ChildBlocks);
-
-        // DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, _section.ChildInlines, string.Empty, true);
-        renderer.Content.Append(sb);
+        DocumentRendererHelper.RenderBlockChildsToHtml(renderer, _section.ChildBlocks);
     }
 }

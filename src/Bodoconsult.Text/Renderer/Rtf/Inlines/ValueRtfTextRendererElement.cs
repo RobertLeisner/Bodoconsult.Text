@@ -28,6 +28,6 @@ public class ValueRtfTextRendererElement : InlineRtfTextRendererElementBase
     /// <param name="sb">String to add the inline element rendered</param>
     public override void RenderToString(ITextDocumentRender renderer, StringBuilder sb)
     {
-        sb.Append($"{renderer.CheckContent(_value.Content)}");
+        sb.Append($"{{{renderer.CheckContent(_value.Content)}}}");
     }
 }

@@ -158,4 +158,26 @@ public class LdmlReaderTests
 
     }
 
+    [Test]
+    public void ParseLdml_DefinitionList_DocParsed()
+    {
+        // Arrange 
+        var sb = new StringBuilder();
+
+        var dl = TestDataHelper.CreateDefinitionList();
+
+        dl.ToLdmlString(sb, string.Empty);
+
+        Debug.Print(sb.ToString());
+
+        var r = new LdmlReader(sb.ToString());
+
+        // Act  
+        r.ParseLdml();
+
+        // Assert
+        Assert.That(r.TextElement, Is.Not.Null);
+
+    }
+
 }

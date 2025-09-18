@@ -33,14 +33,7 @@ public class TotSectionHtmlTextRendererElement : HtmlTextRendererElementBase
             return;
         }
 
-        // Get the content of all inlines as string
-        var sb = new StringBuilder();
-
         renderer.Content.AppendLine($"<p class=\"TotHeadingStyle\">{renderer.CheckContent(renderer.Document.DocumentMetaData.TotHeading)}</p>");
-
-        DocumentRendererHelper.RenderBlockChildsToHtml(renderer, sb, _totSection.ChildBlocks);
-
-        // DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, _tofSection.ChildInlines, string.Empty, true);
-        renderer.Content.Append(sb);
+        DocumentRendererHelper.RenderBlockChildsToHtml(renderer, _totSection.ChildBlocks);
     }
 }

@@ -48,7 +48,7 @@ public class SpanRtfTextRendererElement : InlineRtfTextRendererElementBase
     {
         if (_span.ChildInlines.Count == 0)
         {
-            sb.Append($"{renderer.CheckContent(_span.Content)}");
+            sb.Append($"{{{renderer.CheckContent(_span.Content)}}}");
         }
         else
         {

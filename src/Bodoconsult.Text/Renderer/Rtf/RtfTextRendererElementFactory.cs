@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using Bodoconsult.Text.Documents;
+using Bodoconsult.Text.Renderer.Html;
 using Bodoconsult.Text.Renderer.Html.Styles;
 using Bodoconsult.Text.Renderer.Rtf.Blocks;
 using Bodoconsult.Text.Renderer.Rtf.Inlines;
@@ -82,6 +83,21 @@ public class RtfTextRendererElementFactory : ITextRendererElementFactory
         if (textElement is Column column)
         {
             return new ColumnRtfTextRendererElement(column);
+        }
+
+        if (textElement is DefinitionList definitionList)
+        {
+            return new DefinitionListRtfTextRendererElement(definitionList);
+        }
+
+        if (textElement is DefinitionListTerm definitionListTerm)
+        {
+            return new DefinitionListTermRtfTextRendererElement(definitionListTerm);
+        }
+
+        if (textElement is DefinitionListItem definitionListItem)
+        {
+            return new DefinitionListItemRtfTextRendererElement(definitionListItem);
         }
 
         if (textElement is Equation equation)
@@ -337,6 +353,21 @@ public class RtfTextRendererElementFactory : ITextRendererElementFactory
         if (textElement is CodeStyle codeStyle)
         {
             return new CodeStyleRtfTextRendererElement(codeStyle);
+        }
+
+        if (textElement is DefinitionListStyle definitionListStyle)
+        {
+            return new DefinitionListStyleRtfTextRendererElement(definitionListStyle);
+        }
+
+        if (textElement is DefinitionListTermStyle definitionListTermStyle)
+        {
+            return new DefinitionListTermStyleRtfTextRendererElement(definitionListTermStyle);
+        }
+
+        if (textElement is DefinitionListItemStyle definitionListItemStyle)
+        {
+            return new DefinitionListItemStyleRtfTextRendererElement(definitionListItemStyle);
         }
 
         if (textElement is EquationStyle equationStyle)

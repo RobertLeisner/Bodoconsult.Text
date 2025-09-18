@@ -79,6 +79,21 @@ namespace Bodoconsult.Text.Renderer.Html
                 return new ColumnHtmlTextRendererElement(column);
             }
 
+            if (textElement is DefinitionList definitionList)
+            {
+                return new DefinitionListHtmlTextRendererElement(definitionList);
+            }
+
+            if (textElement is DefinitionListTerm definitionListTerm)
+            {
+                return new DefinitionListTermHtmlTextRendererElement(definitionListTerm);
+            }
+
+            if (textElement is DefinitionListItem definitionListItem)
+            {
+                return new DefinitionListItemHtmlTextRendererElement(definitionListItem);
+            }
+
             if (textElement is Equation equation)
             {
                 return new EquationHtmlTextRendererElement(equation);
@@ -332,6 +347,21 @@ namespace Bodoconsult.Text.Renderer.Html
             if (textElement is CodeStyle codeStyle)
             {
                 return new CodeStyleHtmlTextRendererElement(codeStyle);
+            }
+
+            if (textElement is DefinitionListStyle definitionListStyle)
+            {
+                return new DefinitionListStyleHtmlTextRendererElement(definitionListStyle);
+            }
+
+            if (textElement is DefinitionListTermStyle definitionListTermStyle)
+            {
+                return new DefinitionListTermStyleHtmlTextRendererElement(definitionListTermStyle);
+            }
+
+            if (textElement is DefinitionListItemStyle definitionListItemStyle)
+            {
+                return new DefinitionListItemStyleHtmlTextRendererElement(definitionListItemStyle);
             }
 
             if (textElement is EquationStyle equationStyle)

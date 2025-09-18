@@ -30,8 +30,6 @@ public class TableRtfTextRendererElement : ITextRendererElement
     /// <param name="renderer">Current renderer</param>
     public void RenderIt(ITextDocumentRender renderer)
     {
-        renderer.Content.Append(@"\trowd\trhdr\trautofit1\trqc\trpaddfb3\trpaddfr3\trpaddft3\trpaddfl3\trpaddb80\trpaddr80\trpaddt80\trpaddl80");
-
         var tableStyle = (TableStyle)renderer.Styleset.FindStyle("TableStyle");
 
         // top margin
@@ -40,10 +38,7 @@ public class TableRtfTextRendererElement : ITextRendererElement
         //// bottom margin
         //renderer.Content.Append($"");
 
-        for (var index = 0; index < _table.Columns.Count; index++)
-        {
-            
-        }
+        renderer.Content.Append(@"\trowd\trhdr\trautofit1\trqc\trpaddfb3\trpaddfr3\trpaddft3\trpaddfl3\trpaddb80\trpaddr80\trpaddt80\trpaddl80");
 
         ParagraphStyleBase style;
         var sb = new StringBuilder();

@@ -56,7 +56,7 @@ public abstract class StyleBase : Block
                 var newIndent = indent + Indentation;
 
                 document.AppendLine( $"{newIndent}<{pi.Name}>");
-                value.ToLdmlString(document, newIndent + Indentation);
+                value.ToLdmlString(document, $"{newIndent}{Indentation}");
                 document.AppendLine($"{newIndent}</{pi.Name}>");
             }
 

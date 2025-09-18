@@ -52,14 +52,14 @@ public abstract class HtmlTextRendererElementBase : ITextRendererElement
 
         if (string.IsNullOrEmpty(LocalCss))
         {
-            renderer.Content.Append($"<{TagToUse} class=\"{ClassName}\">");
+            renderer.Content.AppendLine($"<{TagToUse} class=\"{ClassName}\">");
         }
         else
         {
-            renderer.Content.Append($"<{TagToUse} class=\"{ClassName}\" style=\"{LocalCss}\">");
+            renderer.Content.AppendLine($"<{TagToUse} class=\"{ClassName}\" style=\"{LocalCss}\">");
         }
 
-        DocumentRendererHelper.RenderBlockChildsToHtml(renderer, sb, Block.ChildBlocks);
+        DocumentRendererHelper.RenderBlockChildsToHtml(renderer, Block.ChildBlocks);
 
         DocumentRendererHelper.RenderInlineChildsToHtml(renderer, sb, Block.ChildInlines);
         renderer.Content.Append(sb);

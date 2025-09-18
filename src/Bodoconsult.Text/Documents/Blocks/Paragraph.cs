@@ -22,9 +22,9 @@ public class Paragraph: ParagraphBase
         typeof(Italic),
         typeof(LineBreak),
         typeof(Hyperlink),
-        typeof(Image),
-        typeof(Figure),
-        typeof(Equation)
+        //typeof(Image),
+        //typeof(Figure),
+        //typeof(Equation)
     ];
 
 

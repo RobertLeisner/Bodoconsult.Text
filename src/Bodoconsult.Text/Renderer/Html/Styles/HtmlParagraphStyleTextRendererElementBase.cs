@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
+using System.Collections.Generic;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Extensions;
 using System.Text;
@@ -20,10 +21,16 @@ public class HtmlParagraphStyleTextRendererElementBase: ITextRendererElement
     /// Current block to renderer
     /// </summary>
     public ParagraphStyleBase Style { get; private set; }
+
     /// <summary>
     /// CSS class name
     /// </summary>
     public string ClassName { get; protected set; }
+
+    /// <summary>
+    /// Additonal CSS styling tags
+    /// </summary>
+    public List<string> AdditionalCss { get;  } = new();
 
     /// <summary>
     /// Default ctor
@@ -64,8 +71,12 @@ public class HtmlParagraphStyleTextRendererElementBase: ITextRendererElement
         sb.AppendLine($"     border-style: solid;");
         sb.AppendLine($"     text-align: {Style.TextAlignment.ToString().ToLowerInvariant()};");
 
+        foreach (var css in AdditionalCss)
+        {
+            sb.AppendLine($"     {css}");
+        }
+        
         sb.AppendLine("}");
         renderer.Content.Append(sb);
     }
-
 }

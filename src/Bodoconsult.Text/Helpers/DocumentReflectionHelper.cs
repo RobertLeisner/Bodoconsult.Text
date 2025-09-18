@@ -40,7 +40,7 @@ public static class DocumentReflectionHelper
 
             var isPropElement = typeof(PropertyAsAttributeElement).IsAssignableFrom(propType);
 
-            if (!propType.IsPrimitive && propType != typeof(string) && !propType.IsEnum && !isPropElement && !(propType.IsGenericType && propType.GetGenericTypeDefinition() == typeof(List<>)) && propType != typeof(Type))
+            if (!propType.IsPrimitive && propType != typeof(string) && !propType.IsEnum && !isPropElement && !(propType.IsGenericType && propType.GetGenericTypeDefinition() == typeof(LdmlList<>)) && propType != typeof(Type))
             {
                 continue;
             }
@@ -87,7 +87,7 @@ public static class DocumentReflectionHelper
 
             if (!isPropElement)
             {
-                if (!(propType.IsGenericType && propType.GetGenericTypeDefinition() == typeof(List<>)) && propType != typeof(Type))
+                if (!(propType.IsGenericType && propType.GetGenericTypeDefinition() == typeof(LdmlList<>)) && propType != typeof(Type))
                 {
                     continue;
                 }

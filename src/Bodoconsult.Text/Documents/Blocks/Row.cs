@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Bodoconsult.Text.Documents;
@@ -25,6 +26,7 @@ public class Row : Block
     public Row()
     {
         // Blocks allowed
+        AllowedBlocks.Add(typeof(Cell));
 
         // No inlines allowed
 
@@ -34,22 +36,22 @@ public class Row : Block
     /// <summary>
     /// Cells in the row
     /// </summary>
-    public List<Cell> Cells { get; set; } = new();
+    public ReadOnlyLdmlList<Cell> Cells => Blocks.ToList<Cell>(x => x.GetType() == typeof(Cell));
 
-    /// <summary>
-    /// Add the current element to a document defined in LDML (Logical document markup language)
-    /// </summary>
-    /// <param name="document">StringBuilder instance to create the LDML in</param>
-    /// <param name="indent">Current indent</param>
-    public override void ToLdmlString(StringBuilder document, string indent)
-    {
-        document.AppendLine($"{indent}<{TagToUse}>");
-        document.AppendLine($"{indent}{Indentation}<Cells>");
-        foreach (var cell in Cells)
-        {
-            cell.ToLdmlString(document, $"{indent}{Indentation}{Indentation}");
-        }
-        document.AppendLine($"{indent}{Indentation}</Cells>");
-        document.AppendLine($"{indent}</{TagToUse}>");
-    }
+    ///// <summary>
+    ///// Add the current element to a document defined in LDML (Logical document markup language)
+    ///// </summary>
+    ///// <param name="document">StringBuilder instance to create the LDML in</param>
+    ///// <param name="indent">Current indent</param>
+    //public override void ToLdmlString(StringBuilder document, string indent)
+    //{
+    //    document.AppendLine($"{indent}<{TagToUse}>");
+    //    document.AppendLine($"{indent}{Indentation}<Cells>");
+    //    foreach (var cell in Cells)
+    //    {
+    //        cell.ToLdmlString(document, $"{indent}{Indentation}{Indentation}");
+    //    }
+    //    document.AppendLine($"{indent}{Indentation}</Cells>");
+    //    document.AppendLine($"{indent}</{TagToUse}>");
+    //}
 }

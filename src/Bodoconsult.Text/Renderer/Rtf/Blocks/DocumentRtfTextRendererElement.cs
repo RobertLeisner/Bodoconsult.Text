@@ -29,11 +29,7 @@ public class DocumentRtfTextRendererElement : RtfTextRendererElementBase
     public override void RenderIt(ITextDocumentRender renderer)
     {
         renderer.Content.AppendLine(@"{\rtf1\ansi\deff0");
-
-        var sb = new StringBuilder();
-        DocumentRendererHelper.RenderBlockChildsToRtf(renderer, sb, _document.ChildBlocks);
-        renderer.Content.Append(sb);
-
+        DocumentRendererHelper.RenderBlockChildsToRtf(renderer,  _document.ChildBlocks);
         renderer.Content.AppendLine("}");
 
     }

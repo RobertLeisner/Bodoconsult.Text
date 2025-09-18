@@ -31,14 +31,8 @@ public class TofSectionHtmlTextRendererElement : HtmlTextRendererElementBase
             return;
         }
 
-        // Get the content of all inlines as string
-        var sb = new StringBuilder();
-
         renderer.Content.AppendLine($"<p class=\"TofHeadingStyle\">{renderer.CheckContent(renderer.Document.DocumentMetaData.TofHeading)}</p>");
+        DocumentRendererHelper.RenderBlockChildsToHtml(renderer, _tofSection.ChildBlocks);
 
-        DocumentRendererHelper.RenderBlockChildsToHtml(renderer, sb, _tofSection.ChildBlocks);
-
-        // DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, _tofSection.ChildInlines, string.Empty, true);
-        renderer.Content.Append(sb);
     }
 }

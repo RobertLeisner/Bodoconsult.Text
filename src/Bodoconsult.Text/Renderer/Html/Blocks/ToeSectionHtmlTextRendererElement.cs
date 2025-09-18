@@ -32,14 +32,8 @@ public class ToeSectionHtmlTextRendererElement : HtmlTextRendererElementBase
             return;
         }
 
-        // Get the content of all inlines as string
-        var sb = new StringBuilder();
-
         renderer.Content.AppendLine($"<p class=\"ToeHeadingStyle\">{renderer.CheckContent(renderer.Document.DocumentMetaData.ToeHeading)}</p>");
+        DocumentRendererHelper.RenderBlockChildsToHtml(renderer, _toeSection.ChildBlocks);
 
-        DocumentRendererHelper.RenderBlockChildsToHtml(renderer, sb, _toeSection.ChildBlocks);
-
-        // DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, _toeSection.ChildInlines, string.Empty, true);
-        renderer.Content.Append(sb);
     }
 }

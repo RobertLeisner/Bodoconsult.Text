@@ -81,9 +81,8 @@ public class DocumentRendererHelper
     /// Render child blocks
     /// </summary>
     /// <param name="renderer">Current renderer instance</param>
-    /// <param name="sb">Current string</param>
     /// <param name="childBlocks">Child blocks</param>
-    public static void RenderBlockChildsToHtml(ITextDocumentRender renderer, StringBuilder sb, List<Block> childBlocks)
+    public static void RenderBlockChildsToHtml(ITextDocumentRender renderer, List<Block> childBlocks)
     {
         foreach (var block in childBlocks)
         {
@@ -102,6 +101,20 @@ public class DocumentRendererHelper
         foreach (var row in rows)
         {
             var rendererElement = renderer.TextRendererElementFactory.CreateInstance(row);
+            rendererElement.RenderIt(renderer);
+        }
+    }
+
+    /// <summary>
+    /// Render items to HTML
+    /// </summary>
+    /// <param name="renderer">Current renderer instance</param>
+    /// <param name="items">Items to render</param>
+    public static void RenderItemsToHtml<T>(ITextDocumentRender renderer, List<T> items) where T : DocumentElement
+    {
+        foreach (var item in items)
+        {
+            var rendererElement = renderer.TextRendererElementFactory.CreateInstance(item);
             rendererElement.RenderIt(renderer);
         }
     }
@@ -138,9 +151,8 @@ public class DocumentRendererHelper
     /// Render child blocks
     /// </summary>
     /// <param name="renderer">Current renderer instance</param>
-    /// <param name="sb">Current string</param>
     /// <param name="childBlocks">Child blocks</param>
-    public static void RenderBlockChildsToRtf(ITextDocumentRender renderer, StringBuilder sb, List<Block> childBlocks)
+    public static void RenderBlockChildsToRtf(ITextDocumentRender renderer, List<Block> childBlocks)
     {
         foreach (var block in childBlocks)
         {

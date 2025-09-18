@@ -11,6 +11,18 @@ namespace Bodoconsult.Text.Documents;
 public abstract class DocumentElement
 {
     /// <summary>
+    /// Current indenttation for LDML creation
+    /// </summary>
+    [DoNotSerialize]
+    public string Indentation { get; set; } = "    ";
+
+    /// <summary>
+    /// Parent element
+    /// </summary>
+    [DoNotSerialize]
+    public DocumentElement Parent { get; set; }
+
+    /// <summary>
     /// Add the current element to a document defined in LDML (Logical document markup language)
     /// </summary>
     /// <param name="document">StringBuilder instance to create the LDML in</param>

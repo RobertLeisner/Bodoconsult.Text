@@ -284,7 +284,45 @@ public static class TestDataHelper
         paragraph = new Paragraph(MassText);
         section.AddBlock(paragraph);
 
+        // Add definition list
+        var dl = CreateDefinitionList();
+        section.AddBlock(dl);
+
         return doc;
+    }
+
+    public static DefinitionList CreateDefinitionList()
+    {
+        var dl = new DefinitionList();
+
+        var dlt = new DefinitionListTerm("Share");
+
+        var dli = new DefinitionListItem("Blubb");
+        // var dli = new DefinitionListItem(MassText);
+        dlt.AddBlock(dli);
+
+        dli = new DefinitionListItem("Blabb");
+        dlt.AddBlock(dli);
+
+        dl.AddBlock(dlt);
+
+        //dlt = new DefinitionListTerm("Fixed income");
+
+        //dli = new DefinitionListItem(MassText);
+        //dlt.AddBlock(dli);
+
+        //dl.AddBlock(dlt);
+
+        //dlt = new DefinitionListTerm("Real estate");
+
+        //dli = new DefinitionListItem(MassText);
+        //dlt.AddBlock(dli);
+
+        //dli = new DefinitionListItem(MassText);
+        //dlt.AddBlock(dli);
+
+        //dl.AddBlock(dlt);
+        return dl;
     }
 
     public static Document CreateDocumentRealWorld()

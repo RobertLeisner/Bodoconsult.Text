@@ -132,7 +132,7 @@ namespace Bodoconsult.Text.Documents
             }
             
             // List?
-            if (!(pi.PropertyType.IsGenericType && pi.PropertyType.GetGenericTypeDefinition() == typeof(List<>)))
+            if (!(pi.PropertyType.IsGenericType && pi.PropertyType.GetGenericTypeDefinition() == typeof(LdmlList<>)))
             {
                 // No list
                 GetPropertyAsBlockElement(parent, node, pi);

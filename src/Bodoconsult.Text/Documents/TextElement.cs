@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using System;
+using System.Collections;
+using System.Linq;
 using System.Text;
 using Bodoconsult.Text.Helpers;
 
@@ -11,7 +13,6 @@ namespace Bodoconsult.Text.Documents
     /// </summary>
     public abstract class TextElement : DocumentElement
     {
-
         /// <summary>
         /// The XML tag to ue for the current instance
         /// </summary>
@@ -28,18 +29,6 @@ namespace Bodoconsult.Text.Documents
         /// </summary>
         [DoNotSerialize]
         public bool IsSingleton { get; set; }
-
-        /// <summary>
-        /// Parent element
-        /// </summary>
-        [DoNotSerialize]
-        public TextElement Parent { get; set; }
-
-        /// <summary>
-        /// Current indenttation for LDML creation
-        /// </summary>
-        [DoNotSerialize]
-        public string Indentation { get; set; } = "    ";
 
         /// <summary>
         /// Add the opening tag with properties if available
@@ -65,6 +54,8 @@ namespace Bodoconsult.Text.Documents
             {
                 stringBuilder.Append($"{Environment.NewLine}");
             }
+
+            stringBuilder.Append(GetLdmlListPropertiesAsAttributes($"{indent}{Indentation}"));
         }
 
         /// <summary>
@@ -83,7 +74,7 @@ namespace Bodoconsult.Text.Documents
             }
 
             sb.Append(' ');
-            foreach (var p in pis)
+            foreach (var p in pis.Where(p => !(p.PropertyType.IsGenericType && p.PropertyType.GetGenericTypeDefinition() == typeof(LdmlList<>))))
             {
                 var value = p.GetValue(this);
 
@@ -108,6 +99,48 @@ namespace Bodoconsult.Text.Documents
                 {
                     sb.Append($"{p.Name}=\"{value}\" ");
                 }
+            }
+            return sb;
+        }
+
+        /// <summary>
+        /// Get all properties of an TextElement as XML attributes
+        /// </summary>
+        /// <returns>XML string with attributes only or empty string</returns>
+        public StringBuilder GetLdmlListPropertiesAsAttributes(string indent)
+        {
+            var pis = DocumentReflectionHelper.GetPropertiesForAttributes(GetType());
+
+            var sb = new StringBuilder();
+
+            if (pis.Length == 0)
+            {
+                return sb;
+            }
+
+            foreach (var p in pis.Where(p =>
+                         p.PropertyType.IsGenericType &&
+                         p.PropertyType.GetGenericTypeDefinition() == typeof(LdmlList<>)))
+            {
+                var value = (IEnumerable)p.GetValue(this);
+
+                if (value == null)
+                {
+                    continue;
+                }
+
+                sb.AppendLine($"{indent}<{p.Name}>");
+
+                foreach (var item in value)
+                {
+                    if (item is DocumentElement de)
+                    {
+                        de.ToLdmlString(sb, $"{indent}{Indentation}");
+                    }
+                }
+
+
+                sb.AppendLine($"{indent}</{p.Name}>");
             }
 
             return sb;

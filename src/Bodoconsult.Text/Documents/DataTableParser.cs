@@ -59,7 +59,7 @@ public class DataTableParser
                 Parent = Table
             };
 
-            Table.Columns.Add(col);
+            Table.AddBlock(col);
         }
     }
 
@@ -107,12 +107,12 @@ public class DataTableParser
                     Parent = newRow
                 };
 
-                newRow.Cells.Add(cell);
+                newRow.AddBlock(cell);
             }
 
             newRow.Parent = Table;
 
-            Table.Rows.Add(newRow);
+            Table.AddBlock(newRow);
         }
     }
 }

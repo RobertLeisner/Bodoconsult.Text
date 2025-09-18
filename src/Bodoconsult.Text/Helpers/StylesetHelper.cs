@@ -56,6 +56,18 @@ public static class StylesetHelper
         var columnStyle = new ColumnStyle();
         styleSet.AddBlock(columnStyle);
 
+        // Add style DefinitionListStyle for DefinitionList instances
+        var definitionListStyle = new DefinitionListStyle();
+        styleSet.AddBlock(definitionListStyle);
+
+        // Add style DefinitionListTermStyle for DefinitionListTerm instances
+        var definitionListTermStyle = new DefinitionListTermStyle();
+        styleSet.AddBlock(definitionListTermStyle);
+
+        // Add style DefinitionListItemStyle for DefinitionListItem instances
+        var definitionListItemStyle = new DefinitionListItemStyle();
+        styleSet.AddBlock(definitionListItemStyle);
+
         // Add style EquationStyle for Equation instances 
         var equationStyle = new EquationStyle();
         styleSet.AddBlock(equationStyle);
@@ -261,6 +273,18 @@ public static class StylesetHelper
         // Add style CellStyleCenter for Cell instances
         var cellStyleCenter = new CellCenterStyle();
         styleSet.AddBlock(cellStyleCenter);
+
+        // Add style DefinitionListStyle for DefinitionList instances
+        var definitionListStyle = new DefinitionListStyle();
+        styleSet.AddBlock(definitionListStyle);
+
+        // Add style DefinitionListTermStyle for DefinitionListTerm instances
+        var definitionListTermStyle = new DefinitionListTermStyle();
+        styleSet.AddBlock(definitionListTermStyle);
+
+        // Add style DefinitionListItemStyle for DefinitionListItem instances
+        var definitionListItemStyle = new DefinitionListItemStyle();
+        styleSet.AddBlock(definitionListItemStyle);
 
         // Add style EquationStyle for Equation instances 
         var equationStyle = new EquationStyle();
