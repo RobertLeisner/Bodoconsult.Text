@@ -15,8 +15,8 @@ public class SectionTitleStyle : ParagraphStyleBase
         TagToUse = "SectionTitleStyle";
         Name = TagToUse;
         TextAlignment = TextAlignment.Center;
-        Margins.Top = Document.DefaultFontSize * 4;
-        FontSize = Document.DefaultFontSize + 4;
+        Margins.Top = Styleset.DefaultFontSize * 4;
+        FontSize = Styleset.DefaultFontSize + 4;
         Bold = true;
     }
 }

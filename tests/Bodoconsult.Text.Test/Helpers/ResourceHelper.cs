@@ -1,23 +1,22 @@
-﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
-
+﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using System.IO;
 using System.Reflection;
 
-namespace Bodoconsult.Pdf.Test.Helpers;
+namespace Bodoconsult.Text.Test.Helpers;
 
-internal class FileHelper
+public class ResourceHelper
 {
 
     /// <summary>
-    /// Get a text from a embedded resource file
+    /// Get a text from an embedded resource file
     /// </summary>
-    /// <param name="resourceName">resource name = plain file name with out extension and path</param>
+    /// <param name="resourceName">resource name = plain file name without extension and path</param>
     /// <returns></returns>
     public static string GetTextResource(string resourceName)
     {
 
-        resourceName = $"Bodoconsult.Pdf.Test.Resources.{resourceName}";
+        resourceName = $"Bodoconsult.Text.Test.Resources.{resourceName}";
 
         var ass = Assembly.GetExecutingAssembly();
         var str = ass.GetManifestResourceStream(resourceName);

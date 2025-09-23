@@ -15,12 +15,12 @@ public class Heading2Style : ParagraphStyleBase
         TagToUse = "Heading2Style";
         Name = TagToUse;
         BorderBrush = new SolidColorBrush(Colors.Black);
-        BorderBrush = new SolidColorBrush(Document.DefaultColor);
-        BorderThickness.Bottom = Document.DefaultBorderWidth;
-        Margins.Top = 1 * Document.DefaultFontSize;
-        Paddings.Top = Document.DefaultPaddingWidth;
-        Paddings.Bottom = Document.DefaultPaddingWidth;
-        FontSize = Document.DefaultFontSize + 4;
+        BorderBrush = new SolidColorBrush(Styleset.DefaultColor);
+        BorderThickness.Bottom = Styleset.DefaultBorderWidth;
+        Margins.Top = 1 * Styleset.DefaultFontSize;
+        Paddings.Top = Styleset.DefaultPaddingWidth;
+        Paddings.Bottom = Styleset.DefaultPaddingWidth;
+        FontSize = Styleset.DefaultFontSize + 4;
         Bold = true;
         KeepWithNextParagraph = true;
     }

@@ -271,7 +271,7 @@ public static class TestDataHelper
         section.AddBlock(paragraph);
 
         // Add a table
-        var dt = DataHelper.GetData();
+        var dt = DataHelper.GetDataTable();
 
         var dtp = new DataTableParser(dt, "Portfolio");
         dtp.ParseColumns();
@@ -280,13 +280,17 @@ public static class TestDataHelper
         // Assert
         section.AddBlock(dtp.Table);
 
-        // Keep distance between warning and error
+        // Keep distance
         paragraph = new Paragraph(MassText);
         section.AddBlock(paragraph);
 
         // Add definition list
         var dl = CreateDefinitionList();
         section.AddBlock(dl);
+
+        // Keep distance
+        paragraph = new Paragraph(MassText);
+        section.AddBlock(paragraph);
 
         return doc;
     }
@@ -306,22 +310,22 @@ public static class TestDataHelper
 
         dl.AddBlock(dlt);
 
-        //dlt = new DefinitionListTerm("Fixed income");
+        dlt = new DefinitionListTerm("Fixed income");
 
-        //dli = new DefinitionListItem(MassText);
-        //dlt.AddBlock(dli);
+        dli = new DefinitionListItem(MassText);
+        dlt.AddBlock(dli);
 
-        //dl.AddBlock(dlt);
+        dl.AddBlock(dlt);
 
-        //dlt = new DefinitionListTerm("Real estate");
+        dlt = new DefinitionListTerm("Real estate");
 
-        //dli = new DefinitionListItem(MassText);
-        //dlt.AddBlock(dli);
+        dli = new DefinitionListItem(MassText);
+        dlt.AddBlock(dli);
 
-        //dli = new DefinitionListItem(MassText);
-        //dlt.AddBlock(dli);
+        dli = new DefinitionListItem(MassText);
+        dlt.AddBlock(dli);
 
-        //dl.AddBlock(dlt);
+        dl.AddBlock(dlt);
         return dl;
     }
 

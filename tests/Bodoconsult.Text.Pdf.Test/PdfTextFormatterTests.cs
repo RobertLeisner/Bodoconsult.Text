@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Runtime.Versioning;
 using Bodoconsult.Text.Model;
-using Bodoconsult.Text.Pdf.Test.Helpers;
+using Bodoconsult.Text.Test.Helpers;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
@@ -31,22 +31,22 @@ public class PdfTextFormatterTests
 
         st.AddHeader1("Überschrift 1");
 
-        st.AddParagraph(TestHelper.Masstext1);
+        st.AddParagraph(TestDataHelper.MassText);
 
-        var code = FileHelper.GetTextResource("code1.txt");
+        var code = ResourceHelper.GetTextResource("code1.txt");
 
         st.AddCode(code);
 
-        st.AddParagraph(TestHelper.Masstext1);
+        st.AddParagraph(TestDataHelper.MassText);
 
         st.AddDefinitionListLine("Left1", "Right1");
         st.AddDefinitionListLine("Left2", "Right2");
         st.AddDefinitionListLine("Left3", "Right3");
         st.AddDefinitionListLine("Left4", "Right4");
 
-        st.AddParagraph(TestHelper.Masstext1);
+        st.AddParagraph(TestDataHelper.MassText);
 
-        st.AddTable("Tabelle", TestHelper.GetDataTable());
+        st.AddTable("Tabelle", DataHelper.GetDataTable());
 
         st.AddHeader1("Überschrift 2");
 
@@ -68,6 +68,6 @@ public class PdfTextFormatterTests
 
         FileAssert.Exists(fileName);
 
-        TestHelper.OpenFile(fileName);
+        FileSystemHelper.RunInDebugMode(fileName);
     }
 }

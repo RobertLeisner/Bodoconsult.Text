@@ -1,6 +1,5 @@
 ﻿using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
-using System.Text;
 
 namespace Bodoconsult.Text.Renderer.Html.Styles;
 

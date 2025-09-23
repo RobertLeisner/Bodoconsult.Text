@@ -4,7 +4,6 @@ using Bodoconsult.Text.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Bodoconsult.Text.Documents;
@@ -16,50 +15,7 @@ public class Document : Block
 {
     private bool _isFirstSection;
 
-    /// <summary>
-    ///  Default font name
-    /// </summary>
-    public const string DefaultFontName = "Calibri";
 
-    /// <summary>
-    ///  Default font name
-    /// </summary>
-    public const string DefaultFontNameMonoSpaced = "Courier New";
-
-    /// <summary>
-    /// Default color for borders and fonts
-    /// </summary>
-    public static Color DefaultColor = Colors.Black;
-
-    /// <summary>
-    /// Default border width in pt
-    /// </summary>
-    public const int DefaultBorderWidth = 1;
-
-    /// <summary>
-    /// Default padding width in pt
-    /// </summary>
-    public const int DefaultPaddingWidth = 6;
-
-    /// <summary>
-    /// Default padding width in pt
-    /// </summary>
-    public const int DefaultTablePaddingWidth = 2;
-
-    /// <summary>
-    /// Default font size in pt
-    /// </summary>
-    public const int DefaultFontSize = 12;
-
-    /// <summary>
-    /// Default margin left. Default 1cm = 28.3pt
-    /// </summary>
-    public static double DefaultMarginLeft { get; set; } = 28.3;
-
-    /// <summary>
-    /// Default margin right. Default 1cm = 28.3pt
-    /// </summary>
-    public static double DefaultMarginRight { get; set; } = 28.3;
 
     /// <summary>
     /// Default ctor

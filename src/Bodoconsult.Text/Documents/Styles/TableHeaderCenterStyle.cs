@@ -15,7 +15,7 @@ public class TableHeaderCenterStyle : ParagraphStyleBase
         Bold = true;
         BorderBrush = new SolidColorBrush(Colors.Black);
         BorderThickness = new Thickness(1.0, 1.0, 1.0, 1.0);
-        Paddings = new Thickness(Document.DefaultTablePaddingWidth);
+        Paddings = new Thickness(Styleset.DefaultTablePaddingWidth);
         TextAlignment = TextAlignment.Center;
     }
 }

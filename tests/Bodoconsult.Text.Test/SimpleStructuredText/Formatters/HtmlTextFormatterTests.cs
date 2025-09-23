@@ -262,7 +262,7 @@ public class HtmlTextFormatterTests
         var sr = new StructuredText();
         sr.AddHeader1("Überschrift 1");
 
-        sr.AddTable("Tabellentitel", DataHelper.GetData());
+        sr.AddTable("Tabellentitel", DataHelper.GetDataTable());
 
         sr.AddParagraph(MassText);
         sr.AddDefinitionListLine("Def1", "Value1");

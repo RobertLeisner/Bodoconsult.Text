@@ -14,7 +14,7 @@ public class Toc2Style : ParagraphStyleBase
     {
         TagToUse = "Toc2Style";
         Name = TagToUse;
-        Margins.Left = 1 * Document.DefaultFontSize;
-        FontSize = Document.DefaultFontSize + 2;
+        Margins.Left = 1 * Styleset.DefaultFontSize;
+        FontSize = Styleset.DefaultFontSize + 2;
     }
 }

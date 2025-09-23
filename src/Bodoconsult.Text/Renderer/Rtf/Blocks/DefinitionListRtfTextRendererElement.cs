@@ -1,7 +1,7 @@
-﻿using Bodoconsult.Text.Documents;
+﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
+
+using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
-using System;
-using System.Text;
 
 namespace Bodoconsult.Text.Renderer.Rtf.Blocks;
 
@@ -29,7 +29,7 @@ public class DefinitionListRtfTextRendererElement : RtfTextRendererElementBase
     {
         // top margin
         var listStyle = (DefinitionListStyle)renderer.Document.Styleset.FindStyle("DefinitionListStyle");
-        renderer.Content.AppendLine($@"\pard\plain\sb{MeasurementHelper.GetTwipsFromPt(listStyle.Margins.Top)}\fs6\par");
+        //renderer.Content.AppendLine($@"\pard\plain\sb{MeasurementHelper.GetTwipsFromPt(listStyle.Margins.Top)}\fs6\par");
 
         // Get the content of all inlines as string
         DocumentRendererHelper.RenderBlockChildsToRtf(renderer, Block.ChildBlocks);

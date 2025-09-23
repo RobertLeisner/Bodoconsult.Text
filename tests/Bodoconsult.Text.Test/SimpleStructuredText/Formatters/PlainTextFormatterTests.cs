@@ -116,7 +116,7 @@ public class PlainTextFormatterTests
         var sr = new StructuredText();
         sr.AddHeader1("Überschrift 1");
 
-        sr.AddTable("Tabellentitel", DataHelper.GetData());
+        sr.AddTable("Tabellentitel", DataHelper.GetDataTable());
 
         sr.AddHeader1("Überschrift 2");
         sr.AddParagraph(MassText);
@@ -140,7 +140,7 @@ public class PlainTextFormatterTests
         sr.AddParagraph(MassText);
         sr.AddParagraph(MassText);
 
-        sr.AddTable("Tabellentitel", DataHelper.GetData());
+        sr.AddTable("Tabellentitel", DataHelper.GetDataTable());
 
         sr.AddHeader1("Überschrift 2");
         sr.AddParagraph(MassText);

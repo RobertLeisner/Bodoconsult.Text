@@ -1,4 +1,6 @@
-﻿using Bodoconsult.Text.Documents;
+﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
+
+using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
 using System;
 using System.Diagnostics;
@@ -47,6 +49,7 @@ public class DefinitionListTermRtfTextRendererElement : RtfTextRendererElementBa
         Debug.Print(sb.ToString());
 
         sb.Append($"}}\\cell}}{Environment.NewLine}");
+        sb.Replace("\\par\r\n}\\cell", "}\\cell");
 
         Debug.Print(sb.ToString());
 

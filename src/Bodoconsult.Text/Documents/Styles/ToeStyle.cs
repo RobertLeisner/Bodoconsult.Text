@@ -15,6 +15,6 @@ public class ToeStyle : ParagraphStyleBase
         TagToUse = "ToeStyle";
         Name = TagToUse;
         Margins.Left = 0;
-        FontSize = Document.DefaultFontSize - 2;
+        FontSize = Styleset.DefaultFontSize - 2;
     }
 }

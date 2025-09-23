@@ -13,8 +13,8 @@ public abstract class ImageStyleBase : ParagraphStyleBase
     protected ImageStyleBase()
     {
         TextAlignment = TextAlignment.Center;
-        Margins.Top = 0.5 * Document.DefaultFontSize;
-        Margins.Bottom = 0.5 * Document.DefaultFontSize;
+        Margins.Top = 0.5 * Styleset.DefaultFontSize;
+        Margins.Bottom = 0.5 * Styleset.DefaultFontSize;
         Italic = true;
     }
 

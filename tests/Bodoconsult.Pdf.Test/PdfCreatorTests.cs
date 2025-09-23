@@ -1,11 +1,10 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
 
-
 using System.IO;
 using System.Runtime.Versioning;
 using Bodoconsult.Pdf.PdfSharp;
 using Bodoconsult.Pdf.Stylesets;
-using Bodoconsult.Pdf.Test.Helpers;
+using Bodoconsult.Text.Test.Helpers;
 using MigraDoc.DocumentObjectModel;
 using NUnit.Framework;
 
@@ -15,18 +14,11 @@ namespace Bodoconsult.Pdf.Test;
 [TestFixture]
 public class PdfCreatorTests
 {
-
-    private readonly string _logo = Path.Combine(TestHelper.TestDataPath, "logo_bre.png");
-
-
     [Test]
     public void TestPdfCreatorWithDefaultStyleSheet()
     {
-
         var fileName = Path.Combine(TestHelper.TempPath, "pdf1.pdf");
-            
         CreateFile(fileName);
-
     }
 
 
@@ -54,7 +46,7 @@ public class PdfCreatorTests
 
     private void CreateFile(string fileName, bool landscape = false)
     {
-        var code = FileHelper.GetTextResource("code1.txt");
+        var code = ResourceHelper.GetTextResource("code1.txt").Replace("\\t", "\t");
 
 
         if (File.Exists(fileName))
@@ -70,65 +62,81 @@ public class PdfCreatorTests
 
         var pdf = new PdfCreator(styleset);
 
-        pdf.SetDocInfo("Test", "Susbject", "Author");
+        pdf.SetDocInfo("Test", "Subject", "Author");
 
-        pdf.SetHeader("Kopfzeile", "Header1", _logo);
+        pdf.SetHeader("Header", "Header1", TestHelper.TestLogoImage2);
         pdf.SetFooter("Footer \t<<page>> / <<pages>>");
 
-        pdf.CreateTocSection("Inhaltsverzeichnis");
+        pdf.CreateTocSection("Document title");
         pdf.CreateContentSection();
 
          
-        pdf.AddParagraph("Überschrift 1", "Heading1");
+        pdf.AddParagraph("Heading 1", "Heading1");
 
-        pdf.AddParagraph(TestHelper.Masstext1, "Normal");
+        pdf.AddParagraph(TestDataHelper.MassText, "Normal");
 
         pdf.AddParagraph(code, "Code");
-        pdf.AddParagraph(TestHelper.Masstext1, "Normal");
+        pdf.AddParagraph(TestDataHelper.MassText, "Normal");
 
 
-        pdf.AddDefinitionList(TestHelper.GetDefinitionList(), "Normal", "Normal");
+        pdf.AddDefinitionList(DataHelper.GetDefinitionListAsDataTable(), "DefinitionListTerm", "DefinitionListItem");
 
-        pdf.AddParagraph(TestHelper.Masstext1, "Normal");
-        pdf.AddTable(TestHelper.GetDataTable(), "Tabellenüberschrift", "NoHeading1", "some additional info",
+        pdf.AddParagraph(TestDataHelper.MassText, "Normal");
+        pdf.AddTable(DataHelper.GetSmallDataTable(), "Tabellenüberschrift", "NoHeading1", "some additional info",
             "Details", pdf.Width);
 
 
-        pdf.AddTableFrame(TestHelper.GetDataTable(), "Tabellenüberschrift Frame", "NoHeading1", "some additional info",
+        pdf.AddTableFrame(DataHelper.GetSmallDataTable(), "Tabellenüberschrift Frame", "NoHeading1", "some additional info",
             "Details", pdf.Width / 2);
 
-        pdf.AddTableFrame(TestHelper.GetDataTable(), "Tabellenüberschrift Frame", "NoHeading1", null,
+        pdf.AddTableFrame(DataHelper.GetSmallDataTable(), "Tabellenüberschrift Frame", "NoHeading1", null,
             "Details", pdf.Width / 2);
 
-        pdf.AddParagraph(TestHelper.Masstext1, "Normal");
+        pdf.AddParagraph(TestDataHelper.MassText, "Normal");
 
-        pdf.AddParagraph("Überschrift 2", "Heading1");
-        pdf.AddParagraph(TestHelper.Masstext1, "Normal");
+        pdf.AddParagraph("Heading 2", "Heading1");
+        pdf.AddParagraph(TestDataHelper.MassText, "Normal");
 
-        pdf.AddParagraph("Überschrift 2-1", "Heading2");
-        pdf.AddParagraph(TestHelper.Masstext1, "Normal");
+        pdf.AddParagraph("Heading 2-1", "Heading2");
+        pdf.AddParagraph(TestDataHelper.MassText, "Normal");
 
-        pdf.AddImage(_logo, 5, 1.5);
+        pdf.AddImage(TestHelper.TestChartImage, 10, 6);
 
-        pdf.AddParagraph("Überschrift 2-2", "Heading2");
-        pdf.AddParagraph(TestHelper.Masstext1, "Normal");
+        pdf.AddParagraph("Heading 2-2", "Heading2");
+        pdf.AddParagraph(TestDataHelper.MassText, "Normal");
 
         pdf.AddParagraph("Aufzählung 1", "Bullet1");
         pdf.AddParagraph("Aufzählung 2", "Bullet1");
         pdf.AddParagraph("Aufzählung 3", "Bullet1");
         pdf.AddParagraph("Aufzählung 4", "Bullet1");
 
-        pdf.AddParagraph(TestHelper.Masstext1, "Normal");
+        pdf.AddParagraph(TestDataHelper.MassText, "Normal");
 
         pdf.AddParagraph(code, "Code");
 
-        pdf.AddParagraph(TestHelper.Masstext1, "Normal");
+        pdf.AddParagraph(TestDataHelper.MassText, "Normal");
+
+        pdf.AddParagraph(TestDataHelper.MassText, "Info");
+
+        pdf.AddParagraph(TestDataHelper.MassText, "Normal");
+
+        pdf.AddParagraph(TestDataHelper.MassText, "Warning");
+
+        pdf.AddParagraph(TestDataHelper.MassText, "Normal");
+
+        pdf.AddParagraph(TestDataHelper.MassText, "Error");
+
+        pdf.AddParagraph("Blubb blabb blubb", "Citation");
+
+        pdf.AddParagraph("Robert Leisner", "CitationSource");
+
+        pdf.AddParagraph(TestDataHelper.MassText, "Normal");
 
         pdf.RenderToPdf(fileName, false);
 
         Assert.That(File.Exists(fileName));
 
-        TestHelper.OpenFile(fileName);
+        FileSystemHelper.RunInDebugMode(fileName);
 
 
     }
@@ -217,7 +225,7 @@ public class PdfCreatorTests
         style.ParagraphFormat.Borders.Left.Width = 0;
 
 
-        style = styleSet.TocHeading1;
+        style = styleSet.TocHeading;
         style.Font.Name = "Arial Black";
         style.Font.Size = 12;
         style.Font.Color = Colors.Black;

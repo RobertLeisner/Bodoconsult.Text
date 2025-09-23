@@ -10,17 +10,17 @@ public class ParagraphStyleBase : StyleBase
     /// <summary>
     /// Font name
     /// </summary>
-    public string FontName { get; set; } = Document.DefaultFontName;
+    public string FontName { get; set; } = Styleset.DefaultFontName;
 
     /// <summary>
     /// Font size in pt
     /// </summary>
-    public int FontSize { get; set; } = Document.DefaultFontSize;
+    public int FontSize { get; set; } = Styleset.DefaultFontSize;
 
     /// <summary>
     /// Font color
     /// </summary>
-    public Color FontColor { get; set; } = Document.DefaultColor;
+    public Color FontColor { get; set; } = Styleset.DefaultColor;
 
     /// <summary>
     /// Bold
@@ -40,7 +40,7 @@ public class ParagraphStyleBase : StyleBase
     /// <summary>
     /// Margins
     /// </summary>
-    public Thickness Margins { get; set; } = new(0, Document.DefaultFontSize * 0.5, 0, 0);
+    public Thickness Margins { get; set; } = new(0, Styleset.DefaultFontSize * 0.5, 0, 0);
 
     /// <summary>
     /// Border brush

@@ -15,16 +15,16 @@ public class WarningStyle : ParagraphStyleBase
         TagToUse = "WarningStyle";
         Name = TagToUse;
         BorderBrush = new SolidColorBrush(Colors.Yellow);
-        BorderThickness.Bottom = Document.DefaultBorderWidth;
-        BorderThickness.Left = Document.DefaultBorderWidth;
-        BorderThickness.Right = Document.DefaultBorderWidth;
-        BorderThickness.Top = Document.DefaultBorderWidth;
-        Paddings.Left = Document.DefaultPaddingWidth;
-        Paddings.Right = Document.DefaultPaddingWidth;
-        Paddings.Top = Document.DefaultPaddingWidth;
-        Paddings.Bottom = Document.DefaultPaddingWidth;
-        Margins.Top = 3 * Document.DefaultPaddingWidth;
-        Margins.Bottom = 3 * Document.DefaultPaddingWidth;
+        BorderThickness.Bottom = Styleset.DefaultBorderWidth;
+        BorderThickness.Left = Styleset.DefaultBorderWidth;
+        BorderThickness.Right = Styleset.DefaultBorderWidth;
+        BorderThickness.Top = Styleset.DefaultBorderWidth;
+        Paddings.Left = Styleset.DefaultPaddingWidth;
+        Paddings.Right = Styleset.DefaultPaddingWidth;
+        Paddings.Top = Styleset.DefaultPaddingWidth;
+        Paddings.Bottom = Styleset.DefaultPaddingWidth;
+        Margins.Top = 3 * Styleset.DefaultPaddingWidth;
+        Margins.Bottom = 3 * Styleset.DefaultPaddingWidth;
         KeepTogether = true;
     }
 }

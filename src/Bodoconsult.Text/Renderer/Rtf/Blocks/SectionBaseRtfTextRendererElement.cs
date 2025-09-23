@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using System;
-using System.Net.Sockets;
 using System.Text;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
@@ -103,7 +102,9 @@ public abstract class SectionBaseRtfTextRendererElement : RtfTextRendererElement
             return;
         }
 
-        renderer.Content.Append($@"{{\header{{\pard{{{renderer.Document.DocumentMetaData.Title}}}\par}}}}");
+        var style = (ParagraphStyleBase)renderer.Styleset.FindStyle("HeaderStyle");
+
+        renderer.Content.Append($@"{{\header{{\pard\plain{RtfHelper.GetFormatSettings(style, renderer.Styleset)}{{{renderer.Document.DocumentMetaData.Title}}}\par}}}}");
     }
 
     private static void AddFooter(ITextDocumentRender renderer, PageStyleBase pageStyle, SectionBase section)
@@ -115,6 +116,8 @@ public abstract class SectionBaseRtfTextRendererElement : RtfTextRendererElement
 
         // /{\field{\*\fldinst SECTIONPAGES'}}
 
-        renderer.Content.Append($"{{\\footer{{\\pard{{{renderer.Document.DocumentMetaData.Company} {{\\ptablnone\\pindtabqr}}{renderer.Document.DocumentMetaData.PageNumberPrefix} {{\\field{{\\*\\fldinst PAGE}}}}}}\\par}}}}");
+        var style = (ParagraphStyleBase)renderer.Styleset.FindStyle("FooterStyle");
+
+        renderer.Content.Append($"{{\\footer{{\\pard\\plain{RtfHelper.GetFormatSettings(style, renderer.Styleset)}{{{renderer.Document.DocumentMetaData.Company} {{\\ptablnone\\pindtabqr}}{renderer.Document.DocumentMetaData.PageNumberPrefix} {{\\field{{\\*\\fldinst PAGE}}}}}}\\par}}}}");
     }
 }

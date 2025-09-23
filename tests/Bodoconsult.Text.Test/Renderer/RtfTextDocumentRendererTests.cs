@@ -64,7 +64,7 @@ public class RtfTextDocumentRendererTests
 
         renderer.SaveAsFile(filePath);
 
-        //FileSystemHelper.RunInDebugMode(filePath);
+        FileSystemHelper.RunInDebugMode(filePath);
     }
 
 }

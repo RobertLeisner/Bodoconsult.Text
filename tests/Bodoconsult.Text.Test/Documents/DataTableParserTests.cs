@@ -15,7 +15,7 @@ internal class DataTableParserTests
     public void Ctor_ValidSetup_PropsSetCorrectly()
     {
         // Arrange 
-        var dt = DataHelper.GetData();
+        var dt = DataHelper.GetDataTable();
 
         // Act  
         var dtp = new DataTableParser(dt);
@@ -30,7 +30,7 @@ internal class DataTableParserTests
     public void ParseColumns_ValidSetup_PropsSetCorrectly()
     {
         // Arrange 
-        var dt = DataHelper.GetData();
+        var dt = DataHelper.GetDataTable();
 
         var dtp = new DataTableParser(dt);
 
@@ -45,7 +45,7 @@ internal class DataTableParserTests
     public void ParseRows_ValidSetup_PropsSetCorrectly()
     {
         // Arrange 
-        var dt = DataHelper.GetData();
+        var dt = DataHelper.GetDataTable();
 
         var dtp = new DataTableParser(dt);
         dtp.ParseColumns();

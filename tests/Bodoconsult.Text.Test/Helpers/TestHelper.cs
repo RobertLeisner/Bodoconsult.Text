@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace Bodoconsult.Text.Test.Helpers;
 
-internal class TestHelper
+public class TestHelper
 {
 
     static TestHelper()
@@ -18,7 +18,7 @@ internal class TestHelper
 
         AppPath = fi.DirectoryName;
 
-        TestDataPath = Path.Combine(fi.Directory.Parent.Parent.Parent.FullName, "TestData");
+        TestDataPath = Path.Combine(fi.Directory.Parent.Parent.Parent.Parent.FullName, "Bodoconsult.Text.Test", "TestData");
 
         TestChartImage = Path.Combine(TestDataPath, "chart3d.png");
 
@@ -27,7 +27,23 @@ internal class TestHelper
         TestDistributionImage = Path.Combine(TestDataPath, "NormalDistribution.de.png");
 
         TestLogoImage = Path.Combine(TestDataPath, "logo.jpg");
+
+        TestLogoImage2 = Path.Combine(TestDataPath, "logo_bre.png");
+
+
+        TempPath = Path.GetTempPath();
+
+        if (!Directory.Exists(TempPath))
+        {
+            Directory.CreateDirectory(TempPath);
+        }
     }
+
+
+    /// <summary>
+    /// Folder path for temporary files
+    /// </summary>
+    public static string TempPath { get; }
 
     /// <summary>
     /// Current assembly
@@ -63,4 +79,9 @@ internal class TestHelper
     /// A logo image
     /// </summary>
     public static string TestLogoImage { get; }
+
+    /// <summary>
+    /// A logo image 2
+    /// </summary>
+    public static string TestLogoImage2 { get; }
 }

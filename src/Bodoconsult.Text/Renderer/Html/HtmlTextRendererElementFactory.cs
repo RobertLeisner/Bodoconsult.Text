@@ -379,6 +379,16 @@ namespace Bodoconsult.Text.Renderer.Html
                 return new FigureStyleHtmlTextRendererElement(figureStyle);
             }
 
+            if (textElement is FooterStyle footerStyle)
+            {
+                return new FooterStyleHtmlTextRendererElement(footerStyle);
+            }
+
+            if (textElement is HeaderStyle headerStyle)
+            {
+                return new HeaderStyleHtmlTextRendererElement(headerStyle);
+            }
+
             if (textElement is Heading1Style heading1Style)
             {
                 return new Heading1StyleHtmlTextRendererElement(heading1Style);

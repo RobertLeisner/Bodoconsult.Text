@@ -16,7 +16,6 @@ namespace Bodoconsult.Pdf.PdfSharp
     [SupportedOSPlatform("windows")]
     public class WindowsFontResolver : IFontResolver
     {
-
         /// <summary>
         /// All installed fonts
         /// </summary>

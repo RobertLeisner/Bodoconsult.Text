@@ -8,8 +8,6 @@ using Bodoconsult.Text.Renderer.Rtf.Blocks;
 using Bodoconsult.Text.Renderer.Rtf.Inlines;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Reflection.Metadata;
 using System.Text;
 
 namespace Bodoconsult.Text.Helpers;

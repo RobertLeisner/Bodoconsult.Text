@@ -176,7 +176,7 @@ Here the code of the method to set paper orientation to landscape:
             style.ParagraphFormat.Borders.Left.Width = 0;
 
 
-            style = styleSet.TocHeading1;
+            style = styleSet.TocHeading;
             style.Font.Name = "Arial Black";
             style.Font.Size = 12;
             style.Font.Color = Colors.Black;
@@ -518,7 +518,7 @@ Below you can see the current implementation of the DefaultStyleSet. Feel free t
             Toc4.ParagraphFormat.TabStops.AddTabStop(width, TabAlignment.Right);
 
 
-            TocHeading1 = new Style("TocHeading1", "Normal")
+            TocHeading = new Style("TocHeading", "Normal")
             {
                 Font =
                 {
@@ -528,8 +528,8 @@ Below you can see the current implementation of the DefaultStyleSet. Feel free t
                 },
                 ParagraphFormat = { SpaceAfter = verticalMargin }
             };
-            TocHeading1.ParagraphFormat.SpaceAfter = verticalMargin;
-            TocHeading1.ParagraphFormat.Alignment = ParagraphAlignment.Center;
+            TocHeading.ParagraphFormat.SpaceAfter = verticalMargin;
+            TocHeading.ParagraphFormat.Alignment = ParagraphAlignment.Center;
 
             // Kopfzeile
             Header = new Style("Header", "Normal")

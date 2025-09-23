@@ -1,10 +1,6 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
 
 using Bodoconsult.Text.Documents;
-using Bodoconsult.Text.Helpers;
-using System;
-using System.Reflection.Metadata;
-using System.Text;
 
 namespace Bodoconsult.Text.Renderer.Rtf.Blocks;
 

@@ -13,7 +13,7 @@ public class DefinitionListTermStyle : ParagraphStyleBase
         TagToUse = "DefinitionListTermStyle";
         Name = TagToUse;
         Margins.Left = 0;
-        FontSize = Document.DefaultFontSize;
+        FontSize = Styleset.DefaultFontSize;
         Italic = true;
         Bold = false;
     }

@@ -65,7 +65,7 @@ public class Thickness : PropertyAsAttributeElement
     /// <summary>
     /// Top thickness in pt
     /// </summary>
-    public double Top { get; set; } = Document.DefaultFontSize * 0.5;
+    public double Top { get; set; } = Styleset.DefaultFontSize * 0.5;
 
     /// <summary>
     /// Right thickness in pt

@@ -14,11 +14,11 @@ public class Heading3Style : ParagraphStyleBase
     {
         TagToUse = "Heading3Style";
         Name = TagToUse;
-        FontSize = Document.DefaultFontSize + 2;
+        FontSize = Styleset.DefaultFontSize + 2;
         Bold = true;
-        Margins.Top = 2 * Document.DefaultFontSize;
-        Paddings.Top = Document.DefaultPaddingWidth;
-        Paddings.Bottom = Document.DefaultPaddingWidth;
+        Margins.Top = 2 * Styleset.DefaultFontSize;
+        Paddings.Top = Styleset.DefaultPaddingWidth;
+        Paddings.Bottom = Styleset.DefaultPaddingWidth;
         KeepWithNextParagraph = true;
     }
 }

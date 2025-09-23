@@ -36,7 +36,7 @@ public class StructuredTextTests
         masterText.AddHeader1("Überschrift 2");
 
 
-        masterText.AddTable("Tabellentitel", DataHelper.GetData());
+        masterText.AddTable("Tabellentitel", DataHelper.GetDataTable());
 
         masterText.AddParagraph(MassText);
         masterText.AddParagraph(MassText);

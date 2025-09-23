@@ -139,7 +139,7 @@ public class LdmlReaderTests
         // Arrange 
         var sb = new StringBuilder();
 
-        var dt = DataHelper.GetData();
+        var dt = DataHelper.GetDataTable();
 
         var dtp = new DataTableParser(dt);
         dtp.ParseColumns();

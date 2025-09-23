@@ -2,7 +2,6 @@
 
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
-using System.Text;
 
 namespace Bodoconsult.Text.Renderer.Rtf.Blocks;
 
@@ -31,6 +30,10 @@ public class DocumentRtfTextRendererElement : RtfTextRendererElementBase
         renderer.Content.AppendLine(@"{\rtf1\ansi\deff0");
         DocumentRendererHelper.RenderBlockChildsToRtf(renderer,  _document.ChildBlocks);
         renderer.Content.AppendLine("}");
+
+        // Some general fixes to be applied
+        renderer.Content.Replace("\\par\r\n}\\cell", "}\\cell");
+        renderer.Content.Replace("\\par}\\cell", "}\\cell");
 
     }
 }

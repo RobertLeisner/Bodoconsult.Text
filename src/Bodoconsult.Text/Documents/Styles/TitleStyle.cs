@@ -12,9 +12,9 @@ public class TitleStyle : ParagraphStyleBase
     {
         TagToUse = "TitleStyle";
         Name = TagToUse;
-        FontSize = Document.DefaultFontSize + 8;
-        Margins.Top = Document.DefaultFontSize * 4;
-        Margins.Bottom = Document.DefaultFontSize * 2;
+        FontSize = Styleset.DefaultFontSize + 8;
+        Margins.Top = Styleset.DefaultFontSize * 4;
+        Margins.Bottom = Styleset.DefaultFontSize * 2;
         TextAlignment = TextAlignment.Center;
         Bold = true;
     }

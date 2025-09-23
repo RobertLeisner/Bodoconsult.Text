@@ -48,7 +48,7 @@ internal class TestReportFactory : DocumentFactoryBase
 
         AddParagraph(ParagraphType.Paragraph, TestDataHelper.MassText);
 
-        AddTable(DataHelper.GetData(), "Sample portfolio");
+        AddTable(DataHelper.GetDataTable(), "Sample portfolio");
 
         // Add a figure 1
         AddFigure("A chart", TestHelper.TestChartImage, 1725, 1075);

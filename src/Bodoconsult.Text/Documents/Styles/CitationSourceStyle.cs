@@ -16,9 +16,9 @@ public class CitationSourceStyle : ParagraphStyleBase
         Name = TagToUse;
         TextAlignment = TextAlignment.Center;
         Margins.Top = 0;
-        Margins.Bottom = Document.DefaultPaddingWidth;
-        Margins.Left = Document.DefaultMarginLeft;
-        Margins.Right = Document.DefaultMarginRight;
-        FontSize = Document.DefaultFontSize - 4;
+        Margins.Bottom = Styleset.DefaultPaddingWidth;
+        Margins.Left = Styleset.DefaultMarginLeft;
+        Margins.Right = Styleset.DefaultMarginRight;
+        FontSize = Styleset.DefaultFontSize - 4;
     }
 }

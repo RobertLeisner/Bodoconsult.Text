@@ -166,6 +166,7 @@ namespace Bodoconsult.Typography
         /// Font size used for headings of level 5 in pt
         /// </summary>
         public double HeadingFontSize5 { get; set; }
+
         /// <summary>
         /// Line height in cm (Zeilenabstand ZAB in cm)
         /// </summary>

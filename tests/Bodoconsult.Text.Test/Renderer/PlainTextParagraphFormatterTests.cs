@@ -96,8 +96,8 @@ internal class PlainTextParagraphFormatterTests
         {
             Margins =
             {
-                Left = Document.DefaultMarginLeft,
-                Right = Document.DefaultMarginLeft
+                Left = Styleset.DefaultMarginLeft,
+                Right = Styleset.DefaultMarginLeft
             }
         };
         var pageStyle = new DocumentStyle();
@@ -228,8 +228,8 @@ internal class PlainTextParagraphFormatterTests
         {
             Margins =
             {
-                Left = Document.DefaultMarginLeft,
-                Right = Document.DefaultMarginLeft
+                Left = Styleset.DefaultMarginLeft,
+                Right = Styleset.DefaultMarginLeft
             }
         };
 
@@ -256,8 +256,8 @@ internal class PlainTextParagraphFormatterTests
         {
             Margins =
             {
-                Left = Document.DefaultMarginLeft,
-                Right = Document.DefaultMarginLeft
+                Left = Styleset.DefaultMarginLeft,
+                Right = Styleset.DefaultMarginLeft
             },
             TextAlignment = TextAlignment.Justify
         };
@@ -286,8 +286,8 @@ internal class PlainTextParagraphFormatterTests
             TextAlignment = TextAlignment.Right,
             Margins =
             {
-                Left = Document.DefaultMarginLeft,
-                Right = Document.DefaultMarginLeft
+                Left = Styleset.DefaultMarginLeft,
+                Right = Styleset.DefaultMarginLeft
             }
         };
         var pageStyle = new DocumentStyle();
@@ -314,8 +314,8 @@ internal class PlainTextParagraphFormatterTests
             TextAlignment = TextAlignment.Center,
             Margins =
             {
-                Left = Document.DefaultMarginLeft,
-                Right = Document.DefaultMarginLeft
+                Left = Styleset.DefaultMarginLeft,
+                Right = Styleset.DefaultMarginLeft
             }
         };
         var pageStyle = new DocumentStyle();
@@ -341,8 +341,8 @@ internal class PlainTextParagraphFormatterTests
         {
             Margins =
             {
-                Left = Document.DefaultMarginLeft,
-                Right = Document.DefaultMarginLeft
+                Left = Styleset.DefaultMarginLeft,
+                Right = Styleset.DefaultMarginLeft
             },
             BorderBrush = new SolidColorBrush(Colors.Black),
             BorderThickness =
@@ -382,8 +382,8 @@ internal class PlainTextParagraphFormatterTests
         {
             Margins =
             {
-                Left = Document.DefaultMarginLeft,
-                Right = Document.DefaultMarginLeft
+                Left = Styleset.DefaultMarginLeft,
+                Right = Styleset.DefaultMarginLeft
             },
             BorderBrush = new SolidColorBrush(Colors.Black),
             BorderThickness =
@@ -395,8 +395,8 @@ internal class PlainTextParagraphFormatterTests
             },
             Paddings =
             {
-                Left = Document.DefaultMarginLeft,
-                Right = Document.DefaultMarginLeft
+                Left = Styleset.DefaultMarginLeft,
+                Right = Styleset.DefaultMarginLeft
             },
             TextAlignment = TextAlignment.Right
         };
@@ -424,8 +424,8 @@ internal class PlainTextParagraphFormatterTests
         {
             Margins =
             {
-                Left = Document.DefaultMarginLeft,
-                Right = Document.DefaultMarginLeft
+                Left = Styleset.DefaultMarginLeft,
+                Right = Styleset.DefaultMarginLeft
             },
             BorderBrush = new SolidColorBrush(Colors.Black),
             BorderThickness =
@@ -437,8 +437,8 @@ internal class PlainTextParagraphFormatterTests
             },
             Paddings =
             {
-                Left = Document.DefaultMarginLeft,
-                Right = Document.DefaultMarginLeft
+                Left = Styleset.DefaultMarginLeft,
+                Right = Styleset.DefaultMarginLeft
             },
             TextAlignment = TextAlignment.Center
         };

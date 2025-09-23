@@ -16,10 +16,10 @@ public class CitationStyle : ParagraphStyleBase
         TagToUse = "CitationStyle";
         Name = TagToUse;
         TextAlignment = TextAlignment.Center;
-        Margins.Top = 3 * Document.DefaultPaddingWidth;
+        Margins.Top = 3 * Styleset.DefaultPaddingWidth;
         Margins.Bottom = 0;
-        Margins.Left = Document.DefaultMarginLeft;
-        Margins.Right = Document.DefaultMarginRight;
+        Margins.Left = Styleset.DefaultMarginLeft;
+        Margins.Right = Styleset.DefaultMarginRight;
         Italic = true;
         KeepWithNextParagraph = true;
         KeepTogether = true;

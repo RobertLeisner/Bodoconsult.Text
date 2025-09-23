@@ -1,4 +1,6 @@
-﻿using Bodoconsult.Text.Documents;
+﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
+
+using Bodoconsult.Text.Documents;
 
 namespace Bodoconsult.Text.Renderer.Html.Styles;
 
@@ -7,14 +9,14 @@ namespace Bodoconsult.Text.Renderer.Html.Styles;
 /// </summary>
 public class CodeStyleHtmlTextRendererElement : HtmlParagraphStyleTextRendererElementBase
 {
-    private readonly CodeStyle _codeStyle;
+    private readonly CodeStyle _style;
 
     /// <summary>
     /// Default ctor
     /// </summary>
-    public CodeStyleHtmlTextRendererElement(CodeStyle codeStyle) : base(codeStyle)
+    public CodeStyleHtmlTextRendererElement(CodeStyle style) : base(style)
     {
-        _codeStyle = codeStyle;
+        _style = style;
         ClassName = "CodeStyle";
     }
 }

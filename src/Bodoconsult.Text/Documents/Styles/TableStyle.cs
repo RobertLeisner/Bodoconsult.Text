@@ -20,10 +20,10 @@ public class TableStyle : StyleBase
     /// <summary>
     /// Margins. Margin left and right are ignored. Table is always centered
     /// </summary>
-    public Thickness Margins { get; set; } = new(0, Document.DefaultFontSize, 0, 0);
+    public Thickness Margins { get; set; } = new(0, Styleset.DefaultFontSize, 0, 0);
 
     /// <summary>
     /// Border spacing in pt
     /// </summary>
-    public int BorderSpacing { get; set; } = Document.DefaultTablePaddingWidth;
+    public int BorderSpacing { get; set; } = Styleset.DefaultTablePaddingWidth;
 }

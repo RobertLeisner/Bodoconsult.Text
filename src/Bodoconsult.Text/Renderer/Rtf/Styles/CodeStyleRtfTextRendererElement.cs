@@ -9,14 +9,14 @@ namespace Bodoconsult.Text.Renderer.Rtf.Styles;
 /// </summary>
 public class CodeStyleRtfTextRendererElement : RtfParagraphStyleTextRendererElementBase
 {
-    private readonly ParagraphStyleBase _codeStyle;
+    private readonly ParagraphStyleBase _style;
 
     /// <summary>
     /// Default ctor
     /// </summary>
-    public CodeStyleRtfTextRendererElement(CodeStyle codeStyle) : base(codeStyle)
+    public CodeStyleRtfTextRendererElement(CodeStyle style) : base(style)
     {
-        _codeStyle = codeStyle;
+        _style = style;
         ClassName = "CodeStyle";
     }
 }

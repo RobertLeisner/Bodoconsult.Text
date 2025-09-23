@@ -25,6 +25,21 @@ public interface IStyleSet
     Style Title { get; }
 
     /// <summary>
+    /// Subtitle
+    /// </summary>
+    Style Subtitle { get; }
+
+    /// <summary>
+    /// Section title
+    /// </summary>
+    Style SectionTitle { get; }
+
+    /// <summary>
+    /// Section subtitle
+    /// </summary>
+    Style SectionSubtitle { get; }
+
+    /// <summary>
     /// Heading level 1
     /// </summary>
     Style Heading1 { get; }
@@ -43,6 +58,11 @@ public interface IStyleSet
     /// Heading level 4
     /// </summary>
     Style Heading4 { get; }
+
+    /// <summary>
+    /// Heading level 5
+    /// </summary>
+    Style Heading5 { get; }
 
     /// <summary>
     /// No heading 1 for small tables
@@ -65,6 +85,26 @@ public interface IStyleSet
     Style Table { get; }
 
     /// <summary>
+    /// Style used for table legends
+    /// </summary>
+    Style TableLegend { get; }
+
+    /// <summary>
+    /// Style used for figure legends
+    /// </summary>
+    Style FigureLegend { get; }
+
+    /// <summary>
+    /// Style used for equation legends
+    /// </summary>
+    Style EquationLegend { get; }
+
+    /// <summary>
+    /// Style for TOC section heading
+    /// </summary>
+    Style TocHeading { get; }
+
+    /// <summary>
     /// Style for TOC heading 1
     /// </summary>
     Style Toc1 { get; }
@@ -85,9 +125,39 @@ public interface IStyleSet
     Style Toc4 { get; }
 
     /// <summary>
-    /// Style for TOC title
+    /// Style for TOC heading 5
     /// </summary>
-    Style TocHeading1 { get; }
+    Style Toc5 { get; }
+
+    /// <summary>
+    /// Style for TOE section heading
+    /// </summary>
+    Style ToeHeading { get; }
+
+    /// <summary>
+    /// Style for TOE entry
+    /// </summary>
+    Style Toe { get; }
+
+    /// <summary>
+    /// Style for TOF section heading
+    /// </summary>
+    Style TofHeading { get; }
+
+    /// <summary>
+    /// Style for TOE entry
+    /// </summary>
+    Style Tof { get; }
+
+    /// <summary>
+    /// Style for TOT section heading
+    /// </summary>
+    Style TotHeading { get; }
+
+    /// <summary>
+    /// Style for TOE entry
+    /// </summary>
+    Style Tot { get; }
 
     /// <summary>
     /// Page header style
@@ -110,14 +180,54 @@ public interface IStyleSet
     Style Footer { get; }
 
     /// <summary>
-    /// Style for code segement paragraphs
+    /// Style for code segment paragraphs
     /// </summary>
     Style Code { get; }
+
+    /// <summary>
+    /// Style for info segment paragraphs
+    /// </summary>
+    Style Info { get; }
+
+    /// <summary>
+    /// Style for warning segment paragraphs
+    /// </summary>
+    Style Warning { get; }
+
+    /// <summary>
+    /// Style for error segment paragraphs
+    /// </summary>
+    Style Error { get; }
+
+    /// <summary>
+    /// Style for citation segment paragraphs
+    /// </summary>
+    Style Citation { get; }
+
+    /// <summary>
+    /// Style for citation source segment paragraphs
+    /// </summary>
+    Style CitationSource { get; }
 
     /// <summary>
     /// A style for bulleted lists
     /// </summary>
     Style Bullet1 { get; }
+
+    /// <summary>
+    /// A style to add empty space of make margins top on pages possible
+    /// </summary>
+    Style Empty { get; }
+
+    /// <summary>
+    /// Style for definition list term
+    /// </summary>
+    Style DefinitionListTerm { get; }
+
+    /// <summary>
+    /// Style for definition list item
+    /// </summary>
+    Style DefinitionListItem { get; }
 
     /// <summary>
     /// Current page setup

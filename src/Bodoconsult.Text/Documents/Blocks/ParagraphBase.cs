@@ -1,7 +1,5 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
-using System.Text;
-
 namespace Bodoconsult.Text.Documents;
 
 /// <summary>

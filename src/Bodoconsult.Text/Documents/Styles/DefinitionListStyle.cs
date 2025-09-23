@@ -17,5 +17,5 @@ public class DefinitionListStyle : StyleBase
     /// <summary>
     /// Margins. Margin left and right are ignored. Definitionlist is always on full page width
     /// </summary>
-    public Thickness Margins { get; set; } = new(0, Document.DefaultFontSize, 0, 0);
+    public Thickness Margins { get; set; } = new(0, Styleset.DefaultFontSize, 0, 0);
 }

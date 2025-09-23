@@ -13,7 +13,7 @@ public class DefinitionListItemStyle : ParagraphStyleBase
         TagToUse = "DefinitionListItemStyle";
         Name = TagToUse;
         Margins.Left = 0;
-        FontSize = Document.DefaultFontSize;
+        FontSize = Styleset.DefaultFontSize;
         Italic = false;
         Bold = false;
     }

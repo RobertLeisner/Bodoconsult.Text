@@ -14,8 +14,8 @@ public class SectionSubtitleStyle : ParagraphStyleBase
     {
         TagToUse = "SectionSubtitleStyle";
         Name = TagToUse;
-        FontSize = Document.DefaultFontSize + 2;
-        Margins.Top = Document.DefaultFontSize * 2;
+        FontSize = Styleset.DefaultFontSize + 2;
+        Margins.Top = Styleset.DefaultFontSize * 2;
         TextAlignment = TextAlignment.Center;
         Bold = true;
     }

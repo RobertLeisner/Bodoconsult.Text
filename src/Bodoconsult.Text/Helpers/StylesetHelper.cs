@@ -80,6 +80,14 @@ public static class StylesetHelper
         var figureStyle = new FigureStyle();
         styleSet.AddBlock(figureStyle);
 
+        // Add style FooterStyle for footers
+        var footerStyle = new FooterStyle();
+        styleSet.AddBlock(footerStyle);
+
+        // Add style HeaderStyle for headers
+        var headerStyle = new HeaderStyle();
+        styleSet.AddBlock(headerStyle);
+
         // Add style Heading1Style for Heading1 instances 
         var heading1Style = new Heading1Style();
         styleSet.AddBlock(heading1Style);
@@ -297,6 +305,14 @@ public static class StylesetHelper
         // Add style FigureStyle for Figure instances 
         var figureStyle = new FigureStyle();
         styleSet.AddBlock(figureStyle);
+
+        // Add style FooterStyle for footers
+        var footerStyle = new FooterStyle();
+        styleSet.AddBlock(footerStyle);
+
+        // Add style HeaderStyle for headers
+        var headerStyle = new HeaderStyle();
+        styleSet.AddBlock(headerStyle);
 
         // Add style Heading1Style for Heading1 instances 
         var heading1Style = new Heading1Style

@@ -15,6 +15,6 @@ public class TofStyle : ParagraphStyleBase
         TagToUse = "TofStyle";
         Name = TagToUse;
         Margins.Left = 0;
-        FontSize = Document.DefaultFontSize - 2;
+        FontSize = Styleset.DefaultFontSize - 2;
     }
 }
