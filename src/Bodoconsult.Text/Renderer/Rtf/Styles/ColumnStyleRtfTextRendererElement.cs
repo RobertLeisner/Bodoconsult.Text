@@ -1,4 +1,5 @@
 ﻿using Bodoconsult.Text.Documents;
+using Bodoconsult.Text.Interfaces;
 
 namespace Bodoconsult.Text.Renderer.Rtf.Styles;
 
@@ -21,7 +22,7 @@ public class ColumnStyleRtfTextRendererElement : ITextRendererElement
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public void RenderIt(ITextDocumentRender renderer)
+    public void RenderIt(ITextDocumentRenderer renderer)
     {
 
     }

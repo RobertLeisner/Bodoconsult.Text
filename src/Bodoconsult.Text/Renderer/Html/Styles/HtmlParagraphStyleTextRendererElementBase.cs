@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Extensions;
 using System.Text;
+using Bodoconsult.Text.Interfaces;
 
 namespace Bodoconsult.Text.Renderer.Html.Styles;
 
@@ -45,7 +46,7 @@ public class HtmlParagraphStyleTextRendererElementBase: ITextRendererElement
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public virtual void RenderIt(ITextDocumentRender renderer)
+    public virtual void RenderIt(ITextDocumentRenderer renderer)
     {
         var sb = new StringBuilder();
 

@@ -1,5 +1,7 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
+using Bodoconsult.Text.Interfaces;
+
 namespace Bodoconsult.Text.Renderer.Html.Styles;
 
 /// <summary>
@@ -16,7 +18,7 @@ public abstract class HtmlStyleTextRendererElementBase : ITextRendererElement
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public virtual void RenderIt(ITextDocumentRender renderer)
+    public virtual void RenderIt(ITextDocumentRenderer renderer)
     {
         // Do nothing
     }

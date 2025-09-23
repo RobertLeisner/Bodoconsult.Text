@@ -2,6 +2,7 @@
 
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
+using Bodoconsult.Text.Interfaces;
 using System.Text;
 
 namespace Bodoconsult.Text.Renderer.Rtf.Blocks;
@@ -27,7 +28,7 @@ public class CellRtfTextRendererElement : RtfTextRendererElementBase
     /// </summary>
     /// <param name="renderer">Current renderer</param>
     /// <param name="sb">Current string builder</param>
-    public void RenderToString(ITextDocumentRender renderer, StringBuilder sb)
+    public void RenderToString(ITextDocumentRenderer renderer, StringBuilder sb)
     {
         var type = _cell.Column.DataType;
 

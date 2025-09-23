@@ -4,6 +4,7 @@ using System;
 using System.Text;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
+using Bodoconsult.Text.Interfaces;
 
 namespace Bodoconsult.Text.Renderer.Html;
 
@@ -52,7 +53,7 @@ public class BoldHtmlTextRendererElement : InlineHtmlTextRendererElementBase
     /// </summary>
     /// <param name="renderer">Current renderer</param>
     /// <param name="sb">String to add the inline element rendered</param>
-    public override void RenderToString(ITextDocumentRender renderer, StringBuilder sb)
+    public override void RenderToString(ITextDocumentRenderer renderer, StringBuilder sb)
     {
         if (_span.ChildInlines.Count == 0)
         {

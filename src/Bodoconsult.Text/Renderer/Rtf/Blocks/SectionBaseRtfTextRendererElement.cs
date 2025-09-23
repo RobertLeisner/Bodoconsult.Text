@@ -4,6 +4,7 @@ using System;
 using System.Text;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
+using Bodoconsult.Text.Interfaces;
 
 namespace Bodoconsult.Text.Renderer.Rtf.Blocks;
 
@@ -28,7 +29,7 @@ public abstract class SectionBaseRtfTextRendererElement : RtfTextRendererElement
     /// <param name="renderer">Current renderer</param>
     /// <param name="styleName">Stylename to use for caption</param>
     /// <param name="caption">Caption</param>
-    public void RenderItInternal(ITextDocumentRender renderer, string styleName, string caption)
+    public void RenderItInternal(ITextDocumentRenderer renderer, string styleName, string caption)
     {
         if (_section.ChildBlocks.Count == 0)
         {
@@ -95,7 +96,7 @@ public abstract class SectionBaseRtfTextRendererElement : RtfTextRendererElement
 
     }
 
-    private static void AddHeader(ITextDocumentRender renderer, PageStyleBase pageStyle, SectionBase section)
+    private static void AddHeader(ITextDocumentRenderer renderer, PageStyleBase pageStyle, SectionBase section)
     {
         if (!section.IsHeaderRequired)
         {
@@ -107,7 +108,7 @@ public abstract class SectionBaseRtfTextRendererElement : RtfTextRendererElement
         renderer.Content.Append($@"{{\header{{\pard\plain{RtfHelper.GetFormatSettings(style, renderer.Styleset)}{{{renderer.Document.DocumentMetaData.Title}}}\par}}}}");
     }
 
-    private static void AddFooter(ITextDocumentRender renderer, PageStyleBase pageStyle, SectionBase section)
+    private static void AddFooter(ITextDocumentRenderer renderer, PageStyleBase pageStyle, SectionBase section)
     {
         if (!section.IsFooterRequired)
         {

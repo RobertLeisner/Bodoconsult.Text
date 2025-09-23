@@ -2,6 +2,7 @@
 
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
+using Bodoconsult.Text.Interfaces;
 using System.Text;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
@@ -25,7 +26,7 @@ public class ToeSectionPlainTextRendererElement : ITextRendererElement
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public void RenderIt(ITextDocumentRender renderer)
+    public void RenderIt(ITextDocumentRenderer renderer)
     {
         // Get the content of all inlines as string
         if (_toeSection.ChildBlocks.Count == 0)

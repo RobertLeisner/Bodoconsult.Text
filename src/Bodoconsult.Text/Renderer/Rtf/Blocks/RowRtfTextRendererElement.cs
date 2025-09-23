@@ -3,6 +3,7 @@
 using System;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
+using Bodoconsult.Text.Interfaces;
 
 namespace Bodoconsult.Text.Renderer.Rtf.Blocks;
 
@@ -26,7 +27,7 @@ public class RowRtfTextRendererElement : ITextRendererElement
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public void RenderIt(ITextDocumentRender renderer)
+    public void RenderIt(ITextDocumentRenderer renderer)
     {
         renderer.Content.Append(@"\trowd\trautofit1\trqc\trpaddfb3\trpaddfr3\trpaddft3\trpaddfl3\trpaddb80\trpaddr80\trpaddt80\trpaddl80");
 

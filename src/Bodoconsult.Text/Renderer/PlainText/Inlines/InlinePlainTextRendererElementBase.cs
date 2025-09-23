@@ -3,6 +3,7 @@
 using System;
 using System.Text;
 using Bodoconsult.Text.Documents;
+using Bodoconsult.Text.Interfaces;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
 
@@ -15,7 +16,7 @@ public class InlinePlainTextRendererElementBase : ITextRendererElement
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public void RenderIt(ITextDocumentRender renderer)
+    public void RenderIt(ITextDocumentRenderer renderer)
     {
         // do nothing
     }
@@ -25,7 +26,7 @@ public class InlinePlainTextRendererElementBase : ITextRendererElement
     /// </summary>
     /// <param name="renderer">Current renderer</param>
     /// <param name="sb">String to add the inline element rendered</param>
-    public virtual void RenderToString(ITextDocumentRender renderer, StringBuilder sb)
+    public virtual void RenderToString(ITextDocumentRenderer renderer, StringBuilder sb)
     {
         throw new NotSupportedException("Override method RenderToString() in derived subclasses");
     }

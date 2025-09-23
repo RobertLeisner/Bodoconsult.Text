@@ -3,6 +3,7 @@
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Extensions;
 using Bodoconsult.Text.Helpers;
+using Bodoconsult.Text.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -29,7 +30,7 @@ public class TablePlainTextRendererElement : ITextRendererElement
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public void RenderIt(ITextDocumentRender renderer)
+    public void RenderIt(ITextDocumentRenderer renderer)
     {
         // Get the content of all inlines as string
         var sb = new StringBuilder();
@@ -90,7 +91,7 @@ public class TablePlainTextRendererElement : ITextRendererElement
         }
     }
 
-    private static void PrintTable(ITextDocumentRender renderer, List<List<string>> rowData, Table table)
+    private static void PrintTable(ITextDocumentRenderer renderer, List<List<string>> rowData, Table table)
     {
         AddLine(renderer, table);
 
@@ -110,7 +111,7 @@ public class TablePlainTextRendererElement : ITextRendererElement
         AddLine(renderer, table);
     }
 
-    private static void AddLine(ITextDocumentRender renderer, Table table)
+    private static void AddLine(ITextDocumentRenderer renderer, Table table)
     {
         renderer.Content.Append('-');
 

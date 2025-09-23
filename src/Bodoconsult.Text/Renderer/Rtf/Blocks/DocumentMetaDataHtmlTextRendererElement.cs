@@ -2,6 +2,7 @@
 
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
+using Bodoconsult.Text.Interfaces;
 using System;
 using System.Linq;
 using System.Text;
@@ -28,7 +29,7 @@ public class DocumentMetaDataRtfTextRendererElement : RtfTextRendererElementBase
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public override void RenderIt(ITextDocumentRender renderer)
+    public override void RenderIt(ITextDocumentRenderer renderer)
     {
         var sb = new StringBuilder();
 

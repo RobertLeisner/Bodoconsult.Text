@@ -2,6 +2,7 @@
 
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
+using Bodoconsult.Text.Interfaces;
 
 namespace Bodoconsult.Text.Renderer.Rtf.Blocks;
 
@@ -25,7 +26,7 @@ public class DefinitionListRtfTextRendererElement : RtfTextRendererElementBase
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public override void RenderIt(ITextDocumentRender renderer)
+    public override void RenderIt(ITextDocumentRenderer renderer)
     {
         // top margin
         var listStyle = (DefinitionListStyle)renderer.Document.Styleset.FindStyle("DefinitionListStyle");

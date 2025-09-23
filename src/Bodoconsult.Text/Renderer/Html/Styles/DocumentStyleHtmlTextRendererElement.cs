@@ -1,4 +1,5 @@
 ﻿using Bodoconsult.Text.Documents;
+using Bodoconsult.Text.Interfaces;
 using System.Text;
 
 namespace Bodoconsult.Text.Renderer.Html.Styles;
@@ -23,7 +24,7 @@ public class DocumentStyleHtmlTextRendererElement : HtmlPageStyleTextRendererEle
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public override void RenderIt(ITextDocumentRender renderer)
+    public override void RenderIt(ITextDocumentRenderer renderer)
     {
         var sb = new StringBuilder();
 

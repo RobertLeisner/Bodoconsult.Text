@@ -4,6 +4,7 @@ using System;
 using System.Text;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
+using Bodoconsult.Text.Interfaces;
 
 namespace Bodoconsult.Text.Renderer.Rtf.Styles;
 
@@ -39,7 +40,7 @@ public class RtfParagraphStyleTextRendererElementBase : ITextRendererElement
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public virtual void RenderIt(ITextDocumentRender renderer)
+    public virtual void RenderIt(ITextDocumentRenderer renderer)
     {
         var name = Style.GetType().Name;
 

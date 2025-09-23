@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
 
 using Bodoconsult.Text.Documents;
+using Bodoconsult.Text.Interfaces;
 using System;
 
 namespace Bodoconsult.Text.Renderer.Html;
@@ -25,7 +26,7 @@ public class CitationHtmlTextRendererElement : HtmlTextRendererElementBase
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public override void RenderIt(ITextDocumentRender renderer)
+    public override void RenderIt(ITextDocumentRenderer renderer)
     {
         base.RenderIt(renderer);
 

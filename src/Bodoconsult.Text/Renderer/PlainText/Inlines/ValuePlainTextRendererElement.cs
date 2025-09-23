@@ -2,6 +2,7 @@
 
 using System.Text;
 using Bodoconsult.Text.Documents;
+using Bodoconsult.Text.Interfaces;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
 
@@ -42,7 +43,7 @@ public class ValuePlainTextRendererElement : InlinePlainTextRendererElementBase
     /// </summary>
     /// <param name="renderer">Current renderer</param>
     /// <param name="sb">String to add the inline element rendered</param>
-    public override void RenderToString(ITextDocumentRender renderer, StringBuilder sb)
+    public override void RenderToString(ITextDocumentRenderer renderer, StringBuilder sb)
     {
         sb.Append($"{renderer.CheckContent(_value.Content)}");
     }

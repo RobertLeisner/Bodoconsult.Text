@@ -1,14 +1,13 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using System.Text;
-using Bodoconsult.Text.Interfaces;
 
-namespace Bodoconsult.Text.Renderer;
+namespace Bodoconsult.Text.Interfaces;
 
 /// <summary>
 /// Interface for text based <see cref="IDocumentRenderer"/> implementations
 /// </summary>
-public interface ITextDocumentRender: IDocumentRenderer
+public interface ITextDocumentRenderer: IDocumentRenderer
 {
 
     /// <summary>

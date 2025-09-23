@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using Bodoconsult.Text.Documents;
-using Bodoconsult.Text.Renderer;
+using Bodoconsult.Text.Interfaces;
 using Bodoconsult.Text.Renderer.Html;
 using Bodoconsult.Text.Renderer.PlainText;
 using Bodoconsult.Text.Renderer.Rtf.Blocks;
@@ -25,7 +25,7 @@ public class DocumentRendererHelper
     /// <param name="childInlines">Current child inlines</param>
     /// <param name="tag">Tag to add before and after the inlines</param>
     /// <param name="isBlock">Parent element is a block</param>
-    public static void RenderInlineChildsToPlainText(ITextDocumentRender renderer, StringBuilder sb, List<Inline> childInlines,
+    public static void RenderInlineChildsToPlainText(ITextDocumentRenderer renderer, StringBuilder sb, List<Inline> childInlines,
         string tag = null, bool isBlock = false)
     {
 
@@ -54,7 +54,7 @@ public class DocumentRendererHelper
     /// <param name="childInlines">Current child inlines</param>
     /// <param name="tag">Tag to add before and after the inlines</param>
     /// <param name="isBlock">Parent element is a block</param>
-    public static void RenderInlineChildsToHtml(ITextDocumentRender renderer, StringBuilder sb, List<Inline> childInlines,
+    public static void RenderInlineChildsToHtml(ITextDocumentRenderer renderer, StringBuilder sb, List<Inline> childInlines,
         string tag = null, bool isBlock = false)
     {
 
@@ -80,7 +80,7 @@ public class DocumentRendererHelper
     /// </summary>
     /// <param name="renderer">Current renderer instance</param>
     /// <param name="childBlocks">Child blocks</param>
-    public static void RenderBlockChildsToHtml(ITextDocumentRender renderer, List<Block> childBlocks)
+    public static void RenderBlockChildsToHtml(ITextDocumentRenderer renderer, List<Block> childBlocks)
     {
         foreach (var block in childBlocks)
         {
@@ -94,7 +94,7 @@ public class DocumentRendererHelper
     /// </summary>
     /// <param name="renderer">Current renderer instance</param>
     /// <param name="rows">Child blocks</param>
-    public static void RenderRowsToHtml(ITextDocumentRender renderer, List<Row> rows)
+    public static void RenderRowsToHtml(ITextDocumentRenderer renderer, List<Row> rows)
     {
         foreach (var row in rows)
         {
@@ -108,7 +108,7 @@ public class DocumentRendererHelper
     /// </summary>
     /// <param name="renderer">Current renderer instance</param>
     /// <param name="items">Items to render</param>
-    public static void RenderItemsToHtml<T>(ITextDocumentRender renderer, List<T> items) where T : DocumentElement
+    public static void RenderItemsToHtml<T>(ITextDocumentRenderer renderer, List<T> items) where T : DocumentElement
     {
         foreach (var item in items)
         {
@@ -122,7 +122,7 @@ public class DocumentRendererHelper
     /// </summary>
     /// <param name="renderer">Current renderer instance</param>
     /// <param name="rows">Child blocks</param>
-    public static void RenderRowsToRtf(ITextDocumentRender renderer, List<Row> rows)
+    public static void RenderRowsToRtf(ITextDocumentRenderer renderer, List<Row> rows)
     {
         foreach (var row in rows)
         {
@@ -136,7 +136,7 @@ public class DocumentRendererHelper
     /// </summary>
     /// <param name="renderer">Current renderer instance</param>
     /// <param name="childBlocks">Child blocks</param>
-    public static void RenderBlockChildsToPlain(ITextDocumentRender renderer, List<Block> childBlocks)
+    public static void RenderBlockChildsToPlain(ITextDocumentRenderer renderer, List<Block> childBlocks)
     {
         foreach (var block in childBlocks)
         {
@@ -150,7 +150,7 @@ public class DocumentRendererHelper
     /// </summary>
     /// <param name="renderer">Current renderer instance</param>
     /// <param name="childBlocks">Child blocks</param>
-    public static void RenderBlockChildsToRtf(ITextDocumentRender renderer, List<Block> childBlocks)
+    public static void RenderBlockChildsToRtf(ITextDocumentRenderer renderer, List<Block> childBlocks)
     {
         foreach (var block in childBlocks)
         {
@@ -165,7 +165,7 @@ public class DocumentRendererHelper
     /// <param name="renderer">Current renderer instance</param>
     /// <param name="sb">Current string</param>
     /// <param name="childInlines">Child inlines</param>
-    public static void RenderInlineChildsToRtf(ITextDocumentRender renderer, StringBuilder sb, List<Inline> childInlines)
+    public static void RenderInlineChildsToRtf(ITextDocumentRenderer renderer, StringBuilder sb, List<Inline> childInlines)
     {
         foreach (var inline in childInlines)
         {
@@ -179,7 +179,7 @@ public class DocumentRendererHelper
     /// </summary>
     /// <param name="renderer">Current renderer</param>
     /// <param name="cells">List of all cellss to render</param>
-    public static void RenderCellsToHtml(ITextDocumentRender renderer, List<Cell> cells)
+    public static void RenderCellsToHtml(ITextDocumentRenderer renderer, List<Cell> cells)
     {
         foreach (var cell in cells)
         {
@@ -194,7 +194,7 @@ public class DocumentRendererHelper
     /// <param name="renderer">Current renderer</param>
     /// <param name="tableRows">List of all rows to render</param>
     /// <param name="rowData"></param>
-    public static void RenderRowsToPlain(ITextDocumentRender renderer, List<Row> tableRows, List<List<string>> rowData)
+    public static void RenderRowsToPlain(ITextDocumentRenderer renderer, List<Row> tableRows, List<List<string>> rowData)
     {
         foreach (var row in tableRows)
         {
@@ -209,7 +209,7 @@ public class DocumentRendererHelper
     /// <param name="renderer">Current renderer</param>
     /// <param name="cells">List of all cells to render</param>
     /// <param name="row">List with all rows of the table to print</param>
-    public static void RenderCellsToPlain(ITextDocumentRender renderer, List<Cell> cells, List<string> row)
+    public static void RenderCellsToPlain(ITextDocumentRenderer renderer, List<Cell> cells, List<string> row)
     {
         foreach (var cell in cells)
         {
@@ -223,7 +223,7 @@ public class DocumentRendererHelper
     /// </summary>
     /// <param name="renderer">Current renderer</param>
     /// <param name="cells">List of all cells to render</param>
-    public static void RenderCellsToRtf(ITextDocumentRender renderer, List<Cell> cells)
+    public static void RenderCellsToRtf(ITextDocumentRenderer renderer, List<Cell> cells)
     {
         //foreach (var cell in cells)
         //{
@@ -250,7 +250,7 @@ public class DocumentRendererHelper
     /// </summary>
     /// <param name="renderer">Current renderer</param>
     /// <param name="cells">List of all cells to render</param>
-    public static void RenderCellWidthsToRtf(ITextDocumentRender renderer, List<Cell> cells)
+    public static void RenderCellWidthsToRtf(ITextDocumentRenderer renderer, List<Cell> cells)
     {
         for (var index = 0; index < cells.Count; index++)
         {
@@ -292,7 +292,7 @@ public class DocumentRendererHelper
     /// <param name="renderer">Current renderer</param>
     /// <param name="image">Curent image</param>
     /// <exception cref="NotSupportedException"></exception>
-    public static void CreateImageRtf(ITextDocumentRender renderer, ImageBase image)
+    public static void CreateImageRtf(ITextDocumentRenderer renderer, ImageBase image)
     {
         // Get the content of all inlines as string
         var sb = new StringBuilder();
@@ -357,7 +357,7 @@ public class DocumentRendererHelper
     /// <param name="tagToUse">Tag to use</param>
     /// <param name="localCss">Local CSS class name</param>
     /// <param name="className">Class name</param>
-    public static void CreateImageHtml(ITextDocumentRender renderer, ImageBase image, string tagToUse, string localCss, string className)
+    public static void CreateImageHtml(ITextDocumentRenderer renderer, ImageBase image, string tagToUse, string localCss, string className)
     {
         // Get the content of all inlines as string
         var sb = new StringBuilder();
@@ -398,7 +398,7 @@ public class DocumentRendererHelper
     /// </summary>
     /// <param name="renderer">Current renderer</param>
     /// <param name="image">Current image</param>
-    public static void CreateImagePlainText(ITextDocumentRender renderer, ImageBase image)
+    public static void CreateImagePlainText(ITextDocumentRenderer renderer, ImageBase image)
     {
         var sb = new StringBuilder();
         sb.Append(image.CurrentPrefix);

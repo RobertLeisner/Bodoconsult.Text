@@ -2,7 +2,7 @@
 
 using Bodoconsult.Text.Documents;
 
-namespace Bodoconsult.Text.Renderer;
+namespace Bodoconsult.Text.Interfaces;
 
 /// <summary>
 /// Interface for factories creating instances of <see cref="ITextRendererElement"/>

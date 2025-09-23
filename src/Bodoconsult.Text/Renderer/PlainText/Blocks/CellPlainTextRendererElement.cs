@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
+using Bodoconsult.Text.Interfaces;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
 
@@ -26,7 +27,7 @@ public class CellPlainTextRendererElement : ITextRendererElement
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public void RenderIt(ITextDocumentRender renderer)
+    public void RenderIt(ITextDocumentRenderer renderer)
     {
         // Do nothing
     }
@@ -36,7 +37,7 @@ public class CellPlainTextRendererElement : ITextRendererElement
     /// </summary>
     /// <param name="renderer">Current renderer</param>
     /// <param name="row"></param>
-    public void RenderToString(ITextDocumentRender renderer, List<string> row)
+    public void RenderToString(ITextDocumentRenderer renderer, List<string> row)
     {
         var sb = new StringBuilder();
         DocumentRendererHelper.RenderInlineChildsToPlainText(renderer, sb, _cell.ChildInlines);

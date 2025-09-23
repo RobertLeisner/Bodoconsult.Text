@@ -2,6 +2,7 @@
 
 using System.Text;
 using Bodoconsult.Text.Documents;
+using Bodoconsult.Text.Interfaces;
 
 namespace Bodoconsult.Text.Renderer.Html;
 
@@ -25,7 +26,7 @@ public class StylesetHtmlTextRendererElement : HtmlTextRendererElementBase
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public override void RenderIt(ITextDocumentRender renderer)
+    public override void RenderIt(ITextDocumentRenderer renderer)
     {
         renderer.Content.AppendLine("<style>");
 

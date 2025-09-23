@@ -1,5 +1,6 @@
 ﻿using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
+using Bodoconsult.Text.Interfaces;
 
 namespace Bodoconsult.Text.Renderer.Html;
 
@@ -23,7 +24,7 @@ public class TofSectionHtmlTextRendererElement : HtmlTextRendererElementBase
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public override void RenderIt(ITextDocumentRender renderer)
+    public override void RenderIt(ITextDocumentRenderer renderer)
     {
         if (_tofSection.ChildBlocks.Count == 0)
         {

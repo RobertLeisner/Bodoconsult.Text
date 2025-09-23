@@ -2,6 +2,7 @@
 
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
+using Bodoconsult.Text.Interfaces;
 using System;
 using System.Text;
 
@@ -34,7 +35,7 @@ public class ListPlainTextRendererElement : ParagraphBasePlainTextRendererElemen
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public override void RenderIt(ITextDocumentRender renderer)
+    public override void RenderIt(ITextDocumentRenderer renderer)
     {
         ListStyle = (ListStyle)renderer.Styleset.FindStyle("ListStyle");
 
@@ -53,7 +54,7 @@ public class ListPlainTextRendererElement : ParagraphBasePlainTextRendererElemen
         AddMargin(renderer, ListStyle.Margins.Bottom);
     }
 
-    private void AddMargin(ITextDocumentRender renderer, double thickness)
+    private void AddMargin(ITextDocumentRenderer renderer, double thickness)
     {
         if (thickness <= 0)
         {

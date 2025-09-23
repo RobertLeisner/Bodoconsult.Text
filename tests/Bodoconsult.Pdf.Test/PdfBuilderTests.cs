@@ -20,11 +20,8 @@ public class PdfBuilderTests
     [Test]
     public void TestPdfCreatorWithDefaultStyleSheet()
     {
-
         var fileName = Path.Combine(TestHelper.TempPath, "pdf1.pdf");
-
         CreateFile(fileName);
-
     }
 
 

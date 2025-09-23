@@ -2,6 +2,7 @@
 
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
+using Bodoconsult.Text.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -30,7 +31,7 @@ public class TableHtmlTextRendererElement : HtmlTextRendererElementBase
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public override void RenderIt(ITextDocumentRender renderer)
+    public override void RenderIt(ITextDocumentRenderer renderer)
     {
         // Get the content of all inlines as string
         var sb = new StringBuilder();
@@ -72,7 +73,7 @@ public class TableHtmlTextRendererElement : HtmlTextRendererElementBase
         renderer.Content.Append(sb);
     }
 
-    private static void AddHeaderRow(ITextDocumentRender renderer, Table table)
+    private static void AddHeaderRow(ITextDocumentRenderer renderer, Table table)
     {
         renderer.Content.AppendLine("<tr class=\"RowStyle\">");
 

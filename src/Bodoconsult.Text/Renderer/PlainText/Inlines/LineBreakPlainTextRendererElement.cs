@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using Bodoconsult.Text.Documents;
+using Bodoconsult.Text.Interfaces;
 using System;
 using System.Text;
 
@@ -36,7 +37,7 @@ public class LineBreakPlainTextRendererElement : InlinePlainTextRendererElementB
     /// </summary>
     /// <param name="renderer">Current renderer</param>
     /// <param name="sb">String to add the inline element rendered</param>
-    public override void RenderToString(ITextDocumentRender renderer, StringBuilder sb)
+    public override void RenderToString(ITextDocumentRenderer renderer, StringBuilder sb)
     {
         sb.Append($"{Environment.NewLine}{Environment.NewLine}");
     }

@@ -2,6 +2,7 @@
 
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
+using Bodoconsult.Text.Interfaces;
 using System;
 using System.Diagnostics;
 using System.Text;
@@ -28,7 +29,7 @@ public class DefinitionListTermRtfTextRendererElement : RtfTextRendererElementBa
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public override void RenderIt(ITextDocumentRender renderer)
+    public override void RenderIt(ITextDocumentRenderer renderer)
     {
         // Get the content of all inlines as string
         var sb = new StringBuilder();

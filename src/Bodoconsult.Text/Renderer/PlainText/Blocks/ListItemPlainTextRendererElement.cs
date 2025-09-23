@@ -5,6 +5,7 @@ using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
 using System.Text;
 using Bodoconsult.Text.Extensions;
+using Bodoconsult.Text.Interfaces;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
 
@@ -29,7 +30,7 @@ public class ListItemPlainTextRendererElement : ParagraphBasePlainTextRendererEl
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public override void RenderIt(ITextDocumentRender renderer)
+    public override void RenderIt(ITextDocumentRenderer renderer)
     {
         // Get the content of all inlines as string
         string listChars = " ";

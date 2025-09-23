@@ -2,6 +2,7 @@
 
 
 using Bodoconsult.Text.Documents;
+using Bodoconsult.Text.Interfaces;
 using System.Text;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
@@ -25,7 +26,7 @@ public class CitationPlainTextRendererElement : ParagraphBasePlainTextRendererEl
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public override void RenderIt(ITextDocumentRender renderer)
+    public override void RenderIt(ITextDocumentRenderer renderer)
     {
         base.RenderIt(renderer);
 

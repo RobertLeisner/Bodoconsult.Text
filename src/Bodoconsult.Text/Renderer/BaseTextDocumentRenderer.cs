@@ -10,7 +10,7 @@ namespace Bodoconsult.Text.Renderer;
 /// <summary>
 /// Base implementation of a <see cref="IDocumentRenderer"/> for text based output like TXT, MD or HTML
 /// </summary>
-public class BaseTextDocumentRenderer : BaseDocumentRenderer, ITextDocumentRender
+public class BaseTextDocumentRenderer : BaseDocumentRenderer, ITextDocumentRenderer
 {
 
     /// <summary>
@@ -46,30 +46,8 @@ public class BaseTextDocumentRenderer : BaseDocumentRenderer, ITextDocumentRende
     /// </summary>
     public override void RenderIt()
     {
-
         var rendererElement = TextRendererElementFactory.CreateInstance(Document);
         rendererElement.RenderIt(this);
-
-        //foreach (var section in Document.ChildBlocks)
-        //{
-        //    var type = section.GetType();
-
-        //    if (type == typeof(DocumentMetaData))
-        //    {
-        //        continue;
-        //    }
-
-        //    if (type == typeof(Styleset) && !IsRenderingStylesRequired)
-        //    {
-        //        continue;
-        //    }
-
-        //    foreach (var block in section.ChildBlocks)
-        //    {
-        //        var rendererElement = TextRendererElementFactory.CreateInstance(block);
-        //        rendererElement.RenderIt(this);
-        //    }
-        //}
     }
 
     /// <summary>

@@ -4,6 +4,7 @@ using System;
 using System.Text;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
+using Bodoconsult.Text.Interfaces;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
 
@@ -27,7 +28,7 @@ public class DefinitionListTermPlainTextRendererElement : ParagraphBasePlainText
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public override void RenderIt(ITextDocumentRender renderer)
+    public override void RenderIt(ITextDocumentRenderer renderer)
     {
         // Get the content of all inlines as string
         var sb = new StringBuilder();

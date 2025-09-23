@@ -2,6 +2,7 @@
 
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
+using Bodoconsult.Text.Interfaces;
 
 namespace Bodoconsult.Text.Renderer.Rtf.Blocks;
 
@@ -25,7 +26,7 @@ public class DocumentRtfTextRendererElement : RtfTextRendererElementBase
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public override void RenderIt(ITextDocumentRender renderer)
+    public override void RenderIt(ITextDocumentRenderer renderer)
     {
         renderer.Content.AppendLine(@"{\rtf1\ansi\deff0");
         DocumentRendererHelper.RenderBlockChildsToRtf(renderer,  _document.ChildBlocks);

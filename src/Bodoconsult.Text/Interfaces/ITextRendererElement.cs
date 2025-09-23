@@ -1,6 +1,9 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
-namespace Bodoconsult.Text.Renderer
+
+// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
+
+namespace Bodoconsult.Text.Interfaces
 {
     /// <summary>
     /// Interface for text rendering elements
@@ -11,6 +14,6 @@ namespace Bodoconsult.Text.Renderer
         /// Render the element
         /// </summary>
         /// <param name="renderer">Current renderer</param>
-        void RenderIt(ITextDocumentRender renderer);
+        void RenderIt(ITextDocumentRenderer renderer);
     }
 }

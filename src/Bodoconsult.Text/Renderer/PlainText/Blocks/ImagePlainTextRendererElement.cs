@@ -2,6 +2,7 @@
 
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
+using Bodoconsult.Text.Interfaces;
 
 namespace Bodoconsult.Text.Renderer.PlainText;
 
@@ -23,7 +24,7 @@ public class ImagePlainTextRendererElement : ITextRendererElement
     /// <summary>
     /// Render the element
     /// </summary>
-    public void RenderIt(ITextDocumentRender renderer)
+    public void RenderIt(ITextDocumentRenderer renderer)
     {
         DocumentRendererHelper.CreateImagePlainText(renderer, _image);
     }
