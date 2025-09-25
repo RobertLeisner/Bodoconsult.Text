@@ -26,8 +26,8 @@ public class ParagraphCenterPdfTextRendererElement : ParagraphPdfTextRendererEle
     /// <param name="renderer">Current renderer</param>
     public override void RenderIt(PdfTextDocumentRenderer renderer)
     {
-        Paragraph = renderer.PdfDocument.AddParagraphCenter(string.Empty);
         base.RenderIt(renderer);
+        Paragraph = renderer.PdfDocument.AddParagraphCenter(Content.ToString());
     }
 
 

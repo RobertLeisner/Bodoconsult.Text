@@ -34,8 +34,6 @@ public class TotSectionPdfTextRendererElement : PdfTextRendererElementBase
 
         renderer.PdfDocument.CreateTotSection();
 
-        renderer.PdfDocument.AddParagraph(renderer.Document.DocumentMetaData.TotHeading);
-
         PdfDocumentRendererHelper.RenderBlockChildsToPdf(renderer, Block.ChildBlocks);
     }
 }

@@ -7,7 +7,6 @@ using Bodoconsult.Text.Interfaces;
 using Bodoconsult.Text.Pdf.Interfaces;
 using Bodoconsult.Text.Renderer;
 using PdfSharp.Fonts;
-using System;
 
 namespace Bodoconsult.Text.Pdf.Renderer;
 
@@ -27,6 +26,10 @@ public class PdfTextDocumentRenderer : BaseDocumentRenderer
         PdfTextRendererElementFactory = (IPdfTextRendererElementFactory)textRendererElementFactory;
         IStyleSet styleSet = new DefaultStyleSet();
         PdfDocument = new PdfBuilder(styleSet, fontResolver);
+        PdfDocument.TitleTableOfFigures = document.DocumentMetaData.TofHeading;
+        PdfDocument.TitleTableOfEquations = document.DocumentMetaData.ToeHeading;
+        PdfDocument.TitleTableOfTables = document.DocumentMetaData.TotHeading;
+        PdfDocument.TitleTableOfContent = document.DocumentMetaData.TocHeading;
     }
 
     /// <summary>

@@ -1,6 +1,4 @@
 ﻿using Bodoconsult.Text.Documents;
-using Bodoconsult.Text.Helpers;
-using Bodoconsult.Text.Interfaces;
 using Bodoconsult.Text.Pdf.Helpers;
 
 namespace Bodoconsult.Text.Pdf.Renderer.Blocks;
@@ -33,8 +31,6 @@ public class TofSectionPdfTextRendererElement : PdfTextRendererElementBase
         }
 
         renderer.PdfDocument.CreateTofSection();
-
-        renderer.PdfDocument.AddParagraph(renderer.Document.DocumentMetaData.TofHeading);
 
         PdfDocumentRendererHelper.RenderBlockChildsToPdf(renderer, Block.ChildBlocks);
     }

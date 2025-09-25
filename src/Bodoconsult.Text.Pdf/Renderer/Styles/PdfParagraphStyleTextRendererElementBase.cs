@@ -1,10 +1,9 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using System.Collections.Generic;
-using System.Text;
 using Bodoconsult.Text.Documents;
-using Bodoconsult.Text.Extensions;
 using Bodoconsult.Text.Interfaces;
+using Bodoconsult.Text.Pdf.Helpers;
 using Bodoconsult.Text.Pdf.Interfaces;
 
 namespace Bodoconsult.Text.Pdf.Renderer.Styles;
@@ -55,5 +54,15 @@ public class PdfParagraphStyleTextRendererElementBase : IPdfTextRendererElement
     public void RenderIt(PdfTextDocumentRenderer renderer)
     {
 
+        var styleName = Style.Name.Replace("Style", "");
+
+        if (styleName == "Paragraph")
+        {
+            styleName = "Normal";
+        }
+
+        var pdfStyle = renderer.PdfDocument.GetStyle(styleName);
+
+        PdfDocumentRendererHelper.RenderParagraphStyle(Style, pdfStyle);
     }
 }

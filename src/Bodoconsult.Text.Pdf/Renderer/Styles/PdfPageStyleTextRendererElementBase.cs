@@ -4,6 +4,7 @@ using System;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Interfaces;
 using Bodoconsult.Text.Pdf.Interfaces;
+using MigraDoc.DocumentObjectModel;
 
 namespace Bodoconsult.Text.Pdf.Renderer.Styles;
 
@@ -38,7 +39,18 @@ public abstract class PdfPageStyleTextRendererElementBase : IPdfTextRendererElem
     /// <param name="renderer">Current renderer</param>
     public void RenderIt(PdfTextDocumentRenderer renderer)
     {
-        // ToDo: Do nothing at the moment
+        var pdfStyle = renderer.PdfDocument.PageSetup;
+
+        pdfStyle.Orientation = Style.TypeAreaHeight < Style.TypeAreaWidth ? Orientation.Landscape : Orientation.Portrait;
+        pdfStyle.PageWidth = Unit.FromCentimeter(Style.PageWidth);
+        pdfStyle.PageHeight = Unit.FromCentimeter(Style.PageHeight);
+        pdfStyle.LeftMargin = Unit.FromCentimeter(Style.MarginLeft);
+        pdfStyle.RightMargin = Unit.FromCentimeter(Style.MarginRight);
+        pdfStyle.TopMargin = Unit.FromCentimeter(Style.MarginTop);
+        pdfStyle.BottomMargin = Unit.FromCentimeter(Style.MarginBottom);
+
+        // ToDo: other formats
+        pdfStyle.PageFormat = PageFormat.A4;
     }
 
     /// <summary>

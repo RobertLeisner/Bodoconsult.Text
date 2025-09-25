@@ -62,26 +62,6 @@ public static class TestDataHelper
         var subtitle = new Subtitle("Subtitle");
         section.AddBlock(subtitle);
 
-        // Add a Toc1
-        var toc1 = new Toc1("Toc1");
-        section.AddBlock(toc1);
-
-        // Add a Toc2
-        var toc2 = new Toc2("Toc2");
-        section.AddBlock(toc2);
-
-        // Add a Toc3
-        var toc3 = new Toc3("Toc3");
-        section.AddBlock(toc3);
-
-        // Add a Toc4
-        var toc4 = new Toc4("Toc4");
-        section.AddBlock(toc4);
-
-        // Add a Toc5
-        var toc5 = new Toc5("Toc5");
-        section.AddBlock(toc5);
-
         // Add a SectionTitle
         var sectionTitle = new SectionTitle("SectionTitle");
         section.AddBlock(sectionTitle);

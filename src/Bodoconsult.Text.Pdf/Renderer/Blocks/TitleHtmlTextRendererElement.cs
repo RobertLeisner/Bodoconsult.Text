@@ -26,7 +26,7 @@ public class TitlePdfTextRendererElement : ParagraphPdfTextRendererElementBase
     /// <param name="renderer">Current renderer</param>
     public override void RenderIt(PdfTextDocumentRenderer renderer)
     {
-        Paragraph = renderer.PdfDocument.AddTitle(string.Empty);
         base.RenderIt(renderer);
+        Paragraph = renderer.PdfDocument.AddTitle(Content.ToString());
     }
 }

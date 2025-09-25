@@ -26,7 +26,7 @@ public class TofPdfTextRendererElement : ParagraphPdfTextRendererElementBase
     /// <param name="renderer">Current renderer</param>
     public override void RenderIt(PdfTextDocumentRenderer renderer)
     {
-        Paragraph = renderer.PdfDocument.AddTofEntry(string.Empty, Block.TagName);
         base.RenderIt(renderer);
+        Paragraph = renderer.PdfDocument.AddTofEntry(Content.ToString(), Block.TagName);
     }
 }

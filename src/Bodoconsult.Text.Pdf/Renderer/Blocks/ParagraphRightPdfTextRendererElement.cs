@@ -26,7 +26,7 @@ public class ParagraphRightPdfTextRendererElement : ParagraphPdfTextRendererElem
     /// <param name="renderer">Current renderer</param>
     public override void RenderIt(PdfTextDocumentRenderer renderer)
     {
-        Paragraph = renderer.PdfDocument.AddParagraphRight(string.Empty);
         base.RenderIt(renderer);
+        Paragraph = renderer.PdfDocument.AddParagraphRight(Content.ToString());
     }
 }

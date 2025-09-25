@@ -1,9 +1,7 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using System;
-using System.Text;
 using Bodoconsult.Text.Documents;
-using Bodoconsult.Text.Helpers;
 using Bodoconsult.Text.Interfaces;
 using Bodoconsult.Text.Pdf.Helpers;
 using Bodoconsult.Text.Pdf.Interfaces;

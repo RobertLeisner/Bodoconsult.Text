@@ -1,9 +1,6 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using Bodoconsult.Text.Documents;
-using Bodoconsult.Text.Helpers;
-using Bodoconsult.Text.Interfaces;
-using MigraDoc.DocumentObjectModel;
 using System;
 using System.Text;
 
@@ -33,7 +30,7 @@ public class SpanPdfTextRendererElement : InlinePdfTextRendererElementBase
     /// <param name="paragraph">Paragraph to render the inline into</param>
     public override void RenderIt(PdfTextDocumentRenderer renderer, MigraDoc.DocumentObjectModel.Paragraph paragraph)
     {
-        paragraph.AddText(_span.Content);
+        paragraph.AddText(_span.Content ?? "");
     }
 
     /// <summary>

@@ -26,7 +26,7 @@ public class Heading2PdfTextRendererElement : HeadingBasePdfTextRendererElement
     /// <param name="renderer">Current renderer</param>
     public override void RenderIt(PdfTextDocumentRenderer renderer)
     {
-        Paragraph = renderer.PdfDocument.AddHeading2(string.Empty, _heading2.TagName);
         base.RenderIt(renderer);
+        Paragraph = renderer.PdfDocument.AddHeading2(Content.ToString(), _heading2.TagName);
     }
 }

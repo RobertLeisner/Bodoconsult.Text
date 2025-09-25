@@ -55,7 +55,7 @@ public abstract class PdfBuilderBase : IDisposable
     /// <summary>
     /// Current page setup
     /// </summary>
-    protected PageSetup PageSetup;
+    public PageSetup PageSetup { get; private set; }
 
     /// <summary>
     /// Width of a <see cref="DateTime"/> value
@@ -211,7 +211,6 @@ public abstract class PdfBuilderBase : IDisposable
     /// <param name="showPdfFile">Show Pdf-File in a viewer</param>
     public void RenderToPdf(string fileName, bool showPdfFile)
     {
-
         var renderer = new PdfDocumentRenderer { Document = Document };
         renderer.RenderDocument();
 
@@ -2676,5 +2675,13 @@ public abstract class PdfBuilderBase : IDisposable
         AddStyle(styleSet.Error);
     }
 
-
+    /// <summary>
+    /// Get a style form the document
+    /// </summary>
+    /// <param name="styleName">Name of the style</param>
+    /// <returns>Style</returns>
+    public Style GetStyle(string styleName)
+    {
+        return Document.Styles[styleName];
+    }
 }

@@ -7,6 +7,10 @@ namespace Bodoconsult.Text.Documents;
 /// </summary>
 public abstract class ParagraphBase : Block
 {
+    /// <summary>
+    /// The current prefix calculated by TOC, TOE, TOF and TOT calculation
+    /// </summary>
+    public string CurrentPrefix { get; set; }
 
     /// <summary>
     /// Add a block element

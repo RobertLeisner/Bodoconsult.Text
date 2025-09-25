@@ -26,7 +26,7 @@ public class InfoPdfTextRendererElement : ParagraphPdfTextRendererElementBase
     /// <param name="renderer">Current renderer</param>
     public override void RenderIt(PdfTextDocumentRenderer renderer)
     {
-        Paragraph = renderer.PdfDocument.AddInfo(string.Empty);
         base.RenderIt(renderer);
+        Paragraph = renderer.PdfDocument.AddInfo(Content.ToString());
     }
 }

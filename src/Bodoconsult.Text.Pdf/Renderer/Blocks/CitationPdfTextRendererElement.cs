@@ -1,9 +1,6 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
 
 using Bodoconsult.Text.Documents;
-using Bodoconsult.Text.Interfaces;
-using Bodoconsult.Text.Pdf.Helpers;
-using System;
 
 namespace Bodoconsult.Text.Pdf.Renderer.Blocks;
 
@@ -29,8 +26,8 @@ public class CitationPdfTextRendererElement : ParagraphPdfTextRendererElementBas
     /// <param name="renderer">Current renderer</param>
     public override void RenderIt(PdfTextDocumentRenderer renderer)
     {
-        Paragraph = renderer.PdfDocument.AddCitation(string.Empty, _citation.Source);
         base.RenderIt(renderer);
+        Paragraph = renderer.PdfDocument.AddCitation(Content.ToString(), _citation.Source);
     }
 }
 

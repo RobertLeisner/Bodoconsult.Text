@@ -1,6 +1,4 @@
-﻿using System.Text;
-using Bodoconsult.Text.Documents;
-using Bodoconsult.Text.Interfaces;
+﻿using Bodoconsult.Text.Documents;
 
 namespace Bodoconsult.Text.Pdf.Renderer.Styles;
 

@@ -26,7 +26,7 @@ public class ParagraphJustifyPdfTextRendererElement : ParagraphPdfTextRendererEl
     /// <param name="renderer">Current renderer</param>
     public override void RenderIt(PdfTextDocumentRenderer renderer)
     {
-        Paragraph = renderer.PdfDocument.AddParagraphJustify( string.Empty);
         base.RenderIt(renderer);
+        Paragraph = renderer.PdfDocument.AddParagraphJustify(Content.ToString());
     }
 }

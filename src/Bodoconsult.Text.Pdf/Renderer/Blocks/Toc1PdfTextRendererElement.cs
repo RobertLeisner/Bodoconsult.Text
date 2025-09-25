@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
 
+using System.Text;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Pdf.Helpers;
 
@@ -27,8 +28,8 @@ public class Toc1PdfTextRendererElement : ParagraphPdfTextRendererElementBase
     /// <param name="renderer">Current renderer</param>
     public override void RenderIt(PdfTextDocumentRenderer renderer)
     {
-        Paragraph = renderer.PdfDocument.AddToc1Entry(string.Empty, Block.TagName);
         base.RenderIt(renderer);
+        Paragraph = renderer.PdfDocument.AddToc1Entry(Content.ToString(), Block.TagName);
     }
 }
 
