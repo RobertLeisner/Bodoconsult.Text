@@ -1,4 +1,6 @@
-﻿using Bodoconsult.Text.Documents;
+﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
+
+using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
 using Bodoconsult.Text.Interfaces;
 
@@ -18,23 +20,5 @@ public class DocumentPdfTextRendererElement : PdfTextRendererElementBase
     {
         _document = document;
         ClassName = document.StyleName;
-    }
-
-    /// <summary>
-    /// Render the element
-    /// </summary>
-    /// <param name="renderer">Current renderer</param>
-    public override void RenderIt(ITextDocumentRenderer renderer)
-    {
-        renderer.Content.AppendLine("<!DOCTYPE html>");
-        renderer.Content.AppendLine("<html>");
-        renderer.Content.AppendLine("<head>");
-        renderer.Content.AppendLine("<meta charset=\"utf-8\">");
-
-        DocumentRendererHelper.RenderBlockChildsToHtml(renderer, _document.ChildBlocks);
-
-        renderer.Content.AppendLine("</body>");
-        renderer.Content.AppendLine("</html>");
-
     }
 }

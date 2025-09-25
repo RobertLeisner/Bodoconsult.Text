@@ -7,7 +7,7 @@ namespace Bodoconsult.Text.Pdf.Renderer.Blocks;
 /// <summary>
 /// HTML rendering element for <see cref="Subtitle"/> instances
 /// </summary>
-public class SubtitlePdfTextRendererElement : PdfTextRendererElementBase
+public class SubtitlePdfTextRendererElement : ParagraphPdfTextRendererElementBase
 {
     private readonly Subtitle _subtitle;
 
@@ -18,5 +18,15 @@ public class SubtitlePdfTextRendererElement : PdfTextRendererElementBase
     {
         _subtitle = subtitle;
         ClassName = subtitle.StyleName;
+    }
+
+    /// <summary>
+    /// Render the element
+    /// </summary>
+    /// <param name="renderer">Current renderer</param>
+    public override void RenderIt(PdfTextDocumentRenderer renderer)
+    {
+        Paragraph = renderer.PdfDocument.AddSubtitle(string.Empty);
+        base.RenderIt(renderer);
     }
 }

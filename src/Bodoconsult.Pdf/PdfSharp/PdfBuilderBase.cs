@@ -423,9 +423,9 @@ public abstract class PdfBuilderBase : IDisposable
     /// </summary>
     /// <param name="text">Content to add</param>
     /// <param name="tag">Name of the tag of the referenced heading</param>
-    public void AddToc1Entry(string text, string tag)
+    public Paragraph AddToc1Entry(string text, string tag)
     {
-        AddTocEntryInternal(1, text, tag);
+        return AddTocEntryInternal(1, text, tag);
     }
 
     /// <summary>
@@ -433,9 +433,9 @@ public abstract class PdfBuilderBase : IDisposable
     /// </summary>
     /// <param name="text">Content to add</param>
     /// <param name="tag">Name of the tag of the referenced heading</param>
-    public void AddToc2Entry(string text, string tag)
+    public Paragraph AddToc2Entry(string text, string tag)
     {
-        AddTocEntryInternal(2, text, tag);
+        return AddTocEntryInternal(2, text, tag);
     }
 
     /// <summary>
@@ -443,9 +443,9 @@ public abstract class PdfBuilderBase : IDisposable
     /// </summary>
     /// <param name="text">Content to add</param>
     /// <param name="tag">Name of the tag of the referenced heading</param>
-    public void AddToc3Entry(string text, string tag)
+    public Paragraph AddToc3Entry(string text, string tag)
     {
-        AddTocEntryInternal(3, text, tag);
+        return AddTocEntryInternal(3, text, tag);
     }
 
     /// <summary>
@@ -453,9 +453,9 @@ public abstract class PdfBuilderBase : IDisposable
     /// </summary>
     /// <param name="text">Content to add</param>
     /// <param name="tag">Name of the tag of the referenced heading</param>
-    public void AddToc4Entry(string text, string tag)
+    public Paragraph AddToc4Entry(string text, string tag)
     {
-        AddTocEntryInternal(4, text, tag);
+        return AddTocEntryInternal(4, text, tag);
     }
 
     /// <summary>
@@ -463,9 +463,9 @@ public abstract class PdfBuilderBase : IDisposable
     /// </summary>
     /// <param name="text">Content to add</param>
     /// <param name="tag">Name of the tag of the referenced heading</param>
-    public void AddToc5Entry(string text, string tag)
+    public Paragraph AddToc5Entry(string text, string tag)
     {
-        AddTocEntryInternal(5, text, tag);
+        return AddTocEntryInternal(5, text, tag);
     }
 
     /// <summary>
@@ -474,7 +474,7 @@ public abstract class PdfBuilderBase : IDisposable
     /// <param name="level">Heading level</param>
     /// <param name="text">Content to add</param>
     /// <param name="tag">Name of the tag of the referenced heading</param>
-    private void AddTocEntryInternal(int level, string text, string tag)
+    private Paragraph AddTocEntryInternal(int level, string text, string tag)
     {
         var p = Toc.AddParagraph();
         p.Style = $"TOC{level}";
@@ -482,6 +482,8 @@ public abstract class PdfBuilderBase : IDisposable
         var hyperlink = p.AddHyperlink(tag);
         hyperlink.AddText($"{text}\t");
         hyperlink.AddPageRefField(tag);
+
+        return p;
     }
 
     /// <summary>
@@ -489,7 +491,7 @@ public abstract class PdfBuilderBase : IDisposable
     /// </summary>
     /// <param name="text">Content to add</param>
     /// <param name="tag">Name of the tag of the referenced equation</param>
-    public void AddToeEntry(string text, string tag)
+    public Paragraph AddToeEntry(string text, string tag)
     {
         var p = Toe.AddParagraph();
         p.Style = "TOE";
@@ -497,6 +499,8 @@ public abstract class PdfBuilderBase : IDisposable
         var hyperlink = p.AddHyperlink(tag);
         hyperlink.AddText($"{text}\t");
         hyperlink.AddPageRefField(tag);
+
+        return p;
     }
 
     /// <summary>
@@ -504,7 +508,7 @@ public abstract class PdfBuilderBase : IDisposable
     /// </summary>
     /// <param name="text">Content to add</param>
     /// <param name="tag">Name of the tag of the referenced figure</param>
-    public void AddTofEntry(string text, string tag)
+    public Paragraph AddTofEntry(string text, string tag)
     {
         var p = Tof.AddParagraph();
         p.Style = "TOF";
@@ -512,6 +516,8 @@ public abstract class PdfBuilderBase : IDisposable
         var hyperlink = p.AddHyperlink(tag);
         hyperlink.AddText($"{text}\t");
         hyperlink.AddPageRefField(tag);
+
+        return p;
     }
 
     /// <summary>
@@ -519,7 +525,7 @@ public abstract class PdfBuilderBase : IDisposable
     /// </summary>
     /// <param name="text">Content to add</param>
     /// <param name="tag">Name of the tag of the referenced table</param>
-    public void AddTotEntry(string text, string tag)
+    public Paragraph AddTotEntry(string text, string tag)
     {
         var p = Tot.AddParagraph();
         p.Style = "TOT";
@@ -527,6 +533,8 @@ public abstract class PdfBuilderBase : IDisposable
         var hyperlink = p.AddHyperlink(tag);
         hyperlink.AddText($"{text}\t");
         hyperlink.AddPageRefField(tag);
+
+        return p;
     }
 
     /// <summary>
@@ -534,18 +542,18 @@ public abstract class PdfBuilderBase : IDisposable
     /// </summary>
     /// <param name="text">Content to add</param>
     /// <param name="tag">Name of the tag of the referenced table</param>
-    public void AddHeading1(string text, string tag)
+    public Paragraph AddHeading1(string text, string tag)
     {
-        AddHeadingInternal(1, text, tag);
+        return AddHeadingInternal(1, text, tag);
     }
     /// <summary>
     /// Add a heading 2 to the content section
     /// </summary>
     /// <param name="text">Content to add</param>
     /// <param name="tag">Name of the tag of the referenced table</param>
-    public void AddHeading2(string text, string tag)
+    public Paragraph AddHeading2(string text, string tag)
     {
-        AddHeadingInternal(2, text, tag);
+        return AddHeadingInternal(2, text, tag);
     }
 
     /// <summary>
@@ -553,9 +561,9 @@ public abstract class PdfBuilderBase : IDisposable
     /// </summary>
     /// <param name="text">Content to add</param>
     /// <param name="tag">Name of the tag of the referenced table</param>
-    public void AddHeading3(string text, string tag)
+    public Paragraph AddHeading3(string text, string tag)
     {
-        AddHeadingInternal(3, text, tag);
+        return AddHeadingInternal(3, text, tag);
     }
 
     /// <summary>
@@ -563,9 +571,9 @@ public abstract class PdfBuilderBase : IDisposable
     /// </summary>
     /// <param name="text">Content to add</param>
     /// <param name="tag">Name of the tag of the referenced table</param>
-    public void AddHeading4(string text, string tag)
+    public Paragraph AddHeading4(string text, string tag)
     {
-        AddHeadingInternal(4, text, tag);
+        return AddHeadingInternal(4, text, tag);
     }
 
     /// <summary>
@@ -573,9 +581,9 @@ public abstract class PdfBuilderBase : IDisposable
     /// </summary>
     /// <param name="text">Content to add</param>
     /// <param name="tag">Name of the tag of the referenced table</param>
-    public void AddHeading5(string text, string tag)
+    public Paragraph AddHeading5(string text, string tag)
     {
-        AddHeadingInternal(5, text, tag);
+        return AddHeadingInternal(5, text, tag);
     }
 
     /// <summary>
@@ -584,7 +592,7 @@ public abstract class PdfBuilderBase : IDisposable
     /// <param name="level">Heading level</param>
     /// <param name="text">Content to add</param>
     /// <param name="tag">Name of the tag of the referenced table</param>
-    private void AddHeadingInternal(int level, string text, string tag)
+    private Paragraph AddHeadingInternal(int level, string text, string tag)
     {
         var paragraph = new Paragraph
         {
@@ -595,6 +603,8 @@ public abstract class PdfBuilderBase : IDisposable
         paragraph.AddText(text ?? "");
 
         Content.Add(paragraph);
+
+        return paragraph;
     }
 
 
@@ -602,11 +612,12 @@ public abstract class PdfBuilderBase : IDisposable
     /// Add a paragraph to the content section
     /// </summary>
     /// <param name="text">Content to add</param>
-    public void AddParagraph(string text)
+    public Paragraph AddParagraph(string text)
     {
         var paragraph = new Paragraph();
         paragraph.AddText(text ?? "");
         Content.Add(paragraph);
+        return paragraph;
     }
 
     /// <summary>
@@ -614,7 +625,7 @@ public abstract class PdfBuilderBase : IDisposable
     /// </summary>
     /// <param name="text">Content to add</param>
     /// <param name="styleName">Name of the style to use</param>
-    public virtual void AddParagraph(string text, string styleName)
+    public virtual Paragraph AddParagraph(string text, string styleName)
     {
         if (string.IsNullOrEmpty(styleName))
         {
@@ -637,6 +648,150 @@ public abstract class PdfBuilderBase : IDisposable
 
         paragraph.Style = styleName;
         Content.Add(paragraph);
+        return paragraph;
+    }
+
+    /// <summary>
+    /// Add a WARNING paragraph
+    /// </summary>
+    /// <param name="text">Initial text to add to the paragraph</param>
+    /// <returns>The new paragraph instance</returns>
+    public Paragraph AddWarning(string text)
+    {
+        return AddParagraph(text, "Warning");
+    }
+
+    /// <summary>
+    /// Add an INFO paragraph
+    /// </summary>
+    /// <param name="text">Initial text to add to the paragraph</param>
+    /// <returns>The new paragraph instance</returns>
+    public Paragraph AddInfo(string text)
+    {
+        return AddParagraph(text, "Info");
+    }
+
+    /// <summary>
+    /// Add an ERROR paragraph
+    /// </summary>
+    /// <param name="text">Initial text to add to the paragraph</param>
+    /// <returns>The new paragraph instance</returns>
+    public Paragraph AddError(string text)
+    {
+        return AddParagraph(text, "Error");
+    }
+
+    /// <summary>
+    /// Add a CODE paragraph
+    /// </summary>
+    /// <param name="text">Initial text to add to the paragraph</param>
+    /// <returns>The new paragraph instance</returns>
+    public Paragraph AddCode(string text)
+    {
+        return AddParagraph(text, "Code");
+    }
+
+    /// <summary>
+    /// Add a CITATION paragraph
+    /// </summary>
+    /// <param name="text">Initial text to add to the paragraph</param>
+    /// <param name="source">Source for the citation</param>
+    /// <returns>The new paragraph instance</returns>
+    public Paragraph AddCitation(string text, string source)
+    {
+        var p = AddParagraph(text, "Citation");
+
+        AddParagraph(source, "CitationSource");
+
+        return p;
+    }
+
+    /// <summary>
+    /// Add a left-aligned paragraph
+    /// </summary>
+    /// <param name="text">Initial text to add to the paragraph</param>
+    /// <returns>The new paragraph instance</returns>
+    public Paragraph AddParagraphLeft(string text)
+    {
+        var p = AddParagraph(text, "Normal");
+        return p;
+    }
+
+    /// <summary>
+    /// Add a title
+    /// </summary>
+    /// <param name="text">Initial text to add to the paragraph</param>
+    /// <returns>The new paragraph instance</returns>
+    public Paragraph AddTitle(string text)
+    {
+        var p = AddParagraph(text, "Title");
+        return p;
+    }
+
+    /// <summary>
+    /// Add a subtitle
+    /// </summary>
+    /// <param name="text">Initial text to add to the paragraph</param>
+    /// <returns>The new paragraph instance</returns>
+    public Paragraph AddSubtitle(string text)
+    {
+        var p = AddParagraph(text, "Subtitle");
+        return p;
+    }
+
+    /// <summary>
+    /// Add a section title
+    /// </summary>
+    /// <param name="text">Initial text to add to the paragraph</param>
+    /// <returns>The new paragraph instance</returns>
+    public Paragraph AddSectionTitle(string text)
+    {
+        var p = AddParagraph(text, "SectionTitle");
+        return p;
+    }
+
+    /// <summary>
+    /// Add a section subtitle
+    /// </summary>
+    /// <param name="text">Initial text to add to the paragraph</param>
+    /// <returns>The new paragraph instance</returns>
+    public Paragraph AddSectionSubtitle(string text)
+    {
+        var p = AddParagraph(text, "SectionSubtitle");
+        return p;
+    }
+
+    /// <summary>
+    /// Add a right-aligned paragraph
+    /// </summary>
+    /// <param name="text">Initial text to add to the paragraph</param>
+    /// <returns>The new paragraph instance</returns>
+    public Paragraph AddParagraphRight(string text)
+    {
+        var p = AddParagraph(text, "ParagraphRight");
+        return p;
+    }
+
+    /// <summary>
+    /// Add a centered paragraph
+    /// </summary>
+    /// <param name="text">Initial text to add to the paragraph</param>
+    /// <returns>The new paragraph instance</returns>
+    public Paragraph AddParagraphCenter(string text)
+    {
+        var p = AddParagraph(text, "ParagraphCenter");
+        return p;
+    }
+
+    /// <summary>
+    /// Add a justified paragraph
+    /// </summary>
+    /// <param name="text">Initial text to add to the paragraph</param>
+    /// <returns>The new paragraph instance</returns>
+    public Paragraph AddParagraphJustify(string text)
+    {
+        var p = AddParagraph(text, "ParagraphJustify");
+        return p;
     }
 
     /// <summary>
@@ -740,7 +895,7 @@ public abstract class PdfBuilderBase : IDisposable
     /// <param name="section">Section to add the footer to</param>
     protected void AddFooterInternal(Section section)
     {
-        if (section == null)
+        if (section == null || string.IsNullOrEmpty(FooterText))
         {
             return;
         }
@@ -807,7 +962,7 @@ public abstract class PdfBuilderBase : IDisposable
     /// <param name="section">Section to add the header to</param>
     protected void AddHeaderInternal(Section section)
     {
-        if (section == null)
+        if (section == null || (string.IsNullOrEmpty(HeaderText) && string.IsNullOrEmpty(BackgroundImagePath)))
         {
             return;
         }
@@ -859,9 +1014,6 @@ public abstract class PdfBuilderBase : IDisposable
 
         paragraph.Style = HeaderStyleName;
         section.Headers.Primary.Add(paragraph);
-
-
-
     }
 
     /// <summary>
@@ -2475,6 +2627,9 @@ public abstract class PdfBuilderBase : IDisposable
         ObjectHelper.MapProperties(styleSet.Normal.ParagraphFormat.Borders.Bottom, style.ParagraphFormat.Borders.Bottom);
 
         //AddStyle(styleSet.Normal);
+        AddStyle(styleSet.ParagraphCenter);
+        AddStyle(styleSet.ParagraphRight);
+        AddStyle(styleSet.ParagraphJustify);
         AddStyle(styleSet.Footer);
 
         AddStyle(styleSet.NormalTable);

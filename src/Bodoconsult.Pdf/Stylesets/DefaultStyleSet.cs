@@ -73,6 +73,57 @@ public class DefaultStyleSet : IStyleSet
         //Normal.ParagraphFormat.Borders.Left.Width = 1;
         //Normal.ParagraphFormat.Borders.Left.Color = Colors.Black;
 
+        ParagraphRight = new Style("ParagraphRight", "Normal")
+        {
+            Font =
+            {
+                Name = "Arial",
+                Size =  defaultFontSize,
+                Color = Colors.Black
+            },
+            ParagraphFormat =
+            {
+                SpaceBefore = verticalMargin,
+                SpaceAfter = verticalMargin,
+                PageBreakBefore = false,
+                Alignment = ParagraphAlignment.Right,
+            }
+        };
+
+        ParagraphCenter = new Style("ParagraphCenter", "Normal")
+        {
+            Font =
+            {
+                Name = "Arial",
+                Size =  defaultFontSize,
+                Color = Colors.Black
+            },
+            ParagraphFormat =
+            {
+                SpaceBefore = verticalMargin,
+                SpaceAfter = verticalMargin,
+                PageBreakBefore = false,
+                Alignment = ParagraphAlignment.Center,
+            }
+        };
+
+        ParagraphJustify = new Style("ParagraphJustify", "Normal")
+        {
+            Font =
+            {
+                Name = "Arial",
+                Size =  defaultFontSize,
+                Color = Colors.Black
+            },
+            ParagraphFormat =
+            {
+                SpaceBefore = verticalMargin,
+                SpaceAfter = verticalMargin,
+                PageBreakBefore = false,
+                Alignment = ParagraphAlignment.Justify,
+            }
+        };
+
         NormalTable = new Style("NormalTable", "Normal")
         {
             Font =
@@ -931,10 +982,27 @@ public class DefaultStyleSet : IStyleSet
     /// </summary>
     public PageSetup PageSetup { get; set; }
 
+
+
     /// <summary>
     /// Normal paragraphs (default style)
     /// </summary>
     public Style Normal { get; }
+
+    /// <summary>
+    /// Centered paragraph style
+    /// </summary>
+    public Style ParagraphCenter { get; set; }
+
+    /// <summary>
+    /// Right-aligned paragraph style
+    /// </summary>
+    public Style ParagraphRight { get; set; }
+
+    /// <summary>
+    /// Justified paragraph style
+    /// </summary>
+    public Style ParagraphJustify { get; set; }
 
     /// <summary>
     /// Style used a table base. Do NOT change this style

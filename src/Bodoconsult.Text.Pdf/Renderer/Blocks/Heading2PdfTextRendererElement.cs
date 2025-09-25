@@ -19,4 +19,14 @@ public class Heading2PdfTextRendererElement : HeadingBasePdfTextRendererElement
         _heading2 = heading2;
         ClassName = heading2.StyleName;
     }
+
+    /// <summary>
+    /// Render the element
+    /// </summary>
+    /// <param name="renderer">Current renderer</param>
+    public override void RenderIt(PdfTextDocumentRenderer renderer)
+    {
+        Paragraph = renderer.PdfDocument.AddHeading2(string.Empty, _heading2.TagName);
+        base.RenderIt(renderer);
+    }
 }

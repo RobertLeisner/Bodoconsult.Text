@@ -1,21 +1,20 @@
 ﻿using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
 using Bodoconsult.Text.Interfaces;
-using Bodoconsult.Text.Pdf.Renderer.Blocks;
 
-namespace Bodoconsult.Text.Pdf.Renderer.Styles;
+namespace Bodoconsult.Text.Renderer.Html;
 
 /// <summary>
 /// HTML rendering element for <see cref="Section"/> instances
 /// </summary>
-public class SectionPdfTextRendererElement : PdfTextRendererElementBase
+public class SectionHtmlTextRendererElement : HtmlTextRendererElementBase
 {
     private readonly Section _section;
 
     /// <summary>
     /// Default ctor
     /// </summary>
-    public SectionPdfTextRendererElement(Section section) : base(section)
+    public SectionHtmlTextRendererElement(Section section) : base(section)
     {
         _section = section;
         ClassName = section.StyleName;

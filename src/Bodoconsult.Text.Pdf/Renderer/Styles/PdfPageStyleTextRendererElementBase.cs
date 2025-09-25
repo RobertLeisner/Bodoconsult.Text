@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
+using System;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Interfaces;
 using Bodoconsult.Text.Pdf.Interfaces;
@@ -35,17 +36,17 @@ public abstract class PdfPageStyleTextRendererElementBase : IPdfTextRendererElem
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public virtual void RenderIt(ITextDocumentRenderer renderer)
+    public void RenderIt(PdfTextDocumentRenderer renderer)
     {
-        // Do nothing
+        // ToDo: Do nothing at the moment
     }
 
     /// <summary>
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public void RenderIt(PdfTextDocumentRenderer renderer)
+    public void RenderIt(ITextDocumentRenderer renderer)
     {
-        throw new System.NotImplementedException();
+        throw new NotSupportedException();
     }
 }

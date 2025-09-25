@@ -7,7 +7,7 @@ namespace Bodoconsult.Text.Pdf.Renderer.Blocks;
 /// <summary>
 /// HTML rendering element for <see cref="Title"/> instances
 /// </summary>
-public class TitlePdfTextRendererElement : PdfTextRendererElementBase
+public class TitlePdfTextRendererElement : ParagraphPdfTextRendererElementBase
 {
     private readonly Title _title;
 
@@ -18,5 +18,15 @@ public class TitlePdfTextRendererElement : PdfTextRendererElementBase
     {
         _title = title;
         ClassName = title.StyleName;
+    }
+
+    /// <summary>
+    /// Render the element
+    /// </summary>
+    /// <param name="renderer">Current renderer</param>
+    public override void RenderIt(PdfTextDocumentRenderer renderer)
+    {
+        Paragraph = renderer.PdfDocument.AddTitle(string.Empty);
+        base.RenderIt(renderer);
     }
 }

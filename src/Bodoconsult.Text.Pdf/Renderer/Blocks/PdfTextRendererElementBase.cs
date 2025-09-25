@@ -5,14 +5,15 @@ using System.Text;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
 using Bodoconsult.Text.Interfaces;
+using Bodoconsult.Text.Pdf.Helpers;
 using Bodoconsult.Text.Pdf.Interfaces;
 
 namespace Bodoconsult.Text.Pdf.Renderer.Blocks;
 
 /// <summary>
-/// Base renderer implementation for HTML elements
-/// </summary>
-public abstract class PdfTextRendererElementBase : IPdfTextRendererElement
+    /// Base renderer implementation for HTML elements
+    /// </summary>
+    public abstract class PdfTextRendererElementBase : IPdfTextRendererElement
 {
     /// <summary>
     /// Current block to renderer
@@ -42,34 +43,17 @@ public abstract class PdfTextRendererElementBase : IPdfTextRendererElement
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public virtual void RenderIt(ITextDocumentRenderer renderer)
+    public virtual void RenderIt(PdfTextDocumentRenderer renderer)
     {
-        //// Get the content of all inlines as string
-        //var sb = new StringBuilder();
-
-        //if (string.IsNullOrEmpty(LocalCss))
-        //{
-        //    renderer.Content.AppendLine($"<{TagToUse} class=\"{ClassName}\">");
-        //}
-        //else
-        //{
-        //    renderer.Content.AppendLine($"<{TagToUse} class=\"{ClassName}\" style=\"{LocalCss}\">");
-        //}
-
-        //DocumentRendererHelper.RenderBlockChildsToHtml(renderer, Block.ChildBlocks);
-
-        //DocumentRendererHelper.RenderInlineChildsToHtml(renderer, sb, Block.ChildInlines);
-        //renderer.Content.Append(sb);
-        //renderer.Content.Append($"</{TagToUse}>{Environment.NewLine}");
+        PdfDocumentRendererHelper.RenderBlockChildsToPdf(renderer, Block.ChildBlocks);
     }
-
 
     /// <summary>
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public void RenderIt(PdfTextDocumentRenderer renderer)
+    public void RenderIt(ITextDocumentRenderer renderer)
     {
-
+        throw new NotSupportedException();
     }
 }

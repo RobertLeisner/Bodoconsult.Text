@@ -22,13 +22,4 @@ public class RowPdfTextRendererElement : PdfTextRendererElementBase
         _row = row;
         ClassName = "RowStyle";
     }
-
-    /// <summary>
-    /// Render the element
-    /// </summary>
-    /// <param name="renderer">Current renderer</param>
-    public override void RenderIt(ITextDocumentRenderer renderer)
-    {
-
-    }
 }

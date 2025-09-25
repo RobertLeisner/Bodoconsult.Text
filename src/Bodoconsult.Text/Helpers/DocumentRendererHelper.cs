@@ -25,7 +25,8 @@ public class DocumentRendererHelper
     /// <param name="childInlines">Current child inlines</param>
     /// <param name="tag">Tag to add before and after the inlines</param>
     /// <param name="isBlock">Parent element is a block</param>
-    public static void RenderInlineChildsToPlainText(ITextDocumentRenderer renderer, StringBuilder sb, List<Inline> childInlines,
+    public static void RenderInlineChildsToPlainText(ITextDocumentRenderer renderer, StringBuilder sb,
+        List<Inline> childInlines,
         string tag = null, bool isBlock = false)
     {
 
@@ -36,7 +37,8 @@ public class DocumentRendererHelper
 
         foreach (var inline in childInlines)
         {
-            var rendererElement = (InlinePlainTextRendererElementBase)renderer.TextRendererElementFactory.CreateInstance(inline);
+            var rendererElement =
+                (InlinePlainTextRendererElementBase)renderer.TextRendererElementFactory.CreateInstance(inline);
             rendererElement.RenderToString(renderer, sb);
         }
 
@@ -54,7 +56,8 @@ public class DocumentRendererHelper
     /// <param name="childInlines">Current child inlines</param>
     /// <param name="tag">Tag to add before and after the inlines</param>
     /// <param name="isBlock">Parent element is a block</param>
-    public static void RenderInlineChildsToHtml(ITextDocumentRenderer renderer, StringBuilder sb, List<Inline> childInlines,
+    public static void RenderInlineChildsToHtml(ITextDocumentRenderer renderer, StringBuilder sb,
+        List<Inline> childInlines,
         string tag = null, bool isBlock = false)
     {
 
@@ -65,7 +68,8 @@ public class DocumentRendererHelper
 
         foreach (var inline in childInlines)
         {
-            var rendererElement = (InlineHtmlTextRendererElementBase)renderer.TextRendererElementFactory.CreateInstance(inline);
+            var rendererElement =
+                (InlineHtmlTextRendererElementBase)renderer.TextRendererElementFactory.CreateInstance(inline);
             rendererElement.RenderToString(renderer, sb);
         }
 
@@ -165,11 +169,13 @@ public class DocumentRendererHelper
     /// <param name="renderer">Current renderer instance</param>
     /// <param name="sb">Current string</param>
     /// <param name="childInlines">Child inlines</param>
-    public static void RenderInlineChildsToRtf(ITextDocumentRenderer renderer, StringBuilder sb, List<Inline> childInlines)
+    public static void RenderInlineChildsToRtf(ITextDocumentRenderer renderer, StringBuilder sb,
+        List<Inline> childInlines)
     {
         foreach (var inline in childInlines)
         {
-            var rendererElement = (InlineRtfTextRendererElementBase)renderer.TextRendererElementFactory.CreateInstance(inline);
+            var rendererElement =
+                (InlineRtfTextRendererElementBase)renderer.TextRendererElementFactory.CreateInstance(inline);
             rendererElement.RenderToString(renderer, sb);
         }
     }
@@ -194,7 +200,8 @@ public class DocumentRendererHelper
     /// <param name="renderer">Current renderer</param>
     /// <param name="tableRows">List of all rows to render</param>
     /// <param name="rowData"></param>
-    public static void RenderRowsToPlain(ITextDocumentRenderer renderer, List<Row> tableRows, List<List<string>> rowData)
+    public static void RenderRowsToPlain(ITextDocumentRenderer renderer, List<Row> tableRows,
+        List<List<string>> rowData)
     {
         foreach (var row in tableRows)
         {
@@ -213,7 +220,8 @@ public class DocumentRendererHelper
     {
         foreach (var cell in cells)
         {
-            var rendererElement = (CellPlainTextRendererElement)renderer.TextRendererElementFactory.CreateInstance(cell);
+            var rendererElement =
+                (CellPlainTextRendererElement)renderer.TextRendererElementFactory.CreateInstance(cell);
             rendererElement.RenderToString(renderer, row);
         }
     }
@@ -245,6 +253,7 @@ public class DocumentRendererHelper
 
         renderer.Content.Append(sb);
     }
+
     /// <summary>
     /// Render table cells to RTF
     /// </summary>
@@ -256,7 +265,7 @@ public class DocumentRendererHelper
         {
             //var cell = cells[index];
             //var twips = cell.Column.MaxLength * 200;
-            renderer.Content.Append($@"\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs \cellx{index+1}000 ");
+            renderer.Content.Append($@"\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs \cellx{index + 1}000 ");
         }
     }
 
@@ -298,12 +307,14 @@ public class DocumentRendererHelper
         var sb = new StringBuilder();
 
         var style = (ParagraphStyleBase)renderer.Styleset.FindStyle(image.StyleName);
-        renderer.Content.Append($@"\pard\plain\q{renderer.Styleset.GetIndexOfStyle(image.StyleName)}{RtfHelper.GetFormatSettings(style, renderer.Styleset)}");
+        renderer.Content.Append(
+            $@"\pard\plain\q{renderer.Styleset.GetIndexOfStyle(image.StyleName)}{RtfHelper.GetFormatSettings(style, renderer.Styleset)}");
 
         // Get max height and with for images in twips
         StylesetHelper.GetMaxWidthAndHeight(renderer.Styleset, out var maxWidth, out var maxHeight);
 
-        StylesetHelper.GetWidthAndHeight(MeasurementHelper.GetTwipsFromPx(image.OriginalWidth), MeasurementHelper.GetTwipsFromPx(image.OriginalHeight), maxWidth, maxHeight, out var width, out var height);
+        StylesetHelper.GetWidthAndHeight(MeasurementHelper.GetTwipsFromPx(image.OriginalWidth),
+            MeasurementHelper.GetTwipsFromPx(image.OriginalHeight), maxWidth, maxHeight, out var width, out var height);
 
         // Add the image
         var bytes = ImageHelper.GetBytes(image.Uri);
@@ -357,7 +368,8 @@ public class DocumentRendererHelper
     /// <param name="tagToUse">Tag to use</param>
     /// <param name="localCss">Local CSS class name</param>
     /// <param name="className">Class name</param>
-    public static void CreateImageHtml(ITextDocumentRenderer renderer, ImageBase image, string tagToUse, string localCss, string className)
+    public static void CreateImageHtml(ITextDocumentRenderer renderer, ImageBase image, string tagToUse,
+        string localCss, string className)
     {
         // Get the content of all inlines as string
         var sb = new StringBuilder();
@@ -386,9 +398,11 @@ public class DocumentRendererHelper
         // Get max height and with for images in twips
         StylesetHelper.GetMaxWidthAndHeight(renderer.Styleset, out var maxWidth, out var maxHeight);
 
-        StylesetHelper.GetWidthAndHeight(MeasurementHelper.GetTwipsFromPx(image.OriginalWidth), MeasurementHelper.GetTwipsFromPx(image.OriginalHeight), maxWidth, maxHeight, out var width, out var height);
+        StylesetHelper.GetWidthAndHeight(MeasurementHelper.GetTwipsFromPx(image.OriginalWidth),
+            MeasurementHelper.GetTwipsFromPx(image.OriginalHeight), maxWidth, maxHeight, out var width, out var height);
 
-        renderer.Content.Append($"<img src=\"{image.Uri}\" alt=\"{sb}\" width=\"{MeasurementHelper.GetPxFromTwips(width)}px\" height=\"{MeasurementHelper.GetPxFromTwips(height)}px\"/><br/>");
+        renderer.Content.Append(
+            $"<img src=\"{image.Uri}\" alt=\"{sb}\" width=\"{MeasurementHelper.GetPxFromTwips(width)}px\" height=\"{MeasurementHelper.GetPxFromTwips(height)}px\"/><br/>");
         renderer.Content.Append(sb);
         renderer.Content.Append($"</{tagToUse}>{Environment.NewLine}");
     }
@@ -415,4 +429,3 @@ public class DocumentRendererHelper
         renderer.Content.Append($"![{sb}]({image.Uri} \"{sb}\"){Environment.NewLine}{Environment.NewLine}");
     }
 }
-

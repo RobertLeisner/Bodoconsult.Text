@@ -109,7 +109,7 @@ public class PdfCreator : PdfBuilderBase
     /// </summary>
     /// <param name="text">Content to add</param>
     /// <param name="styleName">Name of the style to use</param>
-    public override void AddParagraph(string text, string styleName)
+    public override Paragraph AddParagraph(string text, string styleName)
     {
         if (string.IsNullOrEmpty(styleName))
         {
@@ -135,7 +135,7 @@ public class PdfCreator : PdfBuilderBase
 
         if ( Toc == null || !styleName.ToLowerInvariant().StartsWith("heading"))
         {
-            return;
+            return paragraph;
         }
 
         var p = Toc.AddParagraph();
@@ -158,7 +158,7 @@ public class PdfCreator : PdfBuilderBase
                 p.Style = "TOC5";
                 break;
             default:
-                return;
+                return paragraph;
         }
 
         paragraph.AddBookmark(text);
@@ -166,6 +166,8 @@ public class PdfCreator : PdfBuilderBase
         var hyperlink = p.AddHyperlink(text);
         hyperlink.AddText($"{text}\t");
         hyperlink.AddPageRefField(text);
+
+        return paragraph;
     }
 
     ///// <summary>

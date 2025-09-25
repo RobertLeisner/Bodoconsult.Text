@@ -12,7 +12,7 @@ namespace Bodoconsult.Text.Pdf.Renderer.Blocks;
 /// <summary>
 /// HTML rendering element for <see cref="HeadingBase"/> instances
 /// </summary>
-public class HeadingBasePdfTextRendererElement : PdfTextRendererElementBase
+public class HeadingBasePdfTextRendererElement : ParagraphPdfTextRendererElementBase
 {
     private readonly HeadingBase _headingBase;
 

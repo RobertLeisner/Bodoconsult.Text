@@ -26,29 +26,8 @@ public class DocumentMetaDataPdfTextRendererElement : PdfTextRendererElementBase
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public override void RenderIt(ITextDocumentRenderer renderer)
+    public override void RenderIt(PdfTextDocumentRenderer renderer)
     {
-        var sb = new StringBuilder();
-        if (!string.IsNullOrEmpty(_documentMetaData.Title))
-        {
-            sb.AppendLine($"<title>{_documentMetaData.Title}</title>");
-        }
-
-        if (!string.IsNullOrEmpty(_documentMetaData.Description))
-        {
-            sb.AppendLine($"<meta name=\"description\" content=\"{_documentMetaData.Description}\">");
-        }
-
-        if (!string.IsNullOrEmpty( _documentMetaData.Keywords))
-        {
-            sb.AppendLine($"<meta name=\"keywords\" content=\"{_documentMetaData.Keywords}\">");
-        }
-
-        if (!string.IsNullOrEmpty(_documentMetaData.Authors))
-        {
-            sb.AppendLine($"<meta name=\"author\" content=\"{_documentMetaData.Authors}\">");
-        }
-
-        renderer.Content.Append(sb);
+        // Do nothing
     }
 }

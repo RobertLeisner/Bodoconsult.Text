@@ -1,71 +1,48 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
-using System.Text;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
 using Bodoconsult.Text.Interfaces;
+using MigraDoc.DocumentObjectModel;
+using System;
+using System.Text;
 
 namespace Bodoconsult.Text.Pdf.Renderer.Inlines;
 
 /// <summary>
-/// Render a <see cref="Hyperlink"/> element
+/// Render a <see cref="Documents.Hyperlink"/> element
 /// </summary>
 public class HyperlinkPdfTextRendererElement : InlinePdfTextRendererElementBase
 {
-    private readonly Hyperlink _span;
+    private readonly Documents.Hyperlink _span;
 
     /// <summary>
     /// Default ctor
     /// </summary>
     /// <param name="span">Hyperlink</param>
-    public HyperlinkPdfTextRendererElement(Hyperlink span)
+    public HyperlinkPdfTextRendererElement(Documents.Hyperlink span)
     {
         _span = span;
     }
-
-    ///// <summary>
-    ///// Render the element
-    ///// </summary>
-    ///// <param name="renderer">Current renderer</param>
-    //public void RenderIt(ITextDocumentRender renderer)
-    //{
-    //    if (_span.ChildInlines.Count == 0)
-    //    {
-    //        if (_span.Parent is Block)
-    //        {
-    //            renderer.Content.Append($" => [{renderer.CheckContent(_span.Content)}]({_span.Uri}){Environment.NewLine}");
-    //        }
-    //        else
-    //        {
-    //            renderer.Content.Append($"[{renderer.CheckContent(_span.Content)}]({_span.Uri})");
-    //        }
-    //    }
-    //    else
-    //    {
-    //        DocumentRendererHelper.RenderInlineChilds(renderer, _span.ChildInlines, tag: "*");
-    //    }
-    //}
 
     /// <summary>
     /// Render the inline element to string
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    /// <param name="sb">String to add the inline element rendered</param>
-    public override void RenderToString(ITextDocumentRenderer renderer, StringBuilder sb)
+    /// <param name="paragraph">Paragraph to render the inline into</param>
+    public override void RenderIt(PdfTextDocumentRenderer renderer, MigraDoc.DocumentObjectModel.Paragraph paragraph)
     {
-        //if (_span.ChildInlines.Count == 0)
-        //{
-        //    var content = renderer.CheckContent(_span.Content);
-        //    sb.Append($"<a href=\"{_span.Uri}\" title=\"{content}\">{content}</a>");
-        //}
-        //else
-        //{
-        //    DocumentRendererHelper.RenderInlineChildsToHtml(renderer, sb, _span.ChildInlines, string.Empty);
+        var h = paragraph.AddHyperlink(_span.Uri, HyperlinkType.Web);
+        h.AddFormattedText(_span.Content);
+    }
 
-        //    //if (_span.Parent is Block)
-        //    //{
-        //    //    sb.Append($"{Environment.NewLine}");
-        //    //}
-        //}
+    /// <summary>
+    /// Render the inline to a string
+    /// </summary>
+    /// <param name="sb">String</param>
+    /// <exception cref="NotSupportedException"></exception>
+    public override void RenderToString(StringBuilder sb)
+    {
+        sb.Append($"[{_span.Content}]({_span.Uri})");
     }
 }

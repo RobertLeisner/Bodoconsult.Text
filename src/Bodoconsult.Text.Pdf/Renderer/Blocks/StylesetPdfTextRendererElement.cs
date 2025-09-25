@@ -21,26 +21,4 @@ public class StylesetPdfTextRendererElement : PdfTextRendererElementBase
         _styleset = styleset;
         ClassName = styleset.StyleName;
     }
-
-    /// <summary>
-    /// Render the element
-    /// </summary>
-    /// <param name="renderer">Current renderer</param>
-    public override void RenderIt(ITextDocumentRenderer renderer)
-    {
-        renderer.Content.AppendLine("<style>");
-
-        var sb = new StringBuilder();
-
-        foreach (var style in _styleset.StyleDictionary.Values)
-        {
-            var rendererElement = renderer.TextRendererElementFactory.CreateInstance(style);
-            rendererElement.RenderIt(renderer);
-        }
-        renderer.Content.Append(sb);
-
-        renderer.Content.AppendLine("</style>");
-        renderer.Content.AppendLine("</head>");
-        renderer.Content.AppendLine("<body>");
-    }
 }

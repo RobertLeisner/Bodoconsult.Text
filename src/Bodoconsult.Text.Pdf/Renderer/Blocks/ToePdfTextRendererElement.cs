@@ -7,7 +7,7 @@ namespace Bodoconsult.Text.Pdf.Renderer.Blocks;
 /// <summary>
 /// HTML rendering element for <see cref="Toe"/> instances
 /// </summary>
-public class ToePdfTextRendererElement : PdfLinkTextRendererElementBase
+public class ToePdfTextRendererElement : ParagraphPdfTextRendererElementBase
 {
     private readonly Toe _toe;
 
@@ -18,5 +18,15 @@ public class ToePdfTextRendererElement : PdfLinkTextRendererElementBase
     {
         _toe = toe;
         ClassName = toe.StyleName;
+    }
+
+    /// <summary>
+    /// Render the element
+    /// </summary>
+    /// <param name="renderer">Current renderer</param>
+    public override void RenderIt(PdfTextDocumentRenderer renderer)
+    {
+        Paragraph = renderer.PdfDocument.AddToeEntry(string.Empty, Block.TagName);
+        base.RenderIt(renderer);
     }
 }

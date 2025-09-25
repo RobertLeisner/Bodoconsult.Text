@@ -7,7 +7,7 @@ namespace Bodoconsult.Text.Pdf.Renderer.Blocks;
 /// <summary>
 /// HTML rendering element for <see cref="Error"/> instances
 /// </summary>
-public class ErrorPdfTextRendererElement : PdfTextRendererElementBase
+public class ErrorPdfTextRendererElement : ParagraphPdfTextRendererElementBase
 {
     private readonly Error _error;
 
@@ -18,5 +18,15 @@ public class ErrorPdfTextRendererElement : PdfTextRendererElementBase
     {
         _error = error;
         ClassName = error.StyleName;
+    }
+
+    /// <summary>
+    /// Render the element
+    /// </summary>
+    /// <param name="renderer">Current renderer</param>
+    public override void RenderIt(PdfTextDocumentRenderer renderer)
+    {
+        Paragraph = renderer.PdfDocument.AddError(string.Empty);
+        base.RenderIt(renderer);
     }
 }

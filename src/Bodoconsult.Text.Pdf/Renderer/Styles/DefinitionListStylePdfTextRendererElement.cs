@@ -37,6 +37,6 @@ public class DefinitionListStylePdfTextRendererElement : IPdfTextRendererElement
     /// <param name="renderer">Current renderer</param>
     public void RenderIt(PdfTextDocumentRenderer renderer)
     {
-        throw new System.NotImplementedException();
+
     }
 }

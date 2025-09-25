@@ -1,13 +1,14 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
 
 using Bodoconsult.Text.Documents;
+using Bodoconsult.Text.Pdf.Helpers;
 
 namespace Bodoconsult.Text.Pdf.Renderer.Blocks;
 
 /// <summary>
 /// HTML rendering element for <see cref="Toc1"/> instances
 /// </summary>
-public class Toc1PdfTextRendererElement : PdfLinkTextRendererElementBase
+public class Toc1PdfTextRendererElement : ParagraphPdfTextRendererElementBase
 {
     private readonly Toc1 _toc1;
 
@@ -18,6 +19,16 @@ public class Toc1PdfTextRendererElement : PdfLinkTextRendererElementBase
     {
         _toc1 = toc1;
         ClassName = toc1.StyleName;
+    }
+
+    /// <summary>
+    /// Render the element
+    /// </summary>
+    /// <param name="renderer">Current renderer</param>
+    public override void RenderIt(PdfTextDocumentRenderer renderer)
+    {
+        Paragraph = renderer.PdfDocument.AddToc1Entry(string.Empty, Block.TagName);
+        base.RenderIt(renderer);
     }
 }
 

@@ -7,7 +7,7 @@ namespace Bodoconsult.Text.Pdf.Renderer.Blocks;
 /// <summary>
 /// HTML rendering element for <see cref="ParagraphJustify"/> instances
 /// </summary>
-public class ParagraphJustifyPdfTextRendererElement : PdfTextRendererElementBase
+public class ParagraphJustifyPdfTextRendererElement : ParagraphPdfTextRendererElementBase
 {
     private readonly ParagraphJustify _paragraphJustify;
 
@@ -18,5 +18,15 @@ public class ParagraphJustifyPdfTextRendererElement : PdfTextRendererElementBase
     {
         _paragraphJustify = paragraphJustify;
         ClassName = paragraphJustify.StyleName;
+    }
+
+    /// <summary>
+    /// Render the element
+    /// </summary>
+    /// <param name="renderer">Current renderer</param>
+    public override void RenderIt(PdfTextDocumentRenderer renderer)
+    {
+        Paragraph = renderer.PdfDocument.AddParagraphJustify( string.Empty);
+        base.RenderIt(renderer);
     }
 }

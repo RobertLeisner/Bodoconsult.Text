@@ -25,7 +25,7 @@ public class InlinePdfTextRendererElementBase : IPdfTextRendererElement
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="renderer"></param>
+    /// <param name="renderer">Current renderer</param>
     /// <exception cref="NotImplementedException"></exception>
     public void RenderIt(PdfTextDocumentRenderer renderer)
     {
@@ -36,8 +36,18 @@ public class InlinePdfTextRendererElementBase : IPdfTextRendererElement
     /// Render the inline element to string
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    /// <param name="sb">String to add the inline element rendered</param>
-    public virtual void RenderToString(ITextDocumentRenderer renderer, StringBuilder sb)
+    /// <param name="paragraph">Paragraph to render the inline into</param>
+    public virtual void RenderIt(PdfTextDocumentRenderer renderer, MigraDoc.DocumentObjectModel.Paragraph paragraph)
+    {
+        throw new NotSupportedException("Override method RenderToString() in derived subclasses");
+    }
+
+    /// <summary>
+    /// Render the inline to a string
+    /// </summary>
+    /// <param name="sb">String</param>
+    /// <exception cref="NotSupportedException"></exception>
+    public virtual void RenderToString( StringBuilder sb)
     {
         throw new NotSupportedException("Override method RenderToString() in derived subclasses");
     }

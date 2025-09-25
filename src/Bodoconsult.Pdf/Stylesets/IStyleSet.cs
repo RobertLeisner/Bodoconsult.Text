@@ -233,4 +233,19 @@ public interface IStyleSet
     /// Current page setup
     /// </summary>
     PageSetup PageSetup { get; set; }
+
+    /// <summary>
+    /// Centered paragraph style
+    /// </summary>
+    Style ParagraphCenter { get; set; }
+
+    /// <summary>
+    /// Right-aligned paragraph style
+    /// </summary>
+    Style ParagraphRight { get; set; }
+
+    /// <summary>
+    /// Justified paragraph style
+    /// </summary>
+    Style ParagraphJustify { get; set; }
 }

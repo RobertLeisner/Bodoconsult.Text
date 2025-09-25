@@ -7,7 +7,7 @@ namespace Bodoconsult.Text.Pdf.Renderer.Blocks;
 /// <summary>
 /// HTML rendering element for <see cref="Toc5"/> instances
 /// </summary>
-public class Toc5PdfTextRendererElement : PdfLinkTextRendererElementBase
+public class Toc5PdfTextRendererElement : ParagraphPdfTextRendererElementBase
 {
     private readonly Toc5 _toc5;
 
@@ -18,5 +18,15 @@ public class Toc5PdfTextRendererElement : PdfLinkTextRendererElementBase
     {
         _toc5 = toc5;
         ClassName = toc5.StyleName;
+    }
+
+    /// <summary>
+    /// Render the element
+    /// </summary>
+    /// <param name="renderer">Current renderer</param>
+    public override void RenderIt(PdfTextDocumentRenderer renderer)
+    {
+        Paragraph = renderer.PdfDocument.AddToc5Entry(string.Empty, Block.TagName);
+        base.RenderIt(renderer);
     }
 }

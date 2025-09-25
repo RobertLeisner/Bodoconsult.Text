@@ -1,8 +1,7 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
 using Bodoconsult.Text.Documents;
-using Bodoconsult.Text.Helpers;
-using Bodoconsult.Text.Interfaces;
+using Bodoconsult.Text.Pdf.Helpers;
 
 namespace Bodoconsult.Text.Pdf.Renderer.Blocks;
 
@@ -26,14 +25,17 @@ public class TotSectionPdfTextRendererElement : PdfTextRendererElementBase
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public override void RenderIt(ITextDocumentRenderer renderer)
+    public override void RenderIt(PdfTextDocumentRenderer renderer)
     {
         if (_totSection.ChildBlocks.Count == 0)
         {
             return;
         }
 
-        renderer.Content.AppendLine($"<p class=\"TotHeadingStyle\">{renderer.CheckContent(renderer.Document.DocumentMetaData.TotHeading)}</p>");
-        DocumentRendererHelper.RenderBlockChildsToHtml(renderer, _totSection.ChildBlocks);
+        renderer.PdfDocument.CreateTotSection();
+
+        renderer.PdfDocument.AddParagraph(renderer.Document.DocumentMetaData.TotHeading);
+
+        PdfDocumentRendererHelper.RenderBlockChildsToPdf(renderer, Block.ChildBlocks);
     }
 }

@@ -7,7 +7,7 @@ namespace Bodoconsult.Text.Pdf.Renderer.Blocks;
 /// <summary>
 /// HTML rendering element for <see cref="ParagraphCenter"/> instances
 /// </summary>
-public class ParagraphCenterPdfTextRendererElement : PdfTextRendererElementBase
+public class ParagraphCenterPdfTextRendererElement : ParagraphPdfTextRendererElementBase
 {
     private readonly ParagraphCenter _paragraphCenter;
 
@@ -19,4 +19,16 @@ public class ParagraphCenterPdfTextRendererElement : PdfTextRendererElementBase
         _paragraphCenter = paragraphCenter;
         ClassName = paragraphCenter.StyleName;
     }
+
+    /// <summary>
+    /// Render the element
+    /// </summary>
+    /// <param name="renderer">Current renderer</param>
+    public override void RenderIt(PdfTextDocumentRenderer renderer)
+    {
+        Paragraph = renderer.PdfDocument.AddParagraphCenter(string.Empty);
+        base.RenderIt(renderer);
+    }
+
+
 }

@@ -24,14 +24,4 @@ public class TablePdfTextRendererElement : PdfTextRendererElementBase
         _table = table;
         ClassName = "TableStyle";
     }
-
-
-    /// <summary>
-    /// Render the element
-    /// </summary>
-    /// <param name="renderer">Current renderer</param>
-    public override void RenderIt(ITextDocumentRenderer renderer)
-    {
-
-    }
 }

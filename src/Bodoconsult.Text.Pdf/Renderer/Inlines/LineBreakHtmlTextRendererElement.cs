@@ -1,8 +1,10 @@
 ﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH.  All rights reserved.
 
-using System.Text;
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Interfaces;
+using MigraDoc.DocumentObjectModel;
+using System;
+using System.Text;
 
 namespace Bodoconsult.Text.Pdf.Renderer.Inlines;
 
@@ -22,22 +24,23 @@ public class LineBreakPdfTextRendererElement : InlinePdfTextRendererElementBase
         _span = span;
     }
 
-    ///// <summary>
-    ///// Render the element
-    ///// </summary>
-    ///// <param name="renderer">Current renderer</param>
-    //public void RenderIt(ITextDocumentRender renderer)
-    //{
-    //    renderer.Content.Append($"{Environment.NewLine}");
-    //}
-
     /// <summary>
     /// Render the inline element to string
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    /// <param name="sb">String to add the inline element rendered</param>
-    public override void RenderToString(ITextDocumentRenderer renderer, StringBuilder sb)
+    /// <param name="paragraph">Paragraph to render the inline into</param>
+    public override void RenderIt(PdfTextDocumentRenderer renderer, MigraDoc.DocumentObjectModel.Paragraph paragraph)
     {
-        sb.Append("</br>");
+        paragraph.AddLineBreak();
+    }
+
+    /// <summary>
+    /// Render the inline to a string
+    /// </summary>
+    /// <param name="sb">String</param>
+    /// <exception cref="NotSupportedException"></exception>
+    public override void RenderToString(StringBuilder sb)
+    {
+        sb.Append(Environment.NewLine);
     }
 }

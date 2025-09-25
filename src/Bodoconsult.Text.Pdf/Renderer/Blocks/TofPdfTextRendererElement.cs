@@ -7,7 +7,7 @@ namespace Bodoconsult.Text.Pdf.Renderer.Blocks;
 /// <summary>
 /// HTML rendering element for <see cref="Tof"/> instances
 /// </summary>
-public class TofPdfTextRendererElement : PdfLinkTextRendererElementBase
+public class TofPdfTextRendererElement : ParagraphPdfTextRendererElementBase
 {
     private readonly Tof _tof;
 
@@ -18,5 +18,15 @@ public class TofPdfTextRendererElement : PdfLinkTextRendererElementBase
     {
         _tof = tof;
         ClassName = tof.StyleName;
+    }
+
+    /// <summary>
+    /// Render the element
+    /// </summary>
+    /// <param name="renderer">Current renderer</param>
+    public override void RenderIt(PdfTextDocumentRenderer renderer)
+    {
+        Paragraph = renderer.PdfDocument.AddTofEntry(string.Empty, Block.TagName);
+        base.RenderIt(renderer);
     }
 }

@@ -7,7 +7,7 @@ namespace Bodoconsult.Text.Pdf.Renderer.Blocks;
 /// <summary>
 /// HTML rendering element for <see cref="ParagraphRight"/> instances
 /// </summary>
-public class ParagraphRightPdfTextRendererElement : PdfTextRendererElementBase
+public class ParagraphRightPdfTextRendererElement : ParagraphPdfTextRendererElementBase
 {
     private readonly ParagraphRight _paragraphRight;
 
@@ -18,5 +18,15 @@ public class ParagraphRightPdfTextRendererElement : PdfTextRendererElementBase
     {
         _paragraphRight = paragraphRight;
         ClassName = paragraphRight.StyleName;
+    }
+
+    /// <summary>
+    /// Render the element
+    /// </summary>
+    /// <param name="renderer">Current renderer</param>
+    public override void RenderIt(PdfTextDocumentRenderer renderer)
+    {
+        Paragraph = renderer.PdfDocument.AddParagraphRight(string.Empty);
+        base.RenderIt(renderer);
     }
 }

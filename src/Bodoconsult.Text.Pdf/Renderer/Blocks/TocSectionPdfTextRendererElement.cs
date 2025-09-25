@@ -3,6 +3,8 @@
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Helpers;
 using Bodoconsult.Text.Interfaces;
+using Bodoconsult.Text.Pdf.Helpers;
+using MigraDoc.Rendering;
 
 namespace Bodoconsult.Text.Pdf.Renderer.Blocks;
 
@@ -26,12 +28,17 @@ public class TocSectionPdfTextRendererElement : PdfTextRendererElementBase
     /// Render the element
     /// </summary>
     /// <param name="renderer">Current renderer</param>
-    public override void RenderIt(ITextDocumentRenderer renderer)
+    public override void RenderIt(PdfTextDocumentRenderer renderer)
     {
-        if (_tocSection.ChildBlocks.Count==0)
+        if (_tocSection.ChildBlocks.Count == 0)
         {
             return;
         }
 
+        renderer.PdfDocument.CreateTocSection();
+
+        renderer.PdfDocument.AddParagraph(renderer.Document.DocumentMetaData.TocHeading);
+
+        PdfDocumentRendererHelper.RenderBlockChildsToPdf(renderer, Block.ChildBlocks);
     }
 }

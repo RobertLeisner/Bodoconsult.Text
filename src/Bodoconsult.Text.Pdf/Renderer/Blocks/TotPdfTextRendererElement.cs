@@ -7,7 +7,7 @@ namespace Bodoconsult.Text.Pdf.Renderer.Blocks;
 /// <summary>
 /// HTML rendering element for <see cref="Tot"/> instances
 /// </summary>
-public class TotPdfTextRendererElement : PdfLinkTextRendererElementBase
+public class TotPdfTextRendererElement : ParagraphPdfTextRendererElementBase
 {
     private readonly Tot _tot;
 
@@ -18,5 +18,15 @@ public class TotPdfTextRendererElement : PdfLinkTextRendererElementBase
     {
         _tot = tot;
         ClassName = tot.StyleName;
+    }
+
+    /// <summary>
+    /// Render the element
+    /// </summary>
+    /// <param name="renderer">Current renderer</param>
+    public override void RenderIt(PdfTextDocumentRenderer renderer)
+    {
+        Paragraph = renderer.PdfDocument.AddTotEntry(string.Empty, Block.TagName);
+        base.RenderIt(renderer);
     }
 }

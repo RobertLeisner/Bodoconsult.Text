@@ -7,6 +7,7 @@ using Bodoconsult.Text.Interfaces;
 using Bodoconsult.Text.Pdf.Interfaces;
 using Bodoconsult.Text.Renderer;
 using PdfSharp.Fonts;
+using System;
 
 namespace Bodoconsult.Text.Pdf.Renderer;
 
@@ -50,5 +51,14 @@ public class PdfTextDocumentRenderer : BaseDocumentRenderer
     {
         var rendererElement = PdfTextRendererElementFactory.CreateInstancePdf(Document);
         rendererElement.RenderIt(this);
+    }
+
+    /// <summary>
+    /// Save the rendered document as file
+    /// </summary>
+    /// <param name="fileName">Full file path. Existing file will be overwritten</param>
+    public override void SaveAsFile(string fileName)
+    {
+        PdfDocument.RenderToPdf(fileName, false);
     }
 }
