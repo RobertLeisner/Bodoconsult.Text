@@ -138,4 +138,14 @@ public static class MeasurementHelper
     {
         return GetPxFromTwips(GetTwipsFromPt(pt))  ;
     }
+
+    /// <summary>
+    /// Get cm from twips
+    /// </summary>
+    /// <param name="twips">Twips</param>
+    /// <returns>cm</returns>
+    public static double GetCmFromTwips(int twips)
+    {
+        return twips / TwipsPerInchTypographicPoint * 2.54f;
+    }
 }

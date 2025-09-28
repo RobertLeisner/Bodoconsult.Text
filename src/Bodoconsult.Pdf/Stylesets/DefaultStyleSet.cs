@@ -625,7 +625,7 @@ public class DefaultStyleSet : IStyleSet
         };
         Header.ParagraphFormat.Borders.Bottom.Width = 1;
         Header.ParagraphFormat.Borders.Bottom.Color = Colors.Black;
-
+        Header.ParagraphFormat.AddTabStop(width, TabAlignment.Right);
 
         Details = new Style("Details", "Normal")
         {

@@ -355,15 +355,14 @@ public abstract class PdfBuilderBase : IDisposable
     public void CreateTocSection()
     {
         Toc = Document.AddSection();
+        Toc.PageSetup = PageSetup.Clone();
+        Content = Toc;
 
         AddHeaderInternal(Toc);
-        AddFooterInternal(Toc);
+        AddFooterInternal(Toc, "ROMAN");
 
         var p = Toc.AddParagraph(TitleTableOfContent, "TocHeading");
         p.AddBookmark("Content");
-
-        Content = Toc;
-        Toc.PageSetup = PageSetup.Clone();
     }
 
     /// <summary>
@@ -372,15 +371,14 @@ public abstract class PdfBuilderBase : IDisposable
     public void CreateTofSection()
     {
         Tof = Document.AddSection();
+        Tof.PageSetup = PageSetup.Clone();
+        Content = Tof;
 
         AddHeaderInternal(Tof);
-        AddFooterInternal(Tof);
+        AddFooterInternal(Tof, "ROMAN");
 
         var p = Tof.AddParagraph(TitleTableOfFigures, "TofHeading");
         p.AddBookmark("Figures");
-
-        Content = Tof;
-        Tof.PageSetup = PageSetup.Clone();
     }
 
     /// <summary>
@@ -389,15 +387,14 @@ public abstract class PdfBuilderBase : IDisposable
     public void CreateToeSection()
     {
         Toe = Document.AddSection();
+        Toe.PageSetup = PageSetup.Clone();
+        Content = Toe;
 
         AddHeaderInternal(Toe);
-        AddFooterInternal(Toe);
+        AddFooterInternal(Toe, "ROMAN");
 
         var p = Toe.AddParagraph(TitleTableOfEquations, "ToeHeading");
         p.AddBookmark("Equations");
-
-        Content = Toe;
-        Toe.PageSetup = PageSetup.Clone();
     }
 
     /// <summary>
@@ -406,15 +403,15 @@ public abstract class PdfBuilderBase : IDisposable
     public void CreateTotSection()
     {
         Tot = Document.AddSection();
+        Content = Tot;
+        Tot.PageSetup = PageSetup.Clone();
 
         AddHeaderInternal(Tot);
-        AddFooterInternal(Tot);
+        AddFooterInternal(Tot, "ROMAN");
 
         var p = Tot.AddParagraph(TitleTableOfTables, "TotHeading");
         p.AddBookmark("Tables");
 
-        Content = Tot;
-        Tot.PageSetup = PageSetup.Clone();
     }
 
     /// <summary>
@@ -892,25 +889,35 @@ public abstract class PdfBuilderBase : IDisposable
     /// Add a footer
     /// </summary>
     /// <param name="section">Section to add the footer to</param>
-    protected void AddFooterInternal(Section section)
+    /// <param name="pageNumberFormat">Null or ROMAN, roman, ALPHABETIC, alphabetic</param>
+    protected void AddFooterInternal(Section section, string pageNumberFormat = null)
     {
         if (section == null || string.IsNullOrEmpty(FooterText))
         {
             return;
         }
 
-        var paragraph = new Paragraph();
+        var paragraph = new Paragraph
+        {
+            Style = "Footer"
+        };
 
         var text = FooterText;
 
         if (text.Contains("<<page>>"))
         {
+            paragraph.Format.AddTabStop(Unit.FromCentimeter(Width), TabAlignment.Right);
 
             var vorher = text[..text.IndexOf("<<page>>", StringComparison.Ordinal)];
             var nachher = text.Substring(text.IndexOf("<<page>>", StringComparison.Ordinal) + 8,
                 text.Length - text.IndexOf("<<page>>", StringComparison.Ordinal) - 8);
             paragraph.AddText(vorher);
-            paragraph.AddPageField();
+
+            var p = paragraph.AddPageField();
+            if (!string.IsNullOrEmpty(pageNumberFormat))
+            {
+                p.Format = pageNumberFormat;
+            }
 
             if (nachher.Contains("<<pages>>"))
             {
@@ -986,6 +993,7 @@ public abstract class PdfBuilderBase : IDisposable
         };
 
         paragraph.Format.TabStops.ClearAll();
+        paragraph.Style = "Header";
 
         var width = (PageSetup.Orientation == Orientation.Landscape) ? Unit.FromCentimeter(PageSetup.PageHeight.Centimeter -
                 PageSetup.LeftMargin.Centimeter -
@@ -1021,13 +1029,39 @@ public abstract class PdfBuilderBase : IDisposable
     /// <param name="dt">Current table data</param>
     /// <param name="legend">Legend for the table</param>
     /// <param name="tag">Link tag name</param>
-    /// <param name="width">Width to use or 0 for textarea width</param>
+    /// <param name="width">Width in cm to use or 0 for textarea width</param>
     /// <param name="tableStyle">Name of the style to use for table. Default: NormalTable</param>
     public void AddTable(PdfTable dt, string legend, string tag, double width = 0, string tableStyle = "NormalTable")
     {
         if (Math.Abs(width) < 0.000001)
         {
             width = Width;
+        }
+
+        // Calculate maxlength for columns
+        for (var i = 0; i < dt.Columns.Count; i++)
+        {
+            var col = dt.Columns[i];
+            if (col.MaxLength < col.ColumnName.Length)
+            {
+                col.MaxLength = col.ColumnName.Length;
+            }
+
+        }
+
+        foreach (var r in dt.Rows)
+        {
+            for (var i = 0; i < dt.Columns.Count; i++)
+            {
+                var cell = r.Cells[i];
+
+                var col = dt.Columns[i];
+                if (col.MaxLength < cell.Content.Length)
+                {
+                    col.MaxLength = cell.Content.Length;
+                }
+                
+            }
         }
 
         var style = Document.Styles[tableStyle];
@@ -1279,7 +1313,7 @@ public abstract class PdfBuilderBase : IDisposable
 
         foreach (DataRow r in dt.Rows)
 
-            //for (var zeile = schleife * Increment; zeile < (schleife + 1) * Increment; zeile++)
+        //for (var zeile = schleife * Increment; zeile < (schleife + 1) * Increment; zeile++)
         {
             var row = table.AddRow();
             //row.KeepWith = 2;
@@ -2317,7 +2351,7 @@ public abstract class PdfBuilderBase : IDisposable
         var image = frame.AddImage(fileName);
         image.Width = frame.Width;
         image.Height = frame.Height;
-       // image = null;
+        // image = null;
     }
 
     /// <summary>
@@ -2503,8 +2537,8 @@ public abstract class PdfBuilderBase : IDisposable
 
                     startTag = endTag + 1;
                     break;
-                //default:
-                //    break;
+                    //default:
+                    //    break;
             }
 
             startTag = html.IndexOf("<", startTag + 1, StringComparison.InvariantCultureIgnoreCase);

@@ -3,11 +3,10 @@
 using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Pdf.Renderer;
 using Bodoconsult.Text.Pdf.Renderer.Inlines;
+using MigraDoc.DocumentObjectModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using MigraDoc.DocumentObjectModel;
-using MigraDoc.DocumentObjectModel.Shapes;
 using Color = MigraDoc.DocumentObjectModel.Color;
 using Colors = Bodoconsult.Text.Documents.Colors;
 using Paragraph = MigraDoc.DocumentObjectModel.Paragraph;
@@ -49,6 +48,12 @@ public static class PdfDocumentRendererHelper
         }
     }
 
+    /// <summary>
+    /// Render block inline childs to string for PDF
+    /// </summary>
+    /// <param name="renderer">Current renderer</param>
+    /// <param name="childInlines">Child inlines</param>
+    /// <param name="sb">String</param>
     public static void RenderBlockInlinesToStringForPdf(PdfTextDocumentRenderer renderer, List<Inline> childInlines,
         StringBuilder sb)
     {
@@ -115,4 +120,18 @@ public static class PdfDocumentRendererHelper
         return pdfColor;
     }
 
+    ///// <summary>
+    ///// Render block inline childs to string for PDF
+    ///// </summary>
+    ///// <param name="renderer">Current renderer</param>
+    ///// <param name="childInlines">Child inlines</param>
+    ///// <param name="sb">String</param>
+    //public static void RenderBlockInlinesToPdf(PdfTextDocumentRenderer renderer, List<Inline> childInlines, StringBuilder sb)
+    //{
+    //    foreach (var inline in childInlines)
+    //    {
+    //        var rendererElement = (InlinePdfTextRendererElementBase)renderer.PdfTextRendererElementFactory.CreateInstancePdf(inline);
+    //        rendererElement.RenderToString(sb);
+    //    }
+    //}
 }

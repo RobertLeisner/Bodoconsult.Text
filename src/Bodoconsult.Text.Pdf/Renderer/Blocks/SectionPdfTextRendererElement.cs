@@ -37,7 +37,24 @@ public class SectionPdfTextRendererElement : PdfTextRendererElementBase
     /// <param name="renderer">Current renderer</param>
     public override void RenderIt(PdfTextDocumentRenderer renderer)
     {
+        
+        
+        if (!string.IsNullOrEmpty(renderer.Document.DocumentMetaData.HeaderText))
+        {
+            renderer.PdfDocument.SetHeader(renderer.Document.DocumentMetaData.HeaderText);
+        }
+        if (!string.IsNullOrEmpty(renderer.Document.DocumentMetaData.FooterText))
+        {
+            renderer.PdfDocument.SetFooter(renderer.Document.DocumentMetaData.FooterText);
+        }
+
+        if (_section.IsRestartPageNumberingRequired)
+        {
+            renderer.PdfDocument.PageSetup.StartingNumber = 1;
+        }
+
         renderer.PdfDocument.CreateContentSection();
+
         PdfDocumentRendererHelper.RenderBlockChildsToPdf(renderer, Block.ChildBlocks);
     }
 }

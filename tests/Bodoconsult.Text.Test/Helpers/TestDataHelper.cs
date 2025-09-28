@@ -37,7 +37,9 @@ public static class TestDataHelper
             IsTocRequired = true,
             IsFiguresTableRequired = true,
             IsEquationsTableRequired = true,
-            IsTablesTableRequired = true
+            IsTablesTableRequired = true,
+            FooterText = "Bodoconsult GmbH\t<<page>>",
+            HeaderText = "HeaderText"
         };
 
         doc.AddBlock(meta);

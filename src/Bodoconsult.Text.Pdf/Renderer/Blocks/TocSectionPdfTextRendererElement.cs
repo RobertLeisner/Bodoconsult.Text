@@ -32,6 +32,14 @@ public class TocSectionPdfTextRendererElement : PdfTextRendererElementBase
             return;
         }
 
+        if (!string.IsNullOrEmpty(renderer.Document.DocumentMetaData.HeaderText))
+        {
+            renderer.PdfDocument.SetHeader(renderer.Document.DocumentMetaData.HeaderText);
+        }
+        if (!string.IsNullOrEmpty(renderer.Document.DocumentMetaData.FooterText))
+        {
+            renderer.PdfDocument.SetFooter(renderer.Document.DocumentMetaData.FooterText);
+        }
         renderer.PdfDocument.CreateTocSection();
 
         PdfDocumentRendererHelper.RenderBlockChildsToPdf(renderer, Block.ChildBlocks);

@@ -124,6 +124,16 @@ public class DocumentMetaData : Block
     public bool IsTablesTableRequired { get; set; }
 
     /// <summary>
+    /// Footer text. Use &lt;&lt;page&gt;&gt; as placeholder for the page number
+    /// </summary>
+    public string FooterText { get; set; }
+
+    /// <summary>
+    /// Header text
+    /// </summary>
+    public string HeaderText { get; set; }
+
+    /// <summary>
     /// Add the current element to a document defined in LDML (Logical document markup language)
     /// </summary>
     /// <param name="stringBuilder">StringBuilder instance to create the LDML in</param>

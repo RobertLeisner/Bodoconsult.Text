@@ -29,20 +29,3 @@ public class PdfTable
     /// </summary>
     public List<PdfRow> Rows { get;  } = new();
 }
-
-/// <summary>
-/// A term item for a definition list (HTML dt)
-/// </summary>
-public class PdfDefinitionListTerm
-{
-    /// <summary>
-    /// The term value to show of this definition list item
-    /// </summary>
-    public string Term { get; set; }
-
-    /// <summary>
-    /// The item values to show for this definition list item
-    /// </summary>
-    public List<string> Items { get; set; }
-
-}
