@@ -4,20 +4,19 @@
 using System.Windows.Forms;
 using LaTexConvert.Business.ViewModels;
 
-namespace LaTexConvert
+namespace LaTexConvert;
+
+public static class Program
 {
-    public static class Program
+
+    public static void Main()
     {
 
-        public static void Main()
-        {
-
-            var viewModel = new MainWindowViewModel();
+        var viewModel = new MainWindowViewModel();
 
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainWindow(viewModel));
-        }
+        Application.EnableVisualStyles();
+        Application.SetCompatibleTextRenderingDefault(false);
+        Application.Run(new MainWindow(viewModel));
     }
 }

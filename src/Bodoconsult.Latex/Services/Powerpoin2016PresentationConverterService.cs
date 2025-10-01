@@ -6,53 +6,51 @@ using Bodoconsult.Latex.Interfaces;
 using Bodoconsult.Latex.Model;
 using Bodoconsult.Latex.Office.Analyzer;
 
-namespace Bodoconsult.Latex.Services
+namespace Bodoconsult.Latex.Services;
+
+/// <summary>
+/// Convert a Powerpoint 2016 and 2019 presentation to LaTex
+/// </summary>
+public class Powerpoin2016PresentationConverterService : IPresentationConverterService
 {
 
+    protected ILatexWriterService LatexWriterService;
+
+    protected IPresentationToLaTexConverter Converter;
+
+    protected IPresentationAnalyzer Analyzer;
+
+
     /// <summary>
-    /// Convert a Powerpoint 2016 and 2019 presentation to LaTex
+    /// Default ctor
     /// </summary>
-    public class Powerpoin2016PresentationConverterService : IPresentationConverterService
+    /// <param name="presentationJob"></param>
+    public Powerpoin2016PresentationConverterService(PresentationJob presentationJob)
     {
+        PresentationJob = presentationJob;
 
-        protected ILatexWriterService LatexWriterService;
+        LatexWriterService = new LatexV2WriterService(presentationJob.LaTexFilePath);
 
-        protected IPresentationToLaTexConverter Converter;
+        Analyzer = new Powerpoint2016Analyzer(presentationJob.PresentationFilePath);
 
-        protected IPresentationAnalyzer Analyzer;
-
-
-        /// <summary>
-        /// Default ctor
-        /// </summary>
-        /// <param name="presentationJob"></param>
-        public Powerpoin2016PresentationConverterService(PresentationJob presentationJob)
-        {
-            PresentationJob = presentationJob;
-
-            LatexWriterService = new LatexV2WriterService(presentationJob.LaTexFilePath);
-
-            Analyzer = new Powerpoint2016Analyzer(presentationJob.PresentationFilePath);
-
-            Converter = new PresentationToLaTexConverter(Analyzer, LatexWriterService);
+        Converter = new PresentationToLaTexConverter(Analyzer, LatexWriterService);
 
 
-        }
+    }
 
 
-        /// <summary>
-        /// Current presentation job
-        /// </summary>
-        public PresentationJob PresentationJob { get; }
+    /// <summary>
+    /// Current presentation job
+    /// </summary>
+    public PresentationJob PresentationJob { get; }
 
 
 
-        /// <summary>
-        /// Convert the presentation to LaTex
-        /// </summary>
-        public void ConvertPresentation()
-        {
-            Converter.Convert();
-        }
+    /// <summary>
+    /// Convert the presentation to LaTex
+    /// </summary>
+    public void ConvertPresentation()
+    {
+        Converter.Convert();
     }
 }

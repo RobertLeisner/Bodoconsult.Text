@@ -8,26 +8,25 @@ using Bodoconsult.Latex.Services;
 using Bodoconsult.Latex.Test.Helpers;
 using NUnit.Framework;
 
-namespace Bodoconsult.Latex.Test.Office
+namespace Bodoconsult.Latex.Test.Office;
+
+[TestFixture]
+public class UnitTestPresentationToLaTexConverterFakeAnalyzer : BasePresentationToLaTexConverter
 {
-    [TestFixture]
-    public class UnitTestPresentationToLaTexConverterFakeAnalyzer : BasePresentationToLaTexConverter
+
+    [SetUp]
+    public void Setup()
     {
 
-        [SetUp]
-        public void Setup()
-        {
+        LatexWriterService = new LatexV2WriterService(TargetPath);
 
-            LatexWriterService = new LatexV2WriterService(TargetPath);
+        var presentation = new PresentationMetaData(Source);
 
-            var presentation = new PresentationMetaData(Source);
+        TestHelper.FillPresentation(presentation);
 
-            TestHelper.FillPresentation(presentation);
+        Analyzer = new FakeAnalyzer(presentation);
 
-            Analyzer = new FakeAnalyzer(presentation);
+        Converter = new PresentationToLaTexConverter(Analyzer, LatexWriterService);
 
-            Converter = new PresentationToLaTexConverter(Analyzer, LatexWriterService);
-
-        }
     }
 }

@@ -5,77 +5,76 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
-namespace Bodoconsult.Test.Helpers
+namespace Bodoconsult.Test.Helpers;
+
+/// <summary>
+/// Test helper class
+/// </summary>
+public class TestHelper
 {
+
+    private static readonly Assembly Ass;
+
+    static TestHelper()
+    {
+        Ass = Assembly.GetExecutingAssembly();
+        AppPath = new FileInfo(Ass.Location).Directory.FullName;
+        TestDataPath = Path.Combine(AppPath, "TestData");
+    }
+
     /// <summary>
-    /// Test helper class
+    /// Current app path
     /// </summary>
-    public class TestHelper
+    public static string AppPath { get; }
+
+    /// <summary>
+    /// Test data path
+    /// </summary>
+    public static string TestDataPath { get; set; }
+
+
+    /// <summary>
+    /// Get a text from an embedded resource file
+    /// </summary>
+    /// <param name="resourceName">resource name = plain file name without extension and path</param>
+    /// <returns></returns>
+    internal static string GetTextResource(string resourceName)
     {
 
-        private static readonly Assembly Ass;
+        resourceName = $"Bodoconsult.Test.Resources.{resourceName}.txt";
 
-        static TestHelper()
+        var str = Ass.GetManifestResourceStream(resourceName);
+
+        if (str == null) return null;
+
+        string s;
+
+        using (var file = new StreamReader(str))
         {
-            Ass = Assembly.GetExecutingAssembly();
-            AppPath = new FileInfo(Ass.Location).Directory.FullName;
-            TestDataPath = Path.Combine(AppPath, "TestData");
+            s = file.ReadToEnd();
         }
 
-        /// <summary>
-        /// Current app path
-        /// </summary>
-        public static string AppPath { get; }
+        return s;
+    }
 
-        /// <summary>
-        /// Test data path
-        /// </summary>
-        public static string TestDataPath { get; set; }
-
-
-        /// <summary>
-        /// Get a text from an embedded resource file
-        /// </summary>
-        /// <param name="resourceName">resource name = plain file name without extension and path</param>
-        /// <returns></returns>
-        internal static string GetTextResource(string resourceName)
+    /// <summary>
+    /// Opens a file in a separate process. Executable not required
+    /// </summary>
+    /// <param name="path">File to open</param>
+    public static void OpenFile(string path)
+    {
+        if (!Debugger.IsAttached)
         {
+            return;
+        }
 
-            resourceName = $"Bodoconsult.Test.Resources.{resourceName}.txt";
-
-            var str = Ass.GetManifestResourceStream(resourceName);
-
-            if (str == null) return null;
-
-            string s;
-
-            using (var file = new StreamReader(str))
+        var p = new Process
+        {
+            StartInfo = new ProcessStartInfo(path)
             {
-                s = file.ReadToEnd();
+                UseShellExecute = true
             }
-
-            return s;
-        }
-
-        /// <summary>
-        /// Opens a file in a separate process. Executable not required
-        /// </summary>
-        /// <param name="path">File to open</param>
-        public static void OpenFile(string path)
-        {
-            if (!Debugger.IsAttached)
-            {
-                return;
-            }
-
-            var p = new Process
-            {
-                StartInfo = new ProcessStartInfo(path)
-                {
-                    UseShellExecute = true
-                }
-            };
-            p.Start();
-        }
+        };
+        p.Start();
     }
 }

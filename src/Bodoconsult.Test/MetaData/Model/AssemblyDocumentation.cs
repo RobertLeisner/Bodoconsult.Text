@@ -3,25 +3,24 @@
 
 using System.Xml;
 
-namespace Bodoconsult.Test.MetaData.Model
+namespace Bodoconsult.Test.MetaData.Model;
+
+/// <summary>
+/// Contains the XML documentaion for an assembly
+/// </summary>
+public class AssemblyDocumentation
 {
     /// <summary>
-    /// Contains the XML documentaion for an assembly
+    /// File name of the assembly
     /// </summary>
-    public class AssemblyDocumentation
-    {
-        /// <summary>
-        /// File name of the assembly
-        /// </summary>
-        public string AssemblyFileName { get; set; }
+    public string AssemblyFileName { get; set; }
 
 
-        /// <summary>
-        /// The loaded XML documentation
-        /// </summary>
-        public XmlDocument Documentation { get; set; }
+    /// <summary>
+    /// The loaded XML documentation
+    /// </summary>
+    public XmlDocument Documentation { get; set; }
 
 
 
-    }
 }

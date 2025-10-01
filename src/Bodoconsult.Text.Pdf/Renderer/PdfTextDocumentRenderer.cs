@@ -7,6 +7,7 @@ using Bodoconsult.Text.Interfaces;
 using Bodoconsult.Text.Pdf.Interfaces;
 using Bodoconsult.Text.Renderer;
 using PdfSharp.Fonts;
+using Color = MigraDoc.DocumentObjectModel.Color;
 
 namespace Bodoconsult.Text.Pdf.Renderer;
 
@@ -23,13 +24,18 @@ public class PdfTextDocumentRenderer : BaseDocumentRenderer
     /// <param name="fontResolver">Current font resolver</param>
     public PdfTextDocumentRenderer(Document document, ITextRendererElementFactory textRendererElementFactory, IFontResolver fontResolver) : base(document)
     {
+        var metaData = document.DocumentMetaData;
+
         PdfTextRendererElementFactory = (IPdfTextRendererElementFactory)textRendererElementFactory;
         IStyleSet styleSet = new DefaultStyleSet();
         PdfDocument = new PdfBuilder(styleSet, fontResolver);
-        PdfDocument.TitleTableOfFigures = document.DocumentMetaData.TofHeading;
-        PdfDocument.TitleTableOfEquations = document.DocumentMetaData.ToeHeading;
-        PdfDocument.TitleTableOfTables = document.DocumentMetaData.TotHeading;
-        PdfDocument.TitleTableOfContent = document.DocumentMetaData.TocHeading;
+        PdfDocument.TitleTableOfFigures = metaData.TofHeading;
+        PdfDocument.TitleTableOfEquations = metaData.ToeHeading;
+        PdfDocument.TitleTableOfTables = metaData.TotHeading;
+        PdfDocument.TitleTableOfContent = metaData.TocHeading;
+        PdfDocument.BackColor = new Color(metaData.BackColor.A, metaData.BackColor.R, metaData.BackColor.G, metaData.BackColor.B);
+        PdfDocument.AlternateBackColor = new Color(metaData.AlternateBackColor.A, metaData.AlternateBackColor.R, metaData.AlternateBackColor.G, metaData.AlternateBackColor.B);
+        PdfDocument.TableBorderColor = new Color(metaData.TableBorderColor.A, metaData.TableBorderColor.R, metaData.TableBorderColor.G, metaData.TableBorderColor.B);
     }
 
     /// <summary>
@@ -63,5 +69,16 @@ public class PdfTextDocumentRenderer : BaseDocumentRenderer
     public override void SaveAsFile(string fileName)
     {
         PdfDocument.RenderToPdf(fileName, false);
+    }
+
+    /// <summary>
+    /// Check the content for tags to replace
+    /// </summary>
+    /// <param name="content">Content</param>
+    /// <returns>Checked content string</returns>
+    public string CheckContent(string content)
+    {
+        // ToDo: add I18N
+        return content;
     }
 }

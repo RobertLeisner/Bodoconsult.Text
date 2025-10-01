@@ -134,6 +134,21 @@ public class DocumentMetaData : Block
     public string HeaderText { get; set; }
 
     /// <summary>
+    /// Alternating background color for tables
+    /// </summary>
+    public Color AlternateBackColor { get; set; } = Colors.White;
+
+    /// <summary>
+    /// Background color
+    /// </summary>
+    public Color BackColor { get; set; } = Colors.LightSteelBlue;
+
+    /// <summary>
+    /// Table border color
+    /// </summary>
+    public Color TableBorderColor { get; set; } = Colors.DarkGray;
+
+    /// <summary>
     /// Add the current element to a document defined in LDML (Logical document markup language)
     /// </summary>
     /// <param name="stringBuilder">StringBuilder instance to create the LDML in</param>

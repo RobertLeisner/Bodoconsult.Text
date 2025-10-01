@@ -45,9 +45,10 @@ public class InlinePdfTextRendererElementBase : IPdfTextRendererElement
     /// <summary>
     /// Render the inline to a string
     /// </summary>
+    /// <param name="renderer">Current renderer</param>
     /// <param name="sb">String</param>
     /// <exception cref="NotSupportedException"></exception>
-    public virtual void RenderToString( StringBuilder sb)
+    public virtual void RenderToString(PdfTextDocumentRenderer renderer, StringBuilder sb)
     {
         throw new NotSupportedException("Override method RenderToString() in derived subclasses");
     }

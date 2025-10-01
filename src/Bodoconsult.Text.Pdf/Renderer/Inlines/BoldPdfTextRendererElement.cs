@@ -37,10 +37,10 @@ public class BoldPdfTextRendererElement : InlinePdfTextRendererElementBase
     /// <summary>
     /// Render the inline to a string
     /// </summary>
+    /// <param name="renderer">Current renderer</param>
     /// <param name="sb">String</param>
-    /// <exception cref="NotSupportedException"></exception>
-    public override void RenderToString(StringBuilder sb)
+    public override void RenderToString(PdfTextDocumentRenderer renderer, StringBuilder sb)
     {
-        sb.Append(_span.Content);
+        sb.Append(renderer.CheckContent(_span.Content));
     }
 }

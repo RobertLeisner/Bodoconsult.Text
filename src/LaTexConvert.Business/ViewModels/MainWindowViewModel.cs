@@ -3,20 +3,18 @@
 
 using LaTexConvert.Business.Models;
 
-namespace LaTexConvert.Business.ViewModels
+namespace LaTexConvert.Business.ViewModels;
+
+/// <summary>
+/// ViewModel for MainWindow form
+/// </summary>
+public class MainWindowViewModel
 {
-
     /// <summary>
-    /// ViewModel for MainWindow form
+    /// Current presentation job
     /// </summary>
-    public class MainWindowViewModel
-    {
-        /// <summary>
-        /// Current presentation job
-        /// </summary>
-        public PresentationJob PresentationJob { get; set; }
+    public PresentationJob PresentationJob { get; set; }
 
 
 
-    }
 }

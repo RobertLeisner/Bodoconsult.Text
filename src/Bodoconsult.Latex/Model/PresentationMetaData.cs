@@ -3,40 +3,39 @@
 
 using System.Collections.Generic;
 
-namespace Bodoconsult.Latex.Model
+namespace Bodoconsult.Latex.Model;
+
+/// <summary>
+/// Meta data class of a presentation
+/// </summary>
+public class PresentationMetaData
 {
+
     /// <summary>
-    /// Meta data class of a presentation
+    /// Default ctor
     /// </summary>
-    public class PresentationMetaData
+    /// <param name="sourceFileName"></param>
+    public PresentationMetaData(string sourceFileName)
     {
-
-        /// <summary>
-        /// Default ctor
-        /// </summary>
-        /// <param name="sourceFileName"></param>
-        public PresentationMetaData(string sourceFileName)
-        {
-            SourceFileName = sourceFileName;
-        }
-
-
-        /// <summary>
-        /// Source file name
-        /// </summary>
-        public string SourceFileName { get; }
-
-        /// <summary>
-        /// Name of the LaTex file to convert the presentation into
-        /// </summary>
-        public string TargetFileName { get; set; }
-
-
-        /// <summary>
-        /// All slides of presentation
-        /// </summary>
-        public IList<SlideMetaData> Slides { get; } = new List<SlideMetaData>();
-
-
+        SourceFileName = sourceFileName;
     }
+
+
+    /// <summary>
+    /// Source file name
+    /// </summary>
+    public string SourceFileName { get; }
+
+    /// <summary>
+    /// Name of the LaTex file to convert the presentation into
+    /// </summary>
+    public string TargetFileName { get; set; }
+
+
+    /// <summary>
+    /// All slides of presentation
+    /// </summary>
+    public IList<SlideMetaData> Slides { get; } = new List<SlideMetaData>();
+
+
 }

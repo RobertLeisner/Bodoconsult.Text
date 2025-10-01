@@ -7,61 +7,60 @@ using Bodoconsult.Latex.Test.Helpers;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
-namespace Bodoconsult.Latex.Test.Office
+namespace Bodoconsult.Latex.Test.Office;
+
+public abstract class BasePresentationToLaTexConverter
 {
-    public abstract class BasePresentationToLaTexConverter
+
+    protected ILatexWriterService LatexWriterService;
+
+    protected IPresentationToLaTexConverter Converter;
+
+    protected IPresentationAnalyzer Analyzer;
+
+
+    protected string TargetPath = Path.Combine(TestHelper.TempPath, "chapter1.tex");
+
+
+    protected string Source = Path.Combine(TestHelper.TestDataPath, "Test.pptx");
+
+    [Test]
+    public void TestCtor()
     {
 
-        protected ILatexWriterService LatexWriterService;
+        // Act: see Setup()
 
-        protected IPresentationToLaTexConverter Converter;
+        // Assert
+        Assert.That(Analyzer.PresentationMetaData, Is.Not.Null);
+        Assert.That(Analyzer.PresentationMetaData.SourceFileName, Is.EqualTo(Source));
 
-        protected IPresentationAnalyzer Analyzer;
+        Assert.That(Converter.Analyzer.PresentationMetaData, Is.Not.Null);
+        Assert.That(Converter.Analyzer.PresentationMetaData.SourceFileName, Is.EqualTo(Source));
+
+    }
 
 
-        protected string TargetPath = Path.Combine(TestHelper.TempPath, "chapter1.tex");
+    [Test]
+    public void TestConvert()
+    {
 
-
-        protected string Source = Path.Combine(TestHelper.TestDataPath, "Test.pptx");
-
-        [Test]
-        public void TestCtor()
+        // Arrange
+        if (File.Exists(Converter.LaTexWriterService.FileName))
         {
-
-            // Act: see Setup()
-
-            // Assert
-            Assert.That(Analyzer.PresentationMetaData, Is.Not.Null);
-            Assert.That(Analyzer.PresentationMetaData.SourceFileName, Is.EqualTo(Source));
-
-            Assert.That(Converter.Analyzer.PresentationMetaData, Is.Not.Null);
-            Assert.That(Converter.Analyzer.PresentationMetaData.SourceFileName, Is.EqualTo(Source));
-
+            File.Delete(Converter.LaTexWriterService.FileName);
         }
 
+        // Act: see Setup()
+        var result = Converter.Convert();
 
-        [Test]
-        public void TestConvert()
-        {
+        // Assert
+        Assert.That(result, Is.Not.Null);
 
-            // Arrange
-            if (File.Exists(Converter.LaTexWriterService.FileName))
-            {
-                File.Delete(Converter.LaTexWriterService.FileName);
-            }
+        Assert.That(string.IsNullOrEmpty(result.Trim()), Is.False);
 
-            // Act: see Setup()
-            var result = Converter.Convert();
+        FileAssert.Exists(Converter.LaTexWriterService.FileName);
 
-            // Assert
-            Assert.That(result, Is.Not.Null);
+        TestHelper.PrintPresentation(Analyzer.PresentationMetaData);
 
-            Assert.That(string.IsNullOrEmpty(result.Trim()), Is.False);
-
-            FileAssert.Exists(Converter.LaTexWriterService.FileName);
-
-            TestHelper.PrintPresentation(Analyzer.PresentationMetaData);
-
-        }
     }
 }

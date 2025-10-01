@@ -15,6 +15,10 @@ namespace Bodoconsult.Text.Pdf.Renderer.Blocks;
 public abstract class ParagraphPdfTextRendererElementBase : PdfTextRendererElementBase
 {
     private readonly ParagraphBase _paragraphBase;
+
+    /// <summary>
+    /// Content of the paragraph to render
+    /// </summary>
     protected StringBuilder Content = new();
 
     /// <summary>

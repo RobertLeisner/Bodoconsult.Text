@@ -125,7 +125,7 @@ public abstract class PdfBuilderBase : IDisposable
     public string TitleTableOfTables { get; set; } = "Table of tables";
 
     /// <summary>
-    /// Inv´crement
+    /// Increment
     /// </summary>
     public int Increment { get; set; }
 
@@ -1046,7 +1046,6 @@ public abstract class PdfBuilderBase : IDisposable
             {
                 col.MaxLength = col.ColumnName.Length;
             }
-
         }
 
         foreach (var r in dt.Rows)
@@ -1060,13 +1059,12 @@ public abstract class PdfBuilderBase : IDisposable
                 {
                     col.MaxLength = cell.Content.Length;
                 }
-                
             }
         }
 
         var style = Document.Styles[tableStyle];
 
-        //frame.FillFormat.Color = Colors.White;
+        // Create table now
         var table = Content.AddTable();
         table.LeftPadding = 2;
         table.Borders.Width = 0.5;
@@ -1564,7 +1562,14 @@ public abstract class PdfBuilderBase : IDisposable
         }
     }
 
-
+    /// <summary>
+    /// Create a table
+    /// </summary>
+    /// <param name="dt">Data table</param>
+    /// <param name="schleife"></param>
+    /// <param name="frame">Current frame</param>
+    /// <param name="borderWidth">Border width in pt</param>
+    /// <param name="tableStyle">Style to use for the table</param>
     protected void CreateTable(DataTable dt, int schleife, TextFrame frame, double borderWidth = 0.5, string tableStyle = "NormalTable")
     {
 
@@ -1579,7 +1584,10 @@ public abstract class PdfBuilderBase : IDisposable
         table.BottomPadding = 0;
         table.TopPadding = 0;
 
-        if (borderWidth > 0) table.Borders.Color = TableBorderColor;
+        if (borderWidth > 0)
+        {
+            table.Borders.Color = TableBorderColor;
+        }
 
         var colCount = dt.Columns.Count;
 
@@ -1597,7 +1605,10 @@ public abstract class PdfBuilderBase : IDisposable
         {
             var col = dt.Columns[i - 1];
 
-            if (col.ColumnName.ToLower() == "cssstyle") continue;
+            if (col.ColumnName.ToLower() == "cssstyle")
+            {
+                continue;
+            }
 
             var t = col.DataType.ToString().Replace("System.", "").ToLower();
 
@@ -1627,7 +1638,10 @@ public abstract class PdfBuilderBase : IDisposable
         // Errechne dann die zur Verfügung stehende maximale Breite der Text-Spalten
         var widthText = colCountNotUsed > 0 ? Math.Round((frame.Width.Centimeter - usedWidth) / colCountNotUsed, 1) - 0.1 : 2.0;
 
-        if (widthText > 7.0) widthText = 7.0;
+        if (widthText > 7.0)
+        {
+            widthText = 7.0;
+        }
 
         for (var i = 1; i <= colCount; i++)
         {
@@ -1712,7 +1726,11 @@ public abstract class PdfBuilderBase : IDisposable
             row.TopPadding = 0;
 
             var css = "";
-            if (startCol == 2) css = r[0].ToString();
+            if (startCol == 2)
+            {
+                css = r[0].ToString();
+                css = r[0].ToString();
+            }
 
             Color shadingColor;
 

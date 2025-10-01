@@ -32,12 +32,13 @@ public class LineBreakPdfTextRendererElement : InlinePdfTextRendererElementBase
         paragraph.AddLineBreak();
     }
 
+
     /// <summary>
     /// Render the inline to a string
     /// </summary>
+    /// <param name="renderer">Current renderer</param>
     /// <param name="sb">String</param>
-    /// <exception cref="NotSupportedException"></exception>
-    public override void RenderToString(StringBuilder sb)
+    public override void RenderToString(PdfTextDocumentRenderer renderer, StringBuilder sb)
     {
         sb.Append(Environment.NewLine);
     }

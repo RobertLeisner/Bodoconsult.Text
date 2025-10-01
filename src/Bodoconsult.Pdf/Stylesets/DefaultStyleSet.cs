@@ -1204,8 +1204,10 @@ public class DefaultStyleSet : IStyleSet
     /// </summary>
     public Style Bullet1 { get; }
 
+    /// <summary>
+    /// A style to add empty space of make margins top on pages possible
+    /// </summary>
     public Style Empty { get; }
-
 
     /// <summary>
     /// Style for definition list term

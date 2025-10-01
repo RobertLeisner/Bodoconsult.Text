@@ -4,19 +4,18 @@
 using Bodoconsult.Latex.Interfaces;
 using Bodoconsult.Latex.Model;
 
-namespace Bodoconsult.Latex.Test.Office
+namespace Bodoconsult.Latex.Test.Office;
+
+public abstract class BasePresentationConverterService
 {
-    public abstract class BasePresentationConverterService
-    {
 
-        /// <summary>
-        /// Current presentation job
-        /// </summary>
-        public PresentationJob Job { get; set; }
+    /// <summary>
+    /// Current presentation job
+    /// </summary>
+    public PresentationJob Job { get; set; }
 
 
 
-        public IPresentationConverterService Service { get; set; }
+    public IPresentationConverterService Service { get; set; }
 
-    }
 }

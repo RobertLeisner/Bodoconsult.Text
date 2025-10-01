@@ -7,26 +7,25 @@ using Bodoconsult.Latex.Model;
 using Bodoconsult.Latex.Test.Helpers;
 using NUnit.Framework;
 
-namespace Bodoconsult.Latex.Test.Office
+namespace Bodoconsult.Latex.Test.Office;
+
+[TestFixture]
+public class UnitTestFakeAnalyzer : BasePresentationAnalyzer
 {
-    [TestFixture]
-    public class UnitTestFakeAnalyzer : BasePresentationAnalyzer
+
+    [SetUp]
+    public void Setup()
     {
 
-        [SetUp]
-        public void Setup()
-        {
+        Source = Path.Combine(TestHelper.TestDataPath, "Test.pptx");
 
-            Source = Path.Combine(TestHelper.TestDataPath, "Test.pptx");
+        var presentation = new PresentationMetaData(Source);
 
-            var presentation = new PresentationMetaData(Source);
+        TestHelper.FillPresentation(presentation);
 
-            TestHelper.FillPresentation(presentation);
-
-            Analyzer = new FakeAnalyzer(presentation);
-
-        }
-
+        Analyzer = new FakeAnalyzer(presentation);
 
     }
+
+
 }

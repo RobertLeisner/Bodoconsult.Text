@@ -6,144 +6,143 @@ using System.Linq;
 using System.Text;
 using Bodoconsult.Text.Helpers;
 
-namespace Bodoconsult.Text.Documents
+namespace Bodoconsult.Text.Documents;
+
+/// <summary>
+/// Root element for documents
+/// </summary>
+public abstract class TextElement : DocumentElement
 {
     /// <summary>
-    /// Root element for documents
+    /// The XML tag to ue for the current instance
     /// </summary>
-    public abstract class TextElement : DocumentElement
+    [DoNotSerialize]
+    public string TagToUse { get; protected set; } = string.Intern("TextElement");
+
+    /// <summary>
+    /// Describing name of the element. This property is not used in the document itself
+    /// </summary>
+    public string Name { get; set; }
+
+    /// <summary>
+    /// Is the element is a singleton element to be added only once to another element. Default false
+    /// </summary>
+    [DoNotSerialize]
+    public bool IsSingleton { get; set; }
+
+    /// <summary>
+    /// Add the opening tag with properties if available
+    /// </summary>
+    /// <param name="indent">Current indent</param>
+    /// <param name="tag">Tag to use</param>
+    /// <param name="stringBuilder">Content to add the opening tag</param>
+    /// <param name="newLine">Add a new line at the end: Default: true</param>
+    public void AddTagWithAttributes(string indent, string tag, StringBuilder stringBuilder, bool newLine = true)
     {
-        /// <summary>
-        /// The XML tag to ue for the current instance
-        /// </summary>
-        [DoNotSerialize]
-        public string TagToUse { get; protected set; } = string.Intern("TextElement");
+        var sb = GetPropertiesAsAttributes();
 
-        /// <summary>
-        /// Describing name of the element. This property is not used in the document itself
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Is the element is a singleton element to be added only once to another element. Default false
-        /// </summary>
-        [DoNotSerialize]
-        public bool IsSingleton { get; set; }
-
-        /// <summary>
-        /// Add the opening tag with properties if available
-        /// </summary>
-        /// <param name="indent">Current indent</param>
-        /// <param name="tag">Tag to use</param>
-        /// <param name="stringBuilder">Content to add the opening tag</param>
-        /// <param name="newLine">Add a new line at the end: Default: true</param>
-        public void AddTagWithAttributes(string indent, string tag, StringBuilder stringBuilder, bool newLine = true)
+        if (sb.Length > 0)
         {
-            var sb = GetPropertiesAsAttributes();
-
-            if (sb.Length > 0)
-            {
-                stringBuilder.Append($"{indent}<{tag}{sb.ToString().TrimEnd()}>");
-            }
-            else
-            {
-                stringBuilder.Append($"{indent}<{tag}>");
-            }
-
-            if (newLine)
-            {
-                stringBuilder.Append($"{Environment.NewLine}");
-            }
-
-            stringBuilder.Append(GetLdmlListPropertiesAsAttributes($"{indent}{Indentation}"));
+            stringBuilder.Append($"{indent}<{tag}{sb.ToString().TrimEnd()}>");
+        }
+        else
+        {
+            stringBuilder.Append($"{indent}<{tag}>");
         }
 
-        /// <summary>
-        /// Get all properties of an TextElement as XML attributes
-        /// </summary>
-        /// <returns>XML string with attributes only or empty string</returns>
-        public StringBuilder GetPropertiesAsAttributes()
+        if (newLine)
         {
-            var pis = DocumentReflectionHelper.GetPropertiesForAttributes(GetType());
+            stringBuilder.Append($"{Environment.NewLine}");
+        }
 
-            var sb = new StringBuilder();
+        stringBuilder.Append(GetLdmlListPropertiesAsAttributes($"{indent}{Indentation}"));
+    }
 
-            if (pis.Length == 0)
-            {
-                return sb;
-            }
+    /// <summary>
+    /// Get all properties of an TextElement as XML attributes
+    /// </summary>
+    /// <returns>XML string with attributes only or empty string</returns>
+    public StringBuilder GetPropertiesAsAttributes()
+    {
+        var pis = DocumentReflectionHelper.GetPropertiesForAttributes(GetType());
 
-            sb.Append(' ');
-            foreach (var p in pis.Where(p => !(p.PropertyType.IsGenericType && p.PropertyType.GetGenericTypeDefinition() == typeof(LdmlList<>))))
-            {
-                var value = p.GetValue(this);
+        var sb = new StringBuilder();
 
-                if (value == null)
-                {
-                    continue;
-                }
-
-                if (value is PropertyAsAttributeElement pe)
-                {
-
-                    var propValue = pe.ToPropertyValue();
-
-                    if (!string.IsNullOrEmpty(propValue))
-                    {
-                        sb.Append($"{p.Name}=\"{propValue}\" ");
-                    }
-                    continue;
-                }
-
-                if (!string.IsNullOrEmpty(value.ToString()))
-                {
-                    sb.Append($"{p.Name}=\"{value}\" ");
-                }
-            }
+        if (pis.Length == 0)
+        {
             return sb;
         }
 
-        /// <summary>
-        /// Get all properties of an TextElement as XML attributes
-        /// </summary>
-        /// <returns>XML string with attributes only or empty string</returns>
-        public StringBuilder GetLdmlListPropertiesAsAttributes(string indent)
+        sb.Append(' ');
+        foreach (var p in pis.Where(p => !(p.PropertyType.IsGenericType && p.PropertyType.GetGenericTypeDefinition() == typeof(LdmlList<>))))
         {
-            var pis = DocumentReflectionHelper.GetPropertiesForAttributes(GetType());
+            var value = p.GetValue(this);
 
-            var sb = new StringBuilder();
-
-            if (pis.Length == 0)
+            if (value == null)
             {
-                return sb;
+                continue;
             }
 
-            foreach (var p in pis.Where(p =>
-                         p.PropertyType.IsGenericType &&
-                         p.PropertyType.GetGenericTypeDefinition() == typeof(LdmlList<>)))
+            if (value is PropertyAsAttributeElement pe)
             {
-                var value = (IEnumerable)p.GetValue(this);
 
-                if (value == null)
+                var propValue = pe.ToPropertyValue();
+
+                if (!string.IsNullOrEmpty(propValue))
                 {
-                    continue;
+                    sb.Append($"{p.Name}=\"{propValue}\" ");
                 }
-
-                sb.AppendLine($"{indent}<{p.Name}>");
-
-                foreach (var item in value)
-                {
-                    if (item is DocumentElement de)
-                    {
-                        de.ToLdmlString(sb, $"{indent}{Indentation}");
-                    }
-                }
-
-
-                sb.AppendLine($"{indent}</{p.Name}>");
+                continue;
             }
 
+            if (!string.IsNullOrEmpty(value.ToString()))
+            {
+                sb.Append($"{p.Name}=\"{value}\" ");
+            }
+        }
+        return sb;
+    }
+
+    /// <summary>
+    /// Get all properties of an TextElement as XML attributes
+    /// </summary>
+    /// <returns>XML string with attributes only or empty string</returns>
+    public StringBuilder GetLdmlListPropertiesAsAttributes(string indent)
+    {
+        var pis = DocumentReflectionHelper.GetPropertiesForAttributes(GetType());
+
+        var sb = new StringBuilder();
+
+        if (pis.Length == 0)
+        {
             return sb;
         }
+
+        foreach (var p in pis.Where(p =>
+                     p.PropertyType.IsGenericType &&
+                     p.PropertyType.GetGenericTypeDefinition() == typeof(LdmlList<>)))
+        {
+            var value = (IEnumerable)p.GetValue(this);
+
+            if (value == null)
+            {
+                continue;
+            }
+
+            sb.AppendLine($"{indent}<{p.Name}>");
+
+            foreach (var item in value)
+            {
+                if (item is DocumentElement de)
+                {
+                    de.ToLdmlString(sb, $"{indent}{Indentation}");
+                }
+            }
+
+
+            sb.AppendLine($"{indent}</{p.Name}>");
+        }
+
+        return sb;
     }
 }

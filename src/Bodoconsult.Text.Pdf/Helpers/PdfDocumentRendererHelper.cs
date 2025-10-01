@@ -4,12 +4,10 @@ using Bodoconsult.Text.Documents;
 using Bodoconsult.Text.Pdf.Renderer;
 using Bodoconsult.Text.Pdf.Renderer.Inlines;
 using MigraDoc.DocumentObjectModel;
-using System;
 using System.Collections.Generic;
 using System.Text;
 using Color = MigraDoc.DocumentObjectModel.Color;
 using Colors = Bodoconsult.Text.Documents.Colors;
-using Paragraph = MigraDoc.DocumentObjectModel.Paragraph;
 
 namespace Bodoconsult.Text.Pdf.Helpers;
 
@@ -32,22 +30,6 @@ public static class PdfDocumentRendererHelper
         }
     }
 
-    public static void RenderBlockInlinesToPdf(PdfTextDocumentRenderer renderer, List<Inline> childInlines,
-        Paragraph paragraph)
-    {
-        if (paragraph == null)
-        {
-            throw new ArgumentNullException(nameof(paragraph));
-        }
-
-        foreach (var inline in childInlines)
-        {
-            var rendererElement =
-                (InlinePdfTextRendererElementBase)renderer.PdfTextRendererElementFactory.CreateInstancePdf(inline);
-            rendererElement.RenderIt(renderer, paragraph);
-        }
-    }
-
     /// <summary>
     /// Render block inline childs to string for PDF
     /// </summary>
@@ -61,7 +43,7 @@ public static class PdfDocumentRendererHelper
         {
             var rendererElement =
                 (InlinePdfTextRendererElementBase)renderer.PdfTextRendererElementFactory.CreateInstancePdf(inline);
-            rendererElement.RenderToString(sb);
+            rendererElement.RenderToString(renderer, sb);
         }
     }
 
@@ -119,19 +101,4 @@ public static class PdfDocumentRendererHelper
         var pdfColor = new Color(color.A, color.R, color.G, color.B);
         return pdfColor;
     }
-
-    ///// <summary>
-    ///// Render block inline childs to string for PDF
-    ///// </summary>
-    ///// <param name="renderer">Current renderer</param>
-    ///// <param name="childInlines">Child inlines</param>
-    ///// <param name="sb">String</param>
-    //public static void RenderBlockInlinesToPdf(PdfTextDocumentRenderer renderer, List<Inline> childInlines, StringBuilder sb)
-    //{
-    //    foreach (var inline in childInlines)
-    //    {
-    //        var rendererElement = (InlinePdfTextRendererElementBase)renderer.PdfTextRendererElementFactory.CreateInstancePdf(inline);
-    //        rendererElement.RenderToString(sb);
-    //    }
-    //}
 }

@@ -3,38 +3,36 @@
 
 using Bodoconsult.Latex.Model;
 
-namespace Bodoconsult.Latex.Interfaces
+namespace Bodoconsult.Latex.Interfaces;
+
+/// <summary>
+/// Interface for converters from <see cref="PresentationMetaData"/>
+/// </summary>
+public interface IPresentationToLaTexConverter
 {
+
+
     /// <summary>
-    /// Interface for converters from <see cref="PresentationMetaData"/>
+    /// Current presentation
     /// </summary>
-    public interface IPresentationToLaTexConverter
-    {
+    PresentationMetaData Presentation { get; }
 
 
-        /// <summary>
-        /// Current presentation
-        /// </summary>
-        PresentationMetaData Presentation { get; }
+    /// <summary>
+    /// Current presentation analyzer
+    /// </summary>
+    IPresentationAnalyzer Analyzer { get; }
 
-
-        /// <summary>
-        /// Current presentation analyzer
-        /// </summary>
-        IPresentationAnalyzer Analyzer { get; }
-
-        /// <summary>
-        /// The current LaTex writer service to use for conversion
-        /// </summary>
-        ILatexWriterService LaTexWriterService { get; }
+    /// <summary>
+    /// The current LaTex writer service to use for conversion
+    /// </summary>
+    ILatexWriterService LaTexWriterService { get; }
 
 
 
-        /// <summary>
-        /// Convert the presentation
-        /// </summary>
-        string Convert();
-
-    }
+    /// <summary>
+    /// Convert the presentation
+    /// </summary>
+    string Convert();
 
 }

@@ -4,39 +4,37 @@
 using System.Collections.Generic;
 using Bodoconsult.Latex.Interfaces;
 
-namespace Bodoconsult.Latex.Model
+namespace Bodoconsult.Latex.Model;
+
+/// <summary>
+/// Paragraph class for text paragraphs
+/// </summary>
+public class LaTexParagraphItem : ILaTexTextItem
 {
 
     /// <summary>
-    /// Paragraph class for text paragraphs
+    /// Paragraph text content
     /// </summary>
-    public class LaTexParagraphItem : ILaTexTextItem
-    {
+    public string Text { get; set; }
 
-        /// <summary>
-        /// Paragraph text content
-        /// </summary>
-        public string Text { get; set; }
+    /// <summary>
+    /// Nested items
+    /// </summary>
+    public IList<ILaTexItem> SubItems { get; } = new List<ILaTexItem>();
 
-        /// <summary>
-        /// Nested items
-        /// </summary>
-        public IList<ILaTexItem> SubItems { get; } = new List<ILaTexItem>();
+    /// <summary>
+    /// The sort order id the items follow up
+    /// </summary>
+    public int SortId { get; set; }
 
-        /// <summary>
-        /// The sort order id the items follow up
-        /// </summary>
-        public int SortId { get; set; }
+    /// <summary>
+    /// The shape position of surrounding shape
+    /// </summary>
+    public long ShapePosition { get; set; }
 
-        /// <summary>
-        /// The shape position of surrounding shape
-        /// </summary>
-        public long ShapePosition { get; set; }
+    /// <summary>
+    /// Indent level
+    /// </summary>
+    public int IndentLevel { get; set; } = 0;
 
-        /// <summary>
-        /// Indent level
-        /// </summary>
-        public int IndentLevel { get; set; } = 0;
-
-    }
 }

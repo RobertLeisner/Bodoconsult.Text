@@ -8,25 +8,24 @@ using Bodoconsult.Latex.Services;
 using Bodoconsult.Latex.Test.Helpers;
 using NUnit.Framework;
 
-namespace Bodoconsult.Latex.Test.Office
+namespace Bodoconsult.Latex.Test.Office;
+
+[TestFixture]
+public class UnitTestPresentationToLaTexConverterPowerpoint2016AnalyzerRealWorld : BasePresentationToLaTexConverter
 {
-    [TestFixture]
-    public class UnitTestPresentationToLaTexConverterPowerpoint2016AnalyzerRealWorld : BasePresentationToLaTexConverter
+
+    [SetUp]
+    public void Setup()
     {
 
-        [SetUp]
-        public void Setup()
-        {
+        Source = Path.Combine(TestHelper.TestDataPath, "Grundkurs Wirtschaft.pptx");
+        TargetPath = Path.Combine(TestHelper.TempPath, "GrundkursWirtschaft.tex");
 
-            Source = Path.Combine(TestHelper.TestDataPath, "Grundkurs Wirtschaft.pptx");
-            TargetPath = Path.Combine(TestHelper.TempPath, "GrundkursWirtschaft.tex");
+        LatexWriterService = new LatexV2WriterService(TargetPath);
 
-            LatexWriterService = new LatexV2WriterService(TargetPath);
+        Analyzer = new Powerpoint2016Analyzer(Source);
 
-            Analyzer = new Powerpoint2016Analyzer(Source);
+        Converter = new PresentationToLaTexConverter(Analyzer, LatexWriterService);
 
-            Converter = new PresentationToLaTexConverter(Analyzer, LatexWriterService);
-
-        }
     }
 }
